@@ -1,5 +1,5 @@
 //
-//  BCMaster.m
+//  BCPhysics.m
 //  BlackCat
 //
 //  Created by Tim Wood on 11/28/11.
@@ -7,20 +7,22 @@
 //
 
 
-#import "BCMaster.h"
+#import "BCPhysics.h"
 
 
-@interface BCMaster ()
+static BCPhysics *_manager = nil;
 
 
-- (void)reallyAdd:(BCActor *)actor;
-- (void)reallyDestroy:(BCActor *)actor;
+@implementation BCPhysics
 
 
-@end
+#pragma mark -
+#pragma mark singleton
 
 
-@implementation BCMaster
++ (BCPhysics *)manager {
+    return _manager;
+}
 
 
 #pragma mark -
@@ -30,9 +32,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        actors = [[NSMutableArray alloc] init]];
-        actorsToAdd = [[NSMutableArray alloc] init]];
-        actorsToDestroy = [[NSMutableArray alloc] init]];
+
     }
     return self;
 }

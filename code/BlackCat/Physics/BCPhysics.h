@@ -1,5 +1,5 @@
 //
-//  BCMaster.h
+//  BCPhysics.h
 //  BlackCat
 //
 //  Created by Tim Wood on 11/28/11.
@@ -7,12 +7,18 @@
 //
 
 
-@interface BCMaster : NSObject <BCSubsystem> {
+@interface BCPhysics : NSObject <BCSubsystem> {
 @private
-    NSMutableArray *actors;
-    NSMutableArray *actorsToAdd;
-    NSMutableArray *actorsToDestroy;
+    b2World *world;
+    BCContactListener *contactListener;
 }
+
+
+#pragma mark -
+#pragma mark singleton
+
+
++ (BCPhysics *)manager;
 
 
 #pragma mark -
@@ -37,13 +43,11 @@
 
 
 #pragma mark -
-#pragma mark actors
+#pragma mark bodies
 
 
-- (void)add:(BCActor *)actor;
-- (void)remove:(BCActor *)actor;
-- (void)destroy:(BCActor *)actor;
-- (void)destroyAll;
+- (BCPhysicsCircle *)createCircleWithRadius:(float)radius;
+- (BCPhysicsSquare *)createSquareWithSize:(b2Vec2)size;
 
 
 @end
