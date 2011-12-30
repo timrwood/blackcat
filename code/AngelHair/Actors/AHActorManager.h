@@ -1,5 +1,5 @@
 //
-//  BCMaster.h
+//  AHActorManager.h
 //  BlackCat
 //
 //  Created by Tim Wood on 11/28/11.
@@ -7,12 +7,19 @@
 //
 
 
-@interface BCMaster : NSObject <BCSubsystem> {
+@interface AHActorManager : NSObject <AHSubsystem> {
 @private
     NSMutableArray *actors;
     NSMutableArray *actorsToAdd;
     NSMutableArray *actorsToDestroy;
 }
+
+
+#pragma mark -
+#pragma mark singleton
+
+
++ (AHActorManager *)manager;
 
 
 #pragma mark -
@@ -26,7 +33,10 @@
 #pragma mark update
 
 
-- (void)update;
+- (void)updateBeforePhysics;
+- (void)updateBeforeAnimation;
+- (void)updateBeforeRender;
+- (void)updateAfterEverything;
 
 
 #pragma mark -
@@ -40,9 +50,8 @@
 #pragma mark actors
 
 
-- (void)add:(BCActor *)actor;
-- (void)remove:(BCActor *)actor;
-- (void)destroy:(BCActor *)actor;
+- (void)add:(AHActor *)actor;
+- (void)destroy:(AHActor *)actor;
 - (void)destroyAll;
 
 

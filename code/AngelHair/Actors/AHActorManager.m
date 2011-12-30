@@ -1,5 +1,5 @@
 //
-//  BCMaster.m
+//  AHActorManager.m
 //  BlackCat
 //
 //  Created by Tim Wood on 11/28/11.
@@ -7,20 +7,37 @@
 //
 
 
-#import "BCMaster.h"
+#import "AHActorManager.h"
+
+// singleton
+static AHActorManager *_manager = nil;
 
 
-@interface BCMaster ()
+@interface AHActorManager ()
 
 
-- (void)reallyAdd:(BCActor *)actor;
-- (void)reallyDestroy:(BCActor *)actor;
+- (void)reallyAdd:(AHActor *)actor;
+- (void)remove:(AHActor *)actor;
+- (void)reallyDestroy:(AHActor *)actor;
 
 
 @end
 
 
-@implementation BCMaster
+@implementation AHActorManager
+
+
+#pragma mark -
+#pragma mark singleton
+
+
++ (AHActorManager *)manager {
+	if (!_manager) {
+        _manager = [[self alloc] init];
+	}
+    
+	return _manager;
+}
 
 
 #pragma mark -
@@ -37,10 +54,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
-
 
 #pragma mark -
 #pragma mark setup
@@ -55,33 +68,30 @@
 #pragma mark update
 
 
-- (void)update {
-    [[BCInput manager] update];
-
-    for (BCActor *actor in actors) {
+- (void)updateBeforePhysics {
+    for (AHActor *actor in actors) {
         [actor updateBeforePhysics];
     }
+}
 
-    [[BCPhysics manager] update];
-
-    for (BCActor *actor in actors) {
+- (void)updateBeforeAnimation {
+    for (AHActor *actor in actors) {
         [actor updateBeforeAnimation];
     }
+}
 
-    [[BCAnimation manager] update];
-
-    for (BCActor *actor in actors) {
+- (void)updateBeforeRender {
+    for (AHActor *actor in actors) {
         [actor updateBeforeRender];
     }
+}
 
-    [[BCGraphics manager] draw];
-    [[BCParticles manager] draw];
-
-    for (BCActor *actor in actorsToDestroy) {
+- (void)updateAfterEverything {
+    for (AHActor *actor in actorsToDestroy) {
         [self reallyDestroy:actor];
     }
-
-    for (BCActor *actor in actorsToAdd) {
+    
+    for (AHActor *actor in actorsToAdd) {
         [self reallyAdd:actor];
     }
 }
@@ -100,13 +110,13 @@
 #pragma mark actors add
 
 
-- (void)add:(BCActor *)actor {
+- (void)add:(AHActor *)actor {
     if (![actorsToAdd containsObject:actor]) {
         [actorsToAdd addObject:actor];
     }
 }
 
-- (void)reallyAdd:(BCActor *)actor {
+- (void)reallyAdd:(AHActor *)actor {
     if (![actors containsObject:actor]) {
         [actors addObject:actor];
     }
@@ -120,7 +130,7 @@
 #pragma mark actors remove
 
 
-- (void)remove:(BCActor *)actor {
+- (void)remove:(AHActor *)actor {
     if ([actorsToDestroy containsObject:actor]) {
         [actorsToDestroy removeObject:actor];
     }
@@ -137,13 +147,13 @@
 #pragma mark actors remove
 
 
-- (void)destroy:(BCActor *)actor  {
+- (void)destroy:(AHActor *)actor  {
     if (![actorsToDestroy containsObject:actor]){
         [actorsToDestroy addObject:actor];
     }
 }
 
-- (void)reallyDestroy:(BCActor *)actor {
+- (void)reallyDestroy:(AHActor *)actor {
     [actor cleanupBeforeDestruction];
     [actor destroy];
     [self remove:actor];

@@ -1,0 +1,248 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		153EB11A14AD6EE50070DBB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11914AD6EE50070DBB9 /* UIKit.framework */; };
+		153EB11C14AD6EE50070DBB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11B14AD6EE50070DBB9 /* Foundation.framework */; };
+		153EB11E14AD6EE50070DBB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */; };
+		153EB12014AD6EE50070DBB9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11F14AD6EE50070DBB9 /* GLKit.framework */; };
+		153EB12214AD6EE50070DBB9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB12114AD6EE50070DBB9 /* OpenGLES.framework */; };
+		15CD2A3614AE21C2006F36CC /* code in Resources */ = {isa = PBXBuildFile; fileRef = 15CD2A3514AE21C2006F36CC /* code */; };
+		15CD2A3C14AE2765006F36CC /* meta in Resources */ = {isa = PBXBuildFile; fileRef = 15CD2A3B14AE2765006F36CC /* meta */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		153EB11514AD6EE50070DBB9 /* BlackCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		153EB11914AD6EE50070DBB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		153EB11B14AD6EE50070DBB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		153EB11F14AD6EE50070DBB9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		153EB12114AD6EE50070DBB9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		15CD2A3514AE21C2006F36CC /* code */ = {isa = PBXFileReference; lastKnownFileType = folder; path = code; sourceTree = SOURCE_ROOT; };
+		15CD2A3B14AE2765006F36CC /* meta */ = {isa = PBXFileReference; lastKnownFileType = folder; path = meta; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		153EB11214AD6EE50070DBB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				153EB11A14AD6EE50070DBB9 /* UIKit.framework in Frameworks */,
+				153EB11C14AD6EE50070DBB9 /* Foundation.framework in Frameworks */,
+				153EB11E14AD6EE50070DBB9 /* CoreGraphics.framework in Frameworks */,
+				153EB12014AD6EE50070DBB9 /* GLKit.framework in Frameworks */,
+				153EB12214AD6EE50070DBB9 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		153EB10A14AD6EE50070DBB9 = {
+			isa = PBXGroup;
+			children = (
+				153EB12314AD6EE50070DBB9 /* BlackCat */,
+				153EB11814AD6EE50070DBB9 /* Frameworks */,
+				153EB11614AD6EE50070DBB9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		153EB11614AD6EE50070DBB9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				153EB11514AD6EE50070DBB9 /* BlackCat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		153EB11814AD6EE50070DBB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				153EB11914AD6EE50070DBB9 /* UIKit.framework */,
+				153EB11B14AD6EE50070DBB9 /* Foundation.framework */,
+				153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */,
+				153EB11F14AD6EE50070DBB9 /* GLKit.framework */,
+				153EB12114AD6EE50070DBB9 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		153EB12314AD6EE50070DBB9 /* BlackCat */ = {
+			isa = PBXGroup;
+			children = (
+				15CD2A3B14AE2765006F36CC /* meta */,
+				15CD2A3514AE21C2006F36CC /* code */,
+			);
+			path = BlackCat;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		153EB11414AD6EE50070DBB9 /* BlackCat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 153EB13E14AD6EE50070DBB9 /* Build configuration list for PBXNativeTarget "BlackCat" */;
+			buildPhases = (
+				153EB11114AD6EE50070DBB9 /* Sources */,
+				153EB11214AD6EE50070DBB9 /* Frameworks */,
+				153EB11314AD6EE50070DBB9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlackCat;
+			productName = BlackCat;
+			productReference = 153EB11514AD6EE50070DBB9 /* BlackCat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		153EB10C14AD6EE50070DBB9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Broken Pixel Studios";
+			};
+			buildConfigurationList = 153EB10F14AD6EE50070DBB9 /* Build configuration list for PBXProject "BlackCat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 153EB10A14AD6EE50070DBB9;
+			productRefGroup = 153EB11614AD6EE50070DBB9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				153EB11414AD6EE50070DBB9 /* BlackCat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		153EB11314AD6EE50070DBB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15CD2A3614AE21C2006F36CC /* code in Resources */,
+				15CD2A3C14AE2765006F36CC /* meta in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		153EB11114AD6EE50070DBB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		153EB13C14AD6EE50070DBB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		153EB13D14AD6EE50070DBB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		153EB13F14AD6EE50070DBB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "meta/Prefix/BlackCat-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "meta/Property List/BlackCat-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		153EB14014AD6EE50070DBB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "meta/Prefix/BlackCat-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "meta/Property List/BlackCat-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		153EB10F14AD6EE50070DBB9 /* Build configuration list for PBXProject "BlackCat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				153EB13C14AD6EE50070DBB9 /* Debug */,
+				153EB13D14AD6EE50070DBB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		153EB13E14AD6EE50070DBB9 /* Build configuration list for PBXNativeTarget "BlackCat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				153EB13F14AD6EE50070DBB9 /* Debug */,
+				153EB14014AD6EE50070DBB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 153EB10C14AD6EE50070DBB9 /* Project object */;
+}
