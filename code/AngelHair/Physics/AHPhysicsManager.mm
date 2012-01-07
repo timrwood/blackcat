@@ -7,21 +7,25 @@
 //
 
 
-#import "BCPhysics.h"
+#import "AHPhysicsManager.h"
 
 
-static BCPhysics *_manager = nil;
+static AHPhysicsManager *_manager = nil;
 
 
-@implementation BCPhysics
+@implementation AHPhysicsManager
 
 
 #pragma mark -
 #pragma mark singleton
 
 
-+ (BCPhysics *)manager {
-    return _manager;
++ (AHPhysicsManager *)manager {
+	if (!_manager) {
+        _manager = [[self alloc] init];
+	}
+    
+	return _manager;
 }
 
 
@@ -38,7 +42,7 @@ static BCPhysics *_manager = nil;
 }
 
 - (void)dealloc {
-    [super dealloc];
+    
 }
 
 
@@ -47,7 +51,7 @@ static BCPhysics *_manager = nil;
 
 
 - (void)setup {
-
+    world = new b2World(b2Vec2(0.0f, 10.0f));
 }
 
 
@@ -56,34 +60,7 @@ static BCPhysics *_manager = nil;
 
 
 - (void)update {
-    [[BCInput manager] update];
-
-    for (BCActor *actor in actors) {
-        [actor updateBeforePhysics];
-    }
-
-    [[BCPhysics manager] update];
-
-    for (BCActor *actor in actors) {
-        [actor updateBeforeAnimation];
-    }
-
-    [[BCAnimation manager] update];
-
-    for (BCActor *actor in actors) {
-        [actor updateBeforeRender];
-    }
-
-    [[BCGraphics manager] draw];
-    [[BCParticles manager] draw];
-
-    for (BCActor *actor in actorsToDestroy) {
-        [self reallyDestroy:actor];
-    }
-
-    for (BCActor *actor in actorsToAdd) {
-        [self reallyAdd:actor];
-    }
+    
 }
 
 
@@ -92,67 +69,16 @@ static BCPhysics *_manager = nil;
 
 
 - (void)teardown {
-    [self destroyAll];
+    
 }
 
 
 #pragma mark -
-#pragma mark actors add
+#pragma mark bodies
 
 
-- (void)add:(BCActor *)actor {
-    if (![actorsToAdd containsObject:actor]) {
-        [actorsToAdd addObject:actor];
-    }
-}
-
-- (void)reallyAdd:(BCActor *)actor {
-    if (![actors containsObject:actor]) {
-        [actors addObject:actor];
-    }
-    if ([actorsToAdd containsObject:actor]) {
-        [actorsToAdd removeObject:actor];
-    }
-}
-
-
-#pragma mark -
-#pragma mark actors remove
-
-
-- (void)remove:(BCActor *)actor {
-    if ([actorsToDestroy containsObject:actor]) {
-        [actorsToDestroy removeObject:actor];
-    }
-    if ([actorsToAdd containsObject:actor]) {
-        [actorsToAdd removeObject:actor];
-    }
-    if ([actors containsObject:actor]) {
-        [actors removeObject:actor];
-    }
-}
-
-
-#pragma mark -
-#pragma mark actors remove
-
-
-- (void)destroy:(BCActor *)actor  {
-    if (![actorsToDestroy containsObject:actor]){
-        [actorsToDestroy addObject:actor];
-    }
-}
-
-- (void)reallyDestroy:(BCActor *)actor {
-    [actor cleanupBeforeDestruction];
-    [actor destroy];
-    [self remove:actor];
-}
-
-- (void)destroyAll  {
-    while ([actors count] > 0) {
-        [self reallyDestroy:(BCActor *) [actors objectAtIndex:0]];
-    }
+- (b2Body *)addBodyFromDef:(b2BodyDef *)bodyDef {
+    return world->CreateBody(bodyDef);
 }
 
 

@@ -7,10 +7,22 @@
 //
 
 
-@interface BCPhysics : NSObject <BCSubsystem> {
+#ifdef __cplusplus
+    #import "Box2D.h"
+#else
+    
+#endif
+
+
+#import "AHSubSystem.h"
+
+
+@interface AHPhysicsManager : NSObject <AHSubSystem> {
 @private
+#ifdef __cplusplus
     b2World *world;
-    BCContactListener *contactListener;
+#endif
+    //AHContactListener *contactListener;
 }
 
 
@@ -18,14 +30,7 @@
 #pragma mark singleton
 
 
-+ (BCPhysics *)manager;
-
-
-#pragma mark -
-#pragma mark setup
-
-
-- (void)setup;
++ (AHPhysicsManager *)manager;
 
 
 #pragma mark -
@@ -36,18 +41,12 @@
 
 
 #pragma mark -
-#pragma mark teardown
-
-
-- (void)teardown;
-
-
-#pragma mark -
 #pragma mark bodies
 
 
-- (BCPhysicsCircle *)createCircleWithRadius:(float)radius;
-- (BCPhysicsSquare *)createSquareWithSize:(b2Vec2)size;
+#ifdef __cplusplus
+- (b2Body *)addBodyFromDef:(b2BodyDef *)bodyDef;
+#endif
 
 
 @end

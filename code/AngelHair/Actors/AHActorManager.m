@@ -8,6 +8,8 @@
 
 
 #import "AHActorManager.h"
+#import "AHActor.h"
+
 
 // singleton
 static AHActorManager *_manager = nil;
@@ -47,9 +49,9 @@ static AHActorManager *_manager = nil;
 - (id)init {
     self = [super init];
     if (self) {
-        actors = [[NSMutableArray alloc] init]];
-        actorsToAdd = [[NSMutableArray alloc] init]];
-        actorsToDestroy = [[NSMutableArray alloc] init]];
+        actors = [[NSMutableArray alloc] init];
+        actorsToAdd = [[NSMutableArray alloc] init];
+        actorsToDestroy = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -61,6 +63,15 @@ static AHActorManager *_manager = nil;
 
 - (void)setup {
 
+}
+
+
+#pragma mark -
+#pragma mark teardown
+
+
+- (void)teardown {
+    [self destroyAll];
 }
 
 
@@ -94,15 +105,6 @@ static AHActorManager *_manager = nil;
     for (AHActor *actor in actorsToAdd) {
         [self reallyAdd:actor];
     }
-}
-
-
-#pragma mark -
-#pragma mark teardown
-
-
-- (void)teardown {
-    [self destroyAll];
 }
 
 
@@ -161,7 +163,7 @@ static AHActorManager *_manager = nil;
 
 - (void)destroyAll  {
     while ([actors count] > 0) {
-        [self reallyDestroy:(BCActor *) [actors objectAtIndex:0]];
+        [self reallyDestroy:(AHActor *) [actors objectAtIndex:0]];
     }
 }
 

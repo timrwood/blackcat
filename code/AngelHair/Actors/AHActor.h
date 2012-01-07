@@ -7,6 +7,8 @@
 //
 
 
+#import "AHActorComponent.h"
+
 
 @interface AHActor : NSObject {
 @private
@@ -18,8 +20,8 @@
 #pragma mark components
 
 
-- (void)addComponent:(<AHComponent> *)component;
-- (void)removeComponent:(<AHComponent> *)component;
+- (void)addComponent:(NSObject <AHActorComponent> *)component;
+- (void)removeComponent:(NSObject <AHActorComponent> *)component;
 - (void)removeAllComponents;
 
 

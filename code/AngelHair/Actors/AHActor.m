@@ -6,22 +6,37 @@
 //  Copyright (c) 2011 Broken Pixel Studios. All rights reserved.
 //
 
+
 #import "AHActor.h"
 
+
 @implementation AHActor
+
+
+#pragma mark -
+#pragma mark init
+
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        components = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 
 #pragma mark -
 #pragma mark components
 
 
-- (void)addComponent:(<AHComponent> *)component {
+- (void)addComponent:(NSObject <AHActorComponent> *)component {
     if (![components containsObject:component]) {
         [components addObject:component];
     }
 }
 
-- (void)removeComponent:(<AHComponent> *)component {
+- (void)removeComponent:(NSObject <AHActorComponent> *)component {
     if ([components containsObject:component]) {
         [components removeObject:component];
     }
@@ -30,7 +45,7 @@
 
 - (void)removeAllComponents {
     while ([components count] > 0) {
-        [self removeComponent:(<AHComponent> *) [components objectAtIndex:0]];
+        [self removeComponent:(NSObject <AHActorComponent> *) [components objectAtIndex:0]];
     }
 }
 

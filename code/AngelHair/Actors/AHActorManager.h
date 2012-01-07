@@ -7,7 +7,13 @@
 //
 
 
-@interface AHActorManager : NSObject <AHSubsystem> {
+#import "AHSubSystem.h"
+
+
+@class AHActor;
+
+
+@interface AHActorManager : NSObject <AHSubSystem> {
 @private
     NSMutableArray *actors;
     NSMutableArray *actorsToAdd;
@@ -23,13 +29,6 @@
 
 
 #pragma mark -
-#pragma mark setup
-
-
-- (void)setup;
-
-
-#pragma mark -
 #pragma mark update
 
 
@@ -37,13 +36,6 @@
 - (void)updateBeforeAnimation;
 - (void)updateBeforeRender;
 - (void)updateAfterEverything;
-
-
-#pragma mark -
-#pragma mark teardown
-
-
-- (void)teardown;
 
 
 #pragma mark -

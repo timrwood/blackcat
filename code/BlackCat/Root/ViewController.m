@@ -146,8 +146,12 @@ GLfloat gCubeVertexData[216] =
     }
 }
 
-- (void)setupGL
-{
+
+#pragma mark -
+#pragma mark setup
+
+
+- (void)setupGL {
     [EAGLContext setCurrentContext:self.context];
     
     [self loadShaders];
@@ -173,8 +177,12 @@ GLfloat gCubeVertexData[216] =
     glBindVertexArrayOES(0);
 }
 
-- (void)tearDownGL
-{
+
+#pragma mark -
+#pragma mark teardown
+
+
+- (void)tearDownGL {
     [EAGLContext setCurrentContext:self.context];
     
     glDeleteBuffers(1, &_vertexBuffer);
@@ -188,10 +196,12 @@ GLfloat gCubeVertexData[216] =
     }
 }
 
-#pragma mark - GLKView and GLKViewController delegate methods
 
-- (void)update
-{
+#pragma mark -
+#pragma mark update
+
+
+- (void)update {
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     
@@ -219,8 +229,7 @@ GLfloat gCubeVertexData[216] =
     _rotation += self.timeSinceLastUpdate * 0.5f;
 }
 
-- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
-{
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -240,10 +249,12 @@ GLfloat gCubeVertexData[216] =
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
-#pragma mark -  OpenGL ES 2 shader compilation
 
-- (BOOL)loadShaders
-{
+#pragma mark -
+#pragma mark shaders
+
+
+- (BOOL)loadShaders {
     GLuint vertShader, fragShader;
     NSString *vertShaderPathname, *fragShaderPathname;
     
@@ -312,8 +323,7 @@ GLfloat gCubeVertexData[216] =
     return YES;
 }
 
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
-{
+- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file {
     GLint status;
     const GLchar *source;
     
@@ -347,8 +357,12 @@ GLfloat gCubeVertexData[216] =
     return YES;
 }
 
-- (BOOL)linkProgram:(GLuint)prog
-{
+
+#pragma mark -
+#pragma mark program
+
+
+- (BOOL)linkProgram:(GLuint)prog {
     GLint status;
     glLinkProgram(prog);
     
@@ -371,8 +385,7 @@ GLfloat gCubeVertexData[216] =
     return YES;
 }
 
-- (BOOL)validateProgram:(GLuint)prog
-{
+- (BOOL)validateProgram:(GLuint)prog {
     GLint logLength, status;
     
     glValidateProgram(prog);
