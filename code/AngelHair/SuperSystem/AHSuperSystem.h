@@ -36,6 +36,13 @@
 
 
 #pragma mark -
+#pragma mark cleanCache
+
+
+- (void)cleanCache;
+
+
+#pragma mark -
 #pragma mark update
 
 

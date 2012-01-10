@@ -43,15 +43,18 @@
     self = [super init];
     rect = _rect;
     identifier = _identifier;
+    graphics = [[AHGraphicsRect alloc] init];
+    [graphics setRect:rect];
+    [graphics setTex:_tex];
     /*
-    graphics = [[AHGraphicsRect alloc] initFromRect:_rect
-                                     andTexRect:_tex
-                                      andTexKey:_key];
-     
     input = [[AHInputRect alloc] initFromRect:_rect
                                  withDelegate:self];
      */
     return self;
+}
+
+- (void)dealloc {
+    
 }
 
 

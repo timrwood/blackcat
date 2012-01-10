@@ -9,10 +9,13 @@
 
 #import "AHSuperSystem.h"
 
+#import "AHTextureManager.h"
+#import "AHGraphicsManager.h"
 #import "AHActorManager.h"
 #import "AHPhysicsManager.h"
 #import "AHFileManager.h"
 #import "AHSceneManager.h"
+
 // #import "AHAnimationManager.h"
 
 
@@ -56,6 +59,8 @@ static AHSuperSystem *_manager = nil;
     [[AHFileManager manager] setup];
     [[AHSceneManager manager] setup];
     [[AHPhysicsManager manager] setup];
+    [[AHTextureManager manager] setup];
+    [[AHGraphicsManager manager] setup];
     //[[AHAnimationManager manager] setup];
     [[AHActorManager manager] setup];
 }
@@ -72,9 +77,20 @@ static AHSuperSystem *_manager = nil;
 - (void)teardown {
     [[AHActorManager manager] teardown];
     //[[AHAnimationManager manager] teardown];
+    [[AHGraphicsManager manager] teardown];
+    [[AHTextureManager manager] teardown];
     [[AHPhysicsManager manager] teardown];
     [[AHSceneManager manager] teardown];
     [[AHFileManager manager] teardown];
+}
+
+
+#pragma mark -
+#pragma mark cleanCache
+
+
+- (void)cleanCache {
+    [[AHTextureManager manager] cleanCache];
 }
 
 
@@ -93,6 +109,7 @@ static AHSuperSystem *_manager = nil;
     
     // render
     [[AHActorManager manager] updateBeforeRender];
+    [[AHGraphicsManager manager] update];
     
     // end update
     [[AHActorManager manager] updateAfterEverything];
@@ -104,7 +121,7 @@ static AHSuperSystem *_manager = nil;
 
 
 - (void)draw {
-    
+    [[AHGraphicsManager manager] draw];
 }
 
 

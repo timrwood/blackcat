@@ -8,14 +8,15 @@
 
 
 #import "AHActor.h"
+#import "AHGraphicsRect.h"
 
 
 @interface AHButton : AHActor /* <AHInputComponent> */ {
 @private
     CGRect rect;
     int identifier;
-    // AHGraphicsRect *graphics
-    // AHInputRect *input
+    AHGraphicsRect *graphics;
+    // AHInputRect *input;
 }
 
 

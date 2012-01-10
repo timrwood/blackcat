@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface ViewController : GLKViewController
+
+@interface ViewController : GLKViewController {
+    EAGLContext *_context;
+}
+
 
 @end

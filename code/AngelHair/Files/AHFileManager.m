@@ -66,9 +66,7 @@ static AHFileManager *_manager = nil;
 
 
 - (NSArray *)parseJSONFromResourceFileToArray:(NSString *)_filename {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filename = [[paths objectAtIndex:0] stringByAppendingPathComponent:_filename];
-    return [self parseJSONFromFileToArray:filename];
+    return [self parseJSONFromFileToArray:[self pathToResourceFile:_filename]];
 }
 
 - (NSArray *)parseJSONFromFileToArray:(NSString *)_filename {
@@ -89,9 +87,7 @@ static AHFileManager *_manager = nil;
 }
 
 - (NSDictionary *)parseJSONFromResourceFileToDictionary:(NSString *)_filename {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filename = [[paths objectAtIndex:0] stringByAppendingPathComponent:_filename];
-    return [self parseJSONFromFileToDictionary:filename];
+    return [self parseJSONFromFileToDictionary:[self pathToResourceFile:_filename]];
 }
 
 - (NSDictionary *)parseJSONFromFileToDictionary:(NSString *)_filename {
@@ -110,5 +106,16 @@ static AHFileManager *_manager = nil;
     
     return (NSDictionary *) dict;
 }
+
+
+#pragma mark -
+#pragma mark file paths
+
+
+- (NSString *)pathToResourceFile:(NSString *)file {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [[paths objectAtIndex:0] stringByAppendingPathComponent:file];
+}
+
 
 @end

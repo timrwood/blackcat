@@ -7,22 +7,15 @@
 //
 
 
-#ifdef __cplusplus
-    #import "Box2D.h"
-#else
-    
-#endif
-
-
 #import "AHSubSystem.h"
 
 
+@class AHPhysicsManagerCPP;
+
+
 @interface AHPhysicsManager : NSObject <AHSubSystem> {
-@private
-#ifdef __cplusplus
-    b2World *world;
-#endif
-    //AHContactListener *contactListener;
+@private;
+    AHPhysicsManagerCPP *_cppManager;
 }
 
 
@@ -31,6 +24,7 @@
 
 
 + (AHPhysicsManager *)manager;
++ (AHPhysicsManagerCPP *)cppManager;
 
 
 #pragma mark -
@@ -41,12 +35,10 @@
 
 
 #pragma mark -
-#pragma mark bodies
+#pragma mark draw
 
 
-#ifdef __cplusplus
-- (b2Body *)addBodyFromDef:(b2BodyDef *)bodyDef;
-#endif
+- (void)drawDebug;
 
 
 @end

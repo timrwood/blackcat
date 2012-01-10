@@ -33,4 +33,11 @@
 - (NSDictionary *)parseJSONFromFileToDictionary:(NSString *)_filename;
 
 
+#pragma mark -
+#pragma mark file paths
+
+
+- (NSString *)pathToResourceFile:(NSString *)file;
+
+
 @end

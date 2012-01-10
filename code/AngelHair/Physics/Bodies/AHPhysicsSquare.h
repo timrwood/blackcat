@@ -1,5 +1,5 @@
 //
-//  AHPhysicsBody.mm
+//  AHPhysicsSquare.h
 //  BlackCat
 //
 //  Created by Tim Wood on 12/30/11.
@@ -8,17 +8,9 @@
 
 
 #import "AHPhysicsBody.h"
-#import "Box2D.h"
 
 
-@implementation AHPhysicsBody
-
-
-- (void)cleanupAfterRemoval {
-    
-}
-
-
+@interface AHPhysicsSquare : AHPhysicsBody
 
 
 @end

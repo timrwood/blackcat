@@ -8,9 +8,11 @@
 
 
 #import "AHPhysicsManager.h"
+#import "AHPhysicsManagerCPP.h"
 
 
 static AHPhysicsManager *_manager = nil;
+static AHPhysicsManagerCPP *_cppManager = nil;
 
 
 @implementation AHPhysicsManager
@@ -24,8 +26,19 @@ static AHPhysicsManager *_manager = nil;
 	if (!_manager) {
         _manager = [[self alloc] init];
 	}
+    if (!_cppManager) {
+        _cppManager = [[AHPhysicsManagerCPP alloc] init];
+	}
     
 	return _manager;
+}
+
++ (AHPhysicsManagerCPP *)cppManager {
+    if (!_cppManager) {
+        _cppManager = [[self alloc] init];
+	}
+    
+	return _cppManager;
 }
 
 
@@ -36,13 +49,13 @@ static AHPhysicsManager *_manager = nil;
 - (id)init {
     self = [super init];
     if (self) {
-
+        _cppManager = [[AHPhysicsManagerCPP alloc] init];
     }
     return self;
 }
 
 - (void)dealloc {
-    
+    _cppManager = NULL;
 }
 
 
@@ -51,7 +64,7 @@ static AHPhysicsManager *_manager = nil;
 
 
 - (void)setup {
-    world = new b2World(b2Vec2(0.0f, 10.0f));
+    [_cppManager setup];
 }
 
 
@@ -60,7 +73,16 @@ static AHPhysicsManager *_manager = nil;
 
 
 - (void)update {
-    
+    [_cppManager update];
+}
+
+
+#pragma mark -
+#pragma mark draw
+
+
+- (void)drawDebug {
+    [_cppManager drawDebug];
 }
 
 
@@ -69,16 +91,7 @@ static AHPhysicsManager *_manager = nil;
 
 
 - (void)teardown {
-    
-}
-
-
-#pragma mark -
-#pragma mark bodies
-
-
-- (b2Body *)addBodyFromDef:(b2BodyDef *)bodyDef {
-    return world->CreateBody(bodyDef);
+    [_cppManager teardown];
 }
 
 
