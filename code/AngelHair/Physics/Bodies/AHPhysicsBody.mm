@@ -49,6 +49,18 @@
     return 0.0f;
 }
 
+- (void)setLinearVelocity:(CGPoint)vel {
+    if (_body) {
+        _body->SetLinearVelocity(b2Vec2(vel.x, vel.y));
+    }
+}
+
+- (void)setAngularVelocity:(float)vel {
+    if (_body) {
+        _body->SetAngularVelocity(vel);
+    }
+}
+
 
 #pragma mark -
 #pragma mark setup

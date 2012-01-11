@@ -1,5 +1,5 @@
 //
-//  DebugActor.mm
+//  BCHeroActor.mm
 //  BlackCat
 //
 //  Created by Tim Wood on 1/10/12.
@@ -7,11 +7,11 @@
 //
 
 
-#import "DebugActor.h"
-#import "AHPhysicsRect.h"
+#import "BCHeroActor.h"
+#import "AHPhysicsCircle.h"
 
 
-@implementation DebugActor
+@implementation BCHeroActor
 
 
 #pragma mark -
@@ -21,9 +21,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsRect alloc] initFromSize:CGPointMake(0.5f, 0.1f) 
-                                        andRotation:0.0f 
-                                        andPosition:CGPointMake(0.0f, 0.0f)];
+        _body = [[AHPhysicsCircle alloc] initFromRadius:1.0f andPosition:CGPointMake(0.0f, 0.0f)];
         [_body setStatic:NO];
         [self addComponent:_body];
     }
@@ -36,7 +34,8 @@
 
 
 - (void)updateBeforeAnimation {
-    CGPoint pos = [_body position];
+    [_body setLinearVelocity:CGPointMake(1.0f, 0.0f)];
+    //CGPoint pos = [_body position];
     //dlog("Position: x %F y%F", pos.x, pos.y);
 }
 

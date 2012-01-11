@@ -10,13 +10,13 @@
 #import "ViewController.h"
 #import "AHSuperSystem.h"
 #import "AHActorManager.h"
-#import "DebugActor.h"
 
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

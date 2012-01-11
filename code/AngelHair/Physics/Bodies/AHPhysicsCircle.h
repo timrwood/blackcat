@@ -6,8 +6,22 @@
 //  Copyright (c) 2011 Broken Pixel Studios. All rights reserved.
 //
 
+
 #import "AHPhysicsBody.h"
 
-@interface AHPhysicsCircle : AHPhysicsBody
+
+@interface AHPhysicsCircle : AHPhysicsBody {
+    float _radius;
+    CGPoint _position;
+}
+
+
+#pragma mark -
+#pragma mark init
+
+
+- (id)initFromRadius:(float)radius;
+- (id)initFromRadius:(float)radius andPosition:(CGPoint)position;
+
 
 @end

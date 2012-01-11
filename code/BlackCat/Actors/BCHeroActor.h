@@ -1,5 +1,5 @@
 //
-//  DebugActor.h
+//  BCHeroActor.h
 //  BlackCat
 //
 //  Created by Tim Wood on 1/10/12.
@@ -10,12 +10,12 @@
 #import "AHActor.h"
 
 
-@class AHPhysicsRect;
+@class AHPhysicsCircle;
 
 
-@interface DebugActor : AHActor {
+@interface BCHeroActor : AHActor {
 @private;
-    AHPhysicsRect *_body;
+    AHPhysicsCircle *_body;
 }
 
 

@@ -12,7 +12,7 @@
 #import "AHGraphicsManager.h"
 
 #import "AHActorManager.h"
-#import "DebugActor.h"
+#import "BCHeroActor.h"
 
 
 @implementation ViewController
@@ -22,7 +22,7 @@
     [super viewDidLoad];
     
     // debug 
-    [[AHActorManager manager] add:[[DebugActor alloc] init]];
+    [[AHActorManager manager] add:[[BCHeroActor alloc] init]];
     
     _context = [[AHGraphicsManager manager] context];
     

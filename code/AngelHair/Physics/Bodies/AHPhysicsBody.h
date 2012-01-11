@@ -49,7 +49,8 @@
 
 - (CGPoint)position;
 - (float)rotation;
-
+- (void)setLinearVelocity:(CGPoint)vel;
+- (void)setAngularVelocity:(float)vel;
 
 #pragma mark -
 #pragma mark body

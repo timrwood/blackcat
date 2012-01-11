@@ -32,6 +32,15 @@
 
 
 #pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    
+}
+
+
+#pragma mark -
 #pragma mark vertices
 
 
