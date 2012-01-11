@@ -25,6 +25,7 @@
                                         andRotation:0.0f 
                                         andPosition:CGPointMake(0.0f, 0.0f)];
         [_body setStatic:NO];
+        [self addComponent:_body];
     }
     return self;
 }

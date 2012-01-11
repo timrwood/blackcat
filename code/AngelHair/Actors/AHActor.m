@@ -51,6 +51,17 @@
 
 
 #pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    for (NSObject <AHActorComponent> *component in components) {
+        [component setup];
+    }
+}
+
+
+#pragma mark -
 #pragma mark update
 
 

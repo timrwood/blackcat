@@ -9,6 +9,7 @@
 @protocol AHActorComponent <NSObject>
 
 
+- (void)setup;
 - (void)cleanupAfterRemoval;
 
 

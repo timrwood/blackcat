@@ -39,6 +39,7 @@
 @private;
     NSObject <AHContactDelegate> *delegate;
     b2Body *_body;
+    b2BodyType _bodyType;
 }
 
 

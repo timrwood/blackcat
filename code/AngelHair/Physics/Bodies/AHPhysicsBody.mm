@@ -20,7 +20,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        
+        _bodyType = b2_dynamicBody;
     }
     return self;
 }
@@ -51,12 +51,22 @@
 
 
 #pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    
+}
+
+
+#pragma mark -
 #pragma mark body
 
 
 - (void)addBodyToWorld:(const b2BodyDef *)bodyDef {
     _body = [[AHPhysicsManager cppManager] world]->CreateBody(bodyDef);
     _body->SetUserData((__bridge void *) self);
+    _body->SetType(_bodyType);
 }
 
 - (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef {
@@ -64,10 +74,18 @@
 }
 
 - (void)setStatic:(BOOL)isStatic {
-    if (isStatic) {
-        _body->SetType(b2_staticBody);
+    if (_body) {
+        if (isStatic) {
+            _body->SetType(b2_staticBody);
+        } else {
+            _body->SetType(b2_dynamicBody);
+        }
     } else {
-        _body->SetType(b2_dynamicBody);
+        if (isStatic) {
+            _bodyType = b2_staticBody;
+        } else {
+            _bodyType = b2_dynamicBody;
+        }
     }
 }
 

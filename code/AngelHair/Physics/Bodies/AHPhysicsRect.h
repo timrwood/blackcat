@@ -11,7 +11,9 @@
 
 
 @interface AHPhysicsRect : AHPhysicsBody {
-    
+    float _rotation;
+    CGPoint _size;
+    CGPoint _position;
 }
 
 
@@ -21,6 +23,7 @@
 
 - (id)initFromSize:(CGPoint)size;
 - (id)initFromSize:(CGPoint)size andRotation:(float)rotation;
+- (id)initFromSize:(CGPoint)size andPosition:(CGPoint)position;
 - (id)initFromSize:(CGPoint)size andRotation:(float)rotation andPosition:(CGPoint)position;
 
 

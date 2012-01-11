@@ -17,44 +17,69 @@
 #pragma mark init
 
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (id)initFromSize:(CGPoint)size {
-    return [self initFromSize:size andRotation:0.0f andPosition:CGPointMake(0.0f, 0.0f)];
+    _size = size;
+    return [self init];
+}
+
+- (id)initFromSize:(CGPoint)size andPosition:(CGPoint)position {
+    _size = size;
+    _position = position;
+    return [self init];
 }
 
 - (id)initFromSize:(CGPoint)size andRotation:(float)rotation {
-    return [self initFromSize:size andRotation:rotation andPosition:CGPointMake(0.0f, 0.0f)];
+    _size = size;
+    _rotation = rotation;
+    return [self init];
 }
 
 - (id)initFromSize:(CGPoint)size andRotation:(float)rotation andPosition:(CGPoint)position {
-    self = [super init];
-    if (self) {
-        // shape
-        b2PolygonShape *polygonShape = new b2PolygonShape;
-        polygonShape->SetAsBox(size.x, size.y);
-        
-        // fixture
-        b2FixtureDef *fixtureDef = new b2FixtureDef;
-        fixtureDef->density = 1.0f;
-        fixtureDef->restitution = 0.4f;
-        fixtureDef->friction = 0.3f;
-        fixtureDef->shape = (b2Shape *) polygonShape;
-        
-        // body
-        b2BodyDef *bodyDef = new b2BodyDef;
-        bodyDef->angularDamping = .9f;
-        bodyDef->position = b2Vec2(position.x, position.y);
-        bodyDef->angle = rotation;
-        
-        // create body
-        [self addBodyToWorld:bodyDef];
-        [self addFixtureToBody:fixtureDef];
-        
-        // cleanup
-        delete bodyDef;
-        delete fixtureDef;
-        delete polygonShape;
-    }
-    return self;
+    _size = size;
+    _rotation = rotation;
+    _position = position;
+    return [self init];
+}
+
+
+#pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    // shape
+    b2PolygonShape *polygonShape = new b2PolygonShape;
+    polygonShape->SetAsBox(_size.x, _size.y);
+    
+    // fixture
+    b2FixtureDef *fixtureDef = new b2FixtureDef;
+    fixtureDef->density = 1.0f;
+    fixtureDef->restitution = 0.4f;
+    fixtureDef->friction = 0.3f;
+    fixtureDef->shape = (b2Shape *) polygonShape;
+    
+    // body
+    b2BodyDef *bodyDef = new b2BodyDef;
+    bodyDef->angularDamping = .9f;
+    bodyDef->position = b2Vec2(_position.x, _position.y);
+    bodyDef->angle = _rotation;
+    
+    // create body
+    [self addBodyToWorld:bodyDef];
+    [self addFixtureToBody:fixtureDef];
+    
+    // cleanup
+    delete bodyDef;
+    delete fixtureDef;
+    delete polygonShape;
 }
 
 
