@@ -43,10 +43,11 @@
 
 
 - (void)setup {
-    _world = new b2World(b2Vec2(0.0f, 10.0f));
+    _world = new b2World(b2Vec2(0.0f, -10.0f));
     
     // debug draw
     _debugDraw = new AHDebugDraw();
+    _debugDraw->SetFlags(AHDebugDraw::e_shapeBit + AHDebugDraw::e_jointBit + AHDebugDraw::e_centerOfMassBit);
     _world->SetDebugDraw(_debugDraw);
 }
 
@@ -56,7 +57,7 @@
 
 
 - (void)update {
-    
+    _world->Step(1.0f / 30.0f, 10, 10);
 }
 
 
@@ -65,7 +66,17 @@
 
 
 - (void)drawDebug {
+    dlog(@"draw debug");
+    glDisable(GL_TEXTURE_2D);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    
+    glLoadIdentity();
+    
     _world->DrawDebugData();
+    
+    glEnable(GL_TEXTURE_2D);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 

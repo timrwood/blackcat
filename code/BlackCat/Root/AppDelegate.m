@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "AHSuperSystem.h"
+#import "AHActorManager.h"
+#import "DebugActor.h"
 
 
 @implementation AppDelegate
@@ -25,11 +27,11 @@
         self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
     }
     
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-    
     // init super system
     [[AHSuperSystem manager] setup];
+    
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
     
     return YES;
 }

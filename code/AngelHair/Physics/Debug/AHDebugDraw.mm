@@ -6,11 +6,19 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
+
 #include "AHDebugDraw.h"
+#import <GLKit/GLKit.h>
 
 #include <cstdio>
 #include <cstdarg>
 #include <cstring>
+
+
+
+AHDebugDraw::AHDebugDraw() {
+    
+}
 
 void AHDebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color) {
 	b2Vec2 *vertices = new b2Vec2[vertexCount];
@@ -19,8 +27,10 @@ void AHDebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, con
 	}
     
 	glColor4f(color.r, color.g, color.b, 0.5f);
-	glVertexPointer(2, GL_FLOAT, 0, vertices);
-	glDrawArrays(GL_LINE_LOOP, 0, vertexCount);	
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glDrawArrays(GL_LINE_LOOP, 0, vertexCount);
+    
+    dlog(@"draw poly");
 }
 
 void AHDebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color) {
@@ -28,13 +38,15 @@ void AHDebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount
 	for( int i=0;i<vertexCount;i++) {
 		vertices[i] = old_vertices[i];
 	}
-	glVertexPointer(2, GL_FLOAT, 0, vertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 	
 	glColor4f(color.r*0.5f, color.g*0.5f, color.b*0.5f, 1);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, vertexCount);
 	
 	glColor4f(color.r, color.g, color.b, 0.5f);
 	glDrawArrays(GL_LINE_LOOP, 0, vertexCount);
+    
+    dlog(@"draw solid poly");
 }
 
 void AHDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) {
@@ -52,9 +64,11 @@ void AHDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color
 	}
 	
 	glColor4f(color.r, color.g, color.b,1);
-	glVertexPointer(2, GL_FLOAT, 0, glVertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
 	
 	glDrawArrays(GL_LINE_LOOP, 0, vertexCount);
+    
+    dlog(@"draw circle");
 }
 
 void AHDebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color){
@@ -72,7 +86,7 @@ void AHDebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2
 	}
 	
 	glColor4f(color.r *0.5f, color.g*0.5f, color.b*0.5f,1);
-	glVertexPointer(3, GL_FLOAT, 0, glVertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, vertexCount);
 	glColor4f(color.r, color.g, color.b,1);
 	glDrawArrays(GL_LINE_LOOP, 0, vertexCount);
@@ -87,7 +101,7 @@ void AHDebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color&
 		p1.x, p1.y,
 		p2.x, p2.y
 	};
-	glVertexPointer(3, GL_FLOAT, 0, glVertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
 	glDrawArrays(GL_LINES, 0, 2);
 }
 
@@ -108,7 +122,7 @@ void AHDebugDraw::DrawPoint(const b2Vec2& p, float32 size, const b2Color& color)
 	GLfloat glVertices[] = {
 		p.x, p.y
 	};
-	glVertexPointer(2, GL_FLOAT, 0, glVertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
 	glDrawArrays(GL_POINTS, 0, 1);
 	glPointSize(1.0f);
 }
@@ -128,7 +142,7 @@ void AHDebugDraw::DrawAABB(b2AABB* aabb, const b2Color& c) {
 		aabb->upperBound.x, aabb->upperBound.y,
 		aabb->lowerBound.x, aabb->upperBound.y
 	};
-	glVertexPointer(2, GL_FLOAT, 0, glVertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
 	glDrawArrays(GL_LINE_LOOP, 0, 8);
 }
 

@@ -35,7 +35,7 @@ static AHPhysicsManagerCPP *_cppManager = nil;
 
 + (AHPhysicsManagerCPP *)cppManager {
     if (!_cppManager) {
-        _cppManager = [[self alloc] init];
+        _cppManager = [[AHPhysicsManagerCPP alloc] init];
 	}
     
 	return _cppManager;
@@ -49,7 +49,7 @@ static AHPhysicsManagerCPP *_cppManager = nil;
 - (id)init {
     self = [super init];
     if (self) {
-        _cppManager = [[AHPhysicsManagerCPP alloc] init];
+        
     }
     return self;
 }

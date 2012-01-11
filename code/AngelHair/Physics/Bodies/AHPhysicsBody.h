@@ -36,17 +36,27 @@
 
 
 @interface AHPhysicsBody : NSObject <AHActorComponent, AHContactDelegate> {
+@private;
     NSObject <AHContactDelegate> *delegate;
-    
     b2Body *_body;
 }
 
 
 #pragma mark -
-#pragma mark world
+#pragma mark vars
 
 
-- (void)addBodyToWorld:(b2BodyDef *)bodyDef;
+- (CGPoint)position;
+- (float)rotation;
+
+
+#pragma mark -
+#pragma mark body
+
+
+- (void)addBodyToWorld:(const b2BodyDef *)bodyDef;
+- (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef;
+- (void)setStatic:(BOOL)isStatic;
 
 
 #pragma mark -

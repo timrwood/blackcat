@@ -8,23 +8,17 @@
 
 
 #import <GLKit/GLKit.h>
-
 #import "AHSubSystem.h"
+
+@class AHGraphicsCamera;
 
 
 @interface AHGraphicsManager : NSObject <AHSubSystem> {
 @private;
-    GLuint _program;
-    
     EAGLContext *_eaglContext;
     GLKBaseEffect *_baseEffect;
     
-    GLKMatrix4 _modelViewProjectionMatrix;
-    GLKMatrix3 _normalMatrix;
-    float _rotation;
-    
-    GLuint _vertexArray;
-    GLuint _vertexBuffer;
+    AHGraphicsCamera *_camera;
 }
 
 
@@ -40,6 +34,8 @@
 
 
 - (EAGLContext *)context;
+- (AHGraphicsCamera *)camera;
+- (GLKBaseEffect *)effect;
 
 
 #pragma mark -
@@ -54,22 +50,6 @@
 
 
 - (void)draw;
-
-
-#pragma mark -
-#pragma mark shaders
-
-
-- (BOOL)loadShaders;
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
-
-
-#pragma mark -
-#pragma mark program
-
-
-- (BOOL)linkProgram:(GLuint)prog;
-- (BOOL)validateProgram:(GLuint)prog;
 
 
 @end

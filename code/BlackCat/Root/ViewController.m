@@ -11,14 +11,18 @@
 #import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
 
+#import "AHActorManager.h"
+#import "DebugActor.h"
+
 
 @implementation ViewController
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [[AHSuperSystem manager] setup];
+    
+    // debug 
+    [[AHActorManager manager] add:[[DebugActor alloc] init]];
     
     _context = [[AHGraphicsManager manager] context];
     
@@ -30,8 +34,6 @@
 
 - (void)viewDidUnload {    
     [super viewDidUnload];
-    
-    [[AHSuperSystem manager] teardown];
     
     if ([EAGLContext currentContext] == _context) {
         [EAGLContext setCurrentContext:nil];

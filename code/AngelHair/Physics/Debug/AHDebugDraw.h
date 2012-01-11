@@ -6,9 +6,6 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
-#ifndef AH_DEBUG_DRAW_H
-#define AH_DEBUG_DRAW_H
-
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
@@ -21,6 +18,7 @@ struct b2AABB;
 // inside b2World::Step.
 class AHDebugDraw : public b2Draw {
 public:
+    AHDebugDraw();
 	void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 	void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 	void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color);
@@ -31,6 +29,3 @@ public:
     void DrawString(int x, int y, const char* string, ...); 
     void DrawAABB(b2AABB* aabb, const b2Color& color);
 };
-
-
-#endif

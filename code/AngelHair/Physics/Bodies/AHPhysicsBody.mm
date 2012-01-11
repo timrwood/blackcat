@@ -31,12 +31,44 @@
 
 
 #pragma mark -
-#pragma mark world
+#pragma mark vars
 
 
-- (void)addBodyToWorld:(b2BodyDef *)bodyDef {
+- (CGPoint)position {
+    if (_body) {
+        b2Vec2 pos = _body->GetPosition();
+        return CGPointMake(pos.x, pos.y);
+    }
+    return CGPointMake(0.0f, 0.0f);
+}
+
+- (float)rotation {
+    if (_body) {
+        return _body->GetAngle();
+    }
+    return 0.0f;
+}
+
+
+#pragma mark -
+#pragma mark body
+
+
+- (void)addBodyToWorld:(const b2BodyDef *)bodyDef {
     _body = [[AHPhysicsManager cppManager] world]->CreateBody(bodyDef);
     _body->SetUserData((__bridge void *) self);
+}
+
+- (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef {
+    _body->CreateFixture(fixtureDef);
+}
+
+- (void)setStatic:(BOOL)isStatic {
+    if (isStatic) {
+        _body->SetType(b2_staticBody);
+    } else {
+        _body->SetType(b2_dynamicBody);
+    }
 }
 
 

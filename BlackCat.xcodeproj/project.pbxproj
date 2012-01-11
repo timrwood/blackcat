@@ -31,7 +31,7 @@
 		1587705614BBC9C9009886D2 /* AHPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587704F14BBC9C9009886D2 /* AHPhysicsBody.mm */; };
 		1587705714BBC9C9009886D2 /* AHPhysicsCircle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705114BBC9C9009886D2 /* AHPhysicsCircle.mm */; };
 		1587705814BBC9C9009886D2 /* AHPhysicsPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705314BBC9C9009886D2 /* AHPhysicsPolygon.mm */; };
-		1587705914BBC9C9009886D2 /* AHPhysicsSquare.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705514BBC9C9009886D2 /* AHPhysicsSquare.mm */; };
+		1587705914BBC9C9009886D2 /* AHPhysicsRect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705514BBC9C9009886D2 /* AHPhysicsRect.mm */; };
 		1587705C14BBC9F1009886D2 /* AHContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705B14BBC9F1009886D2 /* AHContactListener.mm */; };
 		158C4A9614BB9B130089747C /* AHGraphicsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9514BB9B130089747C /* AHGraphicsManager.m */; };
 		158C4A9A14BB9C530089747C /* AHGraphicsRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9914BB9C530089747C /* AHGraphicsRect.m */; };
@@ -93,6 +93,8 @@
 		15AC4E3414B7B3BC00283A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DF314B7B3BB00283A06 /* main.m */; };
 		15AC4E4014B7BB3400283A06 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7414B7B3BB00283A06 /* Shader.fsh */; };
 		15AC4E4114B7BB3700283A06 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* Shader.vsh */; };
+		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
+		15C06CA914BCE9980067D458 /* DebugActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA814BCE9980067D458 /* DebugActor.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,8 +143,8 @@
 		1587705114BBC9C9009886D2 /* AHPhysicsCircle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsCircle.mm; sourceTree = "<group>"; };
 		1587705214BBC9C9009886D2 /* AHPhysicsPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsPolygon.h; sourceTree = "<group>"; };
 		1587705314BBC9C9009886D2 /* AHPhysicsPolygon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsPolygon.mm; sourceTree = "<group>"; };
-		1587705414BBC9C9009886D2 /* AHPhysicsSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsSquare.h; sourceTree = "<group>"; };
-		1587705514BBC9C9009886D2 /* AHPhysicsSquare.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsSquare.mm; sourceTree = "<group>"; };
+		1587705414BBC9C9009886D2 /* AHPhysicsRect.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AHPhysicsRect.h; sourceTree = "<group>"; };
+		1587705514BBC9C9009886D2 /* AHPhysicsRect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsRect.mm; sourceTree = "<group>"; };
 		1587705A14BBC9F1009886D2 /* AHContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHContactListener.h; path = Contacts/AHContactListener.h; sourceTree = "<group>"; };
 		1587705B14BBC9F1009886D2 /* AHContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AHContactListener.mm; path = Contacts/AHContactListener.mm; sourceTree = "<group>"; };
 		158C4A9414BB9B130089747C /* AHGraphicsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHGraphicsManager.h; sourceTree = "<group>"; };
@@ -267,6 +269,10 @@
 		15AC4DF514B7B3BB00283A06 /* BlackCat-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlackCat-Prefix.pch"; sourceTree = "<group>"; };
 		15AC4DF714B7B3BB00283A06 /* BlackCat-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BlackCat-Info.plist"; sourceTree = "<group>"; };
 		15AC4E3914B7B4F700283A06 /* AHSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSubSystem.h; path = SubSystem/AHSubSystem.h; sourceTree = "<group>"; };
+		15C06CA414BCCBFD0067D458 /* AHGraphicsCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsCamera.h; path = Camera/AHGraphicsCamera.h; sourceTree = "<group>"; };
+		15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsCamera.m; path = Camera/AHGraphicsCamera.m; sourceTree = "<group>"; };
+		15C06CA714BCE9980067D458 /* DebugActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugActor.h; path = Actors/DebugActor.h; sourceTree = "<group>"; };
+		15C06CA814BCE9980067D458 /* DebugActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DebugActor.mm; path = Actors/DebugActor.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +332,8 @@
 		158346F514B7BF6A00C1DA04 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				15C06CA714BCE9980067D458 /* DebugActor.h */,
+				15C06CA814BCE9980067D458 /* DebugActor.mm */,
 			);
 			name = Actors;
 			sourceTree = "<group>";
@@ -428,8 +436,8 @@
 				1587705114BBC9C9009886D2 /* AHPhysicsCircle.mm */,
 				1587705214BBC9C9009886D2 /* AHPhysicsPolygon.h */,
 				1587705314BBC9C9009886D2 /* AHPhysicsPolygon.mm */,
-				1587705414BBC9C9009886D2 /* AHPhysicsSquare.h */,
-				1587705514BBC9C9009886D2 /* AHPhysicsSquare.mm */,
+				1587705414BBC9C9009886D2 /* AHPhysicsRect.h */,
+				1587705514BBC9C9009886D2 /* AHPhysicsRect.mm */,
 			);
 			path = Bodies;
 			sourceTree = "<group>";
@@ -498,14 +506,15 @@
 		15AC4D7214B7B3BB00283A06 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				158C4A9E14BBAA730089747C /* Textures */,
-				15AC4D7314B7B3BB00283A06 /* Shaders */,
 				158C4A9414BB9B130089747C /* AHGraphicsManager.h */,
 				158C4A9514BB9B130089747C /* AHGraphicsManager.m */,
-				158C4A9814BB9C530089747C /* AHGraphicsRect.h */,
-				158C4A9914BB9C530089747C /* AHGraphicsRect.m */,
 				158C4A9B14BB9E580089747C /* AHGraphicsObject.h */,
 				158C4A9C14BB9E580089747C /* AHGraphicsObject.m */,
+				158C4A9814BB9C530089747C /* AHGraphicsRect.h */,
+				158C4A9914BB9C530089747C /* AHGraphicsRect.m */,
+				15C06CA214BCCBC60067D458 /* Camera */,
+				15AC4D7314B7B3BB00283A06 /* Shaders */,
+				158C4A9E14BBAA730089747C /* Textures */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -783,6 +792,15 @@
 			name = SuperSystem;
 			sourceTree = "<group>";
 		};
+		15C06CA214BCCBC60067D458 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				15C06CA414BCCBFD0067D458 /* AHGraphicsCamera.h */,
+				15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -923,8 +941,10 @@
 				1587705614BBC9C9009886D2 /* AHPhysicsBody.mm in Sources */,
 				1587705714BBC9C9009886D2 /* AHPhysicsCircle.mm in Sources */,
 				1587705814BBC9C9009886D2 /* AHPhysicsPolygon.mm in Sources */,
-				1587705914BBC9C9009886D2 /* AHPhysicsSquare.mm in Sources */,
+				1587705914BBC9C9009886D2 /* AHPhysicsRect.mm in Sources */,
 				1587705C14BBC9F1009886D2 /* AHContactListener.mm in Sources */,
+				15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */,
+				15C06CA914BCE9980067D458 /* DebugActor.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

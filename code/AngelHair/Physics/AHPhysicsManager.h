@@ -14,8 +14,7 @@
 
 
 @interface AHPhysicsManager : NSObject <AHSubSystem> {
-@private;
-    AHPhysicsManagerCPP *_cppManager;
+    
 }
 
 

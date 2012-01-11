@@ -114,12 +114,14 @@ static AHActorManager *_manager = nil;
 
 - (void)add:(AHActor *)actor {
     if (![actorsToAdd containsObject:actor]) {
+        dlog(@"added");
         [actorsToAdd addObject:actor];
     }
 }
 
 - (void)reallyAdd:(AHActor *)actor {
     if (![actors containsObject:actor]) {
+        dlog(@"added");
         [actors addObject:actor];
     }
     if ([actorsToAdd containsObject:actor]) {

@@ -3,13 +3,14 @@
 //
 
 
-#ifdef __OBJC__
 
 #if defined(DEBUG)
     #define dlog(fmt, ...) NSLog((@"%s [Line %d]     " fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
     #define dlog(...);
 #endif
+
+#ifdef __OBJC__
 
 #import <Availability.h>
 #ifndef __IPHONE_5_0
