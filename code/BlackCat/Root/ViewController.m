@@ -10,9 +10,11 @@
 #import "ViewController.h"
 #import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
-
 #import "AHActorManager.h"
+
 #import "BCHeroActor.h"
+#import "BCTerrainBuilder.h"
+#import "BCTerrainCleaner.h"
 
 
 @implementation ViewController
@@ -22,7 +24,9 @@
     [super viewDidLoad];
     
     // debug 
+    [[AHActorManager manager] add:[[BCTerrainBuilder alloc] init]];
     [[AHActorManager manager] add:[[BCHeroActor alloc] init]];
+    [[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];
     
     _context = [[AHGraphicsManager manager] context];
     

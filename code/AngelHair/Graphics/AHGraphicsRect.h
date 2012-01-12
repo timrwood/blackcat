@@ -10,7 +10,7 @@
 #import "AHGraphicsObject.h"
 
 
-@interface AHGraphicsRect : AHGraphicsObject <AHActorComponent> {
+@interface AHGraphicsRect : AHGraphicsObject {
 
 }
 

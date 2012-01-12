@@ -11,7 +11,7 @@
 #import "AHTextureInfo.h"
 
 
-@interface AHGraphicsObject : NSObject <AHActorComponent> {
+@interface AHGraphicsObject : AHActorComponent {
 @protected;
     CGPoint *vertices;
     CGPoint *textures;

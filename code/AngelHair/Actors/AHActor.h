@@ -20,8 +20,8 @@
 #pragma mark components
 
 
-- (void)addComponent:(NSObject <AHActorComponent> *)component;
-- (void)removeComponent:(NSObject <AHActorComponent> *)component;
+- (void)addComponent:(AHActorComponent *)component;
+- (void)removeComponent:(AHActorComponent *)component;
 - (void)removeAllComponents;
 
 

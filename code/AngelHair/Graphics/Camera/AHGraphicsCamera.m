@@ -23,7 +23,7 @@
     if (self) {
         _screenRect = [[UIScreen mainScreen] bounds];
         _aspectRatio = _screenRect.size.height / _screenRect.size.width;
-        _zoom = 1.0f;
+        _zoom = 5.0f;
         _position = GLKVector2Make(0.0f, 0.0f);
         [self cacheWorldMatrix];
         _screenMatrix = GLKMatrix4MakeOrtho(0.0f, 
@@ -60,8 +60,15 @@
 #pragma mark camera position
 
 
+- (CGPoint)worldPosition {
+    return CGPointMake(_position.x, _position.y);
+}
+
+- (float)worldZoom {
+    return _zoom;
+}
+
 - (void)cacheWorldMatrix {
-    dlog(@"aspect ratio should be 1.5 %F", _aspectRatio);
     _worldMatrix = GLKMatrix4MakeOrtho(_position.x - _zoom * _aspectRatio, 
                                        _position.x + _zoom * _aspectRatio, 
                                        _position.y - _zoom, 

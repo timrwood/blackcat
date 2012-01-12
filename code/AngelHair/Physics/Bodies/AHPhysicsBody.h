@@ -35,7 +35,7 @@
 #pragma mark body
 
 
-@interface AHPhysicsBody : NSObject <AHActorComponent, AHContactDelegate> {
+@interface AHPhysicsBody : AHActorComponent <AHContactDelegate> {
 @private;
     NSObject <AHContactDelegate> *delegate;
     b2Body *_body;
@@ -49,6 +49,8 @@
 
 - (CGPoint)position;
 - (float)rotation;
+- (CGPoint)linearVelocity;
+- (float)angularVelocity;
 - (void)setLinearVelocity:(CGPoint)vel;
 - (void)setAngularVelocity:(float)vel;
 

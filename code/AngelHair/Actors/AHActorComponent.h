@@ -6,11 +6,37 @@
 //  Copyright (c) 2011 Broken Pixel Studios. All rights reserved.
 //
 
-@protocol AHActorComponent <NSObject>
+
+@class AHActor;
+
+
+@interface AHActorComponent : NSObject {
+@private
+    AHActor *_actor;
+}
+
+
+#pragma mark -
+#pragma mark setup
 
 
 - (void)setup;
+
+
+#pragma mark -
+#pragma mark actor
+
+
+- (void)setActor:(AHActor *)actor;
+- (void)destroyActor;
+
+
+#pragma mark -
+#pragma mark destroy
+
+
 - (void)cleanupAfterRemoval;
 
 
 @end
+

@@ -62,7 +62,7 @@ static AHActorManager *_manager = nil;
 
 
 - (void)setup {
-
+    
 }
 
 
@@ -98,12 +98,12 @@ static AHActorManager *_manager = nil;
 }
 
 - (void)updateAfterEverything {
-    for (AHActor *actor in actorsToDestroy) {
-        [self reallyDestroy:actor];
+    while ([actorsToDestroy count] > 0) {
+        [self reallyDestroy:(AHActor *) [actorsToDestroy objectAtIndex:0]];
     }
     
-    for (AHActor *actor in actorsToAdd) {
-        [self reallyAdd:actor];
+    while ([actorsToAdd count] > 0) {
+        [self reallyAdd:(AHActor *) [actorsToAdd objectAtIndex:0]];
     }
 }
 
@@ -126,6 +126,7 @@ static AHActorManager *_manager = nil;
         [actorsToAdd removeObject:actor];
     }
     [actor setup];
+    dlog(@"total actors: %i", [actors count]);
 }
 
 
@@ -143,6 +144,7 @@ static AHActorManager *_manager = nil;
     if ([actors containsObject:actor]) {
         [actors removeObject:actor];
     }
+    dlog(@"total actors: %i", [actors count]);
 }
 
 

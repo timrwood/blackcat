@@ -143,4 +143,15 @@ static AHGraphicsManager *_manager = nil;
 }
 
 
+#pragma mark -
+#pragma mark color
+
+
+- (void)setDrawColor:(GLKVector4)color {
+    _baseEffect.constantColor = color;
+    _baseEffect.useConstantColor = YES;
+    [_baseEffect prepareToDraw];
+}
+
+
 @end

@@ -49,6 +49,21 @@
     return 0.0f;
 }
 
+- (CGPoint)linearVelocity {
+    if (_body) {
+        b2Vec2 vel = _body->GetLinearVelocity();
+        return CGPointMake(vel.x, vel.y);
+    }
+    return CGPointMake(0.0f, 0.0f);
+}
+
+- (float)angularVelocity {
+    if (_body) {
+        return _body->GetAngularVelocity();
+    }
+    return 0.0f;
+}
+
 - (void)setLinearVelocity:(CGPoint)vel {
     if (_body) {
         _body->SetLinearVelocity(b2Vec2(vel.x, vel.y));
@@ -151,7 +166,7 @@
 
 
 - (void)cleanupAfterRemoval {
-    
+    [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
 }
 
 

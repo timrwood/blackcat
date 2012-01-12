@@ -30,13 +30,14 @@
 #pragma mark components
 
 
-- (void)addComponent:(NSObject <AHActorComponent> *)component {
+- (void)addComponent:(AHActorComponent *)component {
     if (![components containsObject:component]) {
         [components addObject:component];
     }
+    [component setActor:self];
 }
 
-- (void)removeComponent:(NSObject <AHActorComponent> *)component {
+- (void)removeComponent:(AHActorComponent *)component {
     if ([components containsObject:component]) {
         [components removeObject:component];
     }
@@ -45,7 +46,7 @@
 
 - (void)removeAllComponents {
     while ([components count] > 0) {
-        [self removeComponent:(NSObject <AHActorComponent> *) [components objectAtIndex:0]];
+        [self removeComponent:(AHActorComponent *) [components objectAtIndex:0]];
     }
 }
 
@@ -55,7 +56,7 @@
 
 
 - (void)setup {
-    for (NSObject <AHActorComponent> *component in components) {
+    for (AHActorComponent *component in components) {
         [component setup];
     }
 }

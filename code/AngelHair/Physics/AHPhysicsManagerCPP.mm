@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
+
 #import "AHPhysicsManagerCPP.h"
+#import "AHPhysicsBody.h"
 
 
 @implementation AHPhysicsManagerCPP
@@ -66,14 +68,19 @@
 
 
 - (void)drawDebug {
-    dlog(@"draw debug");
     glDisable(GL_TEXTURE_2D);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     glLoadIdentity();
     
-    _world->DrawDebugData();
+    if (_world) {
+        _world->DrawDebugData();
+    }
     
+    glDisable(GL_COLOR_MATERIAL);
     glEnable(GL_TEXTURE_2D);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -88,6 +95,38 @@
     
 }
 
+
+#pragma mark -
+#pragma mark query
+
+
+class ManyQueryCallback : public b2QueryCallback {
+public:
+	ManyQueryCallback(const b2Vec2& point) {
+		actors = [NSMutableArray array];
+	}
+	
+	bool ReportFixture(b2Fixture* fixture) {
+		[actors addObject:(__bridge AHPhysicsBody *) fixture->GetBody()->GetUserData()];
+		return true;
+	}
+	
+	NSMutableArray* actors;
+};
+
+- (NSMutableArray *)getActorsAtPoint:(CGPoint)point withSize:(CGPoint)size {
+    b2AABB aabb;
+	b2Vec2 _size = b2Vec2(size.x, size.y);
+ 	b2Vec2 _point = b2Vec2(point.x, point.y);
+    
+	aabb.lowerBound = _point - _size;
+	aabb.upperBound = _point + _size;
+	
+	ManyQueryCallback callback(_point);
+	_world->QueryAABB(&callback, aabb);
+	
+    return callback.actors;
+}
 
 
 @end

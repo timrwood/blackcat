@@ -42,4 +42,11 @@
 - (void)drawDebug;
 
 
+#pragma mark -
+#pragma mark query
+
+
+- (NSMutableArray *)getActorsAtPoint:(CGPoint)point withSize:(CGPoint)size;
+
+
 @end

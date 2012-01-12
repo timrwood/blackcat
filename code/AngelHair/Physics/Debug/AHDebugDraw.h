@@ -19,6 +19,7 @@ struct b2AABB;
 class AHDebugDraw : public b2Draw {
 public:
     AHDebugDraw();
+    void SetColor(const b2Color& color, float32 opacity);
 	void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 	void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 	void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color);

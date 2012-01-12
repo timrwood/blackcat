@@ -52,4 +52,11 @@
 - (void)draw;
 
 
+#pragma mark -
+#pragma mark color
+
+
+- (void)setDrawColor:(GLKVector4)color;
+
+
 @end
