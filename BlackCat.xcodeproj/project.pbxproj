@@ -35,6 +35,9 @@
 		1587705C14BBC9F1009886D2 /* AHContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705B14BBC9F1009886D2 /* AHContactListener.mm */; };
 		1589E2EE14BE565F008442DA /* AHActorComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1589E2ED14BE565E008442DA /* AHActorComponent.m */; };
 		1589E2F214BE5848008442DA /* BCTerrainCleaner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1589E2F114BE5848008442DA /* BCTerrainCleaner.mm */; };
+		158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE2F14BE731F00E274BB /* AHInputManager.m */; };
+		158ABE3414BE74D500E274BB /* AHInputTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE3314BE74D500E274BB /* AHInputTouch.m */; };
+		158ABE3714BE757D00E274BB /* AHInputComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE3614BE757D00E274BB /* AHInputComponent.m */; };
 		158C4A9614BB9B130089747C /* AHGraphicsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9514BB9B130089747C /* AHGraphicsManager.m */; };
 		158C4A9A14BB9C530089747C /* AHGraphicsRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9914BB9C530089747C /* AHGraphicsRect.m */; };
 		158C4A9D14BB9E580089747C /* AHGraphicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9C14BB9E580089747C /* AHGraphicsObject.m */; };
@@ -102,6 +105,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		152839FA14BF56AA002D7513 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		153EB11514AD6EE50070DBB9 /* BlackCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		153EB11914AD6EE50070DBB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		153EB11B14AD6EE50070DBB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -154,6 +158,12 @@
 		1589E2ED14BE565E008442DA /* AHActorComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActorComponent.m; sourceTree = "<group>"; };
 		1589E2F014BE5848008442DA /* BCTerrainCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCTerrainCleaner.h; path = Actors/Terrain/BCTerrainCleaner.h; sourceTree = "<group>"; };
 		1589E2F114BE5848008442DA /* BCTerrainCleaner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCTerrainCleaner.mm; path = Actors/Terrain/BCTerrainCleaner.mm; sourceTree = "<group>"; };
+		158ABE2E14BE731F00E274BB /* AHInputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHInputManager.h; sourceTree = "<group>"; };
+		158ABE2F14BE731F00E274BB /* AHInputManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHInputManager.m; sourceTree = "<group>"; };
+		158ABE3214BE74D500E274BB /* AHInputTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHInputTouch.h; sourceTree = "<group>"; };
+		158ABE3314BE74D500E274BB /* AHInputTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHInputTouch.m; sourceTree = "<group>"; };
+		158ABE3514BE757D00E274BB /* AHInputComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHInputComponent.h; sourceTree = "<group>"; };
+		158ABE3614BE757D00E274BB /* AHInputComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHInputComponent.m; sourceTree = "<group>"; };
 		158C4A9414BB9B130089747C /* AHGraphicsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHGraphicsManager.h; sourceTree = "<group>"; };
 		158C4A9514BB9B130089747C /* AHGraphicsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHGraphicsManager.m; sourceTree = "<group>"; };
 		158C4A9814BB9C530089747C /* AHGraphicsRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHGraphicsRect.h; sourceTree = "<group>"; };
@@ -322,6 +332,7 @@
 		153EB11814AD6EE50070DBB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				152839FA14BF56AA002D7513 /* CoreFoundation.framework */,
 				153EB11914AD6EE50070DBB9 /* UIKit.framework */,
 				153EB11B14AD6EE50070DBB9 /* Foundation.framework */,
 				153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */,
@@ -565,6 +576,12 @@
 		15AC4D7614B7B3BB00283A06 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				158ABE2E14BE731F00E274BB /* AHInputManager.h */,
+				158ABE2F14BE731F00E274BB /* AHInputManager.m */,
+				158ABE3214BE74D500E274BB /* AHInputTouch.h */,
+				158ABE3314BE74D500E274BB /* AHInputTouch.m */,
+				158ABE3514BE757D00E274BB /* AHInputComponent.h */,
+				158ABE3614BE757D00E274BB /* AHInputComponent.m */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -983,6 +1000,9 @@
 				15AAFC0214BE2CD90058F014 /* BCBuildingActor.mm in Sources */,
 				1589E2EE14BE565F008442DA /* AHActorComponent.m in Sources */,
 				1589E2F214BE5848008442DA /* BCTerrainCleaner.mm in Sources */,
+				158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */,
+				158ABE3414BE74D500E274BB /* AHInputTouch.m in Sources */,
+				158ABE3714BE757D00E274BB /* AHInputComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

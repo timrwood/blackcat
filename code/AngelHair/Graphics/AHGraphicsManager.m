@@ -7,11 +7,11 @@
 //
 
 #import "AHGraphicsManager.h"
-#import "AHGraphicsCamera.h"
 #import "AHPhysicsManager.h"
 
 
 static AHGraphicsManager *_manager = nil;
+static AHGraphicsCamera *_camera = nil;
 
 
 @implementation AHGraphicsManager
@@ -25,8 +25,19 @@ static AHGraphicsManager *_manager = nil;
 	if (!_manager) {
         _manager = [[self alloc] init];
 	}
+    if (!_camera) {
+        _camera = [[AHGraphicsCamera alloc] init];
+	}
     
 	return _manager;
+}
+
++ (AHGraphicsCamera *)camera {
+    if (!_camera) {
+        _camera = [[AHGraphicsCamera alloc] init];
+	}
+    
+    return _camera;
 }
 
 
@@ -37,7 +48,7 @@ static AHGraphicsManager *_manager = nil;
 - (id)init {
     self = [super init];
     if (self) {
-        _camera = [[AHGraphicsCamera alloc] init];
+        
     }
     return self;
 }
@@ -53,10 +64,6 @@ static AHGraphicsManager *_manager = nil;
 
 - (EAGLContext *)context {
     return _eaglContext;
-}
-
-- (AHGraphicsCamera *)camera {
-    return _camera;
 }
 
 - (GLKBaseEffect *)effect {

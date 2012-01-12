@@ -8,14 +8,17 @@
 
 
 #import "AHActor.h"
+#import "AHInputManager.h"
+#import "AHInputComponent.h"
 
 
 @class AHPhysicsCircle;
 
 
-@interface BCHeroActor : AHActor {
+@interface BCHeroActor : AHActor <AHInputDelegate> {
 @private;
     AHPhysicsCircle *_body;
+    AHInputComponent *_input;
 }
 
 

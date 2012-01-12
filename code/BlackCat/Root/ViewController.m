@@ -11,6 +11,7 @@
 #import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
 #import "AHActorManager.h"
+#import "AHInputManager.h"
 
 #import "BCHeroActor.h"
 #import "BCTerrainBuilder.h"
@@ -51,6 +52,30 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
+
+#pragma mark -
+#pragma mark touches
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    [[AHInputManager manager] touchBegan:touch];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    [[AHInputManager manager] touchMoved:touch];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    [[AHInputManager manager] touchEnded:touch];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self touchesEnded:touches withEvent:event];
 }
 
 

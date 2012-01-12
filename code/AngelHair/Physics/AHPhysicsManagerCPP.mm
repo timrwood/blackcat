@@ -45,7 +45,7 @@
 
 
 - (void)setup {
-    _world = new b2World(b2Vec2(0.0f, -10.0f));
+    _world = new b2World(b2Vec2(0.0f, 10.0f));
     
     // debug draw
     _debugDraw = new AHDebugDraw();

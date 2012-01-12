@@ -9,16 +9,13 @@
 
 #import <GLKit/GLKit.h>
 #import "AHSubSystem.h"
-
-@class AHGraphicsCamera;
+#import "AHGraphicsCamera.h"
 
 
 @interface AHGraphicsManager : NSObject <AHSubSystem> {
 @private;
     EAGLContext *_eaglContext;
     GLKBaseEffect *_baseEffect;
-    
-    AHGraphicsCamera *_camera;
 }
 
 
@@ -27,6 +24,7 @@
 
 
 + (AHGraphicsManager *)manager;
++ (AHGraphicsCamera *)camera;
 
 
 #pragma mark -
@@ -34,7 +32,6 @@
 
 
 - (EAGLContext *)context;
-- (AHGraphicsCamera *)camera;
 - (GLKBaseEffect *)effect;
 
 

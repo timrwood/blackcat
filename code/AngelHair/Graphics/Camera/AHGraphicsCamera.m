@@ -71,8 +71,8 @@
 - (void)cacheWorldMatrix {
     _worldMatrix = GLKMatrix4MakeOrtho(_position.x - _zoom * _aspectRatio, 
                                        _position.x + _zoom * _aspectRatio, 
-                                       _position.y - _zoom, 
                                        _position.y + _zoom, 
+                                       _position.y - _zoom, 
                                        -1.0f, 
                                        1.0f);
 }

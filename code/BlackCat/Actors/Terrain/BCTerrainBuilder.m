@@ -39,7 +39,7 @@
     float buildingWidth = 3.0f + rand() % 6;
     float buildingHeight = 1.0f - (float)(rand() % 8) / 12.0f;
     
-    CGPoint pos = CGPointMake(_distanceCovered + buildingWidth / 2.0f, - 3.0f + buildingHeight);
+    CGPoint pos = CGPointMake(_distanceCovered + buildingWidth / 2.0f, 3.0f - buildingHeight);
     CGPoint size = CGPointMake(buildingWidth / 2.0f, buildingHeight);
     
     BCBuildingActor *building = [[BCBuildingActor alloc] initFromSize:size andPosition:pos];
@@ -53,7 +53,7 @@
 
 
 - (void)updateBeforeRender {
-    float cameraX = [[[AHGraphicsManager manager] camera] worldPosition].x;
+    float cameraX = [[AHGraphicsManager camera] worldPosition].x;
 
     if (_distanceCovered < cameraX + 30.0f) {
         [self buildBuilding];

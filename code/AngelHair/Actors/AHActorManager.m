@@ -126,7 +126,7 @@ static AHActorManager *_manager = nil;
         [actorsToAdd removeObject:actor];
     }
     [actor setup];
-    dlog(@"total actors: %i", [actors count]);
+    //dlog(@"total actors: %i", [actors count]);
 }
 
 
@@ -144,7 +144,7 @@ static AHActorManager *_manager = nil;
     if ([actors containsObject:actor]) {
         [actors removeObject:actor];
     }
-    dlog(@"total actors: %i", [actors count]);
+    //dlog(@"total actors: %i", [actors count]);
 }
 
 

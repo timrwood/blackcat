@@ -42,15 +42,15 @@
 - (void)cleanupWorldAtPoint:(CGPoint)point andSize:(CGPoint)size {
     NSMutableArray *actors = [[AHPhysicsManager cppManager] getActorsAtPoint:point withSize:size];
     for (AHPhysicsBody *body in actors) {
-        dlog(@"destroyActor");
+        //dlog(@"destroyActor");
         [body destroyActor];
     }
 }
 
 - (void)cleanupWorld {
-    dlog(@"cleanup world");
+    //dlog(@"cleanup world");
     CGPoint size = CGPointMake(100.0f, 100.0f);
-    float cameraX = [[[AHGraphicsManager manager] camera] worldPosition].x;
+    float cameraX = [[AHGraphicsManager camera] worldPosition].x;
     [self cleanupWorldAtPoint:CGPointMake(cameraX, 120.0f) andSize:size];
     [self cleanupWorldAtPoint:CGPointMake(cameraX - 120.0f, 0.0f) andSize:size];
 }
