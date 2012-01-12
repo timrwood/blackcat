@@ -11,13 +11,14 @@
 
 #import "AHSubSystem.h"
 #import "AHDebugDraw.h"
+#import "AHContactListener.h"
 
 
 @interface AHPhysicsManagerCPP : NSObject <AHSubSystem> {
 @private;
     b2World *_world;
     AHDebugDraw *_debugDraw;
-    // AHContactListener *listener;
+    AHContactListener *_contactListener;
 }
 
 

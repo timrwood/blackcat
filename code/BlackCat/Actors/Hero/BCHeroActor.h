@@ -8,17 +8,21 @@
 
 
 #import "AHActor.h"
-#import "AHInputManager.h"
 #import "AHInputComponent.h"
+#import "AHContactDelegate.h"
 
 
 @class AHPhysicsCircle;
 
 
-@interface BCHeroActor : AHActor <AHInputDelegate> {
+@interface BCHeroActor : AHActor <AHInputDelegate, AHContactDelegate> {
 @private;
     AHPhysicsCircle *_body;
     AHInputComponent *_input;
+    
+    BOOL _canJump;
+    
+    float _runSpeed;
 }
 
 

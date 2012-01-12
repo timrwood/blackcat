@@ -102,10 +102,13 @@
 		15AC4E4014B7BB3400283A06 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7414B7B3BB00283A06 /* Shader.fsh */; };
 		15AC4E4114B7BB3700283A06 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* Shader.vsh */; };
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
+		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
+		15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		152839FA14BF56AA002D7513 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		152839FD14BF62DC002D7513 /* AHContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHContactDelegate.h; sourceTree = "<group>"; };
 		153EB11514AD6EE50070DBB9 /* BlackCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		153EB11914AD6EE50070DBB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		153EB11B14AD6EE50070DBB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -294,6 +297,10 @@
 		15AC4E3914B7B4F700283A06 /* AHSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSubSystem.h; path = SubSystem/AHSubSystem.h; sourceTree = "<group>"; };
 		15C06CA414BCCBFD0067D458 /* AHGraphicsCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsCamera.h; path = Camera/AHGraphicsCamera.h; sourceTree = "<group>"; };
 		15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsCamera.m; path = Camera/AHGraphicsCamera.m; sourceTree = "<group>"; };
+		15CEA5C514BF75D20052D6BC /* BCGlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalManager.h; path = Global/BCGlobalManager.h; sourceTree = "<group>"; };
+		15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCGlobalManager.m; path = Global/BCGlobalManager.m; sourceTree = "<group>"; };
+		15CEA5CA14BF84690052D6BC /* BCCrateActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCrateActor.h; path = Actors/Terrain/BCCrateActor.h; sourceTree = "<group>"; };
+		15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCCrateActor.mm; path = Actors/Terrain/BCCrateActor.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,6 +467,7 @@
 				1587705314BBC9C9009886D2 /* AHPhysicsPolygon.mm */,
 				1587705414BBC9C9009886D2 /* AHPhysicsRect.h */,
 				1587705514BBC9C9009886D2 /* AHPhysicsRect.mm */,
+				152839FD14BF62DC002D7513 /* AHContactDelegate.h */,
 			);
 			path = Bodies;
 			sourceTree = "<group>";
@@ -484,6 +492,8 @@
 				15AAFC0114BE2CD90058F014 /* BCBuildingActor.mm */,
 				1589E2F014BE5848008442DA /* BCTerrainCleaner.h */,
 				1589E2F114BE5848008442DA /* BCTerrainCleaner.mm */,
+				15CEA5CA14BF84690052D6BC /* BCCrateActor.h */,
+				15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */,
 			);
 			name = Terrain;
 			sourceTree = "<group>";
@@ -617,6 +627,7 @@
 		15AC4D8414B7B3BB00283A06 /* BlackCat */ = {
 			isa = PBXGroup;
 			children = (
+				15CEA5C914BF75D60052D6BC /* Global */,
 				158346F514B7BF6A00C1DA04 /* Actors */,
 				15AC4D8514B7B3BB00283A06 /* Root */,
 			);
@@ -852,6 +863,15 @@
 			name = Camera;
 			sourceTree = "<group>";
 		};
+		15CEA5C914BF75D60052D6BC /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				15CEA5C514BF75D20052D6BC /* BCGlobalManager.h */,
+				15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */,
+			);
+			name = Global;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1003,6 +1023,8 @@
 				158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */,
 				158ABE3414BE74D500E274BB /* AHInputTouch.m in Sources */,
 				158ABE3714BE757D00E274BB /* AHInputComponent.m in Sources */,
+				15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */,
+				15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

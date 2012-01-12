@@ -48,9 +48,9 @@
 	
 	// fixture
 	b2FixtureDef *fixtureDef = new b2FixtureDef;
-    fixtureDef->friction = 0.2f;
-    fixtureDef->restitution = 0.3f;
 	fixtureDef->density = 1.0f;
+    fixtureDef->restitution = self->restitution;
+    fixtureDef->restitution = self->friction;
 	fixtureDef->shape = (b2Shape *) circleShape;
 	
 	// body

@@ -19,7 +19,7 @@
 #pragma mark init
 
 
-- (id)initFromSize:(CGPoint)size andPosition:(CGPoint)position {
+- (id)initFromSize:(CGSize)size andPosition:(CGPoint)position {
     self = [super init];
     if (self) {
         _body = [[AHPhysicsRect alloc] initFromSize:size andPosition:position];

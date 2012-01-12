@@ -51,6 +51,10 @@
     _debugDraw = new AHDebugDraw();
     _debugDraw->SetFlags(AHDebugDraw::e_shapeBit + AHDebugDraw::e_jointBit + AHDebugDraw::e_centerOfMassBit);
     _world->SetDebugDraw(_debugDraw);
+    
+    // contacts
+    _contactListener = new AHContactListener();
+    _world->SetContactListener(_contactListener);
 }
 
 

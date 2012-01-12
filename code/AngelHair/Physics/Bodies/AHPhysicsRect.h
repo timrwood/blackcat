@@ -12,7 +12,7 @@
 
 @interface AHPhysicsRect : AHPhysicsBody {
     float _rotation;
-    CGPoint _size;
+    CGSize _size;
     CGPoint _position;
 }
 
@@ -21,10 +21,10 @@
 #pragma mark init
 
 
-- (id)initFromSize:(CGPoint)size;
-- (id)initFromSize:(CGPoint)size andRotation:(float)rotation;
-- (id)initFromSize:(CGPoint)size andPosition:(CGPoint)position;
-- (id)initFromSize:(CGPoint)size andRotation:(float)rotation andPosition:(CGPoint)position;
+- (id)initFromSize:(CGSize)size;
+- (id)initFromSize:(CGSize)size andRotation:(float)rotation;
+- (id)initFromSize:(CGSize)size andPosition:(CGPoint)position;
+- (id)initFromSize:(CGSize)size andRotation:(float)rotation andPosition:(CGPoint)position;
 
 
 @end

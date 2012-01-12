@@ -10,25 +10,7 @@
 #import "AHActorComponent.h"
 #import "AHPhysicsManager.h"
 #import "AHPhysicsManagerCPP.h"
-
-
-@class AHPhysicsBody;
-
-
-#pragma mark -
-#pragma mark contact protocol
-
-
-@protocol AHContactDelegate <NSObject>
-
-
-- (BOOL)collidedWith:(AHPhysicsBody *)contact;
-- (BOOL)collidedWithButDidNotCall:(AHPhysicsBody *)contact;
-- (BOOL)uncollidedWith:(AHPhysicsBody *)contact;
-- (BOOL)uncollidedWithButDidNotCall:(AHPhysicsBody *)contact;
-
-
-@end
+#import "AHContactDelegate.h"
 
 
 #pragma mark -
@@ -40,6 +22,9 @@
     NSObject <AHContactDelegate> *delegate;
     b2Body *_body;
     b2BodyType _bodyType;
+@protected;
+    float restitution;
+    float friction;
 }
 
 
@@ -47,12 +32,15 @@
 #pragma mark vars
 
 
+- (void)setFriction:(float)newFriction;
+- (void)setRestitution:(float)newRestitution;
 - (CGPoint)position;
 - (float)rotation;
 - (CGPoint)linearVelocity;
 - (float)angularVelocity;
 - (void)setLinearVelocity:(CGPoint)vel;
 - (void)setAngularVelocity:(float)vel;
+
 
 #pragma mark -
 #pragma mark body

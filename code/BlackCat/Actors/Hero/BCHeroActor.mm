@@ -7,9 +7,12 @@
 //
 
 
-#import "BCHeroActor.h"
 #import "AHPhysicsCircle.h"
 #import "AHGraphicsManager.h"
+#import "AHInputManager.h"
+
+#import "BCHeroActor.h"
+#import "BCGlobalManager.h"
 
 
 @implementation BCHeroActor
@@ -22,13 +25,17 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsCircle alloc] initFromRadius:1.0f andPosition:CGPointMake(0.0f, 0.0f)];
+        _body = [[AHPhysicsCircle alloc] initFromRadius:0.5f andPosition:CGPointMake(0.0f, 0.0f)];
+        [_body setRestitution:0.1f];
         [_body setStatic:NO];
+        [_body setDelegate:self];
         [self addComponent:_body];
         
         _input = [[AHInputComponent alloc] initWithScreenRect:[[UIScreen mainScreen] bounds]];
         [_input setDelegate:self];
         [self addComponent:_input];
+        
+        _runSpeed = 5.0f;
     }
     return self;
 }
@@ -39,18 +46,27 @@
 
 
 - (void)updateBeforeAnimation {
-    // move to right
+    // velocity
     float vely = [_body linearVelocity].y;
-    [_body setLinearVelocity:CGPointMake(20.0f, vely)];
+    _runSpeed += 0.02f;
+    if (vely > 0.0f) {
+        vely *= 1.2f; // travelling downward
+    } else {
+        vely /= 1.4f; // travelling upward
+    }
+    [_body setLinearVelocity:CGPointMake(_runSpeed, vely)];
+    [[BCGlobalManager manager] setHeroSpeed:_runSpeed];
     
-    float cameraYOffset = 1.0f + fmaxf(-8.0f, fminf([_body position].y, 0.0f)) / 2.0f;
+    // camera
+    float cameraYOffset = - 2.0f + fmaxf(3.0f, fminf([_body position].y, 5.0f)) / 2.0f;
+    dlog(@"camera y offset %F %F", [_body position].y, cameraYOffset);
     
     CGPoint cameraPos = [_body position];
-    cameraPos.x += 3.0f;
-    cameraPos.y -= cameraYOffset;
+    cameraPos.x += 20.0f;
+    cameraPos.y -= cameraYOffset * 4.0f;
     
-    // set camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
+    [[AHGraphicsManager camera] setWorldZoom:40.0f];
 }
 
 
@@ -59,7 +75,21 @@
 
 
 - (void)touchBegan {
-    dlog(@"-------------------- hero touch began");
+    if (_canJump) {
+        float velx = [_body linearVelocity].x;
+        [_body setLinearVelocity:CGPointMake(velx, -30.0f)];
+        _canJump = NO;
+    }
+}
+
+
+#pragma mark -
+#pragma mark contacts
+
+
+- (BOOL)collidedWith:(AHPhysicsBody *)contact {
+    _canJump = YES;
+    return YES;
 }
 
 

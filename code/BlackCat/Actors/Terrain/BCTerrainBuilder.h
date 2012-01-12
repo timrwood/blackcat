@@ -20,7 +20,9 @@
 #pragma mark build
 
 
+- (void)buildBuildingWithSize:(CGSize)size;
 - (void)buildBuilding;
+- (void)buildCratesAtPosition:(CGPoint)position;
 
 
 @end

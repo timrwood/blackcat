@@ -25,24 +25,24 @@
     return self;
 }
 
-- (id)initFromSize:(CGPoint)size {
+- (id)initFromSize:(CGSize)size {
     _size = size;
     return [self init];
 }
 
-- (id)initFromSize:(CGPoint)size andPosition:(CGPoint)position {
+- (id)initFromSize:(CGSize)size andPosition:(CGPoint)position {
     _size = size;
     _position = position;
     return [self init];
 }
 
-- (id)initFromSize:(CGPoint)size andRotation:(float)rotation {
+- (id)initFromSize:(CGSize)size andRotation:(float)rotation {
     _size = size;
     _rotation = rotation;
     return [self init];
 }
 
-- (id)initFromSize:(CGPoint)size andRotation:(float)rotation andPosition:(CGPoint)position {
+- (id)initFromSize:(CGSize)size andRotation:(float)rotation andPosition:(CGPoint)position {
     _size = size;
     _rotation = rotation;
     _position = position;
@@ -57,13 +57,13 @@
 - (void)setup {
     // shape
     b2PolygonShape *polygonShape = new b2PolygonShape;
-    polygonShape->SetAsBox(_size.x, _size.y);
+    polygonShape->SetAsBox(_size.width, _size.height);
     
     // fixture
     b2FixtureDef *fixtureDef = new b2FixtureDef;
     fixtureDef->density = 1.0f;
-    fixtureDef->restitution = 0.4f;
-    fixtureDef->friction = 0.3f;
+    fixtureDef->restitution = self->restitution;
+    fixtureDef->restitution = self->friction;
     fixtureDef->shape = (b2Shape *) polygonShape;
     
     // body

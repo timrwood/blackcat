@@ -13,6 +13,8 @@
 
 #import "BCTerrainBuilder.h"
 #import "BCBuildingActor.h"
+#import "BCCrateActor.h"
+#import "BCGlobalManager.h"
 
 
 @implementation BCTerrainBuilder
@@ -26,6 +28,7 @@
     self = [super init];
     if (self) {
         _distanceCovered = 0.0f;
+        [self buildBuildingWithSize:CGSizeMake(50.0f, 0.0f)];
     }
     return self;
 }
@@ -35,16 +38,50 @@
 #pragma mark build
 
 
-- (void)buildBuilding {
-    float buildingWidth = 3.0f + rand() % 6;
-    float buildingHeight = 1.0f - (float)(rand() % 8) / 12.0f;
+- (void)buildBuildingWithSize:(CGSize)size {
+    float buildingSpacing = [[BCGlobalManager manager] heroSpeed] * 0.5f;
     
-    CGPoint pos = CGPointMake(_distanceCovered + buildingWidth / 2.0f, 3.0f - buildingHeight);
-    CGPoint size = CGPointMake(buildingWidth / 2.0f, buildingHeight);
+    CGPoint pos = CGPointMake(_distanceCovered + buildingSpacing + size.width / 2.0f, 5.0f - size.height);
+    CGSize bSize = CGSizeMake(size.width / 2.0f, 5.0f);
     
-    BCBuildingActor *building = [[BCBuildingActor alloc] initFromSize:size andPosition:pos];
+    BCBuildingActor *building = [[BCBuildingActor alloc] initFromSize:bSize andPosition:pos];
     [[AHActorManager manager] add:building];
-    _distanceCovered += buildingWidth;
+    _distanceCovered += size.width + buildingSpacing;
+    
+    pos.x += size.width * (0.4f - (0.08f * (rand() % 10)));
+    pos.y = -size.height;
+    [self buildCratesAtPosition:pos];
+}
+
+- (void)buildBuilding {
+    float buildingWidth = 15.0f + rand() % 15;
+    float buildingHeight = (float)(rand() % 5);
+    [self buildBuildingWithSize:CGSizeMake(buildingWidth, buildingHeight)];
+}
+
+- (void)buildCratesAtPosition:(CGPoint)position {
+    float size = [BCCrateActor size];
+    
+    CGPoint pos = position;
+    pos.y -= size;
+    [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
+    
+    pos.x -= size * 2;
+    [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
+    
+    pos.x += size * 4;
+    [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
+    
+    pos.x -= size;
+    pos.y -= size * 2;
+    [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
+    
+    pos.x -= size * 2;
+    [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
+    
+    pos.x += size;
+    pos.y -= size * 4;
+    [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
 }
 
 

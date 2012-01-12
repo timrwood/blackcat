@@ -21,6 +21,7 @@
     self = [super init];
     if (self) {
         _bodyType = b2_dynamicBody;
+        restitution = 0.3f;
     }
     return self;
 }
@@ -33,6 +34,14 @@
 #pragma mark -
 #pragma mark vars
 
+
+- (void)setFriction:(float)newFriction {
+    friction = newFriction;
+}
+
+- (void)setRestitution:(float)newRestitution {
+    restitution = newRestitution;
+}
 
 - (CGPoint)position {
     if (_body) {
@@ -122,9 +131,7 @@
 
 
 - (void)setDelegate:(NSObject <AHContactDelegate> *)newDelegate {
-    if ([newDelegate conformsToProtocol:@protocol(AHContactDelegate)]) {
-        delegate = newDelegate;
-    }
+    delegate = newDelegate;
 }
 
 
@@ -134,27 +141,28 @@
 
 - (BOOL)collidedWith:(AHPhysicsBody *)contact {
     if (delegate) {
+        dlog(@"collide");
         return [delegate collidedWith:contact];
     }
     return YES;
 }
 
 - (BOOL)collidedWithButDidNotCall:(AHPhysicsBody *)contact {
-    if (delegate) {
+    if (delegate && [delegate respondsToSelector:@selector(collidedWithButDidNotCall:)]) {
         return [delegate collidedWithButDidNotCall:contact];
     }
     return YES;
 }
 
 - (BOOL)uncollidedWith:(AHPhysicsBody *)contact {
-    if (delegate) {
+    if (delegate && [delegate respondsToSelector:@selector(uncollidedWith:)]) {
         return [delegate uncollidedWith:contact];
     }
     return YES;
 }
 
 - (BOOL)uncollidedWithButDidNotCall:(AHPhysicsBody *)contact {
-    if (delegate) {
+    if (delegate && [delegate respondsToSelector:@selector(uncollidedWithButDidNotCall:)]) {
         return [delegate uncollidedWithButDidNotCall:contact];
     }
     return YES;
