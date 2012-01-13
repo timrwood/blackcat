@@ -25,6 +25,10 @@
     return self;
 }
 
+- (void)dealloc {
+    components = nil;
+}
+
 
 #pragma mark -
 #pragma mark components

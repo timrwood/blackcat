@@ -41,8 +41,17 @@
 
 
 - (void)setup {
-    dlog(@"setup");
     [[AHInputManager manager] addInputComponent:self];
+}
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupAfterRemoval {
+    [[AHInputManager manager] removeInputComponent:self];
+    _delegate = nil;
 }
 
 

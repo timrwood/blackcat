@@ -27,23 +27,24 @@ void AHDebugDraw::SetColor(const b2Color& color, float32 opacity) {
     GLKVector4 col = GLKVector4Make(color.r, color.g, color.b, opacity);
     
     [[AHGraphicsManager manager] setDrawColor:col];
-
 }
 
 void AHDebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color) {
 	b2Vec2 *vertices = new b2Vec2[vertexCount];
-	for( int i=0;i<vertexCount;i++) {
+	for (int i = 0; i < vertexCount; i++) {
 		vertices[i] = old_vertices[i];
 	}
     
     SetColor(b2Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f), 1.0f);
     glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 	glDrawArrays(GL_LINE_LOOP, 0, vertexCount);
+    
+    delete vertices;
 }
 
 void AHDebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color) {
 	b2Vec2 *vertices = new b2Vec2[vertexCount];
-	for( int i=0;i<vertexCount;i++) {
+	for (int i = 0; i < vertexCount; i++) {
 		vertices[i] = old_vertices[i];
 	}
     glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
@@ -53,6 +54,8 @@ void AHDebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount
     
 	SetColor(b2Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f), 1.0f);
 	glDrawArrays(GL_LINE_LOOP, 0, vertexCount);
+    
+    delete vertices;
 }
 
 void AHDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) {
@@ -61,7 +64,7 @@ void AHDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color
 	const float32 k_increment = 2.0f * b2_pi / k_segments;
 	float32 theta = 0.0f;
 	
-	GLfloat glVertices[vertexCount*2];
+	GLfloat glVertices[vertexCount * 2];
 	for (int32 i = 0; i < k_segments; ++i) {
 		b2Vec2 v = center + radius * b2Vec2(cosf(theta), sinf(theta));
 		glVertices[i*2]=v.x;
@@ -139,7 +142,6 @@ void AHDebugDraw::DrawString(int x, int y, const char *string, ...) {
 }
 
 void AHDebugDraw::DrawAABB(b2AABB* aabb, const b2Color& color) {
-    
     SetColor(b2Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f), 1.0f);
 	GLfloat glVertices[] = {
 		aabb->lowerBound.x, aabb->lowerBound.y,

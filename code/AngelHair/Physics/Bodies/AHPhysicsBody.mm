@@ -141,7 +141,6 @@
 
 - (BOOL)collidedWith:(AHPhysicsBody *)contact {
     if (delegate) {
-        dlog(@"collide");
         return [delegate collidedWith:contact];
     }
     return YES;
@@ -174,6 +173,7 @@
 
 
 - (void)cleanupAfterRemoval {
+    delegate = nil;
     [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
 }
 

@@ -13,6 +13,7 @@
 #import "AHGraphicsManager.h"
 #import "AHGraphicsCamera.h"
 
+#import "BCGlobalManager.h"
 #import "BCTerrainCleaner.h"
 
 
@@ -42,17 +43,14 @@
 - (void)cleanupWorldAtPoint:(CGPoint)point andSize:(CGPoint)size {
     NSMutableArray *actors = [[AHPhysicsManager cppManager] getActorsAtPoint:point withSize:size];
     for (AHPhysicsBody *body in actors) {
-        //dlog(@"destroyActor");
         [body destroyActor];
     }
 }
 
 - (void)cleanupWorld {
-    //dlog(@"cleanup world");
-    CGPoint size = CGPointMake(200.0f, 200.0f);
-    float cameraX = [[AHGraphicsManager camera] worldPosition].x;
-    [self cleanupWorldAtPoint:CGPointMake(cameraX, 290.0f) andSize:size];
-    [self cleanupWorldAtPoint:CGPointMake(cameraX - 290.0f, 0.0f) andSize:size];
+    float cameraX = [[BCGlobalManager manager] heroPosition].x;
+    [self cleanupWorldAtPoint:CGPointMake(cameraX, 2025.0f) andSize:CGPointMake(4000.0f, 2000.0f)];
+    [self cleanupWorldAtPoint:CGPointMake(cameraX - 2200.0f, 0.0f) andSize:CGPointMake(2000.0f, 4000.0f)];
 }
 
 

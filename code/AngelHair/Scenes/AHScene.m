@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
+
+#import "AHActorManager.h"
 #import "AHScene.h"
 #import "AHButton.h"
 #import "AHFileManager.h"
@@ -78,11 +80,31 @@
 
 
 #pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    [self resetSetup];
+}
+
+- (void)resetSetup {
+    
+}
+
+
+#pragma mark -
 #pragma mark update
 
 
 - (void)update {
     
+}
+
+- (void)reset {
+    [self resetTeardown];
+    [[AHActorManager manager] destroyAll];
+    [[AHActorManager manager] updateAfterEverything];
+    [self resetSetup];
 }
 
 
@@ -91,6 +113,10 @@
 
 
 - (void)teardown {
+    [self resetTeardown];
+}
+
+- (void)resetTeardown {
     
 }
 

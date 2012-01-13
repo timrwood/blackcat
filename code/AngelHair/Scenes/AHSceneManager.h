@@ -10,9 +10,17 @@
 #import "AHSubSystem.h"
 
 
+@class AHScene;
+
+
 @interface AHSceneManager : NSObject <AHSubSystem> {
-@private
+@private;
+    AHScene *_currentScene;
+    AHScene *_nextScene;
     
+    float _timeToNewScene;
+    float _timeToReset;
+    BOOL _needsToBeReset;
 }
 
 
@@ -24,10 +32,25 @@
 
 
 #pragma mark -
+#pragma mark reset
+
+
+- (void)reset;
+
+
+#pragma mark -
 #pragma mark update
 
 
 - (void)update;
+
+
+#pragma mark -
+#pragma mark scenes
+
+
+- (void)goToScene:(AHScene *)scene;
+- (void)goToNextScene;
 
 
 @end

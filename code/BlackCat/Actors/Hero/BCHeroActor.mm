@@ -14,6 +14,7 @@
 #import "AHPhysicsCircle.h"
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
+#import "AHSceneManager.h"
 
 #import "BCHeroActor.h"
 #import "BCGlobalManager.h"
@@ -54,6 +55,8 @@
     float vely = [_body linearVelocity].y;
     if (_runSpeed < 15.0f) {
         _runSpeed += 0.02f;
+    } else if (_runSpeed < 30.0f) {
+        _runSpeed += 0.01f;
     }
     if (vely > 0.0f) {
         if (vely < 10.0f) {
@@ -74,18 +77,16 @@
 
 
 - (void)updateCamera {
-    // camera needs to be between buildingHeight and buildingHeight + CAMERA_JUMP_DISTANCE
     float buildingHeight = [[BCGlobalManager manager] buildingHeight];
     float jumpPercent = fmaxf(buildingHeight - CAMERA_JUMP_DISTANCE, fminf([_body position].y, buildingHeight));
     jumpPercent = (jumpPercent - buildingHeight) / CAMERA_JUMP_DISTANCE;
-    dlog(@"jump - %F %F", [_body position].y, jumpPercent);
     
     CGPoint cameraPos = [_body position];
     cameraPos.x += 4.0f;
     cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
-    //cameraPos.y += [AHMathUtils percent:jumpPercent betweenFloatA:-4.0f andFloatB:4.0f];
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
+    //[[AHGraphicsManager camera] setWorldZoom:50.0f];
     
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
@@ -111,6 +112,16 @@
 - (BOOL)collidedWith:(AHPhysicsBody *)contact {
     _canJump = YES;
     return YES;
+}
+
+
+#pragma mark -
+#pragma mark destruction
+
+
+- (void)cleanupBeforeDestruction {
+    [[AHSceneManager manager] reset];
+    [super cleanupBeforeDestruction];
 }
 
 

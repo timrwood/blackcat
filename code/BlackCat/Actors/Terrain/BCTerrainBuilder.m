@@ -27,9 +27,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self buildBuildingWithSize:CGSizeMake(50.0f, 0.0f)];
-        //[self buildBuildingWithSize:CGSizeMake(50.0f, 10.0f)];
-        [self buildBuilding];
+        [self buildBuildingWithSize:CGSizeMake(5.0f, 0.0f)];
     }
     return self;
 }
@@ -99,10 +97,20 @@
     
     if ([_currentBuilding distanceCovered] > heroX) {
         [[BCGlobalManager manager] setBuildingHeight:[_currentBuilding heightAtPosition:heroX]];
-        dlog(@"building height %F", [_currentBuilding heightAtPosition:heroX]);
+        //dlog(@"building height %F", [_currentBuilding heightAtPosition:heroX]);
     } else {
         [self buildBuilding];
     }
+}
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupBeforeDestruction {
+    _currentBuilding = nil;
+    _nextBuilding = nil;
 }
 
 

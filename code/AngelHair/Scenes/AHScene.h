@@ -28,10 +28,19 @@
 
 
 #pragma mark -
+#pragma mark setup
+
+
+- (void)setup;
+- (void)resetSetup;
+
+
+#pragma mark -
 #pragma mark update
 
 
 - (void)update;
+- (void)reset;
 
 
 #pragma mark -
@@ -39,6 +48,7 @@
 
 
 - (void)teardown;
+- (void)resetTeardown;
 
 
 @end

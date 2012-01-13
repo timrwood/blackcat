@@ -41,13 +41,4 @@
 }
 
 
-#pragma mark -
-#pragma mark update
-
-
-- (void)updateBeforeAnimation {
-    
-}
-
-
 @end

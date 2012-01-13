@@ -21,6 +21,7 @@ static AHActorManager *_manager = nil;
 - (void)reallyAdd:(AHActor *)actor;
 - (void)remove:(AHActor *)actor;
 - (void)reallyDestroy:(AHActor *)actor;
+- (void)reallyDestroyAll;
 
 
 @end
@@ -71,7 +72,7 @@ static AHActorManager *_manager = nil;
 
 
 - (void)teardown {
-    [self destroyAll];
+    [self reallyDestroyAll];
 }
 
 
@@ -164,9 +165,15 @@ static AHActorManager *_manager = nil;
     [self remove:actor];
 }
 
-- (void)destroyAll  {
+- (void)reallyDestroyAll {
     while ([actors count] > 0) {
         [self reallyDestroy:(AHActor *) [actors objectAtIndex:0]];
+    }
+}
+
+- (void)destroyAll  {
+    for (AHActor *actor in actors) {
+        [self destroy:actor];
     }
 }
 

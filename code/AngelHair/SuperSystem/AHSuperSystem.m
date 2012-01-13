@@ -115,6 +115,7 @@ static AHSuperSystem *_manager = nil;
     [[AHGraphicsManager manager] update];
     
     // end update
+    [[AHSceneManager manager] update];
     [[AHActorManager manager] updateAfterEverything];
 }
 
