@@ -10,9 +10,13 @@
 #import "AHActor.h"
 
 
+@class BCBuildingActor;
+
+
 @interface BCTerrainBuilder : AHActor {
 @private;
-    float _distanceCovered;
+    BCBuildingActor *_currentBuilding;
+    BCBuildingActor *_nextBuilding;
 }
 
 

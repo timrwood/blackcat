@@ -7,7 +7,7 @@
 //
 
 
-#define CRATE_SIZE 0.5f
+#define CRATE_SIZE 0.2f
 
 
 #import "BCCrateActor.h"

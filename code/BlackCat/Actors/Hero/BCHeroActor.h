@@ -26,4 +26,11 @@
 }
 
 
+#pragma mark -
+#pragma mark camera
+
+
+- (void)updateCamera;
+
+
 @end

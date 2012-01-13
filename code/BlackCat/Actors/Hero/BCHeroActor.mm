@@ -7,6 +7,10 @@
 //
 
 
+#define CAMERA_JUMP_DISTANCE 4.0f
+
+
+#import "AHMathUtils.h"
 #import "AHPhysicsCircle.h"
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
@@ -35,7 +39,7 @@
         [_input setDelegate:self];
         [self addComponent:_input];
         
-        _runSpeed = 5.0f;
+        _runSpeed = 8.0f;
     }
     return self;
 }
@@ -48,25 +52,42 @@
 - (void)updateBeforeAnimation {
     // velocity
     float vely = [_body linearVelocity].y;
-    _runSpeed += 0.02f;
+    if (_runSpeed < 15.0f) {
+        _runSpeed += 0.02f;
+    }
     if (vely > 0.0f) {
-        vely *= 1.2f; // travelling downward
+        if (vely < 10.0f) {
+            vely *= 1.2f; // travelling downward
+        }
     } else {
         vely /= 1.4f; // travelling upward
     }
     [_body setLinearVelocity:CGPointMake(_runSpeed, vely)];
     [[BCGlobalManager manager] setHeroSpeed:_runSpeed];
-    
-    // camera
-    float cameraYOffset = - 2.0f + fmaxf(3.0f, fminf([_body position].y, 5.0f)) / 2.0f;
-    dlog(@"camera y offset %F %F", [_body position].y, cameraYOffset);
+
+    [self updateCamera];
+}
+
+
+#pragma mark -
+#pragma mark camera
+
+
+- (void)updateCamera {
+    // camera needs to be between buildingHeight and buildingHeight + CAMERA_JUMP_DISTANCE
+    float buildingHeight = [[BCGlobalManager manager] buildingHeight];
+    float jumpPercent = fmaxf(buildingHeight - CAMERA_JUMP_DISTANCE, fminf([_body position].y, buildingHeight));
+    jumpPercent = (jumpPercent - buildingHeight) / CAMERA_JUMP_DISTANCE;
+    dlog(@"jump - %F %F", [_body position].y, jumpPercent);
     
     CGPoint cameraPos = [_body position];
-    cameraPos.x += 20.0f;
-    cameraPos.y -= cameraYOffset * 4.0f;
+    cameraPos.x += 4.0f;
+    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
+    //cameraPos.y += [AHMathUtils percent:jumpPercent betweenFloatA:-4.0f andFloatB:4.0f];
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
-    [[AHGraphicsManager camera] setWorldZoom:40.0f];
+    
+    [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
 
 

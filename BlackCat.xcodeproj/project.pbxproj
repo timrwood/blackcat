@@ -104,6 +104,7 @@
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
 		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
 		15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */; };
+		15CEA5D014BFB7760052D6BC /* AHMathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CF14BFB7760052D6BC /* AHMathUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,6 +302,8 @@
 		15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCGlobalManager.m; path = Global/BCGlobalManager.m; sourceTree = "<group>"; };
 		15CEA5CA14BF84690052D6BC /* BCCrateActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCrateActor.h; path = Actors/Terrain/BCCrateActor.h; sourceTree = "<group>"; };
 		15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCCrateActor.mm; path = Actors/Terrain/BCCrateActor.mm; sourceTree = "<group>"; };
+		15CEA5CE14BFB7760052D6BC /* AHMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHMathUtils.h; path = Math/AHMathUtils.h; sourceTree = "<group>"; };
+		15CEA5CF14BFB7760052D6BC /* AHMathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHMathUtils.m; path = Math/AHMathUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +524,7 @@
 		15AC4D6A14B7B3BB00283A06 /* AngelHair */ = {
 			isa = PBXGroup;
 			children = (
+				15CEA5CD14BFB7530052D6BC /* Math */,
 				15AC4D6B14B7B3BB00283A06 /* Actors */,
 				15AC4D7114B7B3BB00283A06 /* Animation */,
 				1583471614B7CC1800C1DA04 /* Files */,
@@ -872,6 +876,15 @@
 			name = Global;
 			sourceTree = "<group>";
 		};
+		15CEA5CD14BFB7530052D6BC /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				15CEA5CE14BFB7760052D6BC /* AHMathUtils.h */,
+				15CEA5CF14BFB7760052D6BC /* AHMathUtils.m */,
+			);
+			name = Math;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1025,6 +1038,7 @@
 				158ABE3714BE757D00E274BB /* AHInputComponent.m in Sources */,
 				15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */,
 				15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */,
+				15CEA5D014BFB7760052D6BC /* AHMathUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

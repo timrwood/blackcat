@@ -27,8 +27,9 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _distanceCovered = 0.0f;
         [self buildBuildingWithSize:CGSizeMake(50.0f, 0.0f)];
+        //[self buildBuildingWithSize:CGSizeMake(50.0f, 10.0f)];
+        [self buildBuilding];
     }
     return self;
 }
@@ -39,14 +40,18 @@
 
 
 - (void)buildBuildingWithSize:(CGSize)size {
+    // set the next building to the current building
+    _currentBuilding = _nextBuilding;
+    
     float buildingSpacing = [[BCGlobalManager manager] heroSpeed] * 0.5f;
     
-    CGPoint pos = CGPointMake(_distanceCovered + buildingSpacing + size.width / 2.0f, 5.0f - size.height);
+    CGPoint pos = CGPointMake([_currentBuilding distanceCovered] + buildingSpacing + size.width / 2.0f, 5.0f - size.height);
     CGSize bSize = CGSizeMake(size.width / 2.0f, 5.0f);
     
-    BCBuildingActor *building = [[BCBuildingActor alloc] initFromSize:bSize andPosition:pos];
-    [[AHActorManager manager] add:building];
-    _distanceCovered += size.width + buildingSpacing;
+    _nextBuilding = [[BCBuildingActor alloc] initFromSize:bSize andPosition:pos];
+    [_nextBuilding setSpacing:buildingSpacing];
+    [_nextBuilding setPrevHeight:[_currentBuilding height]];
+    [[AHActorManager manager] add:_nextBuilding];
     
     pos.x += size.width * (0.4f - (0.08f * (rand() % 10)));
     pos.y = -size.height;
@@ -54,7 +59,7 @@
 }
 
 - (void)buildBuilding {
-    float buildingWidth = 15.0f + rand() % 15;
+    float buildingWidth = 5.0f + rand() % 15 + [[BCGlobalManager manager] heroSpeed];
     float buildingHeight = (float)(rand() % 5);
     [self buildBuildingWithSize:CGSizeMake(buildingWidth, buildingHeight)];
 }
@@ -90,9 +95,12 @@
 
 
 - (void)updateBeforeRender {
-    float cameraX = [[AHGraphicsManager camera] worldPosition].x;
-
-    if (_distanceCovered < cameraX + 30.0f) {
+    float heroX = [[BCGlobalManager manager] heroPosition].x;
+    
+    if ([_currentBuilding distanceCovered] > heroX) {
+        [[BCGlobalManager manager] setBuildingHeight:[_currentBuilding heightAtPosition:heroX]];
+        dlog(@"building height %F", [_currentBuilding heightAtPosition:heroX]);
+    } else {
         [self buildBuilding];
     }
 }

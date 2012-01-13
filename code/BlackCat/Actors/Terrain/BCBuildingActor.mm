@@ -8,6 +8,7 @@
 
 
 #import "AHPhysicsRect.h"
+#import "AHMathUtils.h"
 
 #import "BCBuildingActor.h"
 
@@ -25,8 +26,47 @@
         _body = [[AHPhysicsRect alloc] initFromSize:size andPosition:position];
         [_body setStatic:YES];
         [self addComponent:_body];
+        
+        _distanceCoveredRight = position.x + size.width;
+        _distanceCoveredLeft = position.x - size.width;
+        _height = position.y - 5.0f; // THIS NEEDS TO NOT BE AN INLINE CONSTANT
     }
     return self;
+}
+
+
+
+#pragma mark -
+#pragma mark coverage
+
+
+- (void)setPrevHeight:(float)prevHeight {
+    _prevHeight = prevHeight;
+}
+
+- (void)setSpacing:(float)spacing {
+    _spacing = spacing;
+}
+
+- (float)distanceCovered {
+    return _distanceCoveredRight;
+}
+
+- (float)height {
+    return _height;
+}
+
+- (float)heightAtPosition:(float)position {
+    float endOfPrev = _distanceCoveredLeft - _spacing;
+    
+    if (position < endOfPrev) {
+        return _prevHeight;
+    } else if (position < _distanceCoveredLeft) {
+        float percent = (position - endOfPrev) / _spacing;
+        return [AHMathUtils percent:percent betweenFloatA:_prevHeight andFloatB:_height];
+    } else {
+        return _height;
+    }
 }
 
 

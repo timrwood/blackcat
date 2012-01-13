@@ -16,6 +16,12 @@
 @interface BCBuildingActor : AHActor {
 @private;
     AHPhysicsRect *_body;
+    float _distanceCoveredRight;
+    float _distanceCoveredLeft;
+    float _height;
+    
+    float _spacing;
+    float _prevHeight;
 }
 
 
@@ -24,6 +30,17 @@
 
 
 - (id)initFromSize:(CGSize)size andPosition:(CGPoint)position;
+
+
+#pragma mark -
+#pragma mark coverage
+
+
+- (void)setPrevHeight:(float)prevHeight;
+- (void)setSpacing:(float)spacing;
+- (float)distanceCovered;
+- (float)height;
+- (float)heightAtPosition:(float)position;
 
 
 @end
