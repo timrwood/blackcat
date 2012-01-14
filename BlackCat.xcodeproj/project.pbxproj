@@ -36,7 +36,6 @@
 		1589E2EE14BE565F008442DA /* AHActorComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1589E2ED14BE565E008442DA /* AHActorComponent.m */; };
 		1589E2F214BE5848008442DA /* BCTerrainCleaner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1589E2F114BE5848008442DA /* BCTerrainCleaner.mm */; };
 		158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE2F14BE731F00E274BB /* AHInputManager.m */; };
-		158ABE3414BE74D500E274BB /* AHInputTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE3314BE74D500E274BB /* AHInputTouch.m */; };
 		158ABE3714BE757D00E274BB /* AHInputComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE3614BE757D00E274BB /* AHInputComponent.m */; };
 		158C4A9614BB9B130089747C /* AHGraphicsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9514BB9B130089747C /* AHGraphicsManager.m */; };
 		158C4A9A14BB9C530089747C /* AHGraphicsRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9914BB9C530089747C /* AHGraphicsRect.m */; };
@@ -103,6 +102,7 @@
 		15AC4E4014B7BB3400283A06 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7414B7B3BB00283A06 /* Shader.fsh */; };
 		15AC4E4114B7BB3700283A06 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* Shader.vsh */; };
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
+		15C5EBC314C0F17200FB5BAF /* AHActorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */; };
 		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
 		15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */; };
 		15CEA5D014BFB7760052D6BC /* AHMathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CF14BFB7760052D6BC /* AHMathUtils.m */; };
@@ -165,8 +165,6 @@
 		1589E2F114BE5848008442DA /* BCTerrainCleaner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCTerrainCleaner.mm; path = Actors/Terrain/BCTerrainCleaner.mm; sourceTree = "<group>"; };
 		158ABE2E14BE731F00E274BB /* AHInputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHInputManager.h; sourceTree = "<group>"; };
 		158ABE2F14BE731F00E274BB /* AHInputManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHInputManager.m; sourceTree = "<group>"; };
-		158ABE3214BE74D500E274BB /* AHInputTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHInputTouch.h; sourceTree = "<group>"; };
-		158ABE3314BE74D500E274BB /* AHInputTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHInputTouch.m; sourceTree = "<group>"; };
 		158ABE3514BE757D00E274BB /* AHInputComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHInputComponent.h; sourceTree = "<group>"; };
 		158ABE3614BE757D00E274BB /* AHInputComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHInputComponent.m; sourceTree = "<group>"; };
 		158C4A9414BB9B130089747C /* AHGraphicsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHGraphicsManager.h; sourceTree = "<group>"; };
@@ -301,6 +299,9 @@
 		15AC4E3914B7B4F700283A06 /* AHSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSubSystem.h; path = SubSystem/AHSubSystem.h; sourceTree = "<group>"; };
 		15C06CA414BCCBFD0067D458 /* AHGraphicsCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsCamera.h; path = Camera/AHGraphicsCamera.h; sourceTree = "<group>"; };
 		15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsCamera.m; path = Camera/AHGraphicsCamera.m; sourceTree = "<group>"; };
+		15C5EBC114C0F17200FB5BAF /* AHActorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorMessage.h; sourceTree = "<group>"; };
+		15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActorMessage.m; sourceTree = "<group>"; };
+		15C5EBC414C0FB3A00FB5BAF /* BCGlobalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalTypes.h; path = Global/BCGlobalTypes.h; sourceTree = "<group>"; };
 		15CEA5C514BF75D20052D6BC /* BCGlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalManager.h; path = Global/BCGlobalManager.h; sourceTree = "<group>"; };
 		15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCGlobalManager.m; path = Global/BCGlobalManager.m; sourceTree = "<group>"; };
 		15CEA5CA14BF84690052D6BC /* BCCrateActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCrateActor.h; path = Actors/Terrain/BCCrateActor.h; sourceTree = "<group>"; };
@@ -563,6 +564,8 @@
 				15AC4D7014B7B3BB00283A06 /* AHActorManager.m */,
 				1583471314B7C92400C1DA04 /* AHButton.h */,
 				1583471414B7C92400C1DA04 /* AHButton.m */,
+				15C5EBC114C0F17200FB5BAF /* AHActorMessage.h */,
+				15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */,
 			);
 			path = Actors;
 			sourceTree = "<group>";
@@ -604,8 +607,6 @@
 			children = (
 				158ABE2E14BE731F00E274BB /* AHInputManager.h */,
 				158ABE2F14BE731F00E274BB /* AHInputManager.m */,
-				158ABE3214BE74D500E274BB /* AHInputTouch.h */,
-				158ABE3314BE74D500E274BB /* AHInputTouch.m */,
 				158ABE3514BE757D00E274BB /* AHInputComponent.h */,
 				158ABE3614BE757D00E274BB /* AHInputComponent.m */,
 			);
@@ -885,6 +886,7 @@
 			children = (
 				15CEA5C514BF75D20052D6BC /* BCGlobalManager.h */,
 				15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */,
+				15C5EBC414C0FB3A00FB5BAF /* BCGlobalTypes.h */,
 			);
 			name = Global;
 			sourceTree = "<group>";
@@ -1047,12 +1049,12 @@
 				1589E2EE14BE565F008442DA /* AHActorComponent.m in Sources */,
 				1589E2F214BE5848008442DA /* BCTerrainCleaner.mm in Sources */,
 				158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */,
-				158ABE3414BE74D500E274BB /* AHInputTouch.m in Sources */,
 				158ABE3714BE757D00E274BB /* AHInputComponent.m in Sources */,
 				15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */,
 				15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */,
 				15CEA5D014BFB7760052D6BC /* AHMathUtils.m in Sources */,
 				158E021114C0B0ED0012D393 /* BCMainScene.m in Sources */,
+				15C5EBC314C0F17200FB5BAF /* AHActorMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

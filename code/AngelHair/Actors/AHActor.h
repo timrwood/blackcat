@@ -8,6 +8,7 @@
 
 
 #import "AHActorComponent.h"
+#import "AHActorMessage.h"
 
 
 @interface AHActor : NSObject {
@@ -47,6 +48,14 @@
 
 - (void)cleanupBeforeDestruction;
 - (void)destroy;
+
+
+#pragma mark -
+#pragma mark messages
+
+
+- (void)recieveMessage:(AHActorMessage *)message;
+- (void)sendMessage:(AHActorMessage *)message;
 
 
 @end

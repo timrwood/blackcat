@@ -7,6 +7,7 @@
 //
 
 
+#import "AHActorMessage.h"
 #import "AHActorManager.h"
 #import "AHActor.h"
 
@@ -22,6 +23,7 @@ static AHActorManager *_manager = nil;
 - (void)remove:(AHActor *)actor;
 - (void)reallyDestroy:(AHActor *)actor;
 - (void)reallyDestroyAll;
+- (void)sendAllMessages;
 
 
 @end
@@ -53,6 +55,7 @@ static AHActorManager *_manager = nil;
         actors = [[NSMutableArray alloc] init];
         actorsToAdd = [[NSMutableArray alloc] init];
         actorsToDestroy = [[NSMutableArray alloc] init];
+        messages = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -106,6 +109,8 @@ static AHActorManager *_manager = nil;
     while ([actorsToAdd count] > 0) {
         [self reallyAdd:(AHActor *) [actorsToAdd objectAtIndex:0]];
     }
+    
+    [self sendAllMessages];
 }
 
 
@@ -174,6 +179,26 @@ static AHActorManager *_manager = nil;
 - (void)destroyAll  {
     for (AHActor *actor in actors) {
         [self destroy:actor];
+    }
+}
+
+
+#pragma mark -
+#pragma mark messages
+
+
+- (void)sendAllMessages {
+    for (AHActorMessage *message in messages) {
+        for (AHActor *actor in actors) {
+            [actor recieveMessage:message];
+        }
+    }
+    [messages removeAllObjects];
+}
+
+- (void)sendMessage:(AHActorMessage *)message {
+    if (![messages containsObject:message]) {
+        [messages addObject:message];
     }
 }
 

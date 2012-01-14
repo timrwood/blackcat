@@ -8,6 +8,7 @@
 
 
 #import "AHActor.h"
+#import "AHActorManager.h"
 
 
 @implementation AHActor
@@ -93,6 +94,19 @@
 
 - (void)destroy {
     
+}
+
+
+#pragma mark -
+#pragma mark messages
+
+
+- (void)recieveMessage:(AHActorMessage *)message {
+    
+}
+
+- (void)sendMessage:(AHActorMessage *)message {
+    [[AHActorManager manager] sendMessage:message];
 }
 
 

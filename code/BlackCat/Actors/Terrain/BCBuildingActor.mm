@@ -10,6 +10,7 @@
 #import "AHPhysicsRect.h"
 #import "AHMathUtils.h"
 
+#import "BCGlobalTypes.h"
 #import "BCBuildingActor.h"
 
 
@@ -33,7 +34,6 @@
     }
     return self;
 }
-
 
 
 #pragma mark -
@@ -66,6 +66,17 @@
         return [AHMathUtils percent:percent betweenFloatA:_prevHeight andFloatB:_height];
     } else {
         return _height;
+    }
+}
+
+
+#pragma mark -
+#pragma mark message
+
+
+- (void)recieveMessage:(AHActorMessage *)message {
+    if ([message type] == messageTest) {
+        dlog(@"red");
     }
 }
 

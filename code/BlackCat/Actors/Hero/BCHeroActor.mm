@@ -10,6 +10,7 @@
 #define CAMERA_JUMP_DISTANCE 4.0f
 
 
+#import "AHActorMessage.h"
 #import "AHMathUtils.h"
 #import "AHPhysicsCircle.h"
 #import "AHGraphicsManager.h"
@@ -17,6 +18,7 @@
 #import "AHSceneManager.h"
 
 #import "BCHeroActor.h"
+#import "BCGlobalTypes.h"
 #import "BCGlobalManager.h"
 
 
@@ -101,6 +103,7 @@
         float velx = [_body linearVelocity].x;
         [_body setLinearVelocity:CGPointMake(velx, -30.0f)];
         _canJump = NO;
+        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)messageTest]];
     }
 }
 

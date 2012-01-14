@@ -11,6 +11,7 @@
 
 
 @class AHActor;
+@class AHActorMessage;
 
 
 @interface AHActorManager : NSObject <AHSubSystem> {
@@ -18,6 +19,7 @@
     NSMutableArray *actors;
     NSMutableArray *actorsToAdd;
     NSMutableArray *actorsToDestroy;
+    NSMutableArray *messages;
 }
 
 
@@ -45,6 +47,13 @@
 - (void)add:(AHActor *)actor;
 - (void)destroy:(AHActor *)actor;
 - (void)destroyAll;
+
+
+#pragma mark -
+#pragma mark messages
+
+
+- (void)sendMessage:(AHActorMessage *)message;
 
 
 @end
