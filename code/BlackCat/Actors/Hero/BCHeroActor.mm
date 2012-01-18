@@ -8,8 +8,15 @@
 
 
 #define CAMERA_JUMP_DISTANCE 4.0f
+#define RADIUS 0.5f
+#define RAYCAST_RADIUS_RATIO 1.4f
+#define MAX_SAFETY_RANGE_FRAMES 3
+
+#define BASE_UPWARD_SLOWING 1.2f
+#define BASE_DOWNWARD_SLOWING 1.1f
 
 
+#import "AHTimeManager.h"
 #import "AHActorMessage.h"
 #import "AHMathUtils.h"
 #import "AHPhysicsCircle.h"
@@ -32,10 +39,10 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsCircle alloc] initFromRadius:0.5f andPosition:CGPointMake(0.0f, 0.0f)];
+        _body = [[AHPhysicsCircle alloc] initFromRadius:RADIUS andPosition:CGPointMake(0.0f, 0.0f)];
         [_body setRestitution:0.1f];
         [_body setStatic:NO];
-        [_body setDelegate:self];
+        [_body setCategory:PHY_CAT_HERO];
         [self addComponent:_body];
         
         _input = [[AHInputComponent alloc] initWithScreenRect:[[UIScreen mainScreen] bounds]];
@@ -43,6 +50,11 @@
         [self addComponent:_input];
         
         _runSpeed = 8.0f;
+        
+        _upwardSlowing = powf(BASE_UPWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
+        _downwardSlowing = powf(BASE_DOWNWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
+        
+        _speedIncrease = 0.01f * 60.0f / [[AHTimeManager manager] realFramesPerSecond];
     }
     return self;
 }
@@ -53,30 +65,59 @@
 
 
 - (void)updateBeforeAnimation {
-    // velocity
-    float vely = [_body linearVelocity].y;
-    if (_runSpeed < 15.0f) {
-        _runSpeed += 0.02f;
-    } else if (_runSpeed < 30.0f) {
-        _runSpeed += 0.01f;
-    }
-    if (vely > 0.0f) {
-        if (vely < 10.0f) {
-            vely *= 1.2f; // travelling downward
-        }
-    } else {
-        vely /= 1.4f; // travelling upward
-    }
-    [_body setLinearVelocity:CGPointMake(_runSpeed, vely)];
-    [[BCGlobalManager manager] setHeroSpeed:_runSpeed];
-
+    [self updateVelocity];
     [self updateCamera];
+    [self updateJumpability];
 }
 
+- (void)updateVelocity {
+    // increase velocity
+    float vely = [_body linearVelocity].y;
+    if (_runSpeed < 15.0f) {
+        _runSpeed += _speedIncrease;
+    } else if (_runSpeed < 50.0f) {
+        _runSpeed += _speedIncrease / 2.0f;
+    }
+    
+    // make jumping snappier
+    if (vely > 0.0f) {
+        if (vely < 10.0f) {
+            vely *= _downwardSlowing; // travelling downward
+        }
+    } else {
+        vely /= _upwardSlowing; // travelling upward
+    }
+    
+    // set vars
+    [_body setLinearVelocity:CGPointMake(_runSpeed, vely)];
+    [[BCGlobalManager manager] setHeroSpeed:_runSpeed];
+}
 
-#pragma mark -
-#pragma mark camera
-
+- (void)updateJumpability {
+    CGPoint foot = [_body position];
+    foot.y += RADIUS * RAYCAST_RADIUS_RATIO;
+    
+    int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_JUMPABLE 
+                                                                     from:[_body position] 
+                                                                       to:foot];
+    
+    if (cat != PHY_CAT_NONE) {
+        _canJump = YES;
+        _safetyRange = MAX_SAFETY_RANGE_FRAMES;
+    } else {
+        if (_safetyRange > 0) {
+            _safetyRange--;
+        } else {
+            _canJump = NO;
+        }
+    }
+    
+    // send landing message
+    if (_isJumping && _canJump) {
+        _isJumping = NO;
+        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_LAND]];
+    }
+}
 
 - (void)updateCamera {
     float buildingHeight = [[BCGlobalManager manager] buildingHeight];
@@ -88,7 +129,7 @@
     cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
-    //[[AHGraphicsManager camera] setWorldZoom:50.0f];
+    //[[AHGraphicsManager camera] setWorldZoom:10.0f];
     
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
@@ -103,18 +144,9 @@
         float velx = [_body linearVelocity].x;
         [_body setLinearVelocity:CGPointMake(velx, -30.0f)];
         _canJump = NO;
-        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)messageTest]];
+        _isJumping = YES;
+        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_JUMP]];
     }
-}
-
-
-#pragma mark -
-#pragma mark contacts
-
-
-- (BOOL)collidedWith:(AHPhysicsBody *)contact {
-    _canJump = YES;
-    return YES;
 }
 
 

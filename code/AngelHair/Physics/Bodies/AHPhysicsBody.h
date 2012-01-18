@@ -18,27 +18,46 @@
 
 
 @interface AHPhysicsBody : AHActorComponent <AHContactDelegate> {
+@protected;
+    float restitution;
+    float friction;
+    BOOL _isSensor;
 @private;
     NSObject <AHContactDelegate> *delegate;
     b2Body *_body;
     b2BodyType _bodyType;
-@protected;
-    float restitution;
-    float friction;
+    int _tags;
+    int _category;
 }
 
 
 #pragma mark -
-#pragma mark vars
+#pragma mark setup
 
 
 - (void)setFriction:(float)newFriction;
 - (void)setRestitution:(float)newRestitution;
+
+
+#pragma mark -
+#pragma mark position + rotation
+
+
 - (CGPoint)position;
+- (void)setPosition:(CGPoint)newPosition;
 - (float)rotation;
+- (void)setRotation:(float)rotation;
+
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (CGPoint)force;
 - (CGPoint)linearVelocity;
 - (float)angularVelocity;
 - (void)setLinearVelocity:(CGPoint)vel;
+- (void)setLinearVelocity:(CGPoint)vel atWorldPoint:(CGPoint)point;
 - (void)setAngularVelocity:(float)vel;
 
 
@@ -49,6 +68,7 @@
 - (void)addBodyToWorld:(const b2BodyDef *)bodyDef;
 - (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef;
 - (void)setStatic:(BOOL)isStatic;
+- (void)setSensor:(BOOL)isSensor;
 
 
 #pragma mark -
@@ -56,6 +76,23 @@
 
 
 - (void)setDelegate:(NSObject <AHContactDelegate> *)newDelegate;
+
+
+#pragma mark -
+#pragma mark tags
+
+
+- (void)addTag:(int)tag;
+- (void)removeTag:(int)tag;
+- (BOOL)hasTag:(int)tag;
+
+
+#pragma mark -
+#pragma mark category
+
+
+- (void)setCategory:(int)category;
+- (int)category;
 
 
 @end

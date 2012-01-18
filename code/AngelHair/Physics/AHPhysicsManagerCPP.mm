@@ -7,6 +7,7 @@
 //
 
 
+#import "AHTimeManager.h"
 #import "AHPhysicsManagerCPP.h"
 #import "AHPhysicsBody.h"
 
@@ -63,7 +64,7 @@
 
 
 - (void)update {
-    _world->Step(1.0f / 30.0f, 10, 10);
+    _world->Step([[AHTimeManager manager] worldSecondsPerFrame], 10, 10);
 }
 
 
@@ -132,5 +133,40 @@ public:
     return callback.actors;
 }
 
+class RayCastCallback : public b2RayCastCallback {
+public:
+    RayCastCallback(int tag) {
+        _tag = tag;
+        category = 0;
+    }
+    
+    float32 ReportFixture(b2Fixture* fixture, 
+                          const b2Vec2& point,
+                          const b2Vec2& normal, 
+                          float32 fraction) {
+        AHPhysicsBody *body = (__bridge AHPhysicsBody *) fixture->GetBody()->GetUserData();
+        if (_tag > 0 && ![body hasTag:_tag]) { // ignore if we have a desired tag and this body does not have the tag;
+            return -1;
+        } else {
+            category = [body category];
+            return 0;
+        }
+    }
+    
+    int _tag;
+	int category;
+};
+
+- (int)getFirstActorCategoryFrom:(CGPoint)pointA to:(CGPoint)pointB {
+	return [self getFirstActorCategoryWithTag:0 from:pointA to:pointB];
+}
+
+- (int)getFirstActorCategoryWithTag:(int)tag from:(CGPoint)pointA to:(CGPoint)pointB {
+    RayCastCallback callback(tag);
+	[self world]->RayCast(&callback, 
+                          b2Vec2(pointA.x, pointA.y), 
+                          b2Vec2(pointB.x, pointB.y));
+    return callback.category;
+}
 
 @end

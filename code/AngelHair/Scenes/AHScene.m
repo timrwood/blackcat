@@ -7,6 +7,7 @@
 //
 
 
+#import "AHTimeManager.h"
 #import "AHActorManager.h"
 #import "AHScene.h"
 #import "AHButton.h"
@@ -104,6 +105,7 @@
     [self resetTeardown];
     [[AHActorManager manager] destroyAll];
     [[AHActorManager manager] updateAfterEverything];
+    [[AHTimeManager manager] reset];
     [self resetSetup];
 }
 

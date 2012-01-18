@@ -10,7 +10,14 @@
 #import "AHScene.h"
 
 
-@interface BCMainScene : AHScene
+@class BCHeroRecorderActor;
+
+
+@interface BCMainScene : AHScene {
+@private;
+    BCHeroRecorderActor *_recorderActor;
+    NSData *_lastRecording;
+}
 
 
 @end

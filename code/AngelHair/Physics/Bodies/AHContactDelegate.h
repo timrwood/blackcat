@@ -17,12 +17,12 @@
 @protocol AHContactDelegate <NSObject>
 
 
-- (BOOL)collidedWith:(AHPhysicsBody *)contact;
-
-
 @optional;
 
 
+- (BOOL)willCollideWith:(AHPhysicsBody *)contact;
+- (BOOL)willCollideWithButWillNotCall:(AHPhysicsBody *)contact;
+- (BOOL)collidedWith:(AHPhysicsBody *)contact;
 - (BOOL)collidedWithButDidNotCall:(AHPhysicsBody *)contact;
 - (BOOL)uncollidedWith:(AHPhysicsBody *)contact;
 - (BOOL)uncollidedWithButDidNotCall:(AHPhysicsBody *)contact;

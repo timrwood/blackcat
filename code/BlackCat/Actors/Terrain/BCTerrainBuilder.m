@@ -7,6 +7,7 @@
 //
 
 
+#import "AHMathUtils.h"
 #import "AHActorManager.h"
 #import "AHGraphicsCamera.h"
 #import "AHGraphicsManager.h"
@@ -27,6 +28,18 @@
 - (id)init {
     self = [super init];
     if (self) {
+        _randKey = rand();
+        _randOffset = 0;
+        [self buildBuildingWithSize:CGSizeMake(5.0f, 0.0f)];
+    }
+    return self;
+}
+
+- (id)initWithKey:(int)key {
+    self = [super init];
+    if (self) {
+        _randKey = key;
+        _randOffset = 0;
         [self buildBuildingWithSize:CGSizeMake(5.0f, 0.0f)];
     }
     return self;
@@ -49,6 +62,7 @@
     _nextBuilding = [[BCBuildingActor alloc] initFromSize:bSize andPosition:pos];
     [_nextBuilding setSpacing:buildingSpacing];
     [_nextBuilding setPrevHeight:[_currentBuilding height]];
+    _lastBuildingHeight = size.height;
     [[AHActorManager manager] add:_nextBuilding];
     
     pos.x += size.width * (0.4f - (0.08f * (rand() % 10)));
@@ -57,8 +71,10 @@
 }
 
 - (void)buildBuilding {
-    float buildingWidth = 5.0f + rand() % 15 + [[BCGlobalManager manager] heroSpeed];
-    float buildingHeight = (float)(rand() % 5);
+    float buildingWidth = [self seededRandomBetweenFloat:5.0f andFloat:20.0f] + [[BCGlobalManager manager] heroSpeed];
+    float minBuildingHeight = fmaxf(0.0f, _lastBuildingHeight - 2.0f);
+    float maxBuildingHeight = fminf(5.0f, _lastBuildingHeight + 2.0f);
+    float buildingHeight = [self seededRandomBetweenFloat:minBuildingHeight andFloat:maxBuildingHeight];
     [self buildBuildingWithSize:CGSizeMake(buildingWidth, buildingHeight)];
 }
 
@@ -97,7 +113,6 @@
     
     if ([_currentBuilding distanceCovered] > heroX) {
         [[BCGlobalManager manager] setBuildingHeight:[_currentBuilding heightAtPosition:heroX]];
-        //dlog(@"building height %F", [_currentBuilding heightAtPosition:heroX]);
     } else {
         [self buildBuilding];
     }
@@ -111,6 +126,25 @@
 - (void)cleanupBeforeDestruction {
     _currentBuilding = nil;
     _nextBuilding = nil;
+}
+
+
+#pragma mark -
+#pragma mark rand
+
+
+- (float)seededPercent {
+    _randOffset++;
+    if (_randOffset > 100) {
+        _randOffset = 0;
+    }
+    int mod = (_randOffset * 3 + 20);
+    return (float) (_randKey % mod) / (float) mod;
+}
+
+- (float)seededRandomBetweenFloat:(float)a andFloat:(float)b {
+    float percent = [self seededPercent];
+    return [AHMathUtils percent:percent betweenFloatA:a andFloatB:b];
 }
 
 

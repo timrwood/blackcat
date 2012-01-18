@@ -48,6 +48,7 @@
 
 
 - (NSMutableArray *)getActorsAtPoint:(CGPoint)point withSize:(CGPoint)size;
-
+- (int)getFirstActorCategoryFrom:(CGPoint)pointA to:(CGPoint)pointB;
+- (int)getFirstActorCategoryWithTag:(int)tag from:(CGPoint)pointA to:(CGPoint)pointB;
 
 @end

@@ -8,14 +8,16 @@
 
 
 #import "AHActor.h"
+#import "AHContactDelegate.h"
 
 
 @class AHPhysicsRect;
 
 
-@interface BCCrateActor : AHActor {
+@interface BCCrateActor : AHActor <AHContactDelegate> {
 @private;
     AHPhysicsRect *_body;
+    BOOL _hasBeenUpset;
 }
 
 

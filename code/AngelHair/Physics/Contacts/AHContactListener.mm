@@ -11,22 +11,30 @@
 #import "AHContactListener.h"
 
 
-void AHContactListener::BeginContact(b2Contact *contact) {
+void AHContactListener::PreSolve(b2Contact *contact, const b2Manifold* oldManifold) {
 	AHPhysicsBody *contact1 = (__bridge AHPhysicsBody *)contact->GetFixtureA()->GetBody()->GetUserData();
 	AHPhysicsBody *contact2 = (__bridge AHPhysicsBody *)contact->GetFixtureB()->GetBody()->GetUserData();
 	if (contact1 && 
         contact2 &&
-        [contact1 collidedWith:contact2] &&
-        [contact2 collidedWith:contact1] &&
-        [contact1 collidedWithButDidNotCall:contact2]){
-        // contact was good, enable it
+        [contact1 willCollideWith:contact2] &&
+        [contact2 willCollideWith:contact1] &&
+        [contact1 willCollideWithButWillNotCall:contact2]){
     } else {
-        // contact was canceled, disable it
         contact->SetEnabled(NO);
     }
 }
 
-void AHContactListener::EndContact(b2Contact *contact) {
+void AHContactListener::BeginContact(b2Contact *contact, const b2Manifold* oldManifold) {
+	AHPhysicsBody *contact1 = (__bridge AHPhysicsBody *)contact->GetFixtureA()->GetBody()->GetUserData();
+	AHPhysicsBody *contact2 = (__bridge AHPhysicsBody *)contact->GetFixtureB()->GetBody()->GetUserData();
+	if (contact1 && contact2) {
+        [contact1 collidedWith:contact2];
+        [contact2 collidedWith:contact1];
+        [contact1 collidedWithButDidNotCall:contact2];
+    }
+}
+
+void AHContactListener::EndContact(b2Contact *contact, const b2Manifold* oldManifold) {
 	AHPhysicsBody *contact1 = (__bridge AHPhysicsBody *)contact->GetFixtureA()->GetBody()->GetUserData();
 	AHPhysicsBody *contact2 = (__bridge AHPhysicsBody *)contact->GetFixtureB()->GetBody()->GetUserData();
 	if (contact1 && contact2) {

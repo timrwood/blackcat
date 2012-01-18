@@ -32,16 +32,8 @@
 
 
 #pragma mark -
-#pragma mark vars
+#pragma mark position + rotation
 
-
-- (void)setFriction:(float)newFriction {
-    friction = newFriction;
-}
-
-- (void)setRestitution:(float)newRestitution {
-    restitution = newRestitution;
-}
 
 - (CGPoint)position {
     if (_body) {
@@ -51,11 +43,39 @@
     return CGPointMake(0.0f, 0.0f);
 }
 
+- (void)setPosition:(CGPoint)newPosition {
+    if (_body) {
+        _body->SetTransform(b2Vec2(newPosition.x, newPosition.y), _body->GetAngle());
+    }
+}
+
 - (float)rotation {
     if (_body) {
         return _body->GetAngle();
     }
     return 0.0f;
+}
+
+- (void)setRotation:(float)rotation {
+    if (_body) {
+        _body->SetTransform(_body->GetPosition(), rotation);
+    }
+}
+
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (CGPoint)force {
+    if (_body) {
+        float mass = _body->GetMass();
+        b2Vec2 vel = _body->GetLinearVelocity();
+        vel.Normalize();
+        vel *= mass;
+        return CGPointMake(vel.x, vel.y);
+    }
+    return CGPointMake(0.0f, 0.0f);
 }
 
 - (CGPoint)linearVelocity {
@@ -79,6 +99,12 @@
     }
 }
 
+- (void)setLinearVelocity:(CGPoint)vel atWorldPoint:(CGPoint)point {
+    if (_body) {
+        _body->ApplyLinearImpulse(b2Vec2(vel.x, vel.y), b2Vec2(point.x, point.y));
+    }
+}
+
 - (void)setAngularVelocity:(float)vel {
     if (_body) {
         _body->SetAngularVelocity(vel);
@@ -92,6 +118,14 @@
 
 - (void)setup {
     
+}
+
+- (void)setFriction:(float)newFriction {
+    friction = newFriction;
+}
+
+- (void)setRestitution:(float)newRestitution {
+    restitution = newRestitution;
 }
 
 
@@ -125,6 +159,16 @@
     }
 }
 
+- (void)setSensor:(BOOL)isSensor {
+    if (_body) {
+        for (b2Fixture *fixture = _body->GetFixtureList(); fixture; fixture = fixture->GetNext()) {
+            fixture->SetSensor(isSensor);
+        }
+    } else {
+        _isSensor = isSensor;
+    }
+}
+
 
 #pragma mark -
 #pragma mark delegate
@@ -140,7 +184,7 @@
 
 
 - (BOOL)collidedWith:(AHPhysicsBody *)contact {
-    if (delegate) {
+    if (delegate && [delegate respondsToSelector:@selector(collidedWith:)]) {
         return [delegate collidedWith:contact];
     }
     return YES;
@@ -149,6 +193,20 @@
 - (BOOL)collidedWithButDidNotCall:(AHPhysicsBody *)contact {
     if (delegate && [delegate respondsToSelector:@selector(collidedWithButDidNotCall:)]) {
         return [delegate collidedWithButDidNotCall:contact];
+    }
+    return YES;
+}
+
+- (BOOL)willCollideWith:(AHPhysicsBody *)contact {
+    if (delegate && [delegate respondsToSelector:@selector(willCollideWith:)]) {
+        return [delegate willCollideWith:contact];
+    }
+    return YES;
+}
+
+- (BOOL)willCollideWithButWillNotCall:(AHPhysicsBody *)contact {
+    if (delegate && [delegate respondsToSelector:@selector(willCollideWithButWillNotCall:)]) {
+        return [delegate willCollideWithButWillNotCall:contact];
     }
     return YES;
 }
@@ -175,6 +233,36 @@
 - (void)cleanupAfterRemoval {
     delegate = nil;
     [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
+}
+
+
+#pragma mark -
+#pragma mark tags
+
+
+- (void)addTag:(int)tag {
+    _tags = _tags | tag;
+}
+
+- (void)removeTag:(int)tag {
+    _tags = _tags ^ tag;
+}
+
+- (BOOL)hasTag:(int)tag {
+    return (tag & _tags) == tag;
+}
+
+
+#pragma mark -
+#pragma mark category
+
+
+- (void)setCategory:(int)category {
+    _category = category;
+}
+
+- (int)category {
+    return _category;
 }
 
 

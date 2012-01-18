@@ -70,7 +70,6 @@
 }
 
 - (BOOL)containsPoint:(CGPoint)point {
-    dlog(@"checking contains point");
     return CGRectContainsPoint(_rect, point);
 }
 

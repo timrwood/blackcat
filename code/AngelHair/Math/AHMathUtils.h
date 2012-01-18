@@ -20,6 +20,8 @@
 + (CGPoint)percent:(float)percent 
      betweenPointA:(CGPoint)pointA 
          andPointB:(CGPoint)pointB;
-
++ (float)percentForFloat:(float)center
+            betweenFloat:(float)a
+                andFloat:(float)b;
 
 @end

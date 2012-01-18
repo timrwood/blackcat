@@ -10,8 +10,10 @@
 #define CRATE_SIZE 0.2f
 
 
-#import "BCCrateActor.h"
 #import "AHPhysicsRect.h"
+
+#import "BCGlobalTypes.h"
+#import "BCCrateActor.h"
 
 
 @implementation BCCrateActor
@@ -26,9 +28,30 @@
     if (self) {
         _body = [[AHPhysicsRect alloc] initFromSize:CGSizeMake(CRATE_SIZE, CRATE_SIZE) andPosition:position];
         [_body setStatic:NO];
+        [_body addTag:PHY_TAG_DEBRIS];
+        [_body setDelegate:self];
         [self addComponent:_body];
     }
     return self;
+}
+
+
+#pragma mark -
+#pragma mark contacts
+
+
+- (BOOL)willCollideWith:(AHPhysicsBody *)contact {
+    if ([contact category] == PHY_CAT_HERO) {
+        if (!_hasBeenUpset) {
+            CGPoint force = [contact force];
+            force.x *= 2.0f;
+            force.y *= 2.0f;
+            [_body setLinearVelocity:force atWorldPoint:[contact position]];
+            _hasBeenUpset = YES;
+        }
+        return NO;
+    }
+    return YES;
 }
 
 

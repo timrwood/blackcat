@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "AHTimeManager.h"
 #import "AHSuperSystem.h"
 #import "AHActorManager.h"
 
@@ -29,6 +30,10 @@
     
     // init super system
     [[AHSuperSystem manager] setup];
+    
+    // setup fps
+    [self.viewController setPreferredFramesPerSecond:30];
+    [[AHTimeManager manager] setFramesPerSecond:[self.viewController framesPerSecond]];
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

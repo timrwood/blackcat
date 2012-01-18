@@ -32,5 +32,11 @@
     return output;
 }
 
++ (float)percentForFloat:(float)center
+            betweenFloat:(float)a
+                andFloat:(float)b {
+    return (center - a) / (b - a);
+}
+
 
 @end

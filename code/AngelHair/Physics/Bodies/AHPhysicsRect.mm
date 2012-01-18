@@ -65,6 +65,7 @@
     fixtureDef->restitution = self->restitution;
     fixtureDef->restitution = self->friction;
     fixtureDef->shape = (b2Shape *) polygonShape;
+    fixtureDef->isSensor = self->_isSensor;
     
     // body
     b2BodyDef *bodyDef = new b2BodyDef;

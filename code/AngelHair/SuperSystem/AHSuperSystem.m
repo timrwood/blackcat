@@ -9,6 +9,7 @@
 
 #import "AHSuperSystem.h"
 
+#import "AHTimeManager.h"
 #import "AHTextureManager.h"
 #import "AHGraphicsManager.h"
 #import "AHActorManager.h"
@@ -57,6 +58,7 @@ static AHSuperSystem *_manager = nil;
 
 
 - (void)setup {
+    [[AHTimeManager manager] setup];
     [[AHInputManager manager] setup];
     [[AHFileManager manager] setup];
     [[AHSceneManager manager] setup];
@@ -85,6 +87,7 @@ static AHSuperSystem *_manager = nil;
     [[AHSceneManager manager] teardown];
     [[AHFileManager manager] teardown];
     [[AHInputManager manager] teardown];
+    [[AHTimeManager manager] teardown];
 }
 
 
@@ -102,6 +105,7 @@ static AHSuperSystem *_manager = nil;
 
 
 - (void)update {
+    [[AHTimeManager manager] update];
     // physics
     [[AHActorManager manager] updateBeforePhysics];
     [[AHPhysicsManager manager] update];

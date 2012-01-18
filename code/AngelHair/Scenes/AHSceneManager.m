@@ -127,7 +127,6 @@ static AHSceneManager *_manager = nil;
 
 - (void)updateResetTimer {
     if (_needsToBeReset) {
-        dlog(@"need reset");
         _timeToReset += 0.03f; // change to use global time
         if (_timeToReset > TIME_TO_FADE_IN) {
             [_currentScene reset];

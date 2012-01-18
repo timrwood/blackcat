@@ -15,21 +15,30 @@
 @class AHPhysicsCircle;
 
 
-@interface BCHeroActor : AHActor <AHInputDelegate, AHContactDelegate> {
+@interface BCHeroActor : AHActor <AHInputDelegate> {
 @private;
     AHPhysicsCircle *_body;
     AHInputComponent *_input;
     
     BOOL _canJump;
+    BOOL _isJumping;
     
     float _runSpeed;
+    int _safetyRange;
+    
+    float _upwardSlowing;
+    float _downwardSlowing;
+    
+    float _speedIncrease;
 }
 
 
 #pragma mark -
-#pragma mark camera
+#pragma mark update
 
 
+- (void)updateVelocity;
+- (void)updateJumpability;
 - (void)updateCamera;
 
 

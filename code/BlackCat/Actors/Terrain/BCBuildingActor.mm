@@ -26,6 +26,8 @@
     if (self) {
         _body = [[AHPhysicsRect alloc] initFromSize:size andPosition:position];
         [_body setStatic:YES];
+        [_body setCategory:PHY_CAT_BUILDING];
+        [_body addTag:PHY_TAG_JUMPABLE];
         [self addComponent:_body];
         
         _distanceCoveredRight = position.x + size.width;
@@ -66,17 +68,6 @@
         return [AHMathUtils percent:percent betweenFloatA:_prevHeight andFloatB:_height];
     } else {
         return _height;
-    }
-}
-
-
-#pragma mark -
-#pragma mark message
-
-
-- (void)recieveMessage:(AHActorMessage *)message {
-    if ([message type] == messageTest) {
-        dlog(@"red");
     }
 }
 
