@@ -51,7 +51,7 @@
     if (_recorderActor) {
         _lastRecording = [_recorderActor outputData];
         //dlog(@"%@", _lastRecording);
-        dlog(@"%@", [_recorderActor outputString]);
+        //dlog(@"%@", [_recorderActor outputString]);
         _recorderActor = nil;
     }
 }

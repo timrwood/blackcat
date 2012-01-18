@@ -65,7 +65,7 @@
     _lastBuildingHeight = size.height;
     [[AHActorManager manager] add:_nextBuilding];
     
-    pos.x += size.width * (0.4f - (0.08f * (rand() % 10)));
+    pos.x += size.width * [self seededRandomBetweenFloat:-0.3f andFloat:0.3f];
     pos.y = -size.height;
     [self buildCratesAtPosition:pos];
 }

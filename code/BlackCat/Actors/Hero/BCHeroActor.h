@@ -30,6 +30,10 @@
     float _downwardSlowing;
     
     float _speedIncrease;
+    
+    float _dashSpeed;
+    
+    float _halfScreenWidth;
 }
 
 
@@ -40,6 +44,14 @@
 - (void)updateVelocity;
 - (void)updateJumpability;
 - (void)updateCamera;
+
+
+#pragma mark -
+#pragma mark input
+
+
+- (void)inputJump;
+- (void)inputDash;
 
 
 @end

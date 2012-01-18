@@ -15,6 +15,8 @@
 #define BASE_UPWARD_SLOWING 1.2f
 #define BASE_DOWNWARD_SLOWING 1.1f
 
+#define DASH_SLOW_SPEED 1.0f
+
 
 #import "AHTimeManager.h"
 #import "AHActorMessage.h"
@@ -45,7 +47,12 @@
         [_body setCategory:PHY_CAT_HERO];
         [self addComponent:_body];
         
-        _input = [[AHInputComponent alloc] initWithScreenRect:[[UIScreen mainScreen] bounds]];
+        CGRect inputRect = [[UIScreen mainScreen] bounds];
+        float w = inputRect.size.width;
+        inputRect.size.width = inputRect.size.height;
+        inputRect.size.height = w;
+        _halfScreenWidth = inputRect.size.width / 2.0f;
+        _input = [[AHInputComponent alloc] initWithScreenRect:inputRect];
         [_input setDelegate:self];
         [self addComponent:_input];
         
@@ -88,8 +95,11 @@
         vely /= _upwardSlowing; // travelling upward
     }
     
+    // slow down dash
+    _dashSpeed = fmaxf(0.0f, _dashSpeed - DASH_SLOW_SPEED);
+    
     // set vars
-    [_body setLinearVelocity:CGPointMake(_runSpeed, vely)];
+    [_body setLinearVelocity:CGPointMake(_runSpeed + _dashSpeed, vely)];
     [[BCGlobalManager manager] setHeroSpeed:_runSpeed];
 }
 
@@ -129,7 +139,7 @@
     cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
-    //[[AHGraphicsManager camera] setWorldZoom:10.0f];
+    //[[AHGraphicsManager camera] setWorldZoom:100.0f];
     
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
@@ -139,7 +149,15 @@
 #pragma mark touch
 
 
-- (void)touchBegan {
+- (void)touchBeganAtPoint:(CGPoint)point {
+    if (point.x > _halfScreenWidth) {
+        [self inputDash];
+    } else {
+        [self inputJump];
+    }
+}
+
+- (void)inputJump {
     if (_canJump) {
         float velx = [_body linearVelocity].x;
         [_body setLinearVelocity:CGPointMake(velx, -30.0f)];
@@ -149,6 +167,11 @@
     }
 }
 
+- (void)inputDash {
+    if (_dashSpeed == 0.0f) {
+        _dashSpeed = 30.0f;
+    }
+}
 
 #pragma mark -
 #pragma mark destruction

@@ -20,7 +20,6 @@
 #pragma mark cleanup
 
 
-- (void)cleanupWorldAtPoint:(CGPoint)point andSize:(CGPoint)size;
 - (void)cleanupWorld;
 
 

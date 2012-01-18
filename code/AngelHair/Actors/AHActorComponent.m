@@ -57,7 +57,7 @@
 
 
 - (void)cleanupAfterRemoval {
-    
+    _actor = nil;
 }
 
 

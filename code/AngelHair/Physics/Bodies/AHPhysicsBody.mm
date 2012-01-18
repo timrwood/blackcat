@@ -233,6 +233,7 @@
 - (void)cleanupAfterRemoval {
     delegate = nil;
     [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
+    [super cleanupAfterRemoval];
 }
 
 

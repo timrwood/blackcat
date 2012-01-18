@@ -52,6 +52,7 @@
 - (void)cleanupAfterRemoval {
     [[AHInputManager manager] removeInputComponent:self];
     _delegate = nil;
+    [super cleanupAfterRemoval];
 }
 
 

@@ -6,11 +6,9 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
-#import <OpenGLES/EAGL.h>
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES1/glext.h>
 
 #import "Box2D.h"
+
 
 struct b2AABB;
 

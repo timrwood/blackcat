@@ -79,7 +79,7 @@ static AHGraphicsCamera *_camera = nil;
     _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
     if (!_eaglContext) {
-        dlog(@"Failed to create ES context");
+        dlog(@"Failed to create EAGLContext");
     }
     
     [EAGLContext setCurrentContext:_eaglContext];
@@ -155,9 +155,12 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)setDrawColor:(GLKVector4)color {
-    _baseEffect.constantColor = color;
-    _baseEffect.useConstantColor = YES;
-    [_baseEffect prepareToDraw];
+    if (!GLKVector4AllEqualToVector4(color, currentColor)) {
+        currentColor = color;
+        _baseEffect.useConstantColor = YES;
+        _baseEffect.constantColor = color;
+        //[_baseEffect prepareToDraw];
+    }
 }
 
 

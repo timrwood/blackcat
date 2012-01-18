@@ -16,6 +16,8 @@
 @private;
     EAGLContext *_eaglContext;
     GLKBaseEffect *_baseEffect;
+    
+    GLKVector4 currentColor;
 }
 
 

@@ -19,6 +19,9 @@
 
 #define FRAMES_BETWEEN_CLEANUP 5
 
+#define METERS_BEHIND_HERO_TO_CLEANUP 100.0f
+#define METERS_BELOW_HERO_TO_CLEANUP 25.0f
+
 
 @implementation BCTerrainCleaner
 
@@ -40,17 +43,15 @@
 #pragma mark build
 
 
-- (void)cleanupWorldAtPoint:(CGPoint)point andSize:(CGPoint)size {
-    NSMutableArray *actors = [[AHPhysicsManager cppManager] getActorsAtPoint:point withSize:size];
-    for (AHPhysicsBody *body in actors) {
-        [body destroyActor];
-    }
-}
-
 - (void)cleanupWorld {
     float cameraX = [[BCGlobalManager manager] heroPosition].x;
-    [self cleanupWorldAtPoint:CGPointMake(cameraX, 2025.0f) andSize:CGPointMake(4000.0f, 2000.0f)];
-    [self cleanupWorldAtPoint:CGPointMake(cameraX - 2200.0f, 0.0f) andSize:CGPointMake(2000.0f, 4000.0f)];
+    for (b2Body *body = [[AHPhysicsManager cppManager] world]->GetBodyList(); body; body = body->GetNext()) {
+        b2Vec2 pos = body->GetPosition();
+        AHPhysicsBody *wrapper = (__bridge AHPhysicsBody *) body->GetUserData();
+		if (pos.x < cameraX - METERS_BEHIND_HERO_TO_CLEANUP || pos.y > METERS_BELOW_HERO_TO_CLEANUP) {
+            [wrapper destroyActor];
+        }
+	}
 }
 
 

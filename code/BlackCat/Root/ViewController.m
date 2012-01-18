@@ -30,6 +30,7 @@
     GLKView *view = (GLKView *) self.view;
     view.context = _context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    view.drawableMultisample = GLKViewDrawableMultisample4X;
 
 }
 
