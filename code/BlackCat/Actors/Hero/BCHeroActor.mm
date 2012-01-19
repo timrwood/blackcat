@@ -18,6 +18,8 @@
 #define DASH_SLOW_SPEED 1.0f
 
 
+#import "AHAnimationSkeletonCache.h"
+#import "AHAnimationSkeletonTrack.h"
 #import "AHTimeManager.h"
 #import "AHActorMessage.h"
 #import "AHMathUtils.h"
@@ -62,6 +64,8 @@
         _downwardSlowing = powf(BASE_DOWNWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
         
         _speedIncrease = 0.01f * 60.0f / [[AHTimeManager manager] realFramesPerSecond];
+        
+        _track = [[AHAnimationSkeletonCache manager] animationForKey:@"demo"];
     }
     return self;
 }
@@ -75,6 +79,11 @@
     [self updateVelocity];
     [self updateCamera];
     [self updateJumpability];
+    
+    // debug
+    float time = fmodf([_body position].x, 2.5f) / 2.5f;
+    AHSkeleton skeleton = [_track valueAtTime:time];
+    dlog(@"skeleton %F %F", skeleton.x, skeleton.y);
 }
 
 - (void)updateVelocity {

@@ -75,7 +75,7 @@
     float _time = [[AHTimeManager manager] worldTime];
     CGPoint pos = [_position valueAtTime:_time];
     
-    dlog(@"position %F %F", pos.x, pos.y);
+    //dlog(@"position %F %F", pos.x, pos.y);
     
     if (_body) {
         [_body setPosition:pos];

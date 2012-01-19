@@ -13,6 +13,7 @@
 
 
 @class AHPhysicsCircle;
+@class AHAnimationSkeletonTrack;
 
 
 @interface BCHeroActor : AHActor <AHInputDelegate> {
@@ -34,6 +35,8 @@
     float _dashSpeed;
     
     float _halfScreenWidth;
+    
+    AHAnimationSkeletonTrack *_track;
 }
 
 

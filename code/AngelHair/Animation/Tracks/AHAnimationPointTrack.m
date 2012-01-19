@@ -55,7 +55,7 @@
     if (percent == 0.0f) {
         return _values[a];
     }
-    dlog(@"percent %F   a %i   b %i   size %i", percent, a, b, self->size);
+    //dlog(@"percent %F   a %i   b %i   size %i", percent, a, b, self->size);
     return [AHMathUtils percent:percent betweenPointA:_values[a] andPointB:_values[b]];
 }
 

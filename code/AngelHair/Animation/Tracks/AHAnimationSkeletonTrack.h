@@ -23,6 +23,7 @@
 
 
 - (void)setValue:(AHSkeleton)value atIndex:(int)i;
+- (void)setValueFromDictionary:(NSDictionary *)dict atIndex:(int)i;
 
 
 #pragma mark -

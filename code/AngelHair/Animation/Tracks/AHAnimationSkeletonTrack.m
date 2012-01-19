@@ -36,6 +36,30 @@
     }
 }
 
+- (void)setValueFromDictionary:(NSDictionary *)dict atIndex:(int)i {
+    AHSkeleton skeleton;
+    skeleton.x = [[dict objectForKey:@"x"] floatValue];
+    skeleton.y = [[dict objectForKey:@"y"] floatValue];
+    
+    skeleton.neck = [[dict objectForKey:@"neck"] floatValue];
+    
+    skeleton.shoulderA = [[dict objectForKey:@"shoulderA"] floatValue];
+    skeleton.shoulderB = [[dict objectForKey:@"shoulderB"] floatValue];
+    
+    skeleton.elbowA = [[dict objectForKey:@"elbowA"] floatValue];
+    skeleton.elbowB = [[dict objectForKey:@"elbowB"] floatValue];
+    
+    skeleton.waist = [[dict objectForKey:@"waist"] floatValue];
+    
+    skeleton.kneeA = [[dict objectForKey:@"kneeA"] floatValue];
+    skeleton.kneeB = [[dict objectForKey:@"kneeB"] floatValue];
+    
+    skeleton.hipA = [[dict objectForKey:@"hipA"] floatValue];
+    skeleton.hipB = [[dict objectForKey:@"hipB"] floatValue];
+    
+    [self setValue:skeleton atIndex:i];
+}
+
 
 #pragma mark -
 #pragma mark time
@@ -48,7 +72,7 @@
     if (percent == 0.0f) {
         return _values[a];
     }
-    dlog(@"percent %F   a %i   b %i   size %i", percent, a, b, self->size);
+    
     return AHSkeletonAtPercentToSkeleton(_values[a], _values[b], percent);
 }
 

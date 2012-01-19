@@ -5,9 +5,15 @@
 
 
 #if defined(DEBUG)
-    #define dlog(fmt, ...) NSLog((@"%s [Line %d]     " fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+    #define dlog(fmt, ...) NSLog((@"%s [Line %d]     " fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__); 
 #else
     #define dlog(...);
+#endif
+
+#if defined(DEBUG)
+    #define derror(fmt, ...) { NSLog((@"ERROR: %s [Line %d]     " fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__); assert(0); }
+#else
+    #define derror(...);
 #endif
 
 #ifdef __OBJC__

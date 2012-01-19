@@ -66,14 +66,17 @@ static AHFileManager *_manager = nil;
 
 
 - (NSArray *)parseJSONFromResourceFileToArray:(NSString *)_filename {
-    return [self parseJSONFromFileToArray:[self pathToResourceFile:_filename]];
+    return [self parseJSONFromFileToArray:[[NSBundle mainBundle] pathForResource:_filename ofType:@"json"]];
 }
 
 - (NSArray *)parseJSONFromFileToArray:(NSString *)_filename {
     NSError *error = nil;
     
     NSData *json = [fileManager contentsAtPath:_filename];
-    id array = [[CJSONDeserializer deserializer] deserializeAsArray:json error:&error];
+    
+    dlog(@"Filename %@ data %@", _filename, json);
+    
+    NSArray *array = [[CJSONDeserializer deserializer] deserializeAsArray:json error:&error];
     
     if (error) {
         dlog(@"Error parsing JSON : %@", [error localizedDescription]);
@@ -87,14 +90,14 @@ static AHFileManager *_manager = nil;
 }
 
 - (NSDictionary *)parseJSONFromResourceFileToDictionary:(NSString *)_filename {
-    return [self parseJSONFromFileToDictionary:[self pathToResourceFile:_filename]];
+    return [self parseJSONFromFileToDictionary:[[NSBundle mainBundle] pathForResource:_filename ofType:@"json"]];
 }
 
 - (NSDictionary *)parseJSONFromFileToDictionary:(NSString *)_filename {
     NSError *error = nil;
     
     NSData *json = [fileManager contentsAtPath:_filename];
-    id dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:json error:&error];
+    NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:json error:&error];
     
     if (error) {
         dlog(@"Error parsing JSON : %@", [error localizedDescription]);
