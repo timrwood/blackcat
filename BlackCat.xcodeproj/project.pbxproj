@@ -17,6 +17,7 @@
 		1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547317114C62E7D00DDEBA5 /* AHTimeManager.m */; };
 		156A86F014C7744E00B85E04 /* AHAnimationValueTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 156A86EF14C7744E00B85E04 /* AHAnimationValueTrack.m */; };
 		156A86F414C7869200B85E04 /* AHAnimationTimeTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 156A86F314C7869200B85E04 /* AHAnimationTimeTrack.m */; };
+		156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156A86FA14C7B30E00B85E04 /* libz.dylib */; };
 		158346F914B7BFE700C1DA04 /* AHSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158346F814B7BFE700C1DA04 /* AHSceneManager.m */; };
 		158346FC14B7C09D00C1DA04 /* AHScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 158346FB14B7C09D00C1DA04 /* AHScene.m */; };
 		1583471514B7C92500C1DA04 /* AHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1583471414B7C92400C1DA04 /* AHButton.m */; };
@@ -128,10 +129,11 @@
 		1547316D14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroPlaybackActor.mm; path = Actors/Hero/BCHeroPlaybackActor.mm; sourceTree = "<group>"; };
 		1547317014C62E7D00DDEBA5 /* AHTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHTimeManager.h; path = Time/AHTimeManager.h; sourceTree = "<group>"; };
 		1547317114C62E7D00DDEBA5 /* AHTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHTimeManager.m; path = Time/AHTimeManager.m; sourceTree = "<group>"; };
-		156A86EE14C7744E00B85E04 /* AHAnimationValueTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AHAnimationValueTrack.h; sourceTree = "<group>"; };
+		156A86EE14C7744E00B85E04 /* AHAnimationValueTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAnimationValueTrack.h; sourceTree = "<group>"; };
 		156A86EF14C7744E00B85E04 /* AHAnimationValueTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAnimationValueTrack.m; sourceTree = "<group>"; };
 		156A86F214C7869200B85E04 /* AHAnimationTimeTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAnimationTimeTrack.h; sourceTree = "<group>"; };
 		156A86F314C7869200B85E04 /* AHAnimationTimeTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAnimationTimeTrack.m; sourceTree = "<group>"; };
+		156A86FA14C7B30E00B85E04 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		158346F714B7BFE700C1DA04 /* AHSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSceneManager.h; path = Scenes/AHSceneManager.h; sourceTree = "<group>"; };
 		158346F814B7BFE700C1DA04 /* AHSceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHSceneManager.m; path = Scenes/AHSceneManager.m; sourceTree = "<group>"; };
 		158346FA14B7C09D00C1DA04 /* AHScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHScene.h; path = Scenes/AHScene.h; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */,
 				153EB11A14AD6EE50070DBB9 /* UIKit.framework in Frameworks */,
 				153EB11C14AD6EE50070DBB9 /* Foundation.framework in Frameworks */,
 				153EB11E14AD6EE50070DBB9 /* CoreGraphics.framework in Frameworks */,
@@ -361,6 +364,7 @@
 		153EB11814AD6EE50070DBB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				156A86FA14C7B30E00B85E04 /* libz.dylib */,
 				152839FA14BF56AA002D7513 /* CoreFoundation.framework */,
 				153EB11914AD6EE50070DBB9 /* UIKit.framework */,
 				153EB11B14AD6EE50070DBB9 /* Foundation.framework */,

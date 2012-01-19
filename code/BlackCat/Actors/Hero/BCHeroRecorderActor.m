@@ -10,6 +10,7 @@
 #define TIME_BETWEEN_KEYFRAMES 0.15f
 #define Y_DIFF_SLOP 0.001f
 
+
 #import "AHTimeManager.h"
 
 #import "BCGlobalTypes.h"
@@ -76,13 +77,13 @@
 }
 
 - (void)recordFrameWithTime:(float)_time andPosition:(CGPoint)position {
-    /*short t = _time / 50;
-    short x = position.x / 50;
-    short y = position.y / 50;*/
+    short t = _time * 50;
+    short x = position.x * 50;
+    short y = position.y * 50;
     
-    [_data appendBytes:&_time length:sizeof(float)];
-    [_data appendBytes:&position.x length:sizeof(float)];
-    [_data appendBytes:&position.y length:sizeof(float)];
+    [_data appendBytes:&t length:sizeof(short)];
+    [_data appendBytes:&x length:sizeof(short)];
+    [_data appendBytes:&y length:sizeof(short)];
     
     // debug
     _debugLastX = position.x;
@@ -95,10 +96,12 @@
 
 - (NSData *)outputData {
     float time = [[AHTimeManager manager] worldTime];
-    float count = [_data length] / (3.0f * sizeof(float));
+    float count = [_data length] / (3.0f * sizeof(short));
     dlog(@"time : %.2F   frames : %i   FPS : %.2f", time, (int) count, count / time);
     dlog(@"time : %.2F   size : %i   SPS : %.2f", time, (int) [_data length], [_data length] / time);
+    dlog(@"estimated minutes to overflow : %F", (4096 / ([_data length] / time)) / 60.0f);
     dlog(@"last x value %F", _debugLastX);
+    
     return _data;
 }
 

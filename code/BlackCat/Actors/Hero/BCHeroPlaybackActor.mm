@@ -40,7 +40,7 @@
 
 
 - (void)unpackData:(NSData *)data {
-    int totalFrames = [data length] / (3 * sizeof(float));
+    int totalFrames = [data length] / (3 * sizeof(short));
     
     AHAnimationTimeTrack *timeTrack = [[AHAnimationTimeTrack alloc] initWithSize:totalFrames];
     _x = [[AHAnimationValueTrack alloc] initWithSize:totalFrames];
@@ -53,18 +53,18 @@
         [_x setValue:[self unpackFloatFromData:data atOffset:(i * 3) + 1] atIndex:i];
         [_y setValue:[self unpackFloatFromData:data atOffset:(i * 3) + 2] atIndex:i];
         /*
-         dlog(@"unpacked %F %F %F", 
+        dlog(@"unpacked %F %F %F", 
              [self unpackFloatFromData:data atOffset:(i * 3)],
              [self unpackFloatFromData:data atOffset:(i * 3) + 1],
              [self unpackFloatFromData:data atOffset:(i * 3) + 2]);
-         */
+        */
     }
 }
 
 - (float)unpackFloatFromData:(NSData *)data atOffset:(int)offset {
-    float output;
-    [data getBytes:&output range:NSMakeRange(sizeof(float) * offset, sizeof(float))];
-    return output;
+    short output;
+    [data getBytes:&output range:NSMakeRange(sizeof(short) * offset, sizeof(short))];
+    return (float)output / 50.0f;
 }
          
 
