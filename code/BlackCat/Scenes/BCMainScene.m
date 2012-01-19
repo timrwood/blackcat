@@ -50,7 +50,7 @@
 - (void)resetTeardown {
     if (_recorderActor) {
         _lastRecording = [_recorderActor outputData];
-        //dlog(@"%@", _lastRecording);
+        //dlog(@"%@", [_recorderActor outputData]);
         //dlog(@"%@", [_recorderActor outputString]);
         _recorderActor = nil;
     }

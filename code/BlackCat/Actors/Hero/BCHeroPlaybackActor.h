@@ -10,12 +10,13 @@
 
 
 @class AHPhysicsCircle;
+@class AHAnimationValueTrack;
 
 
 @interface BCHeroPlaybackActor : AHActor {
 @private;
-    NSMutableArray *_frames;
-    int _currentIndex;
+    AHAnimationValueTrack *_x;
+    AHAnimationValueTrack *_y;
     AHPhysicsCircle *_body;
 }
 
@@ -25,6 +26,14 @@
 
 
 - (id)initWithData:(NSData *)data;
+
+
+#pragma mark -
+#pragma mark data
+
+
+- (void)unpackData:(NSData *)data;
+- (float)unpackFloatFromData:(NSData *)data atOffset:(int)offset;
 
 
 @end

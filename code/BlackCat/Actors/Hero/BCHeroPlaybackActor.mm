@@ -7,7 +7,7 @@
 //
 
 
-
+#import "AHAnimationValueTrack.h"
 #import "AHMathUtils.h"
 #import "AHPhysicsCircle.h"
 #import "AHTimeManager.h"
@@ -17,28 +17,6 @@
 #import "BCGlobalManager.h"
 #import "BCHeroPlaybackActor.h"
 
-
-@interface BCHeroPlaybackKeyframe : NSObject
-
-@property (nonatomic) CGPoint position;
-@property (nonatomic) float time;
-
-- (CGPoint)pointAtTime:(float)inTime fromLastKeyframe:(BCHeroPlaybackKeyframe *)frame;
-
-@end
-
-@implementation BCHeroPlaybackKeyframe
-
-@synthesize position;
-@synthesize time;
-
-- (CGPoint)pointAtTime:(float)inTime fromLastKeyframe:(BCHeroPlaybackKeyframe *)frame {
-    float percent = [AHMathUtils percentForFloat:inTime betweenFloat:[frame time] andFloat:time];
-    //dlog(@"percent %F", percent);
-    return [AHMathUtils percent:percent betweenPointA:[frame position] andPointB:position];
-}
-
-@end
 
 @implementation BCHeroPlaybackActor
 
@@ -51,49 +29,54 @@
         [_body setSensor:YES];
         [self addComponent:_body];
         
-        // unpack
-        NSError *error;
-        NSArray *frames = [[CJSONDeserializer deserializer] deserializeAsArray:data error:&error];
-        if (error) {
-            dlog(@"error: %@", [error localizedDescription]);
-        }
-        _frames = [[NSMutableArray alloc] init];
-        for (NSDictionary *dict in frames) {
-            //dlog(@"adding dict");
-            float x = [[dict objectForKey:@"x"] floatValue];
-            float y = [[dict objectForKey:@"y"] floatValue];
-            float t = [[dict objectForKey:@"t"] floatValue];
-            BCHeroPlaybackKeyframe *kf = [[BCHeroPlaybackKeyframe alloc] init];
-            [kf setTime:t];
-            [kf setPosition:CGPointMake(x, y)];
-            [_frames addObject:kf];
-        }
+        [self unpackData:data];
     }
     return self;
 }
 
 
 #pragma mark -
+#pragma mark data
+
+
+- (void)unpackData:(NSData *)data {
+    int totalFrames = [data length] / (3 * sizeof(float));
+    
+    AHAnimationTimeTrack *timeTrack = [[AHAnimationTimeTrack alloc] initWithSize:totalFrames];
+    _x = [[AHAnimationValueTrack alloc] initWithSize:totalFrames];
+    _y = [[AHAnimationValueTrack alloc] initWithSize:totalFrames];
+    [_x setTimeTrack:timeTrack];
+    [_y setTimeTrack:timeTrack];
+    
+    for (int i = 0; i < totalFrames; i++) {
+        [timeTrack setTime:[self unpackFloatFromData:data atOffset:(i * 3)] atIndex:i];
+        [_x setValue:[self unpackFloatFromData:data atOffset:(i * 3) + 1] atIndex:i];
+        [_y setValue:[self unpackFloatFromData:data atOffset:(i * 3) + 2] atIndex:i];
+        /*
+         dlog(@"unpacked %F %F %F", 
+             [self unpackFloatFromData:data atOffset:(i * 3)],
+             [self unpackFloatFromData:data atOffset:(i * 3) + 1],
+             [self unpackFloatFromData:data atOffset:(i * 3) + 2]);
+         */
+    }
+}
+
+- (float)unpackFloatFromData:(NSData *)data atOffset:(int)offset {
+    float output;
+    [data getBytes:&output range:NSMakeRange(sizeof(float) * offset, sizeof(float))];
+    return output;
+}
+         
+
+#pragma mark -
 #pragma mark update
 
 
 - (void)updateBeforeAnimation {
-    float time = [[AHTimeManager manager] worldTime];
-    CGPoint pos;
+    float _time = [[AHTimeManager manager] worldTime];
+    CGPoint pos = CGPointMake([_x valueAtTime:_time], [_y valueAtTime:_time]);
     
-    for (int i = _currentIndex; i < [_frames count]; i++) {
-        if (i == 0) {
-            continue;
-        }
-        BCHeroPlaybackKeyframe *currentKeyframe = (BCHeroPlaybackKeyframe *) [_frames objectAtIndex:i];
-        BCHeroPlaybackKeyframe *lastKeyframe = (BCHeroPlaybackKeyframe *) [_frames objectAtIndex:i - 1];
-        if ([currentKeyframe time] > time) {
-            pos = [currentKeyframe pointAtTime:time fromLastKeyframe:lastKeyframe];
-            _currentIndex = i;
-            //dlog(@"time : %F position : %F %F", time, pos.x, pos.y);
-            break;
-        }
-    }
+    //dlog(@"position %F %F", pos.x, pos.y);
     
     if (_body) {
         [_body setPosition:pos];

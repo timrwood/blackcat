@@ -10,13 +10,15 @@
 
 @interface BCHeroRecorderActor : AHActor {
 @private;
-    NSMutableArray *_keyframes;
+    NSMutableData *_data;
     float _timeSinceLastKeyframe;
     
     CGPoint _lastPosition;
     float _lastTime;
     
     BOOL _skippedLastFrame;
+    
+    float _debugLastX;
 }
 
 
@@ -35,7 +37,6 @@
 
 
 - (NSData *)outputData;
-- (NSString *)outputString;
 
 
 @end

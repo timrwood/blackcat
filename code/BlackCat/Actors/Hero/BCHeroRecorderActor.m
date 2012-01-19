@@ -7,8 +7,8 @@
 //
 
 
-#define TIME_BETWEEN_KEYFRAMES 0.1f
-#define Y_DIFF_SLOP 0.0001f
+#define TIME_BETWEEN_KEYFRAMES 0.15f
+#define Y_DIFF_SLOP 0.001f
 
 #import "AHTimeManager.h"
 
@@ -23,7 +23,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _keyframes = [[NSMutableArray alloc] init];
+        _data = [[NSMutableData alloc] init];
     }
     return self;
 }
@@ -76,8 +76,16 @@
 }
 
 - (void)recordFrameWithTime:(float)_time andPosition:(CGPoint)position {
-    NSString *input = [NSString stringWithFormat:@"{\"t\":%.3F,\"x\":%.3F,\"y\":%.3F}", _time, position.x, position.y];
-    [_keyframes addObject:input];
+    /*short t = _time / 50;
+    short x = position.x / 50;
+    short y = position.y / 50;*/
+    
+    [_data appendBytes:&_time length:sizeof(float)];
+    [_data appendBytes:&position.x length:sizeof(float)];
+    [_data appendBytes:&position.y length:sizeof(float)];
+    
+    // debug
+    _debugLastX = position.x;
 }
 
 
@@ -87,23 +95,11 @@
 
 - (NSData *)outputData {
     float time = [[AHTimeManager manager] worldTime];
-    float count = [_keyframes count];
+    float count = [_data length] / (3.0f * sizeof(float));
     dlog(@"time : %.2F   frames : %i   FPS : %.2f", time, (int) count, count / time);
-    return [[self outputString] dataUsingEncoding:NSUTF8StringEncoding];
-}
-
-- (NSString *)outputString {
-    NSMutableString *output = [NSMutableString stringWithString:@"["];
-    BOOL pastFirst = NO;
-    for (NSString *string in _keyframes) {
-        if (pastFirst) {
-            [output appendString:@","];
-        }
-        [output appendString:string];
-        pastFirst = YES;
-    }
-    [output appendString:@"]"];
-    return output;
+    dlog(@"time : %.2F   size : %i   SPS : %.2f", time, (int) [_data length], [_data length] / time);
+    dlog(@"last x value %F", _debugLastX);
+    return _data;
 }
 
 
