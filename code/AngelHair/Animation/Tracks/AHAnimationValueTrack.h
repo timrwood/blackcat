@@ -7,25 +7,13 @@
 //
 
 
-#import "AHAnimationTimeTrack.h"
+#import "AHAnimationTrack.h"
 
 
-@interface AHAnimationValueTrack : NSObject {
+@interface AHAnimationValueTrack : AHAnimationTrack {
 @private;
-    int _size;
-    AHAnimationTimeTrack *_timeTrack;
     float *_values;
-    float _length;
-    
-    BOOL _isLooped;
 }
-
-
-#pragma mark -
-#pragma mark init
-
-
-- (id)initWithSize:(int)size;
 
 
 #pragma mark -
@@ -40,7 +28,6 @@
 #pragma mark time
 
 
-- (void)setTimeTrack:(AHAnimationTimeTrack *)timeTrack;
 - (float)valueAtTime:(float)frame;
 
 

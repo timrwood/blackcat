@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15132C1114C895010017BBD0 /* AHAnimationPointTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C0C14C895010017BBD0 /* AHAnimationPointTrack.m */; };
+		15132C1214C895010017BBD0 /* AHAnimationTimeTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C0E14C895010017BBD0 /* AHAnimationTimeTrack.m */; };
+		15132C1314C895010017BBD0 /* AHAnimationValueTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1014C895010017BBD0 /* AHAnimationValueTrack.m */; };
+		15132C1614C8958E0017BBD0 /* AHAnimationTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1514C8958E0017BBD0 /* AHAnimationTrack.m */; };
+		15132C1A14C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1914C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m */; };
 		153EB11A14AD6EE50070DBB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11914AD6EE50070DBB9 /* UIKit.framework */; };
 		153EB11C14AD6EE50070DBB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11B14AD6EE50070DBB9 /* Foundation.framework */; };
 		153EB11E14AD6EE50070DBB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */; };
@@ -15,8 +20,6 @@
 		1547316B14C62C7100DDEBA5 /* BCHeroRecorderActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547316A14C62C7100DDEBA5 /* BCHeroRecorderActor.m */; };
 		1547316E14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1547316D14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm */; };
 		1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547317114C62E7D00DDEBA5 /* AHTimeManager.m */; };
-		156A86F014C7744E00B85E04 /* AHAnimationValueTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 156A86EF14C7744E00B85E04 /* AHAnimationValueTrack.m */; };
-		156A86F414C7869200B85E04 /* AHAnimationTimeTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 156A86F314C7869200B85E04 /* AHAnimationTimeTrack.m */; };
 		156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156A86FA14C7B30E00B85E04 /* libz.dylib */; };
 		158346F914B7BFE700C1DA04 /* AHSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158346F814B7BFE700C1DA04 /* AHSceneManager.m */; };
 		158346FC14B7C09D00C1DA04 /* AHScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 158346FB14B7C09D00C1DA04 /* AHScene.m */; };
@@ -115,6 +118,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15132C0B14C895010017BBD0 /* AHAnimationPointTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationPointTrack.h; path = Tracks/AHAnimationPointTrack.h; sourceTree = "<group>"; };
+		15132C0C14C895010017BBD0 /* AHAnimationPointTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationPointTrack.m; path = Tracks/AHAnimationPointTrack.m; sourceTree = "<group>"; };
+		15132C0D14C895010017BBD0 /* AHAnimationTimeTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationTimeTrack.h; path = Tracks/AHAnimationTimeTrack.h; sourceTree = "<group>"; };
+		15132C0E14C895010017BBD0 /* AHAnimationTimeTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationTimeTrack.m; path = Tracks/AHAnimationTimeTrack.m; sourceTree = "<group>"; };
+		15132C0F14C895010017BBD0 /* AHAnimationValueTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationValueTrack.h; path = Tracks/AHAnimationValueTrack.h; sourceTree = "<group>"; };
+		15132C1014C895010017BBD0 /* AHAnimationValueTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationValueTrack.m; path = Tracks/AHAnimationValueTrack.m; sourceTree = "<group>"; };
+		15132C1414C8958E0017BBD0 /* AHAnimationTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationTrack.h; path = Tracks/AHAnimationTrack.h; sourceTree = "<group>"; };
+		15132C1514C8958E0017BBD0 /* AHAnimationTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationTrack.m; path = Tracks/AHAnimationTrack.m; sourceTree = "<group>"; };
+		15132C1714C8A59B0017BBD0 /* AHSkeletonStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSkeletonStruct.h; path = Skeletons/AHSkeletonStruct.h; sourceTree = "<group>"; };
+		15132C1814C8ABF90017BBD0 /* AHAnimationSkeletonTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationSkeletonTrack.h; path = Tracks/AHAnimationSkeletonTrack.h; sourceTree = "<group>"; };
+		15132C1914C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationSkeletonTrack.m; path = Tracks/AHAnimationSkeletonTrack.m; sourceTree = "<group>"; };
 		152839FA14BF56AA002D7513 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		152839FD14BF62DC002D7513 /* AHContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHContactDelegate.h; sourceTree = "<group>"; };
 		153EB11514AD6EE50070DBB9 /* BlackCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,10 +143,6 @@
 		1547316D14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroPlaybackActor.mm; path = Actors/Hero/BCHeroPlaybackActor.mm; sourceTree = "<group>"; };
 		1547317014C62E7D00DDEBA5 /* AHTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHTimeManager.h; path = Time/AHTimeManager.h; sourceTree = "<group>"; };
 		1547317114C62E7D00DDEBA5 /* AHTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHTimeManager.m; path = Time/AHTimeManager.m; sourceTree = "<group>"; };
-		156A86EE14C7744E00B85E04 /* AHAnimationValueTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAnimationValueTrack.h; sourceTree = "<group>"; };
-		156A86EF14C7744E00B85E04 /* AHAnimationValueTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAnimationValueTrack.m; sourceTree = "<group>"; };
-		156A86F214C7869200B85E04 /* AHAnimationTimeTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAnimationTimeTrack.h; sourceTree = "<group>"; };
-		156A86F314C7869200B85E04 /* AHAnimationTimeTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAnimationTimeTrack.m; sourceTree = "<group>"; };
 		156A86FA14C7B30E00B85E04 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		158346F714B7BFE700C1DA04 /* AHSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSceneManager.h; path = Scenes/AHSceneManager.h; sourceTree = "<group>"; };
 		158346F814B7BFE700C1DA04 /* AHSceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHSceneManager.m; path = Scenes/AHSceneManager.m; sourceTree = "<group>"; };
@@ -344,6 +354,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15132C0914C894AD0017BBD0 /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				15132C0B14C895010017BBD0 /* AHAnimationPointTrack.h */,
+				15132C0C14C895010017BBD0 /* AHAnimationPointTrack.m */,
+				15132C1814C8ABF90017BBD0 /* AHAnimationSkeletonTrack.h */,
+				15132C1914C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m */,
+				15132C0D14C895010017BBD0 /* AHAnimationTimeTrack.h */,
+				15132C0E14C895010017BBD0 /* AHAnimationTimeTrack.m */,
+				15132C1414C8958E0017BBD0 /* AHAnimationTrack.h */,
+				15132C1514C8958E0017BBD0 /* AHAnimationTrack.m */,
+				15132C0F14C895010017BBD0 /* AHAnimationValueTrack.h */,
+				15132C1014C895010017BBD0 /* AHAnimationValueTrack.m */,
+			);
+			name = Tracks;
+			sourceTree = "<group>";
+		};
+		15132C0A14C894B50017BBD0 /* Skeletons */ = {
+			isa = PBXGroup;
+			children = (
+				15132C1714C8A59B0017BBD0 /* AHSkeletonStruct.h */,
+			);
+			name = Skeletons;
+			sourceTree = "<group>";
+		};
 		153EB10A14AD6EE50070DBB9 = {
 			isa = PBXGroup;
 			children = (
@@ -606,10 +641,8 @@
 		15AC4D7114B7B3BB00283A06 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				156A86EE14C7744E00B85E04 /* AHAnimationValueTrack.h */,
-				156A86EF14C7744E00B85E04 /* AHAnimationValueTrack.m */,
-				156A86F214C7869200B85E04 /* AHAnimationTimeTrack.h */,
-				156A86F314C7869200B85E04 /* AHAnimationTimeTrack.m */,
+				15132C0A14C894B50017BBD0 /* Skeletons */,
+				15132C0914C894AD0017BBD0 /* Tracks */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -1095,8 +1128,11 @@
 				1547316B14C62C7100DDEBA5 /* BCHeroRecorderActor.m in Sources */,
 				1547316E14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm in Sources */,
 				1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */,
-				156A86F014C7744E00B85E04 /* AHAnimationValueTrack.m in Sources */,
-				156A86F414C7869200B85E04 /* AHAnimationTimeTrack.m in Sources */,
+				15132C1114C895010017BBD0 /* AHAnimationPointTrack.m in Sources */,
+				15132C1214C895010017BBD0 /* AHAnimationTimeTrack.m in Sources */,
+				15132C1314C895010017BBD0 /* AHAnimationValueTrack.m in Sources */,
+				15132C1614C8958E0017BBD0 /* AHAnimationTrack.m in Sources */,
+				15132C1A14C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

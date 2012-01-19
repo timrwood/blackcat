@@ -10,13 +10,12 @@
 
 
 @class AHPhysicsCircle;
-@class AHAnimationValueTrack;
+@class AHAnimationPointTrack;
 
 
 @interface BCHeroPlaybackActor : AHActor {
 @private;
-    AHAnimationValueTrack *_x;
-    AHAnimationValueTrack *_y;
+    AHAnimationPointTrack *_position;
     AHPhysicsCircle *_body;
 }
 

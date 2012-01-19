@@ -7,7 +7,7 @@
 //
 
 
-#import "AHAnimationValueTrack.h"
+#import "AHAnimationPointTrack.h"
 #import "AHMathUtils.h"
 #import "AHPhysicsCircle.h"
 #import "AHTimeManager.h"
@@ -43,15 +43,14 @@
     int totalFrames = [data length] / (3 * sizeof(short));
     
     AHAnimationTimeTrack *timeTrack = [[AHAnimationTimeTrack alloc] initWithSize:totalFrames];
-    _x = [[AHAnimationValueTrack alloc] initWithSize:totalFrames];
-    _y = [[AHAnimationValueTrack alloc] initWithSize:totalFrames];
-    [_x setTimeTrack:timeTrack];
-    [_y setTimeTrack:timeTrack];
+    _position = [[AHAnimationPointTrack alloc] initWithSize:totalFrames];
+    [_position setTimeTrack:timeTrack];
     
     for (int i = 0; i < totalFrames; i++) {
         [timeTrack setTime:[self unpackFloatFromData:data atOffset:(i * 3)] atIndex:i];
-        [_x setValue:[self unpackFloatFromData:data atOffset:(i * 3) + 1] atIndex:i];
-        [_y setValue:[self unpackFloatFromData:data atOffset:(i * 3) + 2] atIndex:i];
+        CGPoint pos = CGPointMake([self unpackFloatFromData:data atOffset:(i * 3) + 1],
+                                  [self unpackFloatFromData:data atOffset:(i * 3) + 2]);
+        [_position setValue:pos atIndex:i];
         /*
         dlog(@"unpacked %F %F %F", 
              [self unpackFloatFromData:data atOffset:(i * 3)],
@@ -74,9 +73,9 @@
 
 - (void)updateBeforeAnimation {
     float _time = [[AHTimeManager manager] worldTime];
-    CGPoint pos = CGPointMake([_x valueAtTime:_time], [_y valueAtTime:_time]);
+    CGPoint pos = [_position valueAtTime:_time];
     
-    //dlog(@"position %F %F", pos.x, pos.y);
+    dlog(@"position %F %F", pos.x, pos.y);
     
     if (_body) {
         [_body setPosition:pos];
