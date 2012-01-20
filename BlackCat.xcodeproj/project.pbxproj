@@ -15,6 +15,12 @@
 		15132C1D14C8C0390017BBD0 /* AHAnimationSkeletonCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1C14C8C0390017BBD0 /* AHAnimationSkeletonCache.m */; };
 		15132C2414C8CB680017BBD0 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 15132C2114C8CB680017BBD0 /* demo.json */; };
 		15132C2514C8CB680017BBD0 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 15132C2314C8CB680017BBD0 /* background.png */; };
+		15132C2814C8E7DE0017BBD0 /* AHGraphicsSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C2714C8E7DA0017BBD0 /* AHGraphicsSkeleton.m */; };
+		15132C2C14C8E8140017BBD0 /* AHGraphicsLimb.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C2B14C8E8140017BBD0 /* AHGraphicsLimb.m */; };
+		1515F8A814C9E2FE004FE3BB /* AHGraphicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8A514C9E2FE004FE3BB /* AHGraphicsObject.m */; };
+		1515F8A914C9E2FE004FE3BB /* AHGraphicsRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8A714C9E2FE004FE3BB /* AHGraphicsRect.m */; };
+		1515F8AF14C9E332004FE3BB /* AHGraphicsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8AE14C9E332004FE3BB /* AHGraphicsLayer.m */; };
+		1515F8B314C9F519004FE3BB /* BCBackgroundActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8B214C9F519004FE3BB /* BCBackgroundActor.m */; };
 		153EB11A14AD6EE50070DBB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11914AD6EE50070DBB9 /* UIKit.framework */; };
 		153EB11C14AD6EE50070DBB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11B14AD6EE50070DBB9 /* Foundation.framework */; };
 		153EB11E14AD6EE50070DBB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */; };
@@ -50,8 +56,6 @@
 		158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE2F14BE731F00E274BB /* AHInputManager.m */; };
 		158ABE3714BE757D00E274BB /* AHInputComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE3614BE757D00E274BB /* AHInputComponent.m */; };
 		158C4A9614BB9B130089747C /* AHGraphicsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9514BB9B130089747C /* AHGraphicsManager.m */; };
-		158C4A9A14BB9C530089747C /* AHGraphicsRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9914BB9C530089747C /* AHGraphicsRect.m */; };
-		158C4A9D14BB9E580089747C /* AHGraphicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4A9C14BB9E580089747C /* AHGraphicsObject.m */; };
 		158C4AA114BBAAA60089747C /* AHTextureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4AA014BBAAA60089747C /* AHTextureManager.m */; };
 		158C4AA714BBB0A50089747C /* AHTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 158C4AA614BBB0A50089747C /* AHTextureInfo.m */; };
 		158E021114C0B0ED0012D393 /* BCMainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 158E021014C0B0ED0012D393 /* BCMainScene.m */; };
@@ -136,6 +140,18 @@
 		15132C1C14C8C0390017BBD0 /* AHAnimationSkeletonCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationSkeletonCache.m; path = Skeletons/AHAnimationSkeletonCache.m; sourceTree = "<group>"; };
 		15132C2114C8CB680017BBD0 /* demo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo.json; sourceTree = "<group>"; };
 		15132C2314C8CB680017BBD0 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		15132C2614C8E7D90017BBD0 /* AHGraphicsSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsSkeleton.h; path = Skeletons/AHGraphicsSkeleton.h; sourceTree = "<group>"; };
+		15132C2714C8E7DA0017BBD0 /* AHGraphicsSkeleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsSkeleton.m; path = Skeletons/AHGraphicsSkeleton.m; sourceTree = "<group>"; };
+		15132C2A14C8E8140017BBD0 /* AHGraphicsLimb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsLimb.h; path = Skeletons/AHGraphicsLimb.h; sourceTree = "<group>"; };
+		15132C2B14C8E8140017BBD0 /* AHGraphicsLimb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsLimb.m; path = Skeletons/AHGraphicsLimb.m; sourceTree = "<group>"; };
+		1515F8A414C9E2FE004FE3BB /* AHGraphicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsObject.h; path = Objects/AHGraphicsObject.h; sourceTree = "<group>"; };
+		1515F8A514C9E2FE004FE3BB /* AHGraphicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsObject.m; path = Objects/AHGraphicsObject.m; sourceTree = "<group>"; };
+		1515F8A614C9E2FE004FE3BB /* AHGraphicsRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsRect.h; path = Objects/AHGraphicsRect.h; sourceTree = "<group>"; };
+		1515F8A714C9E2FE004FE3BB /* AHGraphicsRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsRect.m; path = Objects/AHGraphicsRect.m; sourceTree = "<group>"; };
+		1515F8AD14C9E332004FE3BB /* AHGraphicsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsLayer.h; path = Layers/AHGraphicsLayer.h; sourceTree = "<group>"; };
+		1515F8AE14C9E332004FE3BB /* AHGraphicsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsLayer.m; path = Layers/AHGraphicsLayer.m; sourceTree = "<group>"; };
+		1515F8B114C9F519004FE3BB /* BCBackgroundActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBackgroundActor.h; path = Actors/Background/BCBackgroundActor.h; sourceTree = "<group>"; };
+		1515F8B214C9F519004FE3BB /* BCBackgroundActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCBackgroundActor.m; path = Actors/Background/BCBackgroundActor.m; sourceTree = "<group>"; };
 		152839FA14BF56AA002D7513 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		152839FD14BF62DC002D7513 /* AHContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHContactDelegate.h; sourceTree = "<group>"; };
 		153EB11514AD6EE50070DBB9 /* BlackCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,10 +219,6 @@
 		158ABE3614BE757D00E274BB /* AHInputComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHInputComponent.m; sourceTree = "<group>"; };
 		158C4A9414BB9B130089747C /* AHGraphicsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHGraphicsManager.h; sourceTree = "<group>"; };
 		158C4A9514BB9B130089747C /* AHGraphicsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHGraphicsManager.m; sourceTree = "<group>"; };
-		158C4A9814BB9C530089747C /* AHGraphicsRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHGraphicsRect.h; sourceTree = "<group>"; };
-		158C4A9914BB9C530089747C /* AHGraphicsRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHGraphicsRect.m; sourceTree = "<group>"; };
-		158C4A9B14BB9E580089747C /* AHGraphicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHGraphicsObject.h; sourceTree = "<group>"; };
-		158C4A9C14BB9E580089747C /* AHGraphicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHGraphicsObject.m; sourceTree = "<group>"; };
 		158C4A9F14BBAAA60089747C /* AHTextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHTextureManager.h; path = Textures/AHTextureManager.h; sourceTree = "<group>"; };
 		158C4AA014BBAAA60089747C /* AHTextureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHTextureManager.m; path = Textures/AHTextureManager.m; sourceTree = "<group>"; };
 		158C4AA514BBB0A50089747C /* AHTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHTextureInfo.h; path = Textures/AHTextureInfo.h; sourceTree = "<group>"; };
@@ -415,6 +427,46 @@
 			path = resources/graphics;
 			sourceTree = SOURCE_ROOT;
 		};
+		15132C2914C8E7E20017BBD0 /* Skeletons */ = {
+			isa = PBXGroup;
+			children = (
+				15132C2614C8E7D90017BBD0 /* AHGraphicsSkeleton.h */,
+				15132C2714C8E7DA0017BBD0 /* AHGraphicsSkeleton.m */,
+				15132C2A14C8E8140017BBD0 /* AHGraphicsLimb.h */,
+				15132C2B14C8E8140017BBD0 /* AHGraphicsLimb.m */,
+			);
+			name = Skeletons;
+			sourceTree = "<group>";
+		};
+		1515F8A114C9E2A2004FE3BB /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				1515F8AD14C9E332004FE3BB /* AHGraphicsLayer.h */,
+				1515F8AE14C9E332004FE3BB /* AHGraphicsLayer.m */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
+		1515F8A314C9E2AD004FE3BB /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				1515F8A414C9E2FE004FE3BB /* AHGraphicsObject.h */,
+				1515F8A514C9E2FE004FE3BB /* AHGraphicsObject.m */,
+				1515F8A614C9E2FE004FE3BB /* AHGraphicsRect.h */,
+				1515F8A714C9E2FE004FE3BB /* AHGraphicsRect.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		1515F8B014C9F4E4004FE3BB /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				1515F8B114C9F519004FE3BB /* BCBackgroundActor.h */,
+				1515F8B214C9F519004FE3BB /* BCBackgroundActor.m */,
+			);
+			name = Background;
+			sourceTree = "<group>";
+		};
 		153EB10A14AD6EE50070DBB9 = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +520,7 @@
 		158346F514B7BF6A00C1DA04 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				1515F8B014C9F4E4004FE3BB /* Background */,
 				15AAFBF914BE2B970058F014 /* Hero */,
 				15AAFBF714BE2B6F0058F014 /* Terrain */,
 			);
@@ -689,12 +742,11 @@
 			children = (
 				158C4A9414BB9B130089747C /* AHGraphicsManager.h */,
 				158C4A9514BB9B130089747C /* AHGraphicsManager.m */,
-				158C4A9B14BB9E580089747C /* AHGraphicsObject.h */,
-				158C4A9C14BB9E580089747C /* AHGraphicsObject.m */,
-				158C4A9814BB9C530089747C /* AHGraphicsRect.h */,
-				158C4A9914BB9C530089747C /* AHGraphicsRect.m */,
 				15C06CA214BCCBC60067D458 /* Camera */,
+				1515F8A114C9E2A2004FE3BB /* Layers */,
+				1515F8A314C9E2AD004FE3BB /* Objects */,
 				15AC4D7314B7B3BB00283A06 /* Shaders */,
+				15132C2914C8E7E20017BBD0 /* Skeletons */,
 				158C4A9E14BBAA730089747C /* Textures */,
 			);
 			path = Graphics;
@@ -1140,8 +1192,6 @@
 				1583473B14B7DCC200C1DA04 /* CJSONScanner.m in Sources */,
 				1583473C14B7DCC200C1DA04 /* CJSONSerializer.m in Sources */,
 				158C4A9614BB9B130089747C /* AHGraphicsManager.m in Sources */,
-				158C4A9A14BB9C530089747C /* AHGraphicsRect.m in Sources */,
-				158C4A9D14BB9E580089747C /* AHGraphicsObject.m in Sources */,
 				158C4AA114BBAAA60089747C /* AHTextureManager.m in Sources */,
 				158C4AA714BBB0A50089747C /* AHTextureInfo.m in Sources */,
 				1587704714BBC28D009886D2 /* AHDebugDraw.mm in Sources */,
@@ -1173,6 +1223,12 @@
 				15132C1614C8958E0017BBD0 /* AHAnimationTrack.m in Sources */,
 				15132C1A14C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m in Sources */,
 				15132C1D14C8C0390017BBD0 /* AHAnimationSkeletonCache.m in Sources */,
+				15132C2814C8E7DE0017BBD0 /* AHGraphicsSkeleton.m in Sources */,
+				15132C2C14C8E8140017BBD0 /* AHGraphicsLimb.m in Sources */,
+				1515F8A814C9E2FE004FE3BB /* AHGraphicsObject.m in Sources */,
+				1515F8A914C9E2FE004FE3BB /* AHGraphicsRect.m in Sources */,
+				1515F8AF14C9E332004FE3BB /* AHGraphicsLayer.m in Sources */,
+				1515F8B314C9F519004FE3BB /* BCBackgroundActor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

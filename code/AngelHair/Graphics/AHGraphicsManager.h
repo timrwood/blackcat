@@ -12,8 +12,14 @@
 #import "AHGraphicsCamera.h"
 
 
+@class AHGraphicsObject;
+@class AHGraphicsLayer;
+
+
 @interface AHGraphicsManager : NSObject <AHSubSystem> {
 @private;
+    NSMutableArray *_layers;
+    
     EAGLContext *_eaglContext;
     GLKBaseEffect *_baseEffect;
     
@@ -58,4 +64,25 @@
 - (void)setDrawColor:(GLKVector4)color;
 
 
+#pragma mark -
+#pragma mark layers
+
+
+- (void)addLayer:(AHGraphicsLayer *)layer atIndex:(int)i;
+- (void)removeLayer:(AHGraphicsLayer *)layer;
+- (void)removeAllUnusedLayers;
+- (void)removeAllLayers;
+
+
+#pragma mark -
+#pragma mark layers
+
+
+- (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i;
+
+
 @end
+
+
+
+

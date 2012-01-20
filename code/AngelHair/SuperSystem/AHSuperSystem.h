@@ -9,7 +9,7 @@
 
 @interface AHSuperSystem : NSObject {
 @private;
-
+    BOOL _isEnabledDebugDraw;
 }
 
 
@@ -54,6 +54,7 @@
 
 
 - (void)draw;
+- (void)setDebugDraw:(BOOL)enableDebugDraw;
 
 
 @end

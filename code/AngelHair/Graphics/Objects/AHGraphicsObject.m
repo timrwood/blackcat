@@ -7,6 +7,7 @@
 //
 
 
+#import "AHGraphicsLayer.h"
 #import "AHGraphicsObject.h"
 #import "AHTextureManager.h"
 
@@ -28,6 +29,22 @@
 
 - (void)dealloc {
     
+}
+
+
+#pragma mark -
+#pragma mark layer
+
+
+- (void)setLayer:(AHGraphicsLayer *)layer {
+    _layer = layer;
+}
+
+- (void)removeFromParentLayer {
+    if (_layer) {
+        [_layer removeObject:self];
+        _layer = nil;
+    }
 }
 
 
@@ -70,6 +87,7 @@
     if (textures) {
         free(textures);
     }
+    [self removeFromParentLayer];
 }
 
 
@@ -87,6 +105,15 @@
     }
     dlog(@"Texture not loaded for this object.");
     return 0;
+}
+
+
+#pragma mark -
+#pragma mark draw
+
+
+- (void)draw {
+    
 }
 
 

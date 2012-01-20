@@ -11,6 +11,9 @@
 #import "AHTextureInfo.h"
 
 
+@class AHGraphicsLayer;
+
+
 @interface AHGraphicsObject : AHActorComponent {
 @protected;
     CGPoint *vertices;
@@ -18,8 +21,18 @@
     
     int count;
     
+    AHGraphicsLayer *_layer;
+    
     AHTextureInfo *texture;
 }
+
+
+#pragma mark -
+#pragma mark layer
+
+
+- (void)setLayer:(AHGraphicsLayer *)layer;
+- (void)removeFromParentLayer;
 
 
 #pragma mark -
@@ -35,6 +48,13 @@
 
 - (void)setTextureKey:(NSString *)key;
 - (GLuint)textureName;
+
+
+#pragma mark -
+#pragma mark draw
+
+
+- (void)draw;
 
 
 @end

@@ -10,6 +10,7 @@
 #import "AHActorManager.h"
 #import "AHGraphicsManager.h"
 
+#import "BCBackgroundActor.h"
 #import "BCHeroRecorderActor.h"
 #import "BCHeroPlaybackActor.h"
 #import "BCTerrainBuilder.h"
@@ -30,6 +31,7 @@
     [[BCGlobalManager manager] setHeroPosition:CGPointZero];
     [[BCGlobalManager manager] setHeroSpeed:0.0f];
     
+    [[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
     [[AHActorManager manager] add:[[BCHeroActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];

@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
+
+#import "AHGraphicsObject.h"
+#import "AHGraphicsLayer.h"
 #import "AHGraphicsManager.h"
 #import "AHPhysicsManager.h"
 
@@ -117,36 +120,9 @@ static AHGraphicsCamera *_camera = nil;
     
     [_camera prepareToDrawWorld];
     
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    [[AHPhysicsManager manager] drawDebug];
-    
-    //glEnableVertexAttribArray(GLKVertexAttribPosition);
-    //glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, gBoxData);
-    //glDrawArrays(GL_TRIANGLES, 0, 3);
-    //glDisableVertexAttribArray(GLKVertexAttribPosition);
-    
-    /*
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, gBoxData);
-	glColor4f(0.4f, 0.8f, 0.2f, 0.5f);
-	glDrawArrays(GL_LINE_LOOP, 0, 4);
-    */
-    
-    /*
-    glBindVertexArrayOES(_vertexArray);
-    
-    // Render the object with GLKit
-    [_baseEffect prepareToDraw];
-    
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    
-    // Render the object again with ES2
-    glUseProgram(_program);
-    
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
-    glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
-    
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-     */
+    for (AHGraphicsLayer *layer in _layers) {
+        [layer draw];
+    }
 }
 
 
@@ -164,4 +140,59 @@ static AHGraphicsCamera *_camera = nil;
 }
 
 
+#pragma mark -
+#pragma mark layers
+
+
+- (void)addLayer:(AHGraphicsLayer *)layer atIndex:(int)i {
+    if (![_layers containsObject:layer]) {
+        [_layers addObject:layer];
+    }
+}
+
+- (void)removeLayer:(AHGraphicsLayer *)layer {
+    if ([_layers containsObject:layer]) {
+        [_layers removeObject:layer];
+    }
+}
+
+- (void)removeAllUnusedLayers {
+    int skipped = 0;
+    while ([_layers count] > skipped) {
+        AHGraphicsLayer *layer = (AHGraphicsLayer *)[_layers objectAtIndex:skipped];
+        if ([layer hasObjects]) {
+            skipped ++;
+        } else {
+            [self removeLayer:layer];
+        }
+    }
+}
+
+- (void)removeAllLayers {
+    while ([_layers count] > 0) {
+        [self removeLayer:(AHGraphicsLayer *)[_layers objectAtIndex:0]];
+    }
+}
+
+
+#pragma mark -
+#pragma mark layers
+
+
+- (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i {
+    AHGraphicsLayer *layer = [_layers objectAtIndex:i];
+    
+    if (!layer) {
+        layer = [[AHGraphicsLayer alloc] init];
+        [self addLayer:layer atIndex:i];
+    }
+    
+    [object removeFromParentLayer];
+    [layer addObject:object];
+}
+
+
 @end
+
+
+

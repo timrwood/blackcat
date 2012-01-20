@@ -71,4 +71,15 @@
 }
 
 
+#pragma mark -
+#pragma mark draw
+
+
+- (void)draw {
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, self->textures);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, self->vertices);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+
 @end

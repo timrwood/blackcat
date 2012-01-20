@@ -28,3 +28,8 @@ typedef enum {
 } BCPhysicsBodyTypes;
 
 
+typedef enum {
+    GFX_LAYER_BACKGROUND,
+    GFK_LAYER_BUILDINGS,
+    GFK_LAYER_HERO
+} BCGraphicsLayers;

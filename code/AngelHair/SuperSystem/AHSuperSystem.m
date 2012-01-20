@@ -130,6 +130,14 @@ static AHSuperSystem *_manager = nil;
 
 - (void)draw {
     [[AHGraphicsManager manager] draw];
+    
+    if (_isEnabledDebugDraw) {
+        [[AHPhysicsManager manager] drawDebug];
+    }
+}
+        
+- (void)setDebugDraw:(BOOL)enableDebugDraw {
+    _isEnabledDebugDraw = enableDebugDraw;
 }
 
 
