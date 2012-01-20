@@ -13,7 +13,7 @@
 		15132C1614C8958E0017BBD0 /* AHAnimationTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1514C8958E0017BBD0 /* AHAnimationTrack.m */; };
 		15132C1A14C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1914C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m */; };
 		15132C1D14C8C0390017BBD0 /* AHAnimationSkeletonCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1C14C8C0390017BBD0 /* AHAnimationSkeletonCache.m */; };
-		15132C2414C8CB680017BBD0 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 15132C2114C8CB680017BBD0 /* demo.json */; };
+		15132C2414C8CB680017BBD0 /* demo.anim in Resources */ = {isa = PBXBuildFile; fileRef = 15132C2114C8CB680017BBD0 /* demo.anim */; };
 		15132C2514C8CB680017BBD0 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 15132C2314C8CB680017BBD0 /* background.png */; };
 		15132C2814C8E7DE0017BBD0 /* AHGraphicsSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C2714C8E7DA0017BBD0 /* AHGraphicsSkeleton.m */; };
 		15132C2C14C8E8140017BBD0 /* AHGraphicsLimb.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C2B14C8E8140017BBD0 /* AHGraphicsLimb.m */; };
@@ -138,7 +138,7 @@
 		15132C1914C8ABFA0017BBD0 /* AHAnimationSkeletonTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationSkeletonTrack.m; path = Tracks/AHAnimationSkeletonTrack.m; sourceTree = "<group>"; };
 		15132C1B14C8C0390017BBD0 /* AHAnimationSkeletonCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationSkeletonCache.h; path = Skeletons/AHAnimationSkeletonCache.h; sourceTree = "<group>"; };
 		15132C1C14C8C0390017BBD0 /* AHAnimationSkeletonCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationSkeletonCache.m; path = Skeletons/AHAnimationSkeletonCache.m; sourceTree = "<group>"; };
-		15132C2114C8CB680017BBD0 /* demo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo.json; sourceTree = "<group>"; };
+		15132C2114C8CB680017BBD0 /* demo.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.anim; sourceTree = "<group>"; };
 		15132C2314C8CB680017BBD0 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		15132C2614C8E7D90017BBD0 /* AHGraphicsSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsSkeleton.h; path = Skeletons/AHGraphicsSkeleton.h; sourceTree = "<group>"; };
 		15132C2714C8E7DA0017BBD0 /* AHGraphicsSkeleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsSkeleton.m; path = Skeletons/AHGraphicsSkeleton.m; sourceTree = "<group>"; };
@@ -412,7 +412,7 @@
 		15132C2014C8CB680017BBD0 /* animations */ = {
 			isa = PBXGroup;
 			children = (
-				15132C2114C8CB680017BBD0 /* demo.json */,
+				15132C2114C8CB680017BBD0 /* demo.anim */,
 			);
 			name = animations;
 			path = resources/animations;
@@ -600,8 +600,8 @@
 		1587704414BBC28D009886D2 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
-				1587704514BBC28D009886D2 /* AHDebugDraw.mm */,
 				1587704614BBC28D009886D2 /* AHDebugDraw.h */,
+				1587704514BBC28D009886D2 /* AHDebugDraw.mm */,
 			);
 			name = Debug;
 			path = code/AngelHair/Physics/Debug;
@@ -1114,7 +1114,7 @@
 				15AC4E0414B7B3BC00283A06 /* ViewController_iPhone.xib in Resources */,
 				15AC4E4014B7BB3400283A06 /* Shader.fsh in Resources */,
 				15AC4E4114B7BB3700283A06 /* Shader.vsh in Resources */,
-				15132C2414C8CB680017BBD0 /* demo.json in Resources */,
+				15132C2414C8CB680017BBD0 /* demo.anim in Resources */,
 				15132C2514C8CB680017BBD0 /* background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

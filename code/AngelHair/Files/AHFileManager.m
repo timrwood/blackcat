@@ -66,7 +66,7 @@ static AHFileManager *_manager = nil;
 
 
 - (NSArray *)parseJSONFromResourceFileToArray:(NSString *)_filename {
-    return [self parseJSONFromFileToArray:[[NSBundle mainBundle] pathForResource:_filename ofType:@"json"]];
+    return [self parseJSONFromFileToArray:[self pathToResourceFile:_filename]];
 }
 
 - (NSArray *)parseJSONFromFileToArray:(NSString *)_filename {
@@ -74,23 +74,21 @@ static AHFileManager *_manager = nil;
     
     NSData *json = [fileManager contentsAtPath:_filename];
     
-    dlog(@"Filename %@ data %@", _filename, json);
-    
     NSArray *array = [[CJSONDeserializer deserializer] deserializeAsArray:json error:&error];
     
     if (error) {
-        dlog(@"Error parsing JSON : %@", [error localizedDescription]);
+        dlog(@"Error parsing JSON : %@ : %@", _filename, [error localizedDescription]);
     }
     
-    if ([array isKindOfClass:[NSArray class]]) {
-        dlog(@"JSON is not a NSArray");
+    if (![array isKindOfClass:[NSArray class]]) {
+        dlog(@"JSON is not a NSArray %@", _filename);
     }
     
     return (NSArray *) array;
 }
 
 - (NSDictionary *)parseJSONFromResourceFileToDictionary:(NSString *)_filename {
-    return [self parseJSONFromFileToDictionary:[[NSBundle mainBundle] pathForResource:_filename ofType:@"json"]];
+    return [self parseJSONFromFileToDictionary:[self pathToResourceFile:_filename]];
 }
 
 - (NSDictionary *)parseJSONFromFileToDictionary:(NSString *)_filename {
@@ -100,11 +98,11 @@ static AHFileManager *_manager = nil;
     NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:json error:&error];
     
     if (error) {
-        dlog(@"Error parsing JSON : %@", [error localizedDescription]);
+        dlog(@"Error parsing JSON : %@ : %@", _filename, [error localizedDescription]);
     }
     
-    if ([dict isKindOfClass:[NSDictionary class]]) {
-        dlog(@"JSON is not a NSDictionary");
+    if (![dict isKindOfClass:[NSDictionary class]]) {
+        dlog(@"JSON is not a NSDictionary %@", _filename);
     }
     
     return (NSDictionary *) dict;
@@ -116,8 +114,7 @@ static AHFileManager *_manager = nil;
 
 
 - (NSString *)pathToResourceFile:(NSString *)file {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [[paths objectAtIndex:0] stringByAppendingPathComponent:file];
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:file];
 }
 
 

@@ -67,7 +67,7 @@ static AHAnimationSkeletonCache *_manager = nil;
 }
 
 - (AHAnimationSkeletonTrack *)loadAnimationForKey:(NSString *)key {
-    NSArray *keyframes = [[AHFileManager manager] parseJSONFromResourceFileToArray:key];
+    NSArray *keyframes = [[AHFileManager manager] parseJSONFromResourceFileToArray:[key stringByAppendingPathExtension:@"anim"]];
     AHAnimationTimeTrack *timeTrack = [[AHAnimationTimeTrack alloc] initWithSize:[keyframes count]];
     AHAnimationSkeletonTrack *track = [[AHAnimationSkeletonTrack alloc] initWithSize:[keyframes count]];
     [track setTimeTrack:timeTrack];

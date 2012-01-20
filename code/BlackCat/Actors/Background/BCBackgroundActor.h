@@ -18,7 +18,18 @@
     AHGraphicsRect *_top;
     AHGraphicsRect *_mid;
     AHGraphicsRect *_bot;
+    
+    CGSize topMidTexSize;
+    CGSize bottomTexSize;
 }
+
+
+#pragma mark -
+#pragma mark update
+
+
+- (void)updatePosition;
+- (void)updateTexture;
 
 
 @end

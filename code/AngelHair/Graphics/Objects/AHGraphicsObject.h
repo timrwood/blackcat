@@ -15,15 +15,14 @@
 
 
 @interface AHGraphicsObject : AHActorComponent {
+@private;
+    AHGraphicsLayer *_layer;
+    AHTextureInfo *_texture;
+    
+    int _count;
 @protected;
     CGPoint *vertices;
     CGPoint *textures;
-    
-    int count;
-    
-    AHGraphicsLayer *_layer;
-    
-    AHTextureInfo *texture;
 }
 
 
@@ -31,6 +30,7 @@
 #pragma mark layer
 
 
+- (void)addToLayerIndex:(int)i;
 - (void)setLayer:(AHGraphicsLayer *)layer;
 - (void)removeFromParentLayer;
 
@@ -47,7 +47,7 @@
 
 
 - (void)setTextureKey:(NSString *)key;
-- (GLuint)textureName;
+- (AHTextureInfo *)texture;
 
 
 #pragma mark -

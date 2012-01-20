@@ -83,7 +83,7 @@
     // debug
     float time = fmodf([_body position].x, 2.5f) / 2.5f;
     AHSkeleton skeleton = [_track valueAtTime:time];
-    dlog(@"skeleton %F %F", skeleton.x, skeleton.y);
+    //dlog(@"skeleton %F %F", skeleton.x, skeleton.y);
 }
 
 - (void)updateVelocity {

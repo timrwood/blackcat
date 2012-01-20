@@ -51,7 +51,7 @@ static AHGraphicsCamera *_camera = nil;
 - (id)init {
     self = [super init];
     if (self) {
-        
+        _layers = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -120,9 +120,18 @@ static AHGraphicsCamera *_camera = nil;
     
     [_camera prepareToDrawWorld];
     
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	glEnable(GL_TEXTURE_2D);
+    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    
     for (AHGraphicsLayer *layer in _layers) {
         [layer draw];
     }
+    
+	glDisable(GL_TEXTURE_2D);
+    glDisableVertexAttribArray(GLKVertexAttribPosition);
+    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
 }
 
 
@@ -180,12 +189,13 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i {
-    AHGraphicsLayer *layer = [_layers objectAtIndex:i];
+    //dlog(@"object");
     
-    if (!layer) {
-        layer = [[AHGraphicsLayer alloc] init];
-        [self addLayer:layer atIndex:i];
+    if (i >= [_layers count] || ![_layers objectAtIndex:i]) {
+        [self addLayer:[[AHGraphicsLayer alloc] init] atIndex:i];
     }
+    
+    AHGraphicsLayer *layer = [_layers objectAtIndex:i];
     
     [object removeFromParentLayer];
     [layer addObject:object];

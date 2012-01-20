@@ -60,6 +60,10 @@
 #pragma mark camera position
 
 
+- (CGSize)worldSize {
+    return CGSizeMake(_zoom * _aspectRatio, _zoom);
+}
+
 - (CGPoint)worldPosition {
     return CGPointMake(_position.x, _position.y);
 }

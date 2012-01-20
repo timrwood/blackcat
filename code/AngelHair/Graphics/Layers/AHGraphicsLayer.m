@@ -7,6 +7,8 @@
 //
 
 
+#import "AHTextureManager.h"
+#import "AHGraphicsManager.h"
 #import "AHGraphicsObject.h"
 #import "AHGraphicsLayer.h"
 
@@ -64,11 +66,9 @@
 
 
 - (void)draw {
+    //dlog(@"drawing");
     for (AHGraphicsObject *object in _objects) {
-        if ([object textureName] != _currentTexture) {
-            _currentTexture = [object textureName];
-            glBindTexture(GL_TEXTURE0, _currentTexture);
-        }
+        [[AHTextureManager manager] activateTexture:[object texture]];
         [object draw];
     }
 }

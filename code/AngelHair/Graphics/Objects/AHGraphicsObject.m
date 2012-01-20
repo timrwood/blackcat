@@ -7,6 +7,7 @@
 //
 
 
+#import "AHGraphicsManager.h"
 #import "AHGraphicsLayer.h"
 #import "AHGraphicsObject.h"
 #import "AHTextureManager.h"
@@ -36,6 +37,10 @@
 #pragma mark layer
 
 
+- (void)addToLayerIndex:(int)i {
+    [[AHGraphicsManager manager] addObject:self toLayerIndex:i];
+}
+
 - (void)setLayer:(AHGraphicsLayer *)layer {
     _layer = layer;
 }
@@ -62,7 +67,7 @@
 
 
 - (void)setVertexCount:(int)newCount {
-    if (count != newCount) {
+    if (_count != newCount) {
         if (vertices) {
             free(vertices);
         }
@@ -70,9 +75,9 @@
             free(textures);
         }
     }
-    count = newCount;
-    self->vertices = (CGPoint *) malloc(sizeof(CGPoint) * count);
-    self->textures = (CGPoint *) malloc(sizeof(CGPoint) * count);
+    _count = newCount;
+    self->vertices = (CGPoint *) malloc(sizeof(CGPoint) * _count);
+    self->textures = (CGPoint *) malloc(sizeof(CGPoint) * _count);
 }
 
 
@@ -96,15 +101,11 @@
 
 
 - (void)setTextureKey:(NSString *)key {
-    texture = [[AHTextureManager manager] textureForKey:key];
+    _texture = [[AHTextureManager manager] textureForKey:key];
 }
 
-- (GLuint)textureName {
-    if (texture) {
-        return [[texture info] name];
-    }
-    dlog(@"Texture not loaded for this object.");
-    return 0;
+- (AHTextureInfo *)texture {
+    return _texture;
 }
 
 

@@ -13,10 +13,12 @@
 
 
 @interface AHTextureManager : NSObject <AHSubSystem> {
-    NSMutableDictionary *textures;
-    GLKTextureLoader *loader;
+@private;
+    NSMutableDictionary *_textures;
+    GLKTextureLoader *_loader;
     
-    int unloadedTextures;
+    int _unloadedTextures;
+    GLuint _currentTexture;
 }
 
 
@@ -43,6 +45,13 @@
 - (void)removeAllTextures;
 - (void)removeAllUnusedTextures;
 - (AHTextureInfo *)textureForKey:(NSString *)key;
+
+
+#pragma mark -
+#pragma mark activate
+
+
+- (void)activateTexture:(AHTextureInfo *)texture;
 
 
 @end

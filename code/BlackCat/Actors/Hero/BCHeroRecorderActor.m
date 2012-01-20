@@ -95,13 +95,14 @@
 
 
 - (NSData *)outputData {
+    /*
     float time = [[AHTimeManager manager] worldTime];
     float count = [_data length] / (3.0f * sizeof(short));
     dlog(@"time : %.2F   frames : %i   FPS : %.2f", time, (int) count, count / time);
     dlog(@"time : %.2F   size : %i   SPS : %.2f", time, (int) [_data length], [_data length] / time);
     dlog(@"estimated minutes to overflow : %F", (4096 / ([_data length] / time)) / 60.0f);
     dlog(@"last x value %F", _debugLastX);
-    
+    */
     return _data;
 }
 

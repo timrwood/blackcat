@@ -33,6 +33,7 @@
 #pragma mark camera position
 
 
+- (CGSize)worldSize;
 - (CGPoint)worldPosition;
 - (float)worldZoom;
 - (void)cacheWorldMatrix;

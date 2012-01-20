@@ -90,6 +90,7 @@
     }
     
     glDisable(GL_COLOR_MATERIAL);
+    glDisable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
