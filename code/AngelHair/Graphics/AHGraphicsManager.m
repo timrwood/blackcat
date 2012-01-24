@@ -84,7 +84,7 @@ static AHGraphicsCamera *_camera = nil;
 
 - (void)setTexture0:(GLuint)tex {
     if (tex != _currentTex0 || _baseEffect.texture2d0.enabled == NO) {
-        dlog(@"Activating texture %i", tex);
+        //dlog(@"Activating texture %i", tex);
         _currentTex0 = tex;
         _baseEffect.useConstantColor = NO;
         _baseEffect.texture2d0.enabled = YES;

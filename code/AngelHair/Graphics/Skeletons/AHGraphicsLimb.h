@@ -15,8 +15,10 @@
     float _length;
     float _width;
     float _angle;
+    CGRect _rect;
     
-    BOOL _canUseCache;
+    BOOL _canUseVertexCache;
+    BOOL _canUseTextureCache;
 }
 
 
@@ -33,14 +35,15 @@
 #pragma mark texture
 
 
-- (void)setTextureRect:(CGRect *)rect;
+- (void)setTextureRect:(CGRect)rect;
 
 
 #pragma mark -
-#pragma mark draw
+#pragma mark cache
 
 
-- (void)cacheValues;
+- (void)cacheTextureValues;
+- (void)cacheVertexValues;
 
 
 @end

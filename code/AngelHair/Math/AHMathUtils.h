@@ -21,7 +21,10 @@ extern "C" {
 #pragma mark constants
 
 
-#define M_TAU M_PI * 2.0f
+#define M_TAU    M_PI * 2.0f
+#define M_TAU_2  M_PI
+#define M_TAU_4  M_PI_2
+#define M_TAU_8  M_PI_4
 
 
 #pragma mark -

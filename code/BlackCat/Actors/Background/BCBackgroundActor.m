@@ -40,9 +40,9 @@
         [self addComponent:_mid];
         [self addComponent:_bot];
         
-        [_top addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
-        [_mid addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
-        [_bot addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
+        //[_top addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
+        //[_mid addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
+        //[_bot addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
         
         [_top setTextureKey:@"background.png"];
         [_mid setTextureKey:@"background.png"];

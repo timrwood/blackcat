@@ -14,12 +14,16 @@
 
 @class AHPhysicsCircle;
 @class AHAnimationSkeletonTrack;
+@class AHGraphicsLimb;
 
 
 @interface BCHeroActor : AHActor <AHInputDelegate> {
 @private;
     AHPhysicsCircle *_body;
     AHInputComponent *_input;
+    
+    AHGraphicsLimb *_limb;
+    float _limbAngle;
     
     BOOL _canJump;
     BOOL _isJumping;

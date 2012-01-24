@@ -18,15 +18,18 @@
 #define DASH_SLOW_SPEED 1.0f
 
 
-#import "AHAnimationSkeletonCache.h"
-#import "AHAnimationSkeletonTrack.h"
 #import "AHTimeManager.h"
-#import "AHActorMessage.h"
-#import "AHMathUtils.h"
-#import "AHPhysicsCircle.h"
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
 #import "AHSceneManager.h"
+
+#import "AHMathUtils.h"
+
+#import "AHAnimationSkeletonCache.h"
+#import "AHAnimationSkeletonTrack.h"
+#import "AHActorMessage.h"
+#import "AHPhysicsCircle.h"
+#import "AHGraphicsLimb.h"
 
 #import "BCHeroActor.h"
 #import "BCGlobalTypes.h"
@@ -58,6 +61,14 @@
         [_input setDelegate:self];
         [self addComponent:_input];
         
+        _limb = [[AHGraphicsLimb alloc] init];
+        [_limb setLength:5.0f];
+        [_limb setWidth:0.5f];
+        [_limb setTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_limb setTextureKey:@"debug-grid.png"];
+        [self addComponent:_limb];
+        [[AHGraphicsManager manager] addObject:_limb toLayerIndex:GFX_LAYER_BACKGROUND];
+        
         _runSpeed = 8.0f;
         
         _upwardSlowing = powf(BASE_UPWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
@@ -76,9 +87,12 @@
 
 
 - (void)updateBeforeAnimation {
-    [self updateVelocity];
+    //[self updateVelocity];
     [self updateCamera];
-    [self updateJumpability];
+    //[self updateJumpability];
+    _limbAngle += 0.02f;
+    [_limb setAngle:_limbAngle];
+    [[AHGraphicsManager camera] setWorldPosition:GLKVector2Make(0.0f, 3.0f)];
     
     // debug
     //float time = fmodf([_body position].x, 2.5f) / 2.5f;
