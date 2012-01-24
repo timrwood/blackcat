@@ -31,4 +31,11 @@
 - (int)dependants;
 
 
+#pragma mark -
+#pragma mark name
+
+
+- (float)name;
+
+
 @end

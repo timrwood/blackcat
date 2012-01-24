@@ -52,6 +52,14 @@ static AHGraphicsCamera *_camera = nil;
     self = [super init];
     if (self) {
         _layers = [[NSMutableArray alloc] init];
+        _baseEffect = [[GLKBaseEffect alloc] init];
+        _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        
+        if (!_eaglContext) {
+            dlog(@"Failed to create EAGLContext");
+        }
+        
+        [EAGLContext setCurrentContext:_eaglContext];
     }
     return self;
 }
@@ -62,15 +70,34 @@ static AHGraphicsCamera *_camera = nil;
 
 
 #pragma mark -
-#pragma mark vars
+#pragma mark context
 
 
 - (EAGLContext *)context {
     return _eaglContext;
 }
 
-- (GLKBaseEffect *)effect {
-    return _baseEffect;
+
+#pragma mark -
+#pragma mark effect
+
+
+- (void)setTexture0:(GLuint)tex {
+    if (tex != _currentTex0 || _baseEffect.texture2d0.enabled == NO) {
+        dlog(@"Activating texture %i", tex);
+        _currentTex0 = tex;
+        _baseEffect.useConstantColor = NO;
+        _baseEffect.texture2d0.enabled = YES;
+        _baseEffect.texture2d0.envMode = GLKTextureEnvModeReplace;
+        _baseEffect.texture2d0.target = GLKTextureTarget2D;
+        _baseEffect.texture2d0.name = _currentTex0;
+        [_baseEffect prepareToDraw];
+    }
+}
+
+- (void)setCameraMatrix:(GLKMatrix4)matrix {
+    _baseEffect.transform.modelviewMatrix = matrix;
+    [_baseEffect prepareToDraw];
 }
 
 
@@ -79,15 +106,7 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)setup {
-    _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
-    if (!_eaglContext) {
-        dlog(@"Failed to create EAGLContext");
-    }
-    
-    [EAGLContext setCurrentContext:_eaglContext];
-    
-    _baseEffect = [[GLKBaseEffect alloc] init];
 }
 
 
@@ -115,23 +134,20 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)draw {
-    glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
+    glClearColor(0.65f, 0.75f, 0.85f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     [_camera prepareToDrawWorld];
     
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	glEnable(GL_TEXTURE_2D);
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     
     for (AHGraphicsLayer *layer in _layers) {
         [layer draw];
     }
-    
-	glDisable(GL_TEXTURE_2D);
-    glDisableVertexAttribArray(GLKVertexAttribPosition);
-    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
 }
 
 
@@ -140,11 +156,12 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)setDrawColor:(GLKVector4)color {
-    if (!GLKVector4AllEqualToVector4(color, currentColor)) {
-        currentColor = color;
+    if (!GLKVector4AllEqualToVector4(color, _currentColor)) {
+        _currentColor = color;
         _baseEffect.useConstantColor = YES;
-        _baseEffect.constantColor = color;
-        //[_baseEffect prepareToDraw];
+        _baseEffect.texture2d0.enabled = NO;
+        _baseEffect.constantColor = _currentColor;
+        [_baseEffect prepareToDraw];
     }
 }
 

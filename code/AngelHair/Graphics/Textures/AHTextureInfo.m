@@ -37,4 +37,16 @@
 }
 
 
+#pragma mark -
+#pragma mark name
+
+
+- (float)name {
+    if (info) {
+        return [info name];
+    }
+    return 0;
+}
+
+
 @end

@@ -7,6 +7,7 @@
 //
 
 
+#import <GLKit/GLKit.h>
 #import "AHSuperSystem.h"
 
 #import "AHTimeManager.h"
@@ -129,10 +130,14 @@ static AHSuperSystem *_manager = nil;
 
 
 - (void)draw {
+    glPushGroupMarkerEXT(0, "Graphics Manager Draw");
     [[AHGraphicsManager manager] draw];
+    glPopGroupMarkerEXT();
     
     if (_isEnabledDebugDraw) {
+        glPushGroupMarkerEXT(0, "Debug Draw");
         [[AHPhysicsManager manager] drawDebug];
+        glPopGroupMarkerEXT();
     }
 }
         

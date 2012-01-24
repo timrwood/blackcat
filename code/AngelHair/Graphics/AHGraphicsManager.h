@@ -23,7 +23,9 @@
     EAGLContext *_eaglContext;
     GLKBaseEffect *_baseEffect;
     
-    GLKVector4 currentColor;
+    GLKVector4 _currentColor;
+    
+    GLuint _currentTex0;
 }
 
 
@@ -36,11 +38,18 @@
 
 
 #pragma mark -
-#pragma mark vars
+#pragma mark context
 
 
 - (EAGLContext *)context;
-- (GLKBaseEffect *)effect;
+
+
+#pragma mark -
+#pragma mark effect
+
+
+- (void)setTexture0:(GLuint)tex;
+- (void)setCameraMatrix:(GLKMatrix4)matrix;
 
 
 #pragma mark -

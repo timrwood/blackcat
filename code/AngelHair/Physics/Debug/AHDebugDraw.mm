@@ -21,9 +21,9 @@ AHDebugDraw::AHDebugDraw() {
 }
 
 void AHDebugDraw::SetColor(const b2Color& color, float32 opacity) {
-    //GLKVector4 col = GLKVector4Make(color.r, color.g, color.b, opacity);
+    GLKVector4 col = GLKVector4Make(color.r, color.g, color.b, opacity);
     
-    //[[AHGraphicsManager manager] setDrawColor:col];
+    [[AHGraphicsManager manager] setDrawColor:col];
 }
 
 void AHDebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color) {

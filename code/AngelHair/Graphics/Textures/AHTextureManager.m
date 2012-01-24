@@ -110,8 +110,6 @@ static AHTextureManager *_manager = nil;
         texture = [[AHTextureInfo alloc] init];
         [_textures setObject:texture forKey:key];
         
-        // async texture loading
-        
         NSError *error;
         [texture setInfo:[GLKTextureLoader textureWithContentsOfFile:[[AHFileManager manager] pathToResourceFile:key] options:NULL error:&error]];
         
@@ -119,6 +117,13 @@ static AHTextureManager *_manager = nil;
             dlog(@"Error loading texture : %@ - %@", key, [error localizedDescription]);
             dlog(@"Looking for texture in : %@", [[AHFileManager manager] pathToResourceFile:key]);
         }
+        
+        // repeat textures
+        glBindTexture(GL_TEXTURE_2D, [[texture info] name]);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        
+        // async texture loading
         /*
         [_loader textureWithContentsOfFile:[[AHFileManager manager] pathToResourceFile:key]
                                   options:NULL
@@ -126,12 +131,13 @@ static AHTextureManager *_manager = nil;
                         completionHandler:^(GLKTextureInfo *textureInfo, NSError *outError) {
                             _unloadedTextures--;
                             [texture setInfo:textureInfo];
+                            dlog(@"loading texture %@ %i", key, [textureInfo name]);
                             if (!textureInfo) {
                                 dlog(@"Error loading texture : %@ - %@", key, [outError localizedDescription]);
                                 dlog(@"Looking for texture in : %@", [[AHFileManager manager] pathToResourceFile:key]);
                             }
-                        }];
-         */
+                        }];*/
+         
     }
     
     [texture addDependant];
@@ -145,18 +151,7 @@ static AHTextureManager *_manager = nil;
 
 
 - (void)activateTexture:(AHTextureInfo *)texture {
-    if (!texture) {
-        return;
-    }
-    return;
-    if ([[texture info] name] != _currentTexture) {
-        _currentTexture = [[texture info] name];
-        [[[AHGraphicsManager manager] effect] setUseConstantColor:NO];
-        [[[[AHGraphicsManager manager] effect] texture2d0] setEnvMode:GLKTextureEnvModeReplace];
-        [[[[AHGraphicsManager manager] effect] texture2d0] setTarget:GLKTextureTarget2D];
-        [[[[AHGraphicsManager manager] effect] texture2d0] setName:_currentTexture];
-        //[[[AHGraphicsManager manager] effect] prepareToDraw];
-    }
+    [[AHGraphicsManager manager] setTexture0:[texture name]];
 }
 
 

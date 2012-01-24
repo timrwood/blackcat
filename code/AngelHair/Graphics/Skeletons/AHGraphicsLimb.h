@@ -12,10 +12,11 @@
 
 @interface AHGraphicsLimb : AHGraphicsObject {
 @private;
-    float _upperLength;
-    float _lowerLength;
+    float _length;
     float _width;
-    float _jointPercent;
+    float _rotation;
+    
+    BOOL _canUseCache;
 }
 
 
@@ -24,9 +25,8 @@
 
 
 - (void)setWidth:(float)width;
-- (void)setUpperLength:(float)upper;
-- (void)setLowerLength:(float)lower;
-- (void)setJointPercent:(float)percent;
+- (void)setLength:(float)length;
+- (void)setRotation:(float)rotation;
 
 
 #pragma mark -
@@ -34,6 +34,13 @@
 
 
 - (void)setTextureRect:(CGRect *)rect;
+
+
+#pragma mark -
+#pragma mark draw
+
+
+- (void)cacheValues;
 
 
 @end

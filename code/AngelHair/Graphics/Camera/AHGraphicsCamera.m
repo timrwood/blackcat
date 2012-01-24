@@ -24,7 +24,7 @@
         _screenRect = [[UIScreen mainScreen] bounds];
         _aspectRatio = _screenRect.size.height / _screenRect.size.width;
         _zoom = 5.0f;
-        _position = GLKVector2Make(0.0f, 0.0f);
+        _position = CGPointMake(0.0f, 0.0f);
         [self cacheWorldMatrix];
         _screenMatrix = GLKMatrix4MakeOrtho(0.0f, 
                                             _screenRect.size.width, 
@@ -46,13 +46,11 @@
 
 
 - (void)prepareToDrawScreen {
-    [[AHGraphicsManager manager] effect].transform.projectionMatrix = _screenMatrix;
-    [[[AHGraphicsManager manager] effect] prepareToDraw];
+    [[AHGraphicsManager manager] setCameraMatrix:_screenMatrix];
 }
 
 - (void)prepareToDrawWorld {
-    [[AHGraphicsManager manager] effect].transform.projectionMatrix = _worldMatrix;
-    [[[AHGraphicsManager manager] effect] prepareToDraw];
+    [[AHGraphicsManager manager] setCameraMatrix:_worldMatrix];
 }
 
 
@@ -64,14 +62,6 @@
     return CGSizeMake(_zoom * _aspectRatio, _zoom);
 }
 
-- (CGPoint)worldPosition {
-    return CGPointMake(_position.x, _position.y);
-}
-
-- (float)worldZoom {
-    return _zoom;
-}
-
 - (void)cacheWorldMatrix {
     _worldMatrix = GLKMatrix4MakeOrtho(_position.x - _zoom * _aspectRatio, 
                                        _position.x + _zoom * _aspectRatio, 
@@ -81,10 +71,17 @@
                                        1.0f);
 }
 
+- (CGPoint)worldPosition {
+    return _position;
+}
+
 - (void)setWorldPosition:(CGPoint)newPosition {
-    _position.x = newPosition.x;
-    _position.y = newPosition.y;
+    _position = newPosition;
     [self cacheWorldMatrix];
+}
+
+- (float)worldZoom {
+    return _zoom;
 }
 
 - (void)setWorldZoom:(float)newZoom {

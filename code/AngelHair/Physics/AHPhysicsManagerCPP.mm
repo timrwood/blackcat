@@ -10,7 +10,9 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
+#import <GLKit/GLKit.h>
 
+#import "AHGraphicsManager.h"
 #import "AHTimeManager.h"
 #import "AHPhysicsManagerCPP.h"
 #import "AHPhysicsBody.h"
@@ -77,23 +79,15 @@
 
 
 - (void)drawDebug {
-    glDisable(GL_TEXTURE_2D);
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glEnable(GL_COLOR_MATERIAL);
+    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    glLoadIdentity();
+    [[AHGraphicsManager camera] prepareToDrawWorld];
     
     if (_world) {
         _world->DrawDebugData();
     }
-    
-    glDisable(GL_COLOR_MATERIAL);
-    glDisable(GL_BLEND);
-    glEnable(GL_TEXTURE_2D);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 

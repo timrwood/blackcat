@@ -7,6 +7,14 @@
 //
 
 
+#define TEX_TOP_Y_CENTER 5.0f / 32.0f
+#define TEX_MID_Y_CENTER 15.0f / 32.0f
+#define TEX_BOT_Y_CENTER 13.0f / 16.0f
+
+#define TEX_TOP_X_OFFSET_RATIO 1.0f / 200.0f
+#define TEX_MID_X_OFFSET_RATIO 1.0f / 100.0f
+#define TEX_BOT_X_OFFSET_RATIO 1.0f / 50.0f
+
 #import "AHGraphicsManager.h"
 #import "AHGraphicsRect.h"
 
@@ -40,8 +48,8 @@
         [_mid setTextureKey:@"background.png"];
         [_bot setTextureKey:@"background.png"];
         
-        topMidTexSize = CGSizeMake(1.0f, 3.0f / 8.0f);
-        bottomTexSize = CGSizeMake(1.0f, 5.0f / 16.0f);
+        topMidTexSize = CGSizeMake(0.5f, 5.0f / 32.0f);
+        bottomTexSize = CGSizeMake(0.5f, 3.0f / 16.0f);
     }
     return self;
 }
@@ -67,12 +75,6 @@
     CGPoint midCenter = center;
     CGPoint botCenter = center;
     
-    // debug
-    bottomSize.width *= 0.5f;
-    topMidSize.width *= 0.5f;
-    midCenter.x += 1.0f;
-    botCenter.x += 2.0f;
-    
     bottomSize.height *= 0.5f;
     topMidSize.height *= 5.0f / 12.0f;
     
@@ -80,17 +82,21 @@
     midCenter.y -= (1.0f / 12.0f) * size.height;
     botCenter.y += (1.0f / 2.0f) * size.height;
     
-    //dlog(@"pos %.3F %.3f size %.3F %.3f", topCenter.x, topCenter.y, topMidSize.width, topMidSize.height);
-    
     [_top setRectFromCenter:topCenter andSize:topMidSize];
     [_mid setRectFromCenter:midCenter andSize:topMidSize];
     [_bot setRectFromCenter:botCenter andSize:bottomSize];
 }
 
 - (void)updateTexture {
-    [_top setTexFromCenter:CGPointMake(0.5f, 0.5f) andSize:topMidTexSize];
-    [_mid setTexFromCenter:CGPointMake(0.5f, 0.5f) andSize:topMidTexSize];
-    [_bot setTexFromCenter:CGPointMake(0.5f, 0.5f) andSize:bottomTexSize];
+    float heroX = [[AHGraphicsManager camera] worldPosition].x;
+    
+    float topX = fmodf(heroX * TEX_TOP_X_OFFSET_RATIO, 1.0f);
+    float midX = fmodf(heroX * TEX_MID_X_OFFSET_RATIO, 1.0f);
+    float botX = fmodf(heroX * TEX_BOT_X_OFFSET_RATIO, 1.0f);
+    
+    [_top setTexFromCenter:CGPointMake(topX, TEX_TOP_Y_CENTER) andSize:topMidTexSize];
+    [_mid setTexFromCenter:CGPointMake(midX, TEX_MID_Y_CENTER) andSize:topMidTexSize];
+    [_bot setTexFromCenter:CGPointMake(botX, TEX_BOT_Y_CENTER) andSize:bottomTexSize];
 }
 
 

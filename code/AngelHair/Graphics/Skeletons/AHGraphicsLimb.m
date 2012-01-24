@@ -20,7 +20,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self setVertexCount:8];
+        [self setVertexCount:10];
     }
     return self;
 }
@@ -30,19 +30,24 @@
 
 
 - (void)setWidth:(float)width {
-    
+    if (width != _width) {
+        _canUseCache = NO;
+        _width = width;
+    }
 }
 
-- (void)setUpperLength:(float)upper {
-    
+- (void)setLength:(float)length {
+    if (length != _length) {
+        _canUseCache = NO;
+        _length = length;
+    }
 }
 
-- (void)setLowerLength:(float)lower {
-    
-}
-
-- (void)setJointPercent:(float)percent {
-    
+- (void)setRotation:(float)rotation {
+    if (rotation != _rotation) {
+        _canUseCache = NO;
+        _rotation = fmodf(rotation, 360.0f);
+    }
 }
 
 
@@ -51,6 +56,15 @@
 
 
 - (void)setTextureRect:(CGRect *)rect {
+    
+}
+
+
+#pragma mark -
+#pragma mark draw
+
+
+- (void)cacheValues {
     
 }
 
