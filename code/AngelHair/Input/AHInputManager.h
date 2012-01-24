@@ -39,7 +39,7 @@
 #pragma mark -
 #pragma mark touches
 
-- (CGPoint)pointForTouch:(UITouch *)touch;
+- (GLKVector2)pointForTouch:(UITouch *)touch;
 - (void)touchBegan:(UITouch *)touch;
 - (void)touchMoved:(UITouch *)touch;
 - (void)touchEnded:(UITouch *)touch;

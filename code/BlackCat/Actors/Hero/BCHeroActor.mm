@@ -43,7 +43,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsCircle alloc] initFromRadius:RADIUS andPosition:CGPointMake(0.0f, 0.0f)];
+        _body = [[AHPhysicsCircle alloc] initFromRadius:RADIUS andPosition:GLKVector2Make(0.0f, 0.0f)];
         [_body setRestitution:0.1f];
         [_body setStatic:NO];
         [_body setCategory:PHY_CAT_HERO];
@@ -108,12 +108,12 @@
     _dashSpeed = fmaxf(0.0f, _dashSpeed - DASH_SLOW_SPEED);
     
     // set vars
-    [_body setLinearVelocity:CGPointMake(_runSpeed + _dashSpeed, vely)];
+    [_body setLinearVelocity:GLKVector2Make(_runSpeed + _dashSpeed, vely)];
     [[BCGlobalManager manager] setHeroSpeed:_runSpeed];
 }
 
 - (void)updateJumpability {
-    CGPoint foot = [_body position];
+    GLKVector2 foot = [_body position];
     foot.y += RADIUS * RAYCAST_RADIUS_RATIO;
     
     int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_JUMPABLE 
@@ -143,7 +143,7 @@
     float jumpPercent = fmaxf(buildingHeight - CAMERA_JUMP_DISTANCE, fminf([_body position].y, buildingHeight));
     jumpPercent = (jumpPercent - buildingHeight) / CAMERA_JUMP_DISTANCE;
     
-    CGPoint cameraPos = [_body position];
+    GLKVector2 cameraPos = [_body position];
     cameraPos.x += 4.0f;
     cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
     
@@ -158,7 +158,7 @@
 #pragma mark touch
 
 
-- (void)touchBeganAtPoint:(CGPoint)point {
+- (void)touchBeganAtPoint:(GLKVector2)point {
     if (point.x > _halfScreenWidth) {
         [self inputDash];
     } else {
@@ -169,7 +169,7 @@
 - (void)inputJump {
     if (_canJump) {
         float velx = [_body linearVelocity].x;
-        [_body setLinearVelocity:CGPointMake(velx, -30.0f)];
+        [_body setLinearVelocity:GLKVector2Make(velx, -30.0f)];
         _canJump = NO;
         _isJumping = YES;
         [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_JUMP]];

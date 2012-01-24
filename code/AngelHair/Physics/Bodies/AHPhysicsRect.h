@@ -13,7 +13,7 @@
 @interface AHPhysicsRect : AHPhysicsBody {
     float _rotation;
     CGSize _size;
-    CGPoint _position;
+    GLKVector2 _position;
 }
 
 
@@ -23,8 +23,8 @@
 
 - (id)initFromSize:(CGSize)size;
 - (id)initFromSize:(CGSize)size andRotation:(float)rotation;
-- (id)initFromSize:(CGSize)size andPosition:(CGPoint)position;
-- (id)initFromSize:(CGSize)size andRotation:(float)rotation andPosition:(CGPoint)position;
+- (id)initFromSize:(CGSize)size andPosition:(GLKVector2)position;
+- (id)initFromSize:(CGSize)size andRotation:(float)rotation andPosition:(GLKVector2)position;
 
 
 @end

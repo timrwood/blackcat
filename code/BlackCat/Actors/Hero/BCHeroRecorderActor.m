@@ -58,7 +58,7 @@
 }
 
 - (void)recordFrameIfDifferent {
-    CGPoint position = [[BCGlobalManager manager] heroPosition];
+    GLKVector2 position = [[BCGlobalManager manager] heroPosition];
     if (fabsf(_lastPosition.y - position.y) > Y_DIFF_SLOP) {
         if (_skippedLastFrame) {
             [self recordFrameWithTime:_lastTime andPosition:_lastPosition];
@@ -76,7 +76,7 @@
     [self recordFrameWithTime:[[AHTimeManager manager] worldTime] andPosition:[[BCGlobalManager manager] heroPosition]];
 }
 
-- (void)recordFrameWithTime:(float)_time andPosition:(CGPoint)position {
+- (void)recordFrameWithTime:(float)_time andPosition:(GLKVector2)position {
     short t = _time * 50;
     short x = position.x * 50;
     short y = position.y * 50;

@@ -6,14 +6,16 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
+
 #import "AHActor.h"
+
 
 @interface BCHeroRecorderActor : AHActor {
 @private;
     NSMutableData *_data;
     float _timeSinceLastKeyframe;
     
-    CGPoint _lastPosition;
+    GLKVector2 _lastPosition;
     float _lastTime;
     
     BOOL _skippedLastFrame;
@@ -29,7 +31,7 @@
 - (void)updateFrame;
 - (void)recordFrameIfDifferent;
 - (void)forceRecordFrame;
-- (void)recordFrameWithTime:(float)_time andPosition:(CGPoint)position;
+- (void)recordFrameWithTime:(float)_time andPosition:(GLKVector2)position;
 
 
 #pragma mark -

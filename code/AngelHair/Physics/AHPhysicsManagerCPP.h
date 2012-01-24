@@ -47,8 +47,8 @@
 #pragma mark query
 
 
-- (NSMutableArray *)getActorsAtPoint:(CGPoint)point withSize:(CGPoint)size;
-- (int)getFirstActorCategoryFrom:(CGPoint)pointA to:(CGPoint)pointB;
-- (int)getFirstActorCategoryWithTag:(int)tag from:(CGPoint)pointA to:(CGPoint)pointB;
+- (NSMutableArray *)getActorsAtPoint:(GLKVector2)point withSize:(GLKVector2)size;
+- (int)getFirstActorCategoryFrom:(GLKVector2)pointA to:(GLKVector2)pointB;
+- (int)getFirstActorCategoryWithTag:(int)tag from:(GLKVector2)pointA to:(GLKVector2)pointB;
 
 @end

@@ -32,7 +32,7 @@
 #pragma mark init
 
 
-- (id)initAtPosition:(CGPoint)position;
+- (id)initAtPosition:(GLKVector2)position;
 
 
 @end

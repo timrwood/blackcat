@@ -7,6 +7,7 @@
 //
 
 
+#import "AHMathUtils.h"
 #import "AHInputManager.h"
 #import "AHInputComponent.h"
 
@@ -92,12 +93,12 @@ static AHInputManager *_manager = nil;
 #pragma mark touches
 
 
-- (CGPoint)pointForTouch:(UITouch *)touch {
-    return [touch locationInView:[touch view]];
+- (GLKVector2)pointForTouch:(UITouch *)touch {
+    return CGPointToGLKVector2([touch locationInView:[touch view]]);
 }
 
 - (void)touchBegan:(UITouch *)touch {
-    CGPoint point = [self pointForTouch:touch];
+    GLKVector2 point = [self pointForTouch:touch];
     NSValue *key = [NSValue valueWithPointer:(__bridge void *) touch];
     
     for (AHInputComponent *component in _components) {
@@ -110,7 +111,7 @@ static AHInputManager *_manager = nil;
 }
 
 - (void)touchMoved:(UITouch *)touch {
-    CGPoint point = [self pointForTouch:touch];
+    GLKVector2 point = [self pointForTouch:touch];
     NSValue *key = [NSValue valueWithPointer:(__bridge void *) touch];
     
     NSObject *obj = [_touchDict objectForKey:key];
@@ -121,7 +122,7 @@ static AHInputManager *_manager = nil;
 }
 
 - (void)touchEnded:(UITouch *)touch {
-    CGPoint point = [self pointForTouch:touch];
+    GLKVector2 point = [self pointForTouch:touch];
     NSValue *key = [NSValue valueWithPointer:(__bridge void *) touch];
     
     NSObject *obj = [_touchDict objectForKey:key];

@@ -23,7 +23,7 @@
 #pragma mark init
 
 
-- (id)initAtPosition:(CGPoint)position {
+- (id)initAtPosition:(GLKVector2)position {
     self = [super init];
     if (self) {
         _body = [[AHPhysicsRect alloc] initFromSize:CGSizeMake(CRATE_SIZE, CRATE_SIZE) andPosition:position];
@@ -43,7 +43,7 @@
 - (BOOL)willCollideWith:(AHPhysicsBody *)contact {
     if ([contact category] == PHY_CAT_HERO) {
         if (!_hasBeenUpset) {
-            CGPoint force = [contact force];
+            GLKVector2 force = [contact force];
             force.x *= 2.0f;
             force.y *= 2.0f;
             [_body setLinearVelocity:force atWorldPoint:[contact position]];

@@ -55,7 +55,7 @@
     if (percent == 0.0f) {
         return _values[a];
     }
-    return [AHMathUtils percent:percent betweenFloatA:_values[a] andFloatB:_values[b]];
+    return FloatLerp(_values[a], _values[b], percent);
 }
 
 

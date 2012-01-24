@@ -19,8 +19,8 @@
 #pragma mark rect
 
 
-- (void)setRectFromCenter:(CGPoint)center andRadius:(float)radius;
-- (void)setRectFromCenter:(CGPoint)center andSize:(CGSize)size;
+- (void)setRectFromCenter:(GLKVector2)center andRadius:(float)radius;
+- (void)setRectFromCenter:(GLKVector2)center andSize:(CGSize)size;
 - (void)setRect:(CGRect)rect;
 
 
@@ -28,8 +28,8 @@
 #pragma mark tex
 
 
-- (void)setTexFromCenter:(CGPoint)center andRadius:(float)radius;
-- (void)setTexFromCenter:(CGPoint)center andSize:(CGSize)size;
+- (void)setTexFromCenter:(GLKVector2)center andRadius:(float)radius;
+- (void)setTexFromCenter:(GLKVector2)center andSize:(CGSize)size;
 - (void)setTex:(CGRect)rect;
 
 

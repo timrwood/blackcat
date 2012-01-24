@@ -66,14 +66,14 @@
 
 - (void)updatePosition {
     CGSize size = [[AHGraphicsManager camera] worldSize];
-    CGPoint center = [[AHGraphicsManager camera] worldPosition];
+    GLKVector2 center = [[AHGraphicsManager camera] worldPosition];
     
     CGSize bottomSize = size;
     CGSize topMidSize = size;
     
-    CGPoint topCenter = center;
-    CGPoint midCenter = center;
-    CGPoint botCenter = center;
+    GLKVector2 topCenter = center;
+    GLKVector2 midCenter = center;
+    GLKVector2 botCenter = center;
     
     bottomSize.height *= 0.5f;
     topMidSize.height *= 5.0f / 12.0f;
@@ -94,9 +94,9 @@
     float midX = fmodf(heroX * TEX_MID_X_OFFSET_RATIO, 1.0f);
     float botX = fmodf(heroX * TEX_BOT_X_OFFSET_RATIO, 1.0f);
     
-    [_top setTexFromCenter:CGPointMake(topX, TEX_TOP_Y_CENTER) andSize:topMidTexSize];
-    [_mid setTexFromCenter:CGPointMake(midX, TEX_MID_Y_CENTER) andSize:topMidTexSize];
-    [_bot setTexFromCenter:CGPointMake(botX, TEX_BOT_Y_CENTER) andSize:bottomTexSize];
+    [_top setTexFromCenter:GLKVector2Make(topX, TEX_TOP_Y_CENTER) andSize:topMidTexSize];
+    [_mid setTexFromCenter:GLKVector2Make(midX, TEX_MID_Y_CENTER) andSize:topMidTexSize];
+    [_bot setTexFromCenter:GLKVector2Make(botX, TEX_BOT_Y_CENTER) andSize:bottomTexSize];
 }
 
 

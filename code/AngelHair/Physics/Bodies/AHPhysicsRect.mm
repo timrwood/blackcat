@@ -30,7 +30,7 @@
     return [self init];
 }
 
-- (id)initFromSize:(CGSize)size andPosition:(CGPoint)position {
+- (id)initFromSize:(CGSize)size andPosition:(GLKVector2)position {
     _size = size;
     _position = position;
     return [self init];
@@ -42,7 +42,7 @@
     return [self init];
 }
 
-- (id)initFromSize:(CGSize)size andRotation:(float)rotation andPosition:(CGPoint)position {
+- (id)initFromSize:(CGSize)size andRotation:(float)rotation andPosition:(GLKVector2)position {
     _size = size;
     _rotation = rotation;
     _position = position;

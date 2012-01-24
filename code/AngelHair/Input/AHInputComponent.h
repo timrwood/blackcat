@@ -17,12 +17,12 @@
 
 
 - (void)touchBegan;
-- (void)touchBeganAtPoint:(CGPoint)point;
+- (void)touchBeganAtPoint:(GLKVector2)point;
 - (void)touchEndedOutside;
 - (void)touchEndedInside;
 - (void)touchEntered;
 - (void)touchLeft;
-- (void)touchMoved:(CGPoint)point;
+- (void)touchMoved:(GLKVector2)point;
 
 
 @end
@@ -31,7 +31,7 @@
 @interface AHInputComponent : AHActorComponent {
 @private;
     CGRect _rect;
-    CGPoint _initialPoint;
+    GLKVector2 _initialPoint;
     NSObject <AHInputDelegate> *_delegate;
     BOOL _isInside;
 }
@@ -50,7 +50,7 @@
 
 - (void)setScreenRect:(CGRect)newRect;
 - (void)setWorldRect:(CGRect)newRect;
-- (BOOL)containsPoint:(CGPoint)point;
+- (BOOL)containsPoint:(GLKVector2)point;
 
 
 #pragma mark -
@@ -64,9 +64,9 @@
 #pragma mark touches
 
 
-- (void)touchBeganAtPoint:(CGPoint)point;
-- (void)touchMovedAtPoint:(CGPoint)point;
-- (void)touchEndedAtPoint:(CGPoint)point;
+- (void)touchBeganAtPoint:(GLKVector2)point;
+- (void)touchMovedAtPoint:(GLKVector2)point;
+- (void)touchEndedAtPoint:(GLKVector2)point;
 
 
 @end

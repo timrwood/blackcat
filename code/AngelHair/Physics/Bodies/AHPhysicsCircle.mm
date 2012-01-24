@@ -30,7 +30,7 @@
     return [self init];
 }
 
-- (id)initFromRadius:(float)radius andPosition:(CGPoint)position {
+- (id)initFromRadius:(float)radius andPosition:(GLKVector2)position {
     _radius = radius;
     _position = position;
     return [self init];

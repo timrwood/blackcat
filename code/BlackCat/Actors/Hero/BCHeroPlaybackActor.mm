@@ -24,7 +24,7 @@
 - (id)initWithData:(NSData *)data {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsCircle alloc] initFromRadius:0.6f andPosition:CGPointMake(0.0f, 0.0f)];
+        _body = [[AHPhysicsCircle alloc] initFromRadius:0.6f andPosition:GLKVector2Make(0.0f, 0.0f)];
         [_body setStatic:NO];
         [_body setSensor:YES];
         [self addComponent:_body];
@@ -48,7 +48,7 @@
     
     for (int i = 0; i < totalFrames; i++) {
         [timeTrack setTime:[self unpackFloatFromData:data atOffset:(i * 3)] atIndex:i];
-        CGPoint pos = CGPointMake([self unpackFloatFromData:data atOffset:(i * 3) + 1],
+        GLKVector2 pos = GLKVector2Make([self unpackFloatFromData:data atOffset:(i * 3) + 1],
                                   [self unpackFloatFromData:data atOffset:(i * 3) + 2]);
         [_position setValue:pos atIndex:i];
         /*
@@ -73,7 +73,7 @@
 
 - (void)updateBeforeAnimation {
     float _time = [[AHTimeManager manager] worldTime];
-    CGPoint pos = [_position valueAtTime:_time];
+    GLKVector2 pos = [_position valueAtTime:_time];
     
     //dlog(@"position %F %F", pos.x, pos.y);
     

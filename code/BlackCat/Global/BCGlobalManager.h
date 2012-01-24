@@ -25,7 +25,7 @@
 
 
 @property (nonatomic) float heroSpeed;
-@property (nonatomic) CGPoint heroPosition;
+@property (nonatomic) GLKVector2 heroPosition;
 
 @property (nonatomic) float buildingHeight;
 

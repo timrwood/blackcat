@@ -29,7 +29,7 @@
 #pragma mark init
 
 
-- (id)initFromSize:(CGSize)size andPosition:(CGPoint)position;
+- (id)initFromSize:(CGSize)size andPosition:(GLKVector2)position;
 
 
 #pragma mark -

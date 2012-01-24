@@ -13,7 +13,7 @@
 @interface AHGraphicsCamera : NSObject {
 @private;
     float _zoom;
-    CGPoint _position;
+    GLKVector2 _position;
     CGRect _screenRect;
     float _aspectRatio;
     GLKMatrix4 _screenMatrix;
@@ -35,8 +35,8 @@
 
 - (CGSize)worldSize;
 - (void)cacheWorldMatrix;
-- (CGPoint)worldPosition;
-- (void)setWorldPosition:(CGPoint)newPosition;
+- (GLKVector2)worldPosition;
+- (void)setWorldPosition:(GLKVector2)newPosition;
 - (float)worldZoom;
 - (void)setWorldZoom:(float)newZoom;
 
@@ -45,8 +45,8 @@
 #pragma mark conversions
 
 
-- (CGPoint)worldToScreen:(CGPoint)worldPoint;
-- (CGPoint)screenToWorld:(CGPoint)screenPoint;
+- (GLKVector2)worldToScreen:(GLKVector2)worldPoint;
+- (GLKVector2)screenToWorld:(GLKVector2)screenPoint;
 
 
 @end

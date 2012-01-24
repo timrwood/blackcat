@@ -37,7 +37,7 @@
 
 - (void)buildBuildingWithSize:(CGSize)size;
 - (void)buildBuilding;
-- (void)buildCratesAtPosition:(CGPoint)position;
+- (void)buildCratesAtPosition:(GLKVector2)position;
 
 
 #pragma mark -

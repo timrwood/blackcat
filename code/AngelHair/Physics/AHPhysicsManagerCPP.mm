@@ -118,7 +118,7 @@ public:
 	NSMutableArray* actors;
 };
 
-- (NSMutableArray *)getActorsAtPoint:(CGPoint)point withSize:(CGPoint)size {
+- (NSMutableArray *)getActorsAtPoint:(GLKVector2)point withSize:(GLKVector2)size {
     b2AABB aabb;
 	b2Vec2 _size = b2Vec2(size.x, size.y);
  	b2Vec2 _point = b2Vec2(point.x, point.y);
@@ -156,11 +156,11 @@ public:
 	int category;
 };
 
-- (int)getFirstActorCategoryFrom:(CGPoint)pointA to:(CGPoint)pointB {
+- (int)getFirstActorCategoryFrom:(GLKVector2)pointA to:(GLKVector2)pointB {
 	return [self getFirstActorCategoryWithTag:0 from:pointA to:pointB];
 }
 
-- (int)getFirstActorCategoryWithTag:(int)tag from:(CGPoint)pointA to:(CGPoint)pointB {
+- (int)getFirstActorCategoryWithTag:(int)tag from:(GLKVector2)pointA to:(GLKVector2)pointB {
     RayCastCallback callback(tag);
 	[self world]->RayCast(&callback, 
                           b2Vec2(pointA.x, pointA.y), 

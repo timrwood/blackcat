@@ -14,7 +14,7 @@
 @private;
     float _length;
     float _width;
-    float _rotation;
+    float _angle;
     
     BOOL _canUseCache;
 }
@@ -26,7 +26,7 @@
 
 - (void)setWidth:(float)width;
 - (void)setLength:(float)length;
-- (void)setRotation:(float)rotation;
+- (void)setAngle:(float)angle;
 
 
 #pragma mark -

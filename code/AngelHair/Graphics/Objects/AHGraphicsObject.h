@@ -21,8 +21,8 @@
     
     int _count;
 @protected;
-    CGPoint *vertices;
-    CGPoint *textures;
+    GLKVector2 *vertices;
+    GLKVector2 *textures;
 }
 
 

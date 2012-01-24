@@ -24,7 +24,7 @@
         _screenRect = [[UIScreen mainScreen] bounds];
         _aspectRatio = _screenRect.size.height / _screenRect.size.width;
         _zoom = 5.0f;
-        _position = CGPointMake(0.0f, 0.0f);
+        _position = GLKVector2Make(0.0f, 0.0f);
         [self cacheWorldMatrix];
         _screenMatrix = GLKMatrix4MakeOrtho(0.0f, 
                                             _screenRect.size.width, 
@@ -71,11 +71,11 @@
                                        1.0f);
 }
 
-- (CGPoint)worldPosition {
+- (GLKVector2)worldPosition {
     return _position;
 }
 
-- (void)setWorldPosition:(CGPoint)newPosition {
+- (void)setWorldPosition:(GLKVector2)newPosition {
     _position = newPosition;
     [self cacheWorldMatrix];
 }
@@ -94,11 +94,11 @@
 #pragma mark conversions
 
 
-- (CGPoint)worldToScreen:(CGPoint)worldPoint {
+- (GLKVector2)worldToScreen:(GLKVector2)worldPoint {
     
 }
 
-- (CGPoint)screenToWorld:(CGPoint)screenPoint {
+- (GLKVector2)screenToWorld:(GLKVector2)screenPoint {
     
 }
 

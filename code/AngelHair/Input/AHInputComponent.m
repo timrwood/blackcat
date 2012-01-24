@@ -7,6 +7,7 @@
 //
 
 
+#import "AHMathUtils.h"
 #import "AHInputComponent.h"
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
@@ -65,13 +66,13 @@
 }
 
 - (void)setWorldRect:(CGRect)newRect {
-    CGPoint position = [[AHGraphicsManager camera] worldToScreen:newRect.origin];
-    newRect.origin = position;
+    GLKVector2 position = [[AHGraphicsManager camera] worldToScreen:CGPointToGLKVector2(newRect.origin)];
+    newRect.origin = GLKVector2ToCGPoint(position);
     _rect = newRect;
 }
 
-- (BOOL)containsPoint:(CGPoint)point {
-    return CGRectContainsPoint(_rect, point);
+- (BOOL)containsPoint:(GLKVector2)point {
+    return CGRectContainsPoint(_rect, GLKVector2ToCGPoint(point));
 }
 
 
@@ -90,7 +91,7 @@
 #pragma mark touches
 
 
-- (void)touchBeganAtPoint:(CGPoint)point {
+- (void)touchBeganAtPoint:(GLKVector2)point {
     if (_delegate && [_delegate respondsToSelector:@selector(touchBegan)]) {
         [_delegate touchBegan];
     }
@@ -101,7 +102,7 @@
     _isInside = YES;
 }
 
-- (void)touchMovedAtPoint:(CGPoint)point {
+- (void)touchMovedAtPoint:(GLKVector2)point {
     if (_isInside && ![self containsPoint:point]) {
         if (_delegate && [_delegate respondsToSelector:@selector(touchLeft)]) {
             [_delegate touchLeft];
@@ -115,7 +116,7 @@
         _isInside = YES;
     }
     
-    CGPoint amountMoved = point;
+    GLKVector2 amountMoved = point;
     amountMoved.x -= _initialPoint.x;
     amountMoved.y -= _initialPoint.y;
     
@@ -124,7 +125,7 @@
     }
 }
 
-- (void)touchEndedAtPoint:(CGPoint)point {
+- (void)touchEndedAtPoint:(GLKVector2)point {
     if ([self containsPoint:point]) {
         if (_delegate && [_delegate respondsToSelector:@selector(touchEndedInside)]) {
             [_delegate touchEndedInside];

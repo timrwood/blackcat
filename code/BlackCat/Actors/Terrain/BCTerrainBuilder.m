@@ -56,7 +56,7 @@
     
     float buildingSpacing = [[BCGlobalManager manager] heroSpeed] * 0.5f;
     
-    CGPoint pos = CGPointMake([_currentBuilding distanceCovered] + buildingSpacing + size.width / 2.0f, 5.0f - size.height);
+    GLKVector2 pos = GLKVector2Make([_currentBuilding distanceCovered] + buildingSpacing + size.width / 2.0f, 5.0f - size.height);
     CGSize bSize = CGSizeMake(size.width / 2.0f, 5.0f);
     
     _nextBuilding = [[BCBuildingActor alloc] initFromSize:bSize andPosition:pos];
@@ -78,10 +78,10 @@
     [self buildBuildingWithSize:CGSizeMake(buildingWidth, buildingHeight)];
 }
 
-- (void)buildCratesAtPosition:(CGPoint)position {
+- (void)buildCratesAtPosition:(GLKVector2)position {
     float size = [BCCrateActor size];
     
-    CGPoint pos = position;
+    GLKVector2 pos = position;
     pos.y -= size;
     [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
     
@@ -144,7 +144,7 @@
 
 - (float)seededRandomBetweenFloat:(float)a andFloat:(float)b {
     float percent = [self seededPercent];
-    return [AHMathUtils percent:percent betweenFloatA:a andFloatB:b];
+    return FloatLerp(a, b, percent);
 }
 
 

@@ -18,14 +18,14 @@
 
 
 - (id)initWithType:(int)type {
-    return [self initWithType:type andPoint:CGPointMake(0.0f, 0.0f)];
+    return [self initWithType:type andPoint:GLKVector2Make(0.0f, 0.0f)];
 }
 
 - (id)initWithType:(int)type andFloat:(float)newFloat {
-    return [self initWithType:type andPoint:CGPointMake(newFloat, 0.0f)];
+    return [self initWithType:type andPoint:GLKVector2Make(newFloat, 0.0f)];
 }
 
-- (id)initWithType:(int)type andPoint:(CGPoint)point {
+- (id)initWithType:(int)type andPoint:(GLKVector2)point {
     self = [super init];
     if (self) {
         _a = point.x;
@@ -48,8 +48,8 @@
     return _a;
 }
 
-- (CGPoint)valueAsPoint {
-    return CGPointMake(_a, _b);
+- (GLKVector2)valueAsPoint {
+    return GLKVector2Make(_a, _b);
 }
 
 

@@ -43,8 +43,8 @@
 #pragma mark position + rotation
 
 
-- (CGPoint)position;
-- (void)setPosition:(CGPoint)newPosition;
+- (GLKVector2)position;
+- (void)setPosition:(GLKVector2)newPosition;
 - (float)rotation;
 - (void)setRotation:(float)rotation;
 
@@ -53,11 +53,11 @@
 #pragma mark velocity
 
 
-- (CGPoint)force;
-- (CGPoint)linearVelocity;
+- (GLKVector2)force;
+- (GLKVector2)linearVelocity;
 - (float)angularVelocity;
-- (void)setLinearVelocity:(CGPoint)vel;
-- (void)setLinearVelocity:(CGPoint)vel atWorldPoint:(CGPoint)point;
+- (void)setLinearVelocity:(GLKVector2)vel;
+- (void)setLinearVelocity:(GLKVector2)vel atWorldPoint:(GLKVector2)point;
 - (void)setAngularVelocity:(float)vel;
 
 

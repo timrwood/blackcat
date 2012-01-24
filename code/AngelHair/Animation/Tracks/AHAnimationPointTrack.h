@@ -12,7 +12,7 @@
 
 @interface AHAnimationPointTrack : AHAnimationTrack {
 @private;
-    CGPoint *_values;
+    GLKVector2 *_values;
 }
 
 
@@ -22,14 +22,14 @@
 
 
 - (void)setValuesFromArray:(NSArray *)values;
-- (void)setValue:(CGPoint)value atIndex:(int)i;
+- (void)setValue:(GLKVector2)value atIndex:(int)i;
 
 
 #pragma mark -
 #pragma mark time
 
 
-- (CGPoint)valueAtTime:(float)frame;
+- (GLKVector2)valueAtTime:(float)frame;
 
 
 @end

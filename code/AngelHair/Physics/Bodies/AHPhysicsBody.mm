@@ -35,15 +35,15 @@
 #pragma mark position + rotation
 
 
-- (CGPoint)position {
+- (GLKVector2)position {
     if (_body) {
         b2Vec2 pos = _body->GetPosition();
-        return CGPointMake(pos.x, pos.y);
+        return GLKVector2Make(pos.x, pos.y);
     }
-    return CGPointMake(0.0f, 0.0f);
+    return GLKVector2Make(0.0f, 0.0f);
 }
 
-- (void)setPosition:(CGPoint)newPosition {
+- (void)setPosition:(GLKVector2)newPosition {
     if (_body) {
         _body->SetTransform(b2Vec2(newPosition.x, newPosition.y), _body->GetAngle());
     }
@@ -67,23 +67,23 @@
 #pragma mark velocity
 
 
-- (CGPoint)force {
+- (GLKVector2)force {
     if (_body) {
         float mass = _body->GetMass();
         b2Vec2 vel = _body->GetLinearVelocity();
         vel.Normalize();
         vel *= mass;
-        return CGPointMake(vel.x, vel.y);
+        return GLKVector2Make(vel.x, vel.y);
     }
-    return CGPointMake(0.0f, 0.0f);
+    return GLKVector2Make(0.0f, 0.0f);
 }
 
-- (CGPoint)linearVelocity {
+- (GLKVector2)linearVelocity {
     if (_body) {
         b2Vec2 vel = _body->GetLinearVelocity();
-        return CGPointMake(vel.x, vel.y);
+        return GLKVector2Make(vel.x, vel.y);
     }
-    return CGPointMake(0.0f, 0.0f);
+    return GLKVector2Make(0.0f, 0.0f);
 }
 
 - (float)angularVelocity {
@@ -93,13 +93,13 @@
     return 0.0f;
 }
 
-- (void)setLinearVelocity:(CGPoint)vel {
+- (void)setLinearVelocity:(GLKVector2)vel {
     if (_body) {
         _body->SetLinearVelocity(b2Vec2(vel.x, vel.y));
     }
 }
 
-- (void)setLinearVelocity:(CGPoint)vel atWorldPoint:(CGPoint)point {
+- (void)setLinearVelocity:(GLKVector2)vel atWorldPoint:(GLKVector2)point {
     if (_body) {
         _body->ApplyLinearImpulse(b2Vec2(vel.x, vel.y), b2Vec2(point.x, point.y));
     }

@@ -61,13 +61,13 @@
     // handle 0 through (size - 1)
     for (int i = 1; i < _size; i++) {
         if (_times[i] > _modTime) {
-            float percent = [AHMathUtils percentForFloat:_time betweenFloat:_times[i - 1] andFloat:_times[i]];
+            float percent = FloatPercentBetween(_times[i - 1], _times[i], _time);
             //dlog(@"loop return %F", i + percent - 1.0f);
             return i + percent - 1.0f;
         }
     }
     // handle size - 1 to 0
-    float percent = [AHMathUtils percentForFloat:_modTime betweenFloat:_times[_size - 1] andFloat:_times[0] + _length];
+    float percent = FloatPercentBetween(_times[_size - 1], _times[0] + _length, _modTime);
     //dlog(@"end return %F", _size + percent);
     return _size + percent;
 }

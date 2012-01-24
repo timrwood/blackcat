@@ -21,7 +21,7 @@
 - (id)initWithSize:(int)newSize {
     self = [super initWithSize:newSize];
     if (self) {
-        _values = malloc(sizeof(CGPoint) * newSize);
+        _values = malloc(sizeof(GLKVector2) * newSize);
     }
     return self;
 }
@@ -33,11 +33,11 @@
 
 - (void)setValuesFromArray:(NSArray *)values {
     for (int i = 0; i < self->size; i++) {
-        _values[i] = [[values objectAtIndex:i] CGPointValue];
+        _values[i] = CGPointToGLKVector2([[values objectAtIndex:i] CGPointValue]);
     }
 }
 
-- (void)setValue:(CGPoint)value atIndex:(int)i {
+- (void)setValue:(GLKVector2)value atIndex:(int)i {
     if (i < self->size && i >= 0) {
         _values[i] = value;
     }
@@ -48,7 +48,7 @@
 #pragma mark time
 
 
-- (CGPoint)valueAtTime:(float)_time {
+- (GLKVector2)valueAtTime:(float)_time {
     float percent = [self percentAtTime:_time];
     int a = [self indexAAtTime:_time];
     int b = [self indexBAtTime:_time];
@@ -56,7 +56,7 @@
         return _values[a];
     }
     //dlog(@"percent %F   a %i   b %i   size %i", percent, a, b, self->size);
-    return [AHMathUtils percent:percent betweenPointA:_values[a] andPointB:_values[b]];
+    return GLKVector2Lerp(_values[a], _values[b], percent);
 }
 
 

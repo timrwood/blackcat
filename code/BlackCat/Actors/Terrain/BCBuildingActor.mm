@@ -21,7 +21,7 @@
 #pragma mark init
 
 
-- (id)initFromSize:(CGSize)size andPosition:(CGPoint)position {
+- (id)initFromSize:(CGSize)size andPosition:(GLKVector2)position {
     self = [super init];
     if (self) {
         _body = [[AHPhysicsRect alloc] initFromSize:size andPosition:position];
@@ -65,7 +65,7 @@
         return _prevHeight;
     } else if (position < _distanceCoveredLeft) {
         float percent = (position - endOfPrev) / _spacing;
-        return [AHMathUtils percent:percent betweenFloatA:_prevHeight andFloatB:_height];
+        return FloatLerp(_prevHeight, _height, percent);
     } else {
         return _height;
     }

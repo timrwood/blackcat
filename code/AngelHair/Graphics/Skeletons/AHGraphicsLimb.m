@@ -43,10 +43,10 @@
     }
 }
 
-- (void)setRotation:(float)rotation {
-    if (rotation != _rotation) {
+- (void)setAngle:(float)angle {
+    if (angle != _angle) {
         _canUseCache = NO;
-        _rotation = fmodf(rotation, 360.0f);
+        _angle = fmodf(angle, M_PI * 2.0f);
     }
 }
 
@@ -65,8 +65,30 @@
 
 
 - (void)cacheValues {
+    if (_canUseCache) {
+        return;
+    }
+    
+    float atBend = _length / 2.0f;
+    float aboveBend = atBend - _width;
+    float belowBend = atBend + _width;
+    
+    //self->vertices[0] = GLKVector2Make(-_width, 0.0f);
+    //self->vertices[1] = GLKVector2Make(_width, 0.0f);
+    
+    // left side
+    if (_angle < 90.0f) {
+        
+    }
+    
+    _canUseCache = YES;
+}
+
+- (void)draw {
     
 }
 
 
 @end
+
+

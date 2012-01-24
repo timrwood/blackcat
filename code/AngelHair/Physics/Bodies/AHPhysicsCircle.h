@@ -12,7 +12,7 @@
 
 @interface AHPhysicsCircle : AHPhysicsBody {
     float _radius;
-    CGPoint _position;
+    GLKVector2 _position;
 }
 
 
@@ -21,7 +21,7 @@
 
 
 - (id)initFromRadius:(float)radius;
-- (id)initFromRadius:(float)radius andPosition:(CGPoint)position;
+- (id)initFromRadius:(float)radius andPosition:(GLKVector2)position;
 
 
 @end

@@ -21,7 +21,7 @@
 
 - (id)initWithType:(int)newId;
 - (id)initWithType:(int)newId andFloat:(float)newFloat;
-- (id)initWithType:(int)newId andPoint:(CGPoint)point;
+- (id)initWithType:(int)newId andPoint:(GLKVector2)point;
 
 
 #pragma mark -
@@ -30,7 +30,7 @@
 
 - (int)type;
 - (float)valueAsFloat;
-- (CGPoint)valueAsPoint;
+- (GLKVector2)valueAsPoint;
 
 
 @end
