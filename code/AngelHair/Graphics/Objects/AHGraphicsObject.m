@@ -114,6 +114,20 @@
 
 
 - (void)draw {
+    if (_count > 0) {
+        [[AHGraphicsManager manager] drawPointerArrayPosition:self->vertices
+                                                   andTexture:self->textures
+                                                     andCount:_count 
+                                                  andDrawType:GL_TRIANGLE_STRIP];
+    }
+}
+
+
+#pragma mark -
+#pragma mark update
+
+
+- (void)update {
     
 }
 

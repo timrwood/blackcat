@@ -29,7 +29,9 @@
 #import "AHAnimationSkeletonTrack.h"
 #import "AHActorMessage.h"
 #import "AHPhysicsCircle.h"
+#import "AHGraphicsRect.h"
 #import "AHGraphicsLimb.h"
+#import "AHGraphicsSkeleton.h"
 
 #import "BCHeroActor.h"
 #import "BCGlobalTypes.h"
@@ -61,13 +63,30 @@
         [_input setDelegate:self];
         [self addComponent:_input];
         
-        _limb = [[AHGraphicsLimb alloc] init];
-        [_limb setLength:5.0f];
+        _skeleton = [[AHGraphicsSkeleton alloc] init];
+        [_skeleton setArmWidth:0.2f];
+        [_skeleton setArmLength:3.0f];
+        [_skeleton setLegWidth:0.2f];
+        [_skeleton setLegLength:3.0f];
+        [_skeleton setShoulderPosition:GLKVector2Make(0.0f, 1.5f)];
+        [_skeleton setArmsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skeleton setLegsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [[_skeleton torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [[_skeleton head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [[_skeleton torso] setRect:CGRectMake(-0.4f, -0.3f, 0.8f, 2.2f)];
+        [[_skeleton head] setRect:CGRectMake(-0.3f, -0.75f, 0.6f, 1.0f)];
+        [_skeleton setTextureKey:@"debug-grid.png"];
+        
+        [self addComponent:_skeleton];
+        [[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];
+        
+        /*_limb = [[AHGraphicsLimb alloc] init];
+        [_limb setLength:8.0f];
         [_limb setWidth:0.5f];
         [_limb setTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_limb setTextureKey:@"debug-grid.png"];
         [self addComponent:_limb];
-        [[AHGraphicsManager manager] addObject:_limb toLayerIndex:GFX_LAYER_BACKGROUND];
+        [[AHGraphicsManager manager] addObject:_limb toLayerIndex:GFX_LAYER_BACKGROUND];*/
         
         _runSpeed = 8.0f;
         
@@ -88,11 +107,26 @@
 
 - (void)updateBeforeAnimation {
     //[self updateVelocity];
-    [self updateCamera];
+    //[self updateCamera];
     //[self updateJumpability];
+    
     _limbAngle += 0.02f;
-    [_limb setAngle:_limbAngle];
-    [[AHGraphicsManager camera] setWorldPosition:GLKVector2Make(0.0f, 3.0f)];
+    //[_limb setAngle:_limbAngle];
+    AHSkeleton skeleton;
+    skeleton.hipA = _limbAngle;
+    skeleton.hipB = _limbAngle / 2.0f;
+    skeleton.elbowA = _limbAngle;
+    skeleton.elbowB = -_limbAngle / 2.0f;
+    skeleton.kneeA = -_limbAngle;
+    skeleton.kneeB = _limbAngle / 2.0f;
+    skeleton.shoulderA = -_limbAngle;
+    skeleton.shoulderB = _limbAngle / 2.0f;
+    skeleton.neck = _limbAngle;
+    skeleton.waist = -_limbAngle / 2.0f;
+    [_skeleton setSkeleton:skeleton];
+    
+    [[AHGraphicsManager camera] setWorldPosition:GLKVector2Make(0.0f, 0.0f)];
+    [[AHGraphicsManager camera] setWorldZoom:3.0f];
     
     // debug
     //float time = fmodf([_body position].x, 2.5f) / 2.5f;

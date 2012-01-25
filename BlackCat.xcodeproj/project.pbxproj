@@ -29,6 +29,7 @@
 		1547316B14C62C7100DDEBA5 /* BCHeroRecorderActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547316A14C62C7100DDEBA5 /* BCHeroRecorderActor.m */; };
 		1547316E14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1547316D14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm */; };
 		1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547317114C62E7D00DDEBA5 /* AHTimeManager.m */; };
+		154D871E14D09E4400147A99 /* AHShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D871D14D09E4400147A99 /* AHShaderManager.m */; };
 		156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156A86FA14C7B30E00B85E04 /* libz.dylib */; };
 		1579F1EE14CF3BDA000C0833 /* debug-grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 1579F1ED14CF3BDA000C0833 /* debug-grid.png */; };
 		158346F914B7BFE700C1DA04 /* AHSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158346F814B7BFE700C1DA04 /* AHSceneManager.m */; };
@@ -116,8 +117,8 @@
 		15AC4E3214B7B3BC00283A06 /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DEC14B7B3BB00283A06 /* b2WheelJoint.cpp */; };
 		15AC4E3314B7B3BC00283A06 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DEF14B7B3BB00283A06 /* b2Rope.cpp */; };
 		15AC4E3414B7B3BC00283A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DF314B7B3BB00283A06 /* main.m */; };
-		15AC4E4014B7BB3400283A06 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7414B7B3BB00283A06 /* Shader.fsh */; };
-		15AC4E4114B7BB3700283A06 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* Shader.vsh */; };
+		15AC4E4014B7BB3400283A06 /* AHShaderSimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7414B7B3BB00283A06 /* AHShaderSimpleFragment.glsl */; };
+		15AC4E4114B7BB3700283A06 /* AHShaderSimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* AHShaderSimpleVertex.glsl */; };
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
 		15C5EBC314C0F17200FB5BAF /* AHActorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */; };
 		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
@@ -166,6 +167,8 @@
 		1547316D14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroPlaybackActor.mm; path = Actors/Hero/BCHeroPlaybackActor.mm; sourceTree = "<group>"; };
 		1547317014C62E7D00DDEBA5 /* AHTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHTimeManager.h; path = Time/AHTimeManager.h; sourceTree = "<group>"; };
 		1547317114C62E7D00DDEBA5 /* AHTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHTimeManager.m; path = Time/AHTimeManager.m; sourceTree = "<group>"; };
+		154D871C14D09E4400147A99 /* AHShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHShaderManager.h; sourceTree = "<group>"; };
+		154D871D14D09E4400147A99 /* AHShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHShaderManager.m; sourceTree = "<group>"; };
 		156A86FA14C7B30E00B85E04 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1579F1ED14CF3BDA000C0833 /* debug-grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "debug-grid.png"; sourceTree = "<group>"; };
 		158346F714B7BFE700C1DA04 /* AHSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSceneManager.h; path = Scenes/AHSceneManager.h; sourceTree = "<group>"; };
@@ -237,8 +240,8 @@
 		15AC4D6E14B7B3BB00283A06 /* AHActorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorComponent.h; sourceTree = "<group>"; };
 		15AC4D6F14B7B3BB00283A06 /* AHActorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorManager.h; sourceTree = "<group>"; };
 		15AC4D7014B7B3BB00283A06 /* AHActorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActorManager.m; sourceTree = "<group>"; };
-		15AC4D7414B7B3BB00283A06 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
-		15AC4D7514B7B3BB00283A06 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		15AC4D7414B7B3BB00283A06 /* AHShaderSimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderSimpleFragment.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		15AC4D7514B7B3BB00283A06 /* AHShaderSimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderSimpleVertex.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		15AC4D7D14B7B3BB00283A06 /* AHPhysicsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsManager.h; sourceTree = "<group>"; };
 		15AC4D7E14B7B3BB00283A06 /* AHPhysicsManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsManager.mm; sourceTree = "<group>"; };
 		15AC4D8614B7B3BB00283A06 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -756,8 +759,10 @@
 		15AC4D7314B7B3BB00283A06 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				15AC4D7414B7B3BB00283A06 /* Shader.fsh */,
-				15AC4D7514B7B3BB00283A06 /* Shader.vsh */,
+				15AC4D7414B7B3BB00283A06 /* AHShaderSimpleFragment.glsl */,
+				15AC4D7514B7B3BB00283A06 /* AHShaderSimpleVertex.glsl */,
+				154D871C14D09E4400147A99 /* AHShaderManager.h */,
+				154D871D14D09E4400147A99 /* AHShaderManager.m */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -1112,8 +1117,8 @@
 			files = (
 				15AC4E0314B7B3BC00283A06 /* ViewController_iPad.xib in Resources */,
 				15AC4E0414B7B3BC00283A06 /* ViewController_iPhone.xib in Resources */,
-				15AC4E4014B7BB3400283A06 /* Shader.fsh in Resources */,
-				15AC4E4114B7BB3700283A06 /* Shader.vsh in Resources */,
+				15AC4E4014B7BB3400283A06 /* AHShaderSimpleFragment.glsl in Resources */,
+				15AC4E4114B7BB3700283A06 /* AHShaderSimpleVertex.glsl in Resources */,
 				15132C2414C8CB680017BBD0 /* demo.anim in Resources */,
 				15132C2514C8CB680017BBD0 /* background.png in Resources */,
 				1579F1EE14CF3BDA000C0833 /* debug-grid.png in Resources */,
@@ -1229,6 +1234,7 @@
 				1515F8A914C9E2FE004FE3BB /* AHGraphicsRect.m in Sources */,
 				1515F8AF14C9E332004FE3BB /* AHGraphicsLayer.m in Sources */,
 				1515F8B314C9F519004FE3BB /* BCBackgroundActor.m in Sources */,
+				154D871E14D09E4400147A99 /* AHShaderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

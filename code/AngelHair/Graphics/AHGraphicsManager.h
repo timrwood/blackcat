@@ -14,6 +14,7 @@
 
 @class AHGraphicsObject;
 @class AHGraphicsLayer;
+@class AHShaderManager;
 
 
 @interface AHGraphicsManager : NSObject <AHSubSystem> {
@@ -21,7 +22,15 @@
     NSMutableArray *_layers;
     
     EAGLContext *_eaglContext;
+    
+    AHShaderManager *_shaderManager;
+    
     GLKBaseEffect *_baseEffect;
+    
+    GLKMatrix4 _currentModelViewMatrix;
+    GLKMatrix4 _currentProjectionMatrix;
+    GLKMatrix4 *_popPushStack;
+    int _popPushIndex;
     
     GLKVector4 _currentColor;
     
@@ -50,6 +59,35 @@
 
 - (void)setTexture0:(GLuint)tex;
 - (void)setCameraMatrix:(GLKMatrix4)matrix;
+
+
+#pragma mark -
+#pragma mark model movement
+
+
+- (void)modelIdentity;
+- (void)modelPush;
+- (void)modelPop;
+- (void)modelMove:(GLKVector2)move;
+- (void)modelMove:(GLKVector2)move 
+       thenRotate:(float)rotate;
+- (void)modelMove:(GLKVector2)move 
+       thenRotate:(float)rotate
+         thenMove:(GLKVector2)move2;
+- (void)modelMove:(GLKVector2)move 
+       thenRotate:(float)rotate
+         thenMove:(GLKVector2)move2
+       thenRotate:(float)rotate2;
+- (void)modelRotate:(float)rotate;
+- (void)modelRotate:(float)rotate 
+           thenMove:(GLKVector2)move;
+- (void)modelRotate:(float)rotate 
+           thenMove:(GLKVector2)move
+         thenRotate:(float)rotate2;
+- (void)modelRotate:(float)rotate 
+           thenMove:(GLKVector2)move
+         thenRotate:(float)rotate2
+           thenMove:(GLKVector2)move2;
 
 
 #pragma mark -
@@ -88,6 +126,20 @@
 
 
 - (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i;
+
+
+#pragma mark -
+#pragma mark draw array
+
+
+- (void)drawPointerArrayPosition:(GLKVector2 *)position
+                      andTexture:(GLKVector2 *)texture
+                        andCount:(int)count 
+                     andDrawType:(GLenum)type;
+- (void)drawPointerArrayPosition:(GLKVector2 *)position
+                        andColor:(GLKVector4)color
+                        andCount:(int)count 
+                     andDrawType:(GLenum)type;
 
 
 @end

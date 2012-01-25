@@ -15,6 +15,7 @@
 @class AHPhysicsCircle;
 @class AHAnimationSkeletonTrack;
 @class AHGraphicsLimb;
+@class AHGraphicsSkeleton;
 
 
 @interface BCHeroActor : AHActor <AHInputDelegate> {
@@ -22,6 +23,7 @@
     AHPhysicsCircle *_body;
     AHInputComponent *_input;
     
+    AHGraphicsSkeleton *_skeleton;
     AHGraphicsLimb *_limb;
     float _limbAngle;
     

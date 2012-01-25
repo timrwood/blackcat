@@ -57,4 +57,11 @@
 - (void)draw;
 
 
+#pragma mark -
+#pragma mark update
+
+
+- (void)update;
+
+
 @end

@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
+
+#import "AHGraphicsManager.h"
 #import "AHGraphicsRect.h"
 
 
@@ -68,17 +70,6 @@
     self->textures[1] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
     self->textures[2] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
     self->textures[3] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
-}
-
-
-#pragma mark -
-#pragma mark draw
-
-
-- (void)draw {
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, self->textures);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, self->vertices);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 

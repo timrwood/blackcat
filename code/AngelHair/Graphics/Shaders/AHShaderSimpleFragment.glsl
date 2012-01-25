@@ -6,9 +6,8 @@
 //  Copyright (c) 2011 Broken Pixel Studios. All rights reserved.
 //
 
-varying lowp vec4 colorVarying;
+varying lowp vec4 destColor;
 
-void main()
-{
-    gl_FragColor = colorVarying;
+void main(void) {
+    gl_FragColor = destColor;
 }

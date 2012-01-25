@@ -7,6 +7,7 @@
 //
 
 
+#import "AHGraphicsManager.h"
 #import "AHMathUtils.h"
 #import "AHGraphicsLimb.h"
 
@@ -25,6 +26,7 @@
     }
     return self;
 }
+
 
 #pragma mark -
 #pragma mark sizes
@@ -49,7 +51,7 @@
 - (void)setAngle:(float)angle {
     if (angle != _angle) {
         _canUseVertexCache = NO;
-        _angle = fmodf(angle + M_TAU_2, M_TAU) - M_TAU_2;
+        _angle = fmodf(angle + (M_TAU * 10) + M_TAU_2, M_TAU) - M_TAU_2;
     }
     dlog(@"angle %F", _angle);
 }
@@ -164,19 +166,16 @@
 
 
 #pragma mark -
-#pragma mark draw
+#pragma mark update
 
 
-- (void)draw {
+- (void)update {
     if (!_canUseVertexCache) {
         [self cacheVertexValues];
     }
     if (!_canUseTextureCache) {
         [self cacheTextureValues];
     }
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, self->textures);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, self->vertices);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 10);
 }
 
 
