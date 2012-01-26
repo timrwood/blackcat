@@ -69,7 +69,7 @@
     //dlog(@"drawing");
     for (AHGraphicsObject *object in _objects) {
         [[AHTextureManager manager] activateTexture:[object texture]];
-        //[object draw];
+        [object draw];
     }
 }
 

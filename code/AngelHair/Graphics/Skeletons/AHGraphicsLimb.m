@@ -51,9 +51,12 @@
 - (void)setAngle:(float)angle {
     if (angle != _angle) {
         _canUseVertexCache = NO;
-        _angle = fmodf(angle + (M_TAU * 10) + M_TAU_2, M_TAU) - M_TAU_2;
+        if (angle > 0.0f) {
+            _angle = fmodf(angle + M_TAU_2, M_TAU) - M_TAU_2;
+        } else {
+            _angle = fmodf(angle - M_TAU_2, M_TAU) + M_TAU_2;
+        }
     }
-    dlog(@"angle %F", _angle);
 }
 
 

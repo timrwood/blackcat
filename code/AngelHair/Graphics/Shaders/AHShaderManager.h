@@ -10,9 +10,13 @@
 @interface AHShaderManager : NSObject {
 @private;
     GLuint _positionSlot;
+    GLuint _textureSlot;
     GLuint _colorSlot;
+    
     GLuint _modelViewUniform;
     GLuint _projectionUniform;
+    GLuint _textureUniform;
+    
     GLuint _programHandle;
 }
 

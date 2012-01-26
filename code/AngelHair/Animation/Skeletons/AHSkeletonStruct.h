@@ -63,3 +63,16 @@ static inline AHSkeleton AHSkeletonAtPercentToSkeleton(AHSkeleton skeletonA, AHS
 }
 
 
+typedef struct _AHSkeletonConfig {
+	float torsoWidth;
+	float torsoHeight;
+    float legWidth;
+    float legLength;
+    float armWidth;
+	float armLength;
+    float headLeft;
+    float headRight;
+    float headTop;
+    float headBottom;
+} AHSkeletonConfig;
+

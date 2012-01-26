@@ -64,18 +64,30 @@
         [self addComponent:_input];
         
         _skeleton = [[AHGraphicsSkeleton alloc] init];
-        [_skeleton setArmWidth:0.2f];
+        AHSkeletonConfig config;
+        config.armWidth = 0.2f;
+        config.armLength = 3.0f;
+        config.legWidth = 0.3f;
+        config.legLength = 3.0f;
+        config.torsoWidth = 0.6f;
+        config.torsoHeight = 2.0f;
+        config.headTop = 0.7f;
+        config.headBottom = 0.3f;
+        config.headLeft = 0.4f;
+        config.headRight = 0.6f;
+        /*[_skeleton setArmWidth:0.2f];
         [_skeleton setArmLength:3.0f];
-        [_skeleton setLegWidth:0.2f];
+        [_skeleton setLegWidth:0.3f];
         [_skeleton setLegLength:3.0f];
         [_skeleton setShoulderPosition:GLKVector2Make(0.0f, 1.5f)];
+        [[_skeleton torso] setRect:CGRectMake(-0.4f, -0.3f, 0.8f, 2.2f)];
+        [[_skeleton head] setRect:CGRectMake(-0.3f, -0.75f, 0.6f, 1.0f)];*/
+        [_skeleton setFromSkeletonConfig:config];
+        [_skeleton setTextureKey:@"debug-grid.png"];
         [_skeleton setArmsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skeleton setLegsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [[_skeleton torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [[_skeleton head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [[_skeleton torso] setRect:CGRectMake(-0.4f, -0.3f, 0.8f, 2.2f)];
-        [[_skeleton head] setRect:CGRectMake(-0.3f, -0.75f, 0.6f, 1.0f)];
-        [_skeleton setTextureKey:@"debug-grid.png"];
         
         [self addComponent:_skeleton];
         [[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];

@@ -92,17 +92,19 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)setTexture0:(GLuint)tex {
-    if (tex != _currentTex0 || _baseEffect.texture2d0.enabled == NO) {
+    if (tex != _currentTex0) {
         //dlog(@"Activating texture %i", tex);
         
         glPushGroupMarkerEXT(0, "Enable Texture");
         _currentTex0 = tex;
-        _baseEffect.useConstantColor = NO;
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, _currentTex0);
+        /*_baseEffect.useConstantColor = NO;
         _baseEffect.texture2d0.enabled = YES;
         _baseEffect.texture2d0.envMode = GLKTextureEnvModeReplace;
         _baseEffect.texture2d0.target = GLKTextureTarget2D;
         _baseEffect.texture2d0.name = _currentTex0;
-        [_baseEffect prepareToDraw];
+        [_baseEffect prepareToDraw];*/
         glPopGroupMarkerEXT();
          
     }

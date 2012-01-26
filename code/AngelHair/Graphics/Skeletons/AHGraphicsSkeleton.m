@@ -56,6 +56,35 @@
 #pragma mark sizes
 
 
+- (void)setFromSkeletonConfig:(AHSkeletonConfig)config {
+    // shoulder
+    _shoulderPosition.x = 0.0f;
+    _shoulderPosition.y = config.torsoHeight - config.torsoWidth;
+    
+    // arms and legs
+    [self setLegWidth:config.legWidth];
+    [self setLegLength:config.legLength];
+    [self setArmWidth:config.armWidth];
+    [self setArmLength:config.armLength];
+    
+    // head and torso
+    [_head setRect:CGRectMake(-config.headLeft, 
+                              -config.headTop, 
+                              config.headRight + config.headLeft, 
+                              config.headBottom + config.headTop)];
+    [_torso setRect:CGRectMake(-config.torsoWidth / 2.0f, 
+                               - config.torsoWidth / 2.0f, 
+                               config.torsoWidth, 
+                               config.torsoHeight)];
+    
+    // assign for later retrival
+    _config = config;
+}
+
+- (AHSkeletonConfig)skeletonConfig {
+    return _config;
+}
+
 - (void)setLegWidth:(float)width {
     [_legA setWidth:width];
     [_legB setWidth:width];

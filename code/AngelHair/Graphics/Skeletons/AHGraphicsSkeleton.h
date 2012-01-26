@@ -32,6 +32,8 @@
     
     GLKVector2 _position;
     AHSkeleton _skeleton;
+    
+    AHSkeletonConfig _config;
 }
 
 
@@ -39,13 +41,14 @@
 #pragma mark sizes
 
 
+- (void)setFromSkeletonConfig:(AHSkeletonConfig)config;
+- (AHSkeletonConfig)skeletonConfig;
 - (void)setLegWidth:(float)width;
 - (void)setLegLength:(float)length;
 - (void)setArmWidth:(float)width;
 - (void)setArmLength:(float)length;
 - (void)setShoulderPosition:(GLKVector2)position;
 - (void)setPosition:(GLKVector2)position;
-
 
 
 #pragma mark -
@@ -73,6 +76,7 @@
 
 
 - (void)setSkeleton:(AHSkeleton)skeleton;
+- (AHSkeleton)skeleton;
 
 
 @end

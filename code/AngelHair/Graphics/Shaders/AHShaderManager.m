@@ -97,12 +97,15 @@
     // assign pointers for position and color
     _positionSlot = glGetAttribLocation(_programHandle, "position");
     _colorSlot = glGetAttribLocation(_programHandle, "sourceColor");
+    _textureSlot = glGetAttribLocation(_programHandle, "texcoord");
     glEnableVertexAttribArray(_positionSlot);
     glEnableVertexAttribArray(_colorSlot);
+    glEnableVertexAttribArray(_textureSlot);
     
     // assign pointers for
     _modelViewUniform = glGetUniformLocation(_programHandle, "modelview");
     _projectionUniform = glGetUniformLocation(_programHandle, "projection");
+    _textureUniform = glGetUniformLocation(_programHandle, "texture");
     
     dlog(@"_projectionUniform = %i", _projectionUniform);
     dlog(@"_modelViewUniform = %i", _modelViewUniform);
@@ -173,7 +176,7 @@
 
 
 - (GLuint)vertexAttribTexCoord0 {
-    return 0;
+    return _textureSlot;
 }
 
 - (GLuint)vertexAttribPosition {

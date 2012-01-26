@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150F1D2414D1DF5F00592E87 /* AHPhysicsSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 150F1D2314D1DF5F00592E87 /* AHPhysicsSkeleton.m */; };
+		150F1D2814D1E3D900592E87 /* AHPhysicsJoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 150F1D2714D1E3D900592E87 /* AHPhysicsJoint.m */; };
 		15132C1114C895010017BBD0 /* AHAnimationPointTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C0C14C895010017BBD0 /* AHAnimationPointTrack.m */; };
 		15132C1214C895010017BBD0 /* AHAnimationTimeTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C0E14C895010017BBD0 /* AHAnimationTimeTrack.m */; };
 		15132C1314C895010017BBD0 /* AHAnimationValueTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 15132C1014C895010017BBD0 /* AHAnimationValueTrack.m */; };
@@ -126,6 +128,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		150F1D2214D1DF5F00592E87 /* AHPhysicsSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHPhysicsSkeleton.h; path = Skeletons/AHPhysicsSkeleton.h; sourceTree = "<group>"; };
+		150F1D2314D1DF5F00592E87 /* AHPhysicsSkeleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHPhysicsSkeleton.m; path = Skeletons/AHPhysicsSkeleton.m; sourceTree = "<group>"; };
+		150F1D2614D1E3D900592E87 /* AHPhysicsJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHPhysicsJoint.h; path = Joints/AHPhysicsJoint.h; sourceTree = "<group>"; };
+		150F1D2714D1E3D900592E87 /* AHPhysicsJoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHPhysicsJoint.m; path = Joints/AHPhysicsJoint.m; sourceTree = "<group>"; };
 		15132C0B14C895010017BBD0 /* AHAnimationPointTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationPointTrack.h; path = Tracks/AHAnimationPointTrack.h; sourceTree = "<group>"; };
 		15132C0C14C895010017BBD0 /* AHAnimationPointTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHAnimationPointTrack.m; path = Tracks/AHAnimationPointTrack.m; sourceTree = "<group>"; };
 		15132C0D14C895010017BBD0 /* AHAnimationTimeTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHAnimationTimeTrack.h; path = Tracks/AHAnimationTimeTrack.h; sourceTree = "<group>"; };
@@ -376,6 +382,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		150F1D2014D1DF0F00592E87 /* Skeletons */ = {
+			isa = PBXGroup;
+			children = (
+				150F1D2214D1DF5F00592E87 /* AHPhysicsSkeleton.h */,
+				150F1D2314D1DF5F00592E87 /* AHPhysicsSkeleton.m */,
+			);
+			name = Skeletons;
+			sourceTree = "<group>";
+		};
+		150F1D2514D1E36D00592E87 /* Joints */ = {
+			isa = PBXGroup;
+			children = (
+				150F1D2614D1E3D900592E87 /* AHPhysicsJoint.h */,
+				150F1D2714D1E3D900592E87 /* AHPhysicsJoint.m */,
+			);
+			name = Joints;
+			sourceTree = "<group>";
+		};
 		15132C0914C894AD0017BBD0 /* Tracks */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +812,8 @@
 		15AC4D7814B7B3BB00283A06 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
+				150F1D2514D1E36D00592E87 /* Joints */,
+				150F1D2014D1DF0F00592E87 /* Skeletons */,
 				15AC4D7D14B7B3BB00283A06 /* AHPhysicsManager.h */,
 				15AC4D7E14B7B3BB00283A06 /* AHPhysicsManager.mm */,
 				1587704814BBC35E009886D2 /* AHPhysicsManagerCPP.h */,
@@ -1235,6 +1261,8 @@
 				1515F8AF14C9E332004FE3BB /* AHGraphicsLayer.m in Sources */,
 				1515F8B314C9F519004FE3BB /* BCBackgroundActor.m in Sources */,
 				154D871E14D09E4400147A99 /* AHShaderManager.m in Sources */,
+				150F1D2414D1DF5F00592E87 /* AHPhysicsSkeleton.m in Sources */,
+				150F1D2814D1E3D900592E87 /* AHPhysicsJoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
