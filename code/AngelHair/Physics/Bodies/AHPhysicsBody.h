@@ -13,6 +13,9 @@
 #import "AHContactDelegate.h"
 
 
+@class AHPhysicsJoint;
+
+
 #pragma mark -
 #pragma mark body
 
@@ -23,12 +26,22 @@
     float friction;
     BOOL _isSensor;
 @private;
+    NSMutableArray *_joints;
     NSObject <AHContactDelegate> *delegate;
     b2Body *_body;
     b2BodyType _bodyType;
     int _tags;
     int _category;
 }
+
+
+#pragma mark -
+#pragma mark joints
+
+
+- (void)addJoint:(AHPhysicsJoint *)joint;
+- (void)removeJoint:(AHPhysicsJoint *)joint;
+- (void)removeAllJoints;
 
 
 #pragma mark -
@@ -65,6 +78,7 @@
 #pragma mark body
 
 
+- (b2Body *)body;
 - (void)addBodyToWorld:(const b2BodyDef *)bodyDef;
 - (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef;
 - (void)setStatic:(BOOL)isStatic;

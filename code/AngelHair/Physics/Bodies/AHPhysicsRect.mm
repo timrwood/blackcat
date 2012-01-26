@@ -51,6 +51,31 @@
 
 
 #pragma mark -
+#pragma mark setters
+
+
+- (void)setSize:(CGSize)size {
+    _size = size;
+}
+
+- (void)setSize:(CGSize)size andPosition:(GLKVector2)position {
+    _size = size;
+    _position = position;
+}
+
+- (void)setSize:(CGSize)size andRotation:(float)rotation {
+    _size = size;
+    _rotation = rotation;
+}
+
+- (void)setSize:(CGSize)size andRotation:(float)rotation andPosition:(GLKVector2)position {
+    _size = size;
+    _rotation = rotation;
+    _position = position;
+}
+
+
+#pragma mark -
 #pragma mark setup
 
 

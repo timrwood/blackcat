@@ -27,4 +27,14 @@
 - (id)initFromSize:(CGSize)size andRotation:(float)rotation andPosition:(GLKVector2)position;
 
 
+#pragma mark -
+#pragma mark setters
+
+
+- (void)setSize:(CGSize)size;
+- (void)setSize:(CGSize)size andRotation:(float)rotation;
+- (void)setSize:(CGSize)size andPosition:(GLKVector2)position;
+- (void)setSize:(CGSize)size andRotation:(float)rotation andPosition:(GLKVector2)position;
+
+
 @end

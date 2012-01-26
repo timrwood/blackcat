@@ -8,9 +8,35 @@
 
 
 #import "AHActorComponent.h"
+#import "AHPhysicsManager.h"
+#import "AHPhysicsManagerCPP.h"
 
 
-@interface AHPhysicsJoint : AHActorComponent
+@class AHPhysicsBody;
+
+
+@interface AHPhysicsJoint : AHActorComponent {
+@protected;
+    AHPhysicsBody *_bodyA;
+    AHPhysicsBody *_bodyB;
+    b2Joint *_joint;
+}
+
+
+#pragma mark -
+#pragma mark joint
+
+
+- (void)addJointToWorld:(const b2JointDef *)jointDef;
+
+
+#pragma mark -
+#pragma mark bodies
+
+
+- (void)setBodyA:(AHPhysicsBody *)bodyA
+        andBodyB:(AHPhysicsBody *)bodyB;
+- (void)removeSelfFromBodies;
 
 
 @end

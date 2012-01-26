@@ -7,6 +7,7 @@
 //
 
 
+#import "AHPhysicsJoint.h"
 #import "AHPhysicsBody.h"
 
 
@@ -22,12 +23,37 @@
     if (self) {
         _bodyType = b2_dynamicBody;
         restitution = 0.3f;
+        _joints = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (void)dealloc {
     
+}
+
+
+#pragma mark -
+#pragma mark joints
+
+
+- (void)addJoint:(AHPhysicsJoint *)joint {
+    if ([_joints containsObject:joint]) {
+        [_joints addObject:joint];
+    }
+}
+
+- (void)removeJoint:(AHPhysicsJoint *)joint {
+    if ([_joints containsObject:joint]) {
+        [_joints removeObject:joint];
+    }
+}
+
+- (void)removeAllJoints {
+    while ([_joints count] > 0) {
+        AHPhysicsJoint *joint = (AHPhysicsJoint *)[_joints objectAtIndex:0];
+        [joint cleanupAfterRemoval];
+    }
 }
 
 
@@ -133,6 +159,13 @@
 #pragma mark body
 
 
+- (b2Body *)body {
+    if (!_body) {
+        dlog(@"ERROR: Body was not initialized yet!");
+    }
+    return _body;
+}
+
 - (void)addBodyToWorld:(const b2BodyDef *)bodyDef {
     _body = [[AHPhysicsManager cppManager] world]->CreateBody(bodyDef);
     _body->SetUserData((__bridge void *) self);
@@ -233,6 +266,7 @@
 - (void)cleanupAfterRemoval {
     delegate = nil;
     [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
+    [self removeAllJoints];
     [super cleanupAfterRemoval];
 }
 
