@@ -98,9 +98,9 @@
     GLKVector2 jointABPoint = GLKVector2Add(jointOriginAPoint, GLKVector2MultiplyScalar(rotationNormalized, _length / 2.0f));
     GLKVector2 bodyACenterPoint = GLKVector2Add(jointOriginAPoint, GLKVector2MultiplyScalar(rotationNormalized, _length / 4.0f));
     
-    GLKVector2 bodyBCenterPoint = GLKVector2Add(elbowPoint, GLKVector2MultiplyScalar(rotationPlusAngleNormalized, _length / 4.0f));
+    GLKVector2 bodyBCenterPoint = GLKVector2Add(jointABPoint, GLKVector2MultiplyScalar(rotationPlusAngleNormalized, _length / 4.0f));
     
-    CGSize size = CGSizeMake(_width / 2.0f, _height / 4.0f);
+    CGSize size = CGSizeMake(_width / 2.0f, _length / 4.0f);
     
     [_bodyA setSize:size andRotation:_rotation andPosition:bodyACenterPoint];
     [_bodyB setSize:size andRotation:_rotation + _angle andPosition:bodyBCenterPoint];
@@ -122,6 +122,24 @@
     _jointB = nil;
 }
 
+
+#pragma mark -
+#pragma mark angles
+
+
+- (float)rotationA {
+    if (_jointA) {
+        return [_jointA rotation];
+    }
+    return 0.0f;
+}
+
+- (float)rotationB {
+    if (_jointB) {
+        return [_jointB rotation];
+    }
+    return 0.0f;
+}
 
 @end
 

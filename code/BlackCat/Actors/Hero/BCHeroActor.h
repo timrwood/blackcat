@@ -7,6 +7,7 @@
 //
 
 
+#import "AHSkeletonStruct.h"
 #import "AHActor.h"
 #import "AHInputComponent.h"
 #import "AHContactDelegate.h"
@@ -43,6 +44,7 @@
     float _halfScreenWidth;
     
     AHAnimationSkeletonTrack *_track;
+    AHSkeletonConfig config;
 }
 
 

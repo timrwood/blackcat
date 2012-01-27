@@ -22,9 +22,6 @@
     AHGraphicsLimb *_legA;
     AHGraphicsLimb *_legB;
     
-    float _armWidth;
-    float _legWidth;
-    
     AHGraphicsRect *_head;
     AHGraphicsRect *_torso;
     

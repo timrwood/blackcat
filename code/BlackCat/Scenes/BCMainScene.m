@@ -31,10 +31,10 @@
     [[BCGlobalManager manager] setHeroPosition:GLKVector2Make(0.0f, 0.0f)];
     [[BCGlobalManager manager] setHeroSpeed:0.0f];
     
-    [[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
-    [[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
+    //[[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
+    //[[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
     [[AHActorManager manager] add:[[BCHeroActor alloc] init]];
-    [[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];
+    //[[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];
     _recorderActor = [[BCHeroRecorderActor alloc] init];
     [[AHActorManager manager] add:_recorderActor];
     

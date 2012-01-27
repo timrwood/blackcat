@@ -361,7 +361,7 @@ static AHGraphicsCamera *_camera = nil;
                         andColor:(GLKVector4)color
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
-    //glVertexAttribPointer([_shaderManager vertexAttribTexCoord0], 2, GL_FLOAT, GL_FALSE, 0, texture);
+    glVertexAttribPointer([_shaderManager vertexAttribTexCoord0], 2, GL_FLOAT, GL_FALSE, 0, position);
     glVertexAttribPointer([_shaderManager vertexAttribPosition], 2, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
 }

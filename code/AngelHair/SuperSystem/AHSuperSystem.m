@@ -48,7 +48,7 @@ static AHSuperSystem *_manager = nil;
 - (id)init {
     self = [super init];
     if (self) {
-        
+        _isEnabledRenderDraw = YES;
     }
     return self;
 }
@@ -130,9 +130,11 @@ static AHSuperSystem *_manager = nil;
 
 
 - (void)draw {
-    glPushGroupMarkerEXT(0, "Graphics Manager Draw");
-    [[AHGraphicsManager manager] draw];
-    glPopGroupMarkerEXT();
+    if (_isEnabledRenderDraw) {
+        glPushGroupMarkerEXT(0, "Graphics Manager Draw");
+        [[AHGraphicsManager manager] draw];
+        glPopGroupMarkerEXT();
+    }
     
     if (_isEnabledDebugDraw) {
         glPushGroupMarkerEXT(0, "Debug Draw");
@@ -143,6 +145,10 @@ static AHSuperSystem *_manager = nil;
         
 - (void)setDebugDraw:(BOOL)enableDebugDraw {
     _isEnabledDebugDraw = enableDebugDraw;
+}
+
+- (void)setRenderDraw:(BOOL)enableRenderDraw {
+    _isEnabledRenderDraw = enableRenderDraw;
 }
 
 

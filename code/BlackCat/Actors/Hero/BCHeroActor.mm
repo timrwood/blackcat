@@ -27,6 +27,7 @@
 
 #import "AHAnimationSkeletonCache.h"
 #import "AHAnimationSkeletonTrack.h"
+#import "AHActorManager.h"
 #import "AHActorMessage.h"
 #import "AHPhysicsCircle.h"
 #import "AHGraphicsRect.h"
@@ -34,6 +35,7 @@
 #import "AHGraphicsSkeleton.h"
 
 #import "BCHeroActor.h"
+#import "BCHeroActorRagdoll.h"
 #import "BCGlobalTypes.h"
 #import "BCGlobalManager.h"
 
@@ -64,7 +66,6 @@
         [self addComponent:_input];
         
         _skeleton = [[AHGraphicsSkeleton alloc] init];
-        AHSkeletonConfig config;
         config.armWidth = 0.2f;
         config.armLength = 3.0f;
         config.legWidth = 0.3f;
@@ -237,6 +238,11 @@
 }
 
 - (void)inputDash {
+    [self safeDestroy];
+    
+    BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton] andSkeletonConfig:config];
+    [[AHActorManager manager] add:ragdoll];
+    
     if (_dashSpeed == 0.0f) {
         _dashSpeed = 30.0f;
     }
@@ -247,7 +253,7 @@
 
 
 - (void)cleanupBeforeDestruction {
-    [[AHSceneManager manager] reset];
+    //[[AHSceneManager manager] reset];
     [super cleanupBeforeDestruction];
 }
 

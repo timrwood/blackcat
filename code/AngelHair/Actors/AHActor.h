@@ -47,6 +47,7 @@
 
 
 - (void)cleanupBeforeDestruction;
+- (void)safeDestroy;
 - (void)destroy;
 
 

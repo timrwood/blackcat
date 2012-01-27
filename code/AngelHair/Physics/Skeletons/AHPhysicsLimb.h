@@ -44,4 +44,12 @@
 - (void)setAngle:(float)angle;
 
 
+#pragma mark -
+#pragma mark angles
+
+
+- (float)rotationA;
+- (float)rotationB;
+
+
 @end

@@ -92,6 +92,10 @@
     [self removeAllComponents];
 }
 
+- (void)safeDestroy {
+    [[AHActorManager manager] destroy:self];
+}
+
 - (void)destroy {
     
 }

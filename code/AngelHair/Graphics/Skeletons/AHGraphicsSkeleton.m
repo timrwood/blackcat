@@ -166,7 +166,8 @@
     _skeleton = skeleton;
 }
 
-- (void)updateSkeleton {
+- (AHSkeleton)skeleton {
+    return _skeleton;
 }
 
 
@@ -184,7 +185,7 @@
     // draw the back leg
     [m modelPush];
     [m modelRotate:_skeleton.hipA 
-          thenMove:GLKVector2Make(0.0f, _legWidth)];
+          thenMove:GLKVector2Make(0.0f, _config.legWidth)];
     [_legA draw];
     [m modelPop];
     
@@ -193,7 +194,7 @@
     [m modelRotate:_skeleton.waist 
           thenMove:_shoulderPosition 
         thenRotate:_skeleton.shoulderA 
-          thenMove:GLKVector2Make(0.0f, _armWidth)];
+          thenMove:GLKVector2Make(0.0f, _config.armWidth)];
     [_armA draw];
     [m modelPop];
     
@@ -215,7 +216,7 @@
     [m modelPush];
     [m modelMove:_shoulderPosition 
       thenRotate:_skeleton.shoulderB
-        thenMove:GLKVector2Make(0.0f, _armWidth)];
+        thenMove:GLKVector2Make(0.0f, _config.armWidth)];
     [_armA draw];
     [m modelPop];
     
@@ -225,7 +226,7 @@
     // draw the front leg
     [m modelPush];
     [m modelRotate:_skeleton.hipB 
-          thenMove:GLKVector2Make(0.0f, _legWidth)];
+          thenMove:GLKVector2Make(0.0f, _config.legWidth)];
     [_legB draw];
     [m modelPop];
     glPopGroupMarkerEXT();
