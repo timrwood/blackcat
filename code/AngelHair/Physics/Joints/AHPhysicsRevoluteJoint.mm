@@ -31,6 +31,8 @@
 
 
 - (void)setup {
+    dlog(@"setup joint");
+    
     if (!self->_bodyA) {
         dlog(@"ERROR: Body not defined yet");
     }

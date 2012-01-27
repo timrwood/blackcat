@@ -142,6 +142,13 @@
                      andDrawType:(GLenum)type;
 
 
+#pragma mark -
+#pragma mark color texture
+
+
+- (void)useTextureProgram:(BOOL)useTex;
+
+
 @end
 
 

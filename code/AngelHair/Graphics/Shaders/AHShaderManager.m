@@ -20,9 +20,26 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self compileShaders];
+        _textureUniforms = malloc(sizeof(GLuint) * AH_SHADER_UNIFORM_COUNT);
+        _colorUniforms = malloc(sizeof(GLuint) * AH_SHADER_UNIFORM_COUNT);
+        _currentUniforms = malloc(sizeof(GLuint) * AH_SHADER_UNIFORM_COUNT);
+        [self compileTextureShaders];
+        [self compileColorShaders];
+        [self useTextureProgram];
     }
     return self;
+}
+
+- (void)dealloc {
+    if (_textureUniforms) {
+        free(_textureUniforms);
+    }
+    if (_colorUniforms) {
+        free(_colorUniforms);
+    }
+    if (_currentUniforms) {
+        free(_currentUniforms);
+    }
 }
 
 
@@ -67,50 +84,100 @@
     return shaderHandle;
 }
 
-- (void)compileShaders {
+- (void)compileColorShaders {
     // load shaders
-    GLuint vertexShader = [self compileShader:@"AHShaderSimpleVertex" 
+    GLuint vertexShader = [self compileShader:@"AHShaderColorVertex" 
                                      withType:GL_VERTEX_SHADER];
-    GLuint fragmentShader = [self compileShader:@"AHShaderSimpleFragment" 
+    GLuint fragmentShader = [self compileShader:@"AHShaderColorFragment" 
                                        withType:GL_FRAGMENT_SHADER];
     
     // create program
-    _programHandle = glCreateProgram();
-    glAttachShader(_programHandle, vertexShader);
-    glAttachShader(_programHandle, fragmentShader);
-    glLinkProgram(_programHandle);
+    _colorProgram = glCreateProgram();
+    glAttachShader(_colorProgram, vertexShader);
+    glAttachShader(_colorProgram, fragmentShader);
+    
+    // assign pointers for position and color
+    glBindAttribLocation(_colorProgram, AH_SHADER_POSITION_ATTRIB, "position");
+    
+    // link program
+    glLinkProgram(_colorProgram);
     
     // check for success
     GLint linkSuccess;
-    glGetProgramiv(_programHandle, GL_LINK_STATUS, &linkSuccess);
+    glGetProgramiv(_colorProgram, GL_LINK_STATUS, &linkSuccess);
     if (linkSuccess == GL_FALSE) {
         GLchar messages[256];
-        glGetProgramInfoLog(_programHandle, sizeof(messages), 0, &messages[0]);
+        glGetProgramInfoLog(_colorProgram, sizeof(messages), 0, &messages[0]);
         NSString *messageString = [NSString stringWithUTF8String:messages];
         dlog(@"%@", messageString);
         exit(1);
     }
     
     // use program
-    glUseProgram(_programHandle);
+    glUseProgram(_colorProgram);
     
-    // assign pointers for position and color
-    _positionSlot = glGetAttribLocation(_programHandle, "position");
-    _colorSlot = glGetAttribLocation(_programHandle, "sourceColor");
-    _textureSlot = glGetAttribLocation(_programHandle, "texcoord");
-    glEnableVertexAttribArray(_positionSlot);
-    glEnableVertexAttribArray(_colorSlot);
-    glEnableVertexAttribArray(_textureSlot);
+    // enable pointers
+    glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
     
     // assign pointers for
-    _modelViewUniform = glGetUniformLocation(_programHandle, "modelview");
-    _projectionUniform = glGetUniformLocation(_programHandle, "projection");
-    _textureUniform = glGetUniformLocation(_programHandle, "texture");
+    _colorUniforms[AH_SHADER_MODELVIEW_UNIFORM] = glGetUniformLocation(_colorProgram, "modelview");
+    _colorUniforms[AH_SHADER_PROJECTION_UNIFORM] = glGetUniformLocation(_colorProgram, "projection");
+    _colorUniforms[AH_SHADER_COLOR_UNIFORM] = glGetUniformLocation(_colorProgram, "sourceColor");
     
-    dlog(@"_projectionUniform = %i", _projectionUniform);
-    dlog(@"_modelViewUniform = %i", _modelViewUniform);
+    dlog(@"Compiled color modelview uniform %i", _colorUniforms[AH_SHADER_MODELVIEW_UNIFORM]);
+    dlog(@"Compiled color projection uniform %i", _colorUniforms[AH_SHADER_PROJECTION_UNIFORM]);
+    dlog(@"Compiled color sourceColor uniform %i", _colorUniforms[AH_SHADER_COLOR_UNIFORM]);
     
-    dlog(@"Compiled Shaders");
+    dlog(@"Compiled color shaders");
+}
+
+- (void)compileTextureShaders {
+    // load shaders
+    GLuint vertexShader = [self compileShader:@"AHShaderTextureVertex" 
+                                     withType:GL_VERTEX_SHADER];
+    GLuint fragmentShader = [self compileShader:@"AHShaderTextureFragment" 
+                                       withType:GL_FRAGMENT_SHADER];
+    
+    // create program
+    _textureProgram = glCreateProgram();
+    glAttachShader(_textureProgram, vertexShader);
+    glAttachShader(_textureProgram, fragmentShader);
+    
+    // assign pointers for position and color
+    glBindAttribLocation(_textureProgram, AH_SHADER_POSITION_ATTRIB, "position");
+    glBindAttribLocation(_textureProgram, AH_SHADER_TEXTURE_ATTRIB, "texcoord");
+    
+    // link program
+    glLinkProgram(_textureProgram);
+    
+    // check for success
+    GLint linkSuccess;
+    glGetProgramiv(_textureProgram, GL_LINK_STATUS, &linkSuccess);
+    if (linkSuccess == GL_FALSE) {
+        GLchar messages[256];
+        glGetProgramInfoLog(_textureProgram, sizeof(messages), 0, &messages[0]);
+        NSString *messageString = [NSString stringWithUTF8String:messages];
+        dlog(@"%@", messageString);
+        exit(1);
+    }
+    
+    // use program
+    glUseProgram(_textureProgram);
+    
+    // enable pointers
+    glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
+    glEnableVertexAttribArray(AH_SHADER_TEXTURE_ATTRIB);
+    
+    // assign pointers for
+    _textureUniforms[AH_SHADER_MODELVIEW_UNIFORM] = glGetUniformLocation(_textureProgram, "modelview");
+    _textureUniforms[AH_SHADER_PROJECTION_UNIFORM] = glGetUniformLocation(_textureProgram, "projection");
+    _textureUniforms[AH_SHADER_TEXTURE_UNIFORM] = glGetUniformLocation(_textureProgram, "texture");
+    
+    dlog(@"Compiled texture modelview uniform %i", _textureUniforms[AH_SHADER_MODELVIEW_UNIFORM]);
+    dlog(@"Compiled texture projection uniform %i", _textureUniforms[AH_SHADER_PROJECTION_UNIFORM]);
+    dlog(@"Compiled texture texture uniform %i", _textureUniforms[AH_SHADER_TEXTURE_UNIFORM]);
+    
+    dlog(@"Compiled texture shaders");
 }
 
 
@@ -118,9 +185,43 @@
 #pragma mark program
 
 
-- (void)useProgram {
-    glUseProgram(_programHandle);
-    [self debug];
+- (void)useTextureProgram {
+    if (!_isUsingTextureProgram) {
+        _isUsingTextureProgram = YES;
+        for (int i = 0; i < AH_SHADER_UNIFORM_COUNT; i++) {
+            _currentUniforms[i] = _textureUniforms[i];
+        }
+        glUseProgram(_textureProgram);
+        glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
+        glEnableVertexAttribArray(AH_SHADER_TEXTURE_ATTRIB);
+        [self setTexture0:_currentTexture];
+        [self setModelViewMatrix:currentModelview];
+        [self setProjectionMatrix:currentProjection];
+    }
+}
+
+- (void)useColorProgram {
+    if (_isUsingTextureProgram) {
+        _isUsingTextureProgram = NO;
+        for (int i = 0; i < AH_SHADER_UNIFORM_COUNT; i++) {
+            _currentUniforms[i] = _colorUniforms[i];
+        }
+        glUseProgram(_colorProgram);
+        glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
+        [self setModelViewMatrix:currentModelview];
+        [self setProjectionMatrix:currentProjection];
+    }
+}
+
+
+#pragma mark -
+#pragma mark color
+
+
+- (void)setColor:(GLKVector4)color {
+    if (!_isUsingTextureProgram) {
+        glUniform4fv(_currentUniforms[AH_SHADER_COLOR_UNIFORM], 1, color.v);
+    }
 }
 
 
@@ -129,13 +230,27 @@
 
 
 - (void)setModelViewMatrix:(GLKMatrix4)matrix {
-    glUniformMatrix4fv(_modelViewUniform, 1, 0, matrix.m);
+    glUniformMatrix4fv(_currentUniforms[AH_SHADER_MODELVIEW_UNIFORM], 1, 0, matrix.m);
+    currentModelview = matrix;
     [self debug];
 }
 
 - (void)setProjectionMatrix:(GLKMatrix4)matrix {
-    glUniformMatrix4fv(_projectionUniform, 1, 0, matrix.m);
+    glUniformMatrix4fv(_currentUniforms[AH_SHADER_PROJECTION_UNIFORM], 1, 0, matrix.m);
+    currentProjection = matrix;
     [self debug];
+}
+
+
+#pragma mark -
+#pragma mark texture
+
+
+- (void)setTexture0:(GLuint)tex0 {
+    _currentTexture = tex0;
+    if (_isUsingTextureProgram) {
+        glUniform1i(_currentUniforms[AH_SHADER_TEXTURE_UNIFORM], _currentTexture);
+    }
 }
 
 
@@ -168,19 +283,6 @@
         [self debug];
         //exit(1);
     }
-}
-
-
-#pragma mark -
-#pragma mark offsets
-
-
-- (GLuint)vertexAttribTexCoord0 {
-    return _textureSlot;
-}
-
-- (GLuint)vertexAttribPosition {
-    return _positionSlot;
 }
 
 

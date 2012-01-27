@@ -58,6 +58,8 @@
 		1587705814BBC9C9009886D2 /* AHPhysicsPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705314BBC9C9009886D2 /* AHPhysicsPolygon.mm */; };
 		1587705914BBC9C9009886D2 /* AHPhysicsRect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705514BBC9C9009886D2 /* AHPhysicsRect.mm */; };
 		1587705C14BBC9F1009886D2 /* AHContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1587705B14BBC9F1009886D2 /* AHContactListener.mm */; };
+		1587F37314D30B4D002909E3 /* AHShaderColorFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1587F37214D30B4D002909E3 /* AHShaderColorFragment.glsl */; };
+		1587F37414D30E48002909E3 /* AHShaderColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1587F37114D30B4C002909E3 /* AHShaderColorVertex.glsl */; };
 		1589E2EE14BE565F008442DA /* AHActorComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1589E2ED14BE565E008442DA /* AHActorComponent.m */; };
 		1589E2F214BE5848008442DA /* BCTerrainCleaner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1589E2F114BE5848008442DA /* BCTerrainCleaner.mm */; };
 		158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158ABE2F14BE731F00E274BB /* AHInputManager.m */; };
@@ -122,8 +124,8 @@
 		15AC4E3214B7B3BC00283A06 /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DEC14B7B3BB00283A06 /* b2WheelJoint.cpp */; };
 		15AC4E3314B7B3BC00283A06 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DEF14B7B3BB00283A06 /* b2Rope.cpp */; };
 		15AC4E3414B7B3BC00283A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DF314B7B3BB00283A06 /* main.m */; };
-		15AC4E4014B7BB3400283A06 /* AHShaderSimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7414B7B3BB00283A06 /* AHShaderSimpleFragment.glsl */; };
-		15AC4E4114B7BB3700283A06 /* AHShaderSimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* AHShaderSimpleVertex.glsl */; };
+		15AC4E4014B7BB3400283A06 /* AHShaderTextureFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7414B7B3BB00283A06 /* AHShaderTextureFragment.glsl */; };
+		15AC4E4114B7BB3700283A06 /* AHShaderTextureVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* AHShaderTextureVertex.glsl */; };
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
 		15C5EBC314C0F17200FB5BAF /* AHActorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */; };
 		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
@@ -229,6 +231,8 @@
 		1587705514BBC9C9009886D2 /* AHPhysicsRect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsRect.mm; sourceTree = "<group>"; };
 		1587705A14BBC9F1009886D2 /* AHContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHContactListener.h; path = Contacts/AHContactListener.h; sourceTree = "<group>"; };
 		1587705B14BBC9F1009886D2 /* AHContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AHContactListener.mm; path = Contacts/AHContactListener.mm; sourceTree = "<group>"; };
+		1587F37114D30B4C002909E3 /* AHShaderColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderColorVertex.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		1587F37214D30B4D002909E3 /* AHShaderColorFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderColorFragment.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		1589E2ED14BE565E008442DA /* AHActorComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActorComponent.m; sourceTree = "<group>"; };
 		1589E2F014BE5848008442DA /* BCTerrainCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCTerrainCleaner.h; path = Actors/Terrain/BCTerrainCleaner.h; sourceTree = "<group>"; };
 		1589E2F114BE5848008442DA /* BCTerrainCleaner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCTerrainCleaner.mm; path = Actors/Terrain/BCTerrainCleaner.mm; sourceTree = "<group>"; };
@@ -255,8 +259,8 @@
 		15AC4D6E14B7B3BB00283A06 /* AHActorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorComponent.h; sourceTree = "<group>"; };
 		15AC4D6F14B7B3BB00283A06 /* AHActorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorManager.h; sourceTree = "<group>"; };
 		15AC4D7014B7B3BB00283A06 /* AHActorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActorManager.m; sourceTree = "<group>"; };
-		15AC4D7414B7B3BB00283A06 /* AHShaderSimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderSimpleFragment.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		15AC4D7514B7B3BB00283A06 /* AHShaderSimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderSimpleVertex.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		15AC4D7414B7B3BB00283A06 /* AHShaderTextureFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderTextureFragment.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		15AC4D7514B7B3BB00283A06 /* AHShaderTextureVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderTextureVertex.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		15AC4D7D14B7B3BB00283A06 /* AHPhysicsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsManager.h; sourceTree = "<group>"; };
 		15AC4D7E14B7B3BB00283A06 /* AHPhysicsManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsManager.mm; sourceTree = "<group>"; };
 		15AC4D8614B7B3BB00283A06 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -798,10 +802,12 @@
 		15AC4D7314B7B3BB00283A06 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				15AC4D7414B7B3BB00283A06 /* AHShaderSimpleFragment.glsl */,
-				15AC4D7514B7B3BB00283A06 /* AHShaderSimpleVertex.glsl */,
+				1587F37214D30B4D002909E3 /* AHShaderColorFragment.glsl */,
+				1587F37114D30B4C002909E3 /* AHShaderColorVertex.glsl */,
 				154D871C14D09E4400147A99 /* AHShaderManager.h */,
 				154D871D14D09E4400147A99 /* AHShaderManager.m */,
+				15AC4D7414B7B3BB00283A06 /* AHShaderTextureFragment.glsl */,
+				15AC4D7514B7B3BB00283A06 /* AHShaderTextureVertex.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -1156,13 +1162,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15AC4E0314B7B3BC00283A06 /* ViewController_iPad.xib in Resources */,
-				15AC4E0414B7B3BC00283A06 /* ViewController_iPhone.xib in Resources */,
-				15AC4E4014B7BB3400283A06 /* AHShaderSimpleFragment.glsl in Resources */,
-				15AC4E4114B7BB3700283A06 /* AHShaderSimpleVertex.glsl in Resources */,
-				15132C2414C8CB680017BBD0 /* demo.anim in Resources */,
+				1587F37314D30B4D002909E3 /* AHShaderColorFragment.glsl in Resources */,
+				1587F37414D30E48002909E3 /* AHShaderColorVertex.glsl in Resources */,
+				15AC4E4014B7BB3400283A06 /* AHShaderTextureFragment.glsl in Resources */,
+				15AC4E4114B7BB3700283A06 /* AHShaderTextureVertex.glsl in Resources */,
 				15132C2514C8CB680017BBD0 /* background.png in Resources */,
 				1579F1EE14CF3BDA000C0833 /* debug-grid.png in Resources */,
+				15132C2414C8CB680017BBD0 /* demo.anim in Resources */,
+				15AC4E0314B7B3BC00283A06 /* ViewController_iPad.xib in Resources */,
+				15AC4E0414B7B3BC00283A06 /* ViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

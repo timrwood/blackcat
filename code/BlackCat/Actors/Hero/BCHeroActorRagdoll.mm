@@ -23,30 +23,25 @@
 #pragma mark init
 
 
-- (id)init {
+- (id)initFromSkeleton:(AHSkeleton)skeleton andSkeletonConfig:(AHSkeletonConfig)config {
     self = [super init];
     if (self) {
+        _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:config];
         
+        _skin = [[AHGraphicsSkeleton alloc] init];
+        [_skin setFromSkeletonConfig:config];
+        [_skin setSkeleton:skeleton];
+        [_skin setTextureKey:@"debug-grid.png"];
+        [_skin setArmsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skin setLegsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [[_skin torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [[_skin head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        
+        [[AHGraphicsManager manager] addObject:_skin toLayerIndex:GFX_LAYER_BACKGROUND];
+        [self addComponent:_skin];
+        [self addComponent:_ragdoll];
     }
     return self;
-}
-
-- (id)initFromSkeleton:(AHSkeleton)skeleton andSkeletonConfig:(AHSkeletonConfig)config {
-    _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:config];
-    
-    _skin = [[AHGraphicsSkeleton alloc] init];
-    [_skin setFromSkeletonConfig:config];
-    [_skin setSkeleton:skeleton];
-    [_skin setTextureKey:@"debug-grid.png"];
-    [_skin setArmsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-    [_skin setLegsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-    [[_skin torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-    [[_skin head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-    
-    [[AHGraphicsManager manager] addObject:_skin toLayerIndex:GFX_LAYER_BACKGROUND];
-    [self addComponent:_skin];
-    [self addComponent:_ragdoll];
-    return [self init];
 }
 
 
@@ -55,7 +50,7 @@
 
 
 - (void)updateBeforeRender {
-    //[_skin setSkeleton:[_ragdoll skeleton]];
+    [_skin setSkeleton:[_ragdoll skeleton]];
 }
 
 

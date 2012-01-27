@@ -108,36 +108,38 @@
         return;
     }
     
+    float halfWidth = _width / 2.0f;
+    
     float cosAngle = cosf(_angle);
     float sinAngle = sinf(_angle);
     float cosRightAngle = cosf(_angle + M_TAU_4);
     float sinRightAngle = sinf(_angle + M_TAU_4);
     float cosHalfRightAngle = cosf(_angle / 2.0f + M_TAU_4);
     float sinHalfRightAngle = sinf(_angle / 2.0f + M_TAU_4);
-    float atBend = _length / 2.0f;
-    float aboveBend = atBend - _width;
+    float atBend = _length / 2.0f - _width;
+    float centerToEnd = _length / 2.0f - halfWidth;
+    float aboveBend = atBend - halfWidth;
     
     // origin
-    self->vertices[0] = GLKVector2Make(-_width, 0.0f);
-    self->vertices[1] = GLKVector2Make(_width, 0.0f);
+    self->vertices[0] = GLKVector2Make(-halfWidth, 0.0f);
+    self->vertices[1] = GLKVector2Make(halfWidth, 0.0f);
 
     // center
-    GLKVector2 halfAngle = GLKVector2Make(_width * sinHalfRightAngle, _width * cosHalfRightAngle);
+    GLKVector2 halfAngle = GLKVector2Make(halfWidth * sinHalfRightAngle, halfWidth * cosHalfRightAngle);
     GLKVector2 center = GLKVector2Make(0.0f, atBend);
-    GLKVector2 endLength = GLKVector2Make(atBend * sinAngle, atBend * cosAngle);
-    GLKVector2 afterBendLength = GLKVector2Make(_width * sinAngle, _width * cosAngle);
-    GLKVector2 endWidth = GLKVector2Make(_width * sinRightAngle, _width * cosRightAngle);
+    GLKVector2 endLength = GLKVector2Make(centerToEnd * sinAngle, centerToEnd * cosAngle);
+    GLKVector2 afterBendLength = GLKVector2Make(halfWidth * sinAngle, halfWidth * cosAngle);
+    GLKVector2 endWidth = GLKVector2Make(halfWidth * sinRightAngle, halfWidth * cosRightAngle);
 
-    
     if (_angle < 0.0f) {
-        float h = fmaxf(-atBend, -_width * cosHalfRightAngle / sinHalfRightAngle);
-        GLKVector2 centerToClip = GLKVector2Make(-_width, h);
+        float h = fmaxf(-atBend, -halfWidth * cosHalfRightAngle / sinHalfRightAngle);
+        GLKVector2 centerToClip = GLKVector2Make(-halfWidth, h);
         GLKVector2 clipPoint = GLKVector2Add(center, centerToClip);
         self->vertices[4] = clipPoint;
         self->vertices[5] = GLKVector2Add(center, halfAngle);
     } else {
-        float h = fmaxf(-atBend, _width * cosHalfRightAngle / sinHalfRightAngle);
-        GLKVector2 centerToClip = GLKVector2Make(_width, h);
+        float h = fmaxf(-atBend, halfWidth * cosHalfRightAngle / sinHalfRightAngle);
+        GLKVector2 centerToClip = GLKVector2Make(halfWidth, h);
         GLKVector2 clipPoint = GLKVector2Add(center, centerToClip);
         self->vertices[4] = GLKVector2Subtract(center, halfAngle);
         self->vertices[5] = clipPoint;
@@ -149,7 +151,7 @@
         self->vertices[6] = self->vertices[4];
     } else {
         self->vertices[6] = GLKVector2Add(center, GLKVector2Subtract(afterBendLength, endWidth));
-        self->vertices[2] = GLKVector2Make(-_width, aboveBend);
+        self->vertices[2] = GLKVector2Make(-halfWidth, aboveBend);
     }
     
     // right side
@@ -158,7 +160,7 @@
         self->vertices[7] = self->vertices[5];
     } else {
         self->vertices[7] = GLKVector2Add(center, GLKVector2Add(afterBendLength, endWidth));
-        self->vertices[3] = GLKVector2Make(_width, aboveBend);
+        self->vertices[3] = GLKVector2Make(halfWidth, aboveBend);
     }
     
     self->vertices[8] = GLKVector2Add(center, GLKVector2Subtract(endLength, endWidth));

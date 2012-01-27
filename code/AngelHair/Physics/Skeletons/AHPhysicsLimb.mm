@@ -28,6 +28,11 @@
         _bodyB = [[AHPhysicsRect alloc] init];
         _jointA = [[AHPhysicsRevoluteJoint alloc] init];
         _jointB = [[AHPhysicsRevoluteJoint alloc] init];
+        
+        
+        // debug
+        [_bodyA setStatic:YES];
+        [_bodyB setStatic:YES];
     }
     return self;
 }
@@ -90,23 +95,28 @@
 
 
 - (void)setup {
-    GLKVector2 rotationNormalized = GLKVector2Make(cosf(_rotation), sinf(_rotation));
-    GLKVector2 rotationPlusAngleNormalized = GLKVector2Make(cosf(_rotation + _angle), sinf(_rotation + _angle));
+    dlog(@"setup limb");
+    float originToJointA = -_width / 2.0f;
+    float originToCenterA = _length / 4.0f - _width / 2.0f;
+    float originToJointB = _length / 2.0f - _width;
+    float jointBToCenterB = _length / 4.0f - _width / 2.0f;
+    float angleB = _rotation - _angle;
     
-    GLKVector2 jointOriginAPoint = GLKVector2Subtract(_position, GLKVector2MultiplyScalar(rotationNormalized, _width / 2.0f));
+    GLKVector2 rotationNormalized = GLKVector2Make(-sinf(_rotation), cosf(_rotation));
+    GLKVector2 angleNormalized = GLKVector2Make(-sinf(angleB), cosf(angleB));
     
-    GLKVector2 jointABPoint = GLKVector2Add(jointOriginAPoint, GLKVector2MultiplyScalar(rotationNormalized, _length / 2.0f));
-    GLKVector2 bodyACenterPoint = GLKVector2Add(jointOriginAPoint, GLKVector2MultiplyScalar(rotationNormalized, _length / 4.0f));
+    GLKVector2 jointBPoint = GLKVector2Add(_position, GLKVector2MultiplyScalar(rotationNormalized, originToJointB));
     
-    GLKVector2 bodyBCenterPoint = GLKVector2Add(jointABPoint, GLKVector2MultiplyScalar(rotationPlusAngleNormalized, _length / 4.0f));
+    GLKVector2 bodyACenterPoint = GLKVector2Add(_position, GLKVector2MultiplyScalar(rotationNormalized, originToCenterA));
+    GLKVector2 bodyBCenterPoint = GLKVector2Add(jointBPoint, GLKVector2MultiplyScalar(angleNormalized, jointBToCenterB));
     
     CGSize size = CGSizeMake(_width / 2.0f, _length / 4.0f);
     
     [_bodyA setSize:size andRotation:_rotation andPosition:bodyACenterPoint];
-    [_bodyB setSize:size andRotation:_rotation + _angle andPosition:bodyBCenterPoint];
+    [_bodyB setSize:size andRotation:angleB andPosition:bodyBCenterPoint];
     
-    [_jointA joinBodyA:_bodyOrigin toBodyB:_bodyA atPosition:jointOriginAPoint];
-    [_jointB joinBodyA:_bodyA toBodyB:_bodyB atPosition:jointABPoint];
+    [_jointA joinBodyA:_bodyOrigin toBodyB:_bodyA atPosition:_position];
+    [_jointB joinBodyA:_bodyA toBodyB:_bodyB atPosition:jointBPoint];
 }
 
 

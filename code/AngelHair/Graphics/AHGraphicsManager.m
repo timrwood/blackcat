@@ -69,6 +69,7 @@ static AHGraphicsCamera *_camera = nil;
         [EAGLContext setCurrentContext:_eaglContext];
         
         _shaderManager = [[AHShaderManager alloc] init];
+        [self modelIdentity];
     }
     return self;
 }
@@ -93,18 +94,14 @@ static AHGraphicsCamera *_camera = nil;
 
 - (void)setTexture0:(GLuint)tex {
     if (tex != _currentTex0) {
-        //dlog(@"Activating texture %i", tex);
+        glPushGroupMarkerEXT(0, "Enabling texture");
         
-        glPushGroupMarkerEXT(0, "Enable Texture");
+        //dlog(@"Activating texture %i", tex);
         _currentTex0 = tex;
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, _currentTex0);
-        /*_baseEffect.useConstantColor = NO;
-        _baseEffect.texture2d0.enabled = YES;
-        _baseEffect.texture2d0.envMode = GLKTextureEnvModeReplace;
-        _baseEffect.texture2d0.target = GLKTextureTarget2D;
-        _baseEffect.texture2d0.name = _currentTex0;
-        [_baseEffect prepareToDraw];*/
+        [_shaderManager setTexture0:_currentTex0];
+        
         glPopGroupMarkerEXT();
          
     }
@@ -258,17 +255,10 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)draw {
-    glClearColor(0.65f, 0.75f, 0.85f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    [_shaderManager useProgram];
     [_camera prepareToDrawWorld];
     
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    //glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     
     for (AHGraphicsLayer *layer in _layers) {
         [layer draw];
@@ -352,8 +342,9 @@ static AHGraphicsCamera *_camera = nil;
                       andTexture:(GLKVector2 *)texture
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
-    glVertexAttribPointer([_shaderManager vertexAttribTexCoord0], 2, GL_FLOAT, GL_FALSE, 0, texture);
-    glVertexAttribPointer([_shaderManager vertexAttribPosition], 2, GL_FLOAT, GL_FALSE, 0, position);
+    glVertexAttribPointer(AH_SHADER_TEXTURE_ATTRIB, 2, GL_FLOAT, GL_FALSE, 0, texture);
+    //dlog(@"tex %F %F %F %F", texture[0].x, texture[1].x, texture[2].x, texture[3].x);
+    glVertexAttribPointer(AH_SHADER_POSITION_ATTRIB, 2, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
 }
 
@@ -361,9 +352,22 @@ static AHGraphicsCamera *_camera = nil;
                         andColor:(GLKVector4)color
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
-    glVertexAttribPointer([_shaderManager vertexAttribTexCoord0], 2, GL_FLOAT, GL_FALSE, 0, position);
-    glVertexAttribPointer([_shaderManager vertexAttribPosition], 2, GL_FLOAT, GL_FALSE, 0, position);
+    [_shaderManager setColor:color];
+    glVertexAttribPointer(AH_SHADER_POSITION_ATTRIB, 2, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
+}
+
+
+#pragma mark -
+#pragma mark color texture
+
+
+- (void)useTextureProgram:(BOOL)useTex {
+    if (useTex) {
+        [_shaderManager useTextureProgram];
+    } else {
+        [_shaderManager useColorProgram];
+    }
 }
 
 

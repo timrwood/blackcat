@@ -7,6 +7,7 @@
 //
 
 
+#import "AHMathUtils.h"
 #import "AHActor.h"
 #import "AHPhysicsRect.h"
 #import "AHPhysicsLimb.h"
@@ -33,6 +34,10 @@
         _head = [[AHPhysicsRect alloc] init];
         
         _neck = [[AHPhysicsRevoluteJoint alloc] init];
+        
+        // debug
+        [_torso setStatic:YES];
+        [_head setStatic:YES];
     }
     return self;
 }
@@ -40,7 +45,9 @@
 - (id)initFromSkeleton:(AHSkeleton)skeleton andSkeletonConfig:(AHSkeletonConfig)config {
     _config = config;
     _skeleton = skeleton;
-    return [self init];
+    self = [self init];
+    [self setFromSkeletonConfig:_config];
+    return self;
 }
 
 
@@ -125,6 +132,7 @@
 
 - (void)setActor:(AHActor *)actor {
     [super setActor:actor];
+    dlog(@"setActor skel");
     
     [actor addComponent:_torso];
     [actor addComponent:_head];
@@ -137,9 +145,10 @@
 }
 
 - (void)setup {
+    dlog(@"setup skel");
     float distanceBetweenWaistAndShoulder = _config.torsoHeight - _config.torsoWidth;
     
-    GLKVector2 waistRotationNormalized = GLKVector2Make(cosf(_skeleton.waist), sinf(_skeleton.waist));
+    GLKVector2 waistRotationNormalized = GLKVector2Make(-sinf(_skeleton.waist), cosf(_skeleton.waist));
     GLKVector2 waistPosition = GLKVector2Add(_position, GLKVector2Make(_skeleton.x, _skeleton.y));
     
     GLKVector2 waistToShoulder = GLKVector2MultiplyScalar(waistRotationNormalized, distanceBetweenWaistAndShoulder);
@@ -150,16 +159,27 @@
                                  (_config.headTop + _config.headBottom) / 2.0f);
     
     GLKVector2 headOffset = GLKVector2Make(headSize.width - _config.headLeft, headSize.height - _config.headBottom);
-    float headOffsetRotation = atan2f(headOffset.y, headOffset.x);
-    GLKVector2 rotatedHeadOffsetNormalized = GLKVector2Make(cosf(headOffsetRotation + _skeleton.waist + _skeleton.neck),
-                                                            sinf(headOffsetRotation + _skeleton.waist + _skeleton.neck));
-    GLKVector2 rotatedHeadOffset = GLKVector2MultiplyScalar(rotatedHeadOffsetNormalized, GLKVector2Length(headOffset));
+    GLKVector2 headOffsetRotation = GLKVector2Rotate(headOffset, _skeleton.waist + _skeleton.neck);
     
-    GLKVector2 headCenter = GLKVector2Add(shoulderPosition, rotatedHeadOffset);
+    GLKVector2 headCenter = GLKVector2Add(shoulderPosition, headOffsetRotation);
     GLKVector2 torsoCenter = GLKVector2Add(waistPosition, GLKVector2MultiplyScalar(waistToShoulder, 0.5f));
     
     [_torso setSize:torsoSize andRotation:_skeleton.waist andPosition:torsoCenter];
     [_head setSize:headSize andRotation:_skeleton.waist + _skeleton.neck andPosition:headCenter];
+    
+    // rotations
+    [_armA setRotation:_skeleton.waist + _skeleton.shoulderA];
+    [_armB setRotation:_skeleton.waist + _skeleton.shoulderB];
+    [_legA setRotation:_skeleton.hipA];
+    [_legB setRotation:_skeleton.hipB];
+    
+    // angles
+    [_armA setAngle:_skeleton.elbowA];
+    [_armB setAngle:_skeleton.elbowB];
+    [_legA setAngle:_skeleton.kneeA];
+    [_legB setAngle:_skeleton.kneeB];
+    
+    // positions
     [_armA setPosition:shoulderPosition];
     [_armB setPosition:shoulderPosition];
     [_legA setPosition:waistPosition];

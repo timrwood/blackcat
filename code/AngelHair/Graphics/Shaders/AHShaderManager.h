@@ -7,17 +7,31 @@
 //
 
 
+#define AH_SHADER_MODELVIEW_UNIFORM 0
+#define AH_SHADER_PROJECTION_UNIFORM 1
+#define AH_SHADER_TEXTURE_UNIFORM 2
+#define AH_SHADER_COLOR_UNIFORM 3
+#define AH_SHADER_UNIFORM_COUNT 4
+
+#define AH_SHADER_POSITION_ATTRIB 0
+#define AH_SHADER_TEXTURE_ATTRIB 1
+
+
 @interface AHShaderManager : NSObject {
 @private;
-    GLuint _positionSlot;
-    GLuint _textureSlot;
-    GLuint _colorSlot;
+    GLuint *_textureUniforms;
+    GLuint *_colorUniforms;
+    GLuint *_currentUniforms;
     
-    GLuint _modelViewUniform;
-    GLuint _projectionUniform;
-    GLuint _textureUniform;
+    GLuint _textureProgram;
+    GLuint _colorProgram;
     
-    GLuint _programHandle;
+    BOOL _isUsingTextureProgram;
+    
+    GLKMatrix4 currentModelview;
+    GLKMatrix4 currentProjection;
+    
+    GLuint _currentTexture;
 }
 
 
@@ -25,15 +39,25 @@
 #pragma mark compile
 
 
-- (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType;
-- (void)compileShaders;
+- (GLuint)compileShader:(NSString*)shaderName
+               withType:(GLenum)shaderType;
+- (void)compileColorShaders;
+- (void)compileTextureShaders;
 
 
 #pragma mark -
 #pragma mark program
 
 
-- (void)useProgram;
+- (void)useTextureProgram;
+- (void)useColorProgram;
+
+
+#pragma mark -
+#pragma mark color
+
+
+- (void)setColor:(GLKVector4)color;
 
 
 #pragma mark -
@@ -45,18 +69,17 @@
 
 
 #pragma mark -
+#pragma mark texture
+
+
+- (void)setTexture0:(GLuint)tex0;
+
+
+#pragma mark -
 #pragma mark debug
 
 
 - (void)debug;
-
-
-#pragma mark -
-#pragma mark offsets
-
-
-- (GLuint)vertexAttribTexCoord0;
-- (GLuint)vertexAttribPosition;
 
 
 @end

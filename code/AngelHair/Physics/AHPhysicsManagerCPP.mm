@@ -79,10 +79,9 @@
 
 
 - (void)drawDebug {
-    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
+
     [[AHGraphicsManager camera] prepareToDrawWorld];
     
     if (_world) {

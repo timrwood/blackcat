@@ -130,13 +130,18 @@ static AHSuperSystem *_manager = nil;
 
 
 - (void)draw {
+    glClearColor(0.65f, 0.75f, 0.85f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
     if (_isEnabledRenderDraw) {
+        [[AHGraphicsManager manager] useTextureProgram:YES];
         glPushGroupMarkerEXT(0, "Graphics Manager Draw");
         [[AHGraphicsManager manager] draw];
         glPopGroupMarkerEXT();
     }
     
     if (_isEnabledDebugDraw) {
+        [[AHGraphicsManager manager] useTextureProgram:NO];
         glPushGroupMarkerEXT(0, "Debug Draw");
         [[AHPhysicsManager manager] drawDebug];
         glPopGroupMarkerEXT();

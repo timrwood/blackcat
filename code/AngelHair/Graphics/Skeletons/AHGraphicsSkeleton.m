@@ -69,7 +69,7 @@
     
     // head and torso
     [_head setRect:CGRectMake(-config.headLeft, 
-                              -config.headTop, 
+                              -config.headBottom, 
                               config.headRight + config.headLeft, 
                               config.headBottom + config.headTop)];
     [_torso setRect:CGRectMake(-config.torsoWidth / 2.0f, 
@@ -184,8 +184,7 @@
     
     // draw the back leg
     [m modelPush];
-    [m modelRotate:_skeleton.hipA 
-          thenMove:GLKVector2Make(0.0f, _config.legWidth)];
+    [m modelRotate:_skeleton.hipA];
     [_legA draw];
     [m modelPop];
     
@@ -193,8 +192,7 @@
     [m modelPush];
     [m modelRotate:_skeleton.waist 
           thenMove:_shoulderPosition 
-        thenRotate:_skeleton.shoulderA 
-          thenMove:GLKVector2Make(0.0f, _config.armWidth)];
+        thenRotate:_skeleton.shoulderA];
     [_armA draw];
     [m modelPop];
     
@@ -215,9 +213,8 @@
     // draw the front arm
     [m modelPush];
     [m modelMove:_shoulderPosition 
-      thenRotate:_skeleton.shoulderB
-        thenMove:GLKVector2Make(0.0f, _config.armWidth)];
-    [_armA draw];
+      thenRotate:_skeleton.shoulderB];
+    [_armB draw];
     [m modelPop];
     
     // pop the waist angle
@@ -225,8 +222,7 @@
     
     // draw the front leg
     [m modelPush];
-    [m modelRotate:_skeleton.hipB 
-          thenMove:GLKVector2Make(0.0f, _config.legWidth)];
+    [m modelRotate:_skeleton.hipB];
     [_legB draw];
     [m modelPop];
     glPopGroupMarkerEXT();
