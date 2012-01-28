@@ -106,6 +106,10 @@ static AHSuperSystem *_manager = nil;
 
 
 - (void)update {
+    if (_isPaused) {
+        return;
+    }
+    
     [[AHTimeManager manager] update];
     // physics
     [[AHActorManager manager] updateBeforePhysics];
@@ -154,6 +158,19 @@ static AHSuperSystem *_manager = nil;
 
 - (void)setRenderDraw:(BOOL)enableRenderDraw {
     _isEnabledRenderDraw = enableRenderDraw;
+}
+
+
+#pragma mark -
+#pragma mark pause
+
+
+- (void)pause {
+    _isPaused = YES;
+}
+
+- (void)resume {
+    _isPaused = NO;
 }
 
 

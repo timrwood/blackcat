@@ -25,6 +25,7 @@
     float restitution;
     float friction;
     BOOL _isSensor;
+    int16 group;
 @private;
     NSMutableArray *_joints;
     NSObject <AHContactDelegate> *delegate;
@@ -32,6 +33,7 @@
     b2BodyType _bodyType;
     int _tags;
     int _category;
+    b2Vec2 _velocity;
 }
 
 
@@ -107,6 +109,13 @@
 
 - (void)setCategory:(int)category;
 - (int)category;
+
+
+#pragma mark -
+#pragma mark group
+
+
+- (void)setGroup:(int16)_group;
 
 
 @end

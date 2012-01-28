@@ -8,14 +8,16 @@
 
 
 #import "AHActor.h"
+#import "AHInputComponent.h"
 
 
 @class AHPhysicsSkeleton;
 @class AHGraphicsSkeleton;
 
 
-@interface BCHeroActorRagdoll : AHActor {
+@interface BCHeroActorRagdoll : AHActor <AHInputDelegate> {
 @private;
+    AHInputComponent *_input;
     AHPhysicsSkeleton *_ragdoll;
     AHGraphicsSkeleton *_skin;
 }
@@ -27,6 +29,21 @@
 
 - (id)initFromSkeleton:(AHSkeleton)skeleton
      andSkeletonConfig:(AHSkeletonConfig)config;
+
+
+#pragma mark -
+#pragma mark limits
+
+
+- (void)setUpperLimits:(AHSkeleton)upper 
+        andLowerLimits:(AHSkeleton)lower;
+
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (void)setLinearVelocity:(GLKVector2)velocity;
 
 
 @end

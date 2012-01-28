@@ -91,6 +91,7 @@
     fixtureDef->restitution = self->friction;
     fixtureDef->shape = (b2Shape *) polygonShape;
     fixtureDef->isSensor = self->_isSensor;
+    fixtureDef->filter.groupIndex = self->group;
     
     // body
     b2BodyDef *bodyDef = new b2BodyDef;

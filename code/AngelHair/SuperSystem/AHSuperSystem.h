@@ -11,6 +11,8 @@
 @private;
     BOOL _isEnabledDebugDraw;
     BOOL _isEnabledRenderDraw;
+    
+    BOOL _isPaused;
 }
 
 
@@ -57,6 +59,14 @@
 - (void)draw;
 - (void)setDebugDraw:(BOOL)enableDebugDraw;
 - (void)setRenderDraw:(BOOL)enableRenderDraw;
+
+
+#pragma mark -
+#pragma mark pause
+
+
+- (void)pause;
+- (void)resume;
 
 
 @end

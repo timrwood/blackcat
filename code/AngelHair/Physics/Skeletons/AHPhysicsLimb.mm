@@ -29,10 +29,9 @@
         _jointA = [[AHPhysicsRevoluteJoint alloc] init];
         _jointB = [[AHPhysicsRevoluteJoint alloc] init];
         
-        
         // debug
-        [_bodyA setStatic:YES];
-        [_bodyB setStatic:YES];
+        //[_bodyA setStatic:YES];
+        //[_bodyB setStatic:YES];
     }
     return self;
 }
@@ -95,12 +94,10 @@
 
 
 - (void)setup {
-    dlog(@"setup limb");
-    float originToJointA = -_width / 2.0f;
     float originToCenterA = _length / 4.0f - _width / 2.0f;
     float originToJointB = _length / 2.0f - _width;
     float jointBToCenterB = _length / 4.0f - _width / 2.0f;
-    float angleB = _rotation - _angle;
+    float angleB = _rotation + _angle;
     
     GLKVector2 rotationNormalized = GLKVector2Make(-sinf(_rotation), cosf(_rotation));
     GLKVector2 angleNormalized = GLKVector2Make(-sinf(angleB), cosf(angleB));
@@ -138,18 +135,30 @@
 
 
 - (float)rotationA {
-    if (_jointA) {
-        return [_jointA rotation];
+    if (_bodyA) {
+        return [_bodyA rotation];
     }
     return 0.0f;
 }
 
 - (float)rotationB {
-    if (_jointB) {
-        return [_jointB rotation];
+    if (_bodyB && _bodyA) {
+        return [_bodyB rotation] - [_bodyA rotation];
     }
     return 0.0f;
 }
+
+
+
+#pragma mark -
+#pragma mark group
+
+
+- (void)setGroup:(int16)group {
+    [_bodyA setGroup:group];
+    [_bodyB setGroup:group];
+}
+
 
 @end
 

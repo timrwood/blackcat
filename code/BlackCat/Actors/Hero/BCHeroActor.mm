@@ -65,24 +65,19 @@
         [_input setDelegate:self];
         [self addComponent:_input];
         
+        AHSkeleton skeleton;
         _skeleton = [[AHGraphicsSkeleton alloc] init];
-        config.armWidth = 0.2f;
-        config.armLength = 3.0f;
-        config.legWidth = 0.3f;
-        config.legLength = 3.0f;
-        config.torsoWidth = 0.6f;
-        config.torsoHeight = 2.0f;
-        config.headTop = 0.7f;
-        config.headBottom = 0.3f;
-        config.headLeft = 0.4f;
-        config.headRight = 0.6f;
-        /*[_skeleton setArmWidth:0.2f];
-        [_skeleton setArmLength:3.0f];
-        [_skeleton setLegWidth:0.3f];
-        [_skeleton setLegLength:3.0f];
-        [_skeleton setShoulderPosition:GLKVector2Make(0.0f, 1.5f)];
-        [[_skeleton torso] setRect:CGRectMake(-0.4f, -0.3f, 0.8f, 2.2f)];
-        [[_skeleton head] setRect:CGRectMake(-0.3f, -0.75f, 0.6f, 1.0f)];*/
+        config.armWidth = 0.1f;
+        config.armLength = 1.0f;
+        config.legWidth = 0.1f;
+        config.legLength = 1.0f;
+        config.torsoWidth = 0.2f;
+        config.torsoHeight = 0.6f;
+        config.headTop = 0.2f;
+        config.headBottom = 0.1f;
+        config.headLeft = 0.1f;
+        config.headRight = 0.1f;
+        [_skeleton setSkeleton:skeleton];
         [_skeleton setFromSkeletonConfig:config];
         [_skeleton setTextureKey:@"debug-grid.png"];
         [_skeleton setArmsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
@@ -90,16 +85,10 @@
         [[_skeleton torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [[_skeleton head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         
+        _resetWhenDestroyed = YES;
+        
         [self addComponent:_skeleton];
         [[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];
-        
-        /*_limb = [[AHGraphicsLimb alloc] init];
-        [_limb setLength:8.0f];
-        [_limb setWidth:0.5f];
-        [_limb setTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_limb setTextureKey:@"debug-grid.png"];
-        [self addComponent:_limb];
-        [[AHGraphicsManager manager] addObject:_limb toLayerIndex:GFX_LAYER_BACKGROUND];*/
         
         _runSpeed = 8.0f;
         
@@ -119,13 +108,17 @@
 
 
 - (void)updateBeforeAnimation {
-    //[self updateVelocity];
-    //[self updateCamera];
-    //[self updateJumpability];
+    [self updateVelocity];
+    [self updateCamera];
+    [self updateJumpability];
+    
     
     _limbAngle += 0.02f;
     //[_limb setAngle:_limbAngle];
     AHSkeleton skeleton;
+    //skeleton.x = 2.0f;
+    //skeleton.y = 1.0f;
+    
     skeleton.hipA = _limbAngle;
     skeleton.hipB = _limbAngle / 2.0f;
     skeleton.elbowA = _limbAngle;
@@ -136,10 +129,37 @@
     skeleton.shoulderB = _limbAngle / 2.0f;
     skeleton.neck = _limbAngle;
     skeleton.waist = -_limbAngle / 2.0f;
+    
+    /*
+    skeleton.hipA = M_TAU_8;
+    skeleton.hipB = -M_TAU_4;
+    skeleton.kneeA = M_TAU_8;
+    skeleton.kneeB = M_TAU_4 + M_TAU_8;
+    skeleton.elbowA = -M_TAU_4;
+    skeleton.elbowB = -M_TAU_4;
+    skeleton.shoulderA = -M_TAU_4;
+    skeleton.shoulderB = M_TAU_8;
+    skeleton.neck = M_TAU_8;
+    skeleton.waist = M_TAU_8 / 2.0f;
+     */
+    
+    //AHSkeleton skeleton;
+    skeleton.x = [_body position].x;
+    skeleton.y = [_body position].y;
+    /*skeleton.hipA = 0.0f;
+    skeleton.hipB = 0.0f;
+    skeleton.kneeA = 0.0f;
+    skeleton.kneeB = 0.0f;
+    skeleton.elbowA = 0.0f;
+    skeleton.elbowB = 0.0f;
+    skeleton.shoulderA = 0.0f;
+    skeleton.shoulderB = 0.0f;
+    skeleton.neck = 0.0f;
+    skeleton.waist = 0.0f;*/
     [_skeleton setSkeleton:skeleton];
     
-    [[AHGraphicsManager camera] setWorldPosition:GLKVector2Make(0.0f, 0.0f)];
-    [[AHGraphicsManager camera] setWorldZoom:3.0f];
+    //[[AHGraphicsManager camera] setWorldPosition:GLKVector2Make(2.0f, 0.0f)];
+    //[[AHGraphicsManager camera] setWorldZoom:3.0f];
     
     // debug
     //float time = fmodf([_body position].x, 2.5f) / 2.5f;
@@ -240,8 +260,35 @@
 - (void)inputDash {
     [self safeDestroy];
     
+    _resetWhenDestroyed = NO;
+    
     BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton] andSkeletonConfig:config];
+    //[ragdoll setLinearVelocity:[_body linearVelocity]];
     [[AHActorManager manager] add:ragdoll];
+    
+    AHSkeleton upper;
+    upper.hipA = M_TAU_16;
+    upper.hipB = M_TAU_16;
+    upper.kneeA = M_TAU_4 + M_TAU_8;
+    upper.kneeB = M_TAU_4 + M_TAU_8;
+    upper.elbowA = 0.0f;
+    upper.elbowB = 0.0f;
+    upper.shoulderA = M_TAU_4;
+    upper.shoulderB = M_TAU_4;
+    upper.neck = M_TAU_8;
+    
+    AHSkeleton lower;
+    lower.hipA = -(M_TAU_4 + M_TAU_8);
+    lower.hipB = -(M_TAU_4 + M_TAU_8);
+    lower.kneeA = 0.0f;
+    lower.kneeB = 0.0f;
+    lower.elbowA = -(M_TAU_4 + M_TAU_8);
+    lower.elbowB = -(M_TAU_4 + M_TAU_8);
+    lower.shoulderA = -M_TAU_2;
+    lower.shoulderB = -M_TAU_2;
+    lower.neck = -M_TAU_8;
+    
+    [ragdoll setUpperLimits:upper andLowerLimits:lower];
     
     if (_dashSpeed == 0.0f) {
         _dashSpeed = 30.0f;
@@ -253,7 +300,9 @@
 
 
 - (void)cleanupBeforeDestruction {
-    //[[AHSceneManager manager] reset];
+    if (_resetWhenDestroyed) {
+        [[AHSceneManager manager] reset];
+    }
     [super cleanupBeforeDestruction];
 }
 

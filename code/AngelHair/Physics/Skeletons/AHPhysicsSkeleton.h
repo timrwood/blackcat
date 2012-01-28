@@ -43,6 +43,14 @@
 
 
 #pragma mark -
+#pragma mark limits
+
+
+- (void)setUpperLimits:(AHSkeleton)upper 
+        andLowerLimits:(AHSkeleton)lower;
+
+
+#pragma mark -
 #pragma mark sizes
 
 
@@ -54,6 +62,13 @@
 - (void)setArmWidth:(float)width;
 - (void)setArmLength:(float)length;
 - (void)setPosition:(GLKVector2)position;
+
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (void)setLinearVelocity:(GLKVector2)velocity;
 
 
 @end

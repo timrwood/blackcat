@@ -111,11 +111,11 @@
     float halfWidth = _width / 2.0f;
     
     float cosAngle = cosf(_angle);
-    float sinAngle = sinf(_angle);
-    float cosRightAngle = cosf(_angle + M_TAU_4);
-    float sinRightAngle = sinf(_angle + M_TAU_4);
-    float cosHalfRightAngle = cosf(_angle / 2.0f + M_TAU_4);
-    float sinHalfRightAngle = sinf(_angle / 2.0f + M_TAU_4);
+    float sinAngle = -sinf(_angle);
+    float cosRightAngle = cosf(_angle - M_TAU_4);
+    float sinRightAngle = -sinf(_angle - M_TAU_4);
+    float cosHalfRightAngle = cosf(_angle / 2.0f - M_TAU_4);
+    float sinHalfRightAngle = -sinf(_angle / 2.0f - M_TAU_4);
     float atBend = _length / 2.0f - _width;
     float centerToEnd = _length / 2.0f - halfWidth;
     float aboveBend = atBend - halfWidth;
@@ -131,7 +131,7 @@
     GLKVector2 afterBendLength = GLKVector2Make(halfWidth * sinAngle, halfWidth * cosAngle);
     GLKVector2 endWidth = GLKVector2Make(halfWidth * sinRightAngle, halfWidth * cosRightAngle);
 
-    if (_angle < 0.0f) {
+    if (_angle > 0.0f) {
         float h = fmaxf(-atBend, -halfWidth * cosHalfRightAngle / sinHalfRightAngle);
         GLKVector2 centerToClip = GLKVector2Make(-halfWidth, h);
         GLKVector2 clipPoint = GLKVector2Add(center, centerToClip);
@@ -146,7 +146,7 @@
     }
     
     // left side
-    if (_angle < -M_TAU_4) {
+    if (_angle > M_TAU_4) {
         self->vertices[2] = self->vertices[4];
         self->vertices[6] = self->vertices[4];
     } else {
@@ -155,7 +155,7 @@
     }
     
     // right side
-    if (_angle > M_TAU_4) {
+    if (_angle < -M_TAU_4) {
         self->vertices[3] = self->vertices[5];
         self->vertices[7] = self->vertices[5];
     } else {

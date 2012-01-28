@@ -7,6 +7,8 @@
 //
 
 
+#import "AHSceneManager.h"
+#import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
 #import "AHGraphicsRect.h"
 #import "AHPhysicsSkeleton.h"
@@ -28,6 +30,14 @@
     if (self) {
         _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:config];
         
+        CGRect inputRect = [[UIScreen mainScreen] bounds];
+        float w = inputRect.size.width;
+        inputRect.size.width = inputRect.size.height;
+        inputRect.size.height = w;
+        _input = [[AHInputComponent alloc] initWithScreenRect:inputRect];
+        [_input setDelegate:self];
+        [self addComponent:_input];
+        
         _skin = [[AHGraphicsSkeleton alloc] init];
         [_skin setFromSkeletonConfig:config];
         [_skin setSkeleton:skeleton];
@@ -44,13 +54,50 @@
     return self;
 }
 
+#pragma mark -
+#pragma mark limits
+
+
+- (void)setUpperLimits:(AHSkeleton)upper 
+        andLowerLimits:(AHSkeleton)lower {
+    [_ragdoll setUpperLimits:upper andLowerLimits:lower];
+}
+
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (void)setLinearVelocity:(GLKVector2)velocity {
+    [_ragdoll setLinearVelocity:velocity];
+}
+
 
 #pragma mark -
 #pragma mark update
 
 
-- (void)updateBeforeRender {
+- (void)updateBeforeAnimation {
     [_skin setSkeleton:[_ragdoll skeleton]];
+}
+
+
+#pragma mark -
+#pragma mark touch
+
+
+- (void)touchBegan {
+    [[AHSceneManager manager] reset];
+}
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupBeforeDestruction {
+    [[AHSceneManager manager] reset];
+    [super cleanupBeforeDestruction];
 }
 
 

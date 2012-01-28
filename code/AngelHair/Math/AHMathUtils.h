@@ -21,10 +21,12 @@ extern "C" {
 #pragma mark constants
     
     
-#define M_TAU    M_PI * 2.0f
-#define M_TAU_2  M_PI
-#define M_TAU_4  M_PI_2
-#define M_TAU_8  M_PI_4
+#define M_TAU     M_PI * 2.0f
+#define M_TAU_2   M_PI
+#define M_TAU_4   M_PI_2
+#define M_TAU_8   M_PI_4
+#define M_TAU_16  M_PI_4 * 0.5f
+#define M_TAU_32  M_PI_4 * 0.25f
     
     
 #pragma mark -
@@ -67,6 +69,13 @@ extern "C" {
     
 #pragma mark -
 #pragma mark rotation
+    
+    static __inline__ GLKVector2 GLKVector2MakeFromRotationAndLength(float rotation, float length);
+    static __inline__ GLKVector2 GLKVector2MakeFromRotationAndLength(float rotation, float length) {
+        float cosR = cosf(rotation);
+        float sinR = sinf(rotation);
+        return GLKVector2Make(length * cosR, length * sinR);
+    }
     
     static __inline__ GLKVector2 GLKVector2Rotate(GLKVector2 point, float rotation);
     static __inline__ GLKVector2 GLKVector2Rotate(GLKVector2 point, float rotation) {

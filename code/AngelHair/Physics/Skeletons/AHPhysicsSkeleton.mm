@@ -7,6 +7,9 @@
 //
 
 
+//static int SKELETON_OFFSET = 0;
+
+
 #import "AHMathUtils.h"
 #import "AHActor.h"
 #import "AHPhysicsRect.h"
@@ -22,7 +25,7 @@
 #pragma mark init
 
 
-- (id)init {
+- (id)initFromSkeleton:(AHSkeleton)skeleton andSkeletonConfig:(AHSkeletonConfig)config {
     self = [super init];
     if (self) {
         _armA = [[AHPhysicsLimb alloc] init];
@@ -35,19 +38,43 @@
         
         _neck = [[AHPhysicsRevoluteJoint alloc] init];
         
+        // config and skeleton
+        [self setFromSkeletonConfig:config];
+        _skeleton = skeleton;
+        
         // debug
-        [_torso setStatic:YES];
-        [_head setStatic:YES];
+        //[_torso setStatic:YES];
+        //[_head setStatic:YES];
+        
+        //SKELETON_OFFSET--;
+        [_armA setGroup:-1];
+        [_armB setGroup:-1];
+        [_legA setGroup:-1];
+        [_legB setGroup:-1];
+        
+        [_torso setGroup:-1];
+        [_head setGroup:-1];
     }
     return self;
 }
 
-- (id)initFromSkeleton:(AHSkeleton)skeleton andSkeletonConfig:(AHSkeletonConfig)config {
-    _config = config;
-    _skeleton = skeleton;
-    self = [self init];
-    [self setFromSkeletonConfig:_config];
-    return self;
+
+#pragma mark -
+#pragma mark limits
+
+
+- (void)setUpperLimits:(AHSkeleton)upper 
+        andLowerLimits:(AHSkeleton)lower {
+    [_armA setLimitAUpper:upper.shoulderA lower:lower.shoulderA];
+    [_armB setLimitAUpper:upper.shoulderB lower:lower.shoulderB];
+    [_armA setLimitBUpper:upper.elbowA lower:lower.elbowA];
+    [_armB setLimitBUpper:upper.elbowB lower:lower.elbowB];
+    [_legA setLimitAUpper:upper.hipA lower:lower.hipA];
+    [_legB setLimitAUpper:upper.hipB lower:lower.hipB];
+    [_legA setLimitBUpper:upper.kneeA lower:lower.kneeA];
+    [_legB setLimitBUpper:upper.kneeB lower:lower.kneeB];
+    [_neck setUpperLimit:upper.neck];
+    [_neck setLowerLimit:lower.neck];
 }
 
 
@@ -57,41 +84,55 @@
 
 - (AHSkeleton)skeleton {
     AHSkeleton skeleton;
-    skeleton.neck = [_neck rotation];
-    skeleton.waist = [_torso rotation] - _skeleton.waist;
-    skeleton.shoulderA = [_armA rotationA];
-    skeleton.shoulderB = [_armB rotationA];
+    skeleton.neck = [_head rotation] - [_torso rotation];
+    skeleton.waist = [_torso rotation];
+    skeleton.shoulderA = [_armA rotationA] - [_torso rotation];
+    skeleton.shoulderB = [_armB rotationA] - [_torso rotation];
     skeleton.elbowA = [_armA rotationB];
     skeleton.elbowB = [_armB rotationB];
     skeleton.hipA = [_legA rotationA];
     skeleton.hipB = [_legB rotationA];
     skeleton.kneeA = [_legA rotationB];
     skeleton.kneeB = [_legB rotationB];
+    
+    /*
+     skeleton.hipA = M_TAU_8;
+     skeleton.hipB = -M_TAU_4;
+     skeleton.kneeA = M_TAU_4;
+     skeleton.kneeB = M_TAU_4;
+     skeleton.elbowA = -M_TAU_4;
+     skeleton.elbowB = -M_TAU_4;
+     skeleton.shoulderA = -M_TAU_4;
+     skeleton.shoulderB = M_TAU_8;
+     skeleton.neck = M_TAU_8;
+     skeleton.waist = M_TAU_8 / 2.0f;
+     */
+    
+    /*
+    
+    dlog(@"hipA %F %F %F", skeleton.hipA, _skeleton.hipA, M_TAU_8);
+    dlog(@"hipB %F %F %F", skeleton.hipB, _skeleton.hipB, -M_TAU_4);
+    dlog(@"kneeA %F %F %F", skeleton.kneeA, _skeleton.kneeA, M_TAU_4);
+    dlog(@"kneeB %F %F %F", skeleton.kneeB, _skeleton.kneeB, M_TAU_4);
+    
+    dlog(@"neck %F %F %F", skeleton.neck, _skeleton.neck, M_TAU_8);
+     */
+    
+    float distanceBetweenCenterAndWaist = -(_config.torsoHeight - _config.torsoWidth) / 2.0f;
+    GLKVector2 position = GLKVector2MakeFromRotationAndLength(skeleton.waist - M_TAU_4, distanceBetweenCenterAndWaist);
+    position = GLKVector2Add([_torso position], position);
+    
+    skeleton.x = position.x;
+    skeleton.y = position.y;
     return skeleton;
 }
 
 - (void)setFromSkeletonConfig:(AHSkeletonConfig)config {
-    // shoulder
-    //_shoulderPosition.x = 0.0f;
-    //_shoulderPosition.y = config.torsoHeight - config.torsoWidth;
-    
     // arms and legs
     [self setLegWidth:config.legWidth];
     [self setLegLength:config.legLength];
     [self setArmWidth:config.armWidth];
     [self setArmLength:config.armLength];
-    
-    // head and torso
-    /*
-    [_head setRect:CGRectMake(-config.headLeft, 
-                              -config.headTop, 
-                              config.headRight + config.headLeft, 
-                              config.headBottom + config.headTop)];
-    [_torso setRect:CGRectMake(-config.torsoWidth / 2.0f, 
-                               - config.torsoWidth / 2.0f, 
-                               config.torsoWidth, 
-                               config.torsoHeight)];
-     */
     
     // assign for later retrival
     _config = config;
@@ -132,7 +173,6 @@
 
 - (void)setActor:(AHActor *)actor {
     [super setActor:actor];
-    dlog(@"setActor skel");
     
     [actor addComponent:_torso];
     [actor addComponent:_head];
@@ -145,10 +185,9 @@
 }
 
 - (void)setup {
-    dlog(@"setup skel");
     float distanceBetweenWaistAndShoulder = _config.torsoHeight - _config.torsoWidth;
     
-    GLKVector2 waistRotationNormalized = GLKVector2Make(-sinf(_skeleton.waist), cosf(_skeleton.waist));
+    GLKVector2 waistRotationNormalized = GLKVector2Make(sinf(_skeleton.waist), -cosf(_skeleton.waist));
     GLKVector2 waistPosition = GLKVector2Add(_position, GLKVector2Make(_skeleton.x, _skeleton.y));
     
     GLKVector2 waistToShoulder = GLKVector2MultiplyScalar(waistRotationNormalized, distanceBetweenWaistAndShoulder);
@@ -158,7 +197,7 @@
     CGSize headSize = CGSizeMake((_config.headLeft + _config.headRight) / 2.0f, 
                                  (_config.headTop + _config.headBottom) / 2.0f);
     
-    GLKVector2 headOffset = GLKVector2Make(headSize.width - _config.headLeft, headSize.height - _config.headBottom);
+    GLKVector2 headOffset = GLKVector2Make(-(headSize.width - _config.headLeft), -(headSize.height - _config.headBottom));
     GLKVector2 headOffsetRotation = GLKVector2Rotate(headOffset, _skeleton.waist + _skeleton.neck);
     
     GLKVector2 headCenter = GLKVector2Add(shoulderPosition, headOffsetRotation);
@@ -185,6 +224,7 @@
     [_legA setPosition:waistPosition];
     [_legB setPosition:waistPosition];
     [_neck joinBodyA:_torso toBodyB:_head atPosition:shoulderPosition];
+    //[_neck setRotation:_skeleton.waist + _skeleton.neck];
     
     [_armA attachToBody:_torso];
     [_armB attachToBody:_torso];
@@ -205,6 +245,15 @@
     _torso = nil;
     _head = nil;
     _neck = nil;
+}
+
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (void)setLinearVelocity:(GLKVector2)velocity {
+    [_torso setLinearVelocity:velocity];
 }
 
 

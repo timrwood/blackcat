@@ -59,7 +59,7 @@
 - (void)setFromSkeletonConfig:(AHSkeletonConfig)config {
     // shoulder
     _shoulderPosition.x = 0.0f;
-    _shoulderPosition.y = config.torsoHeight - config.torsoWidth;
+    _shoulderPosition.y = -(config.torsoHeight - config.torsoWidth);
     
     // arms and legs
     [self setLegWidth:config.legWidth];
@@ -68,12 +68,12 @@
     [self setArmLength:config.armLength];
     
     // head and torso
-    [_head setRect:CGRectMake(-config.headLeft, 
-                              -config.headBottom, 
+    [_head setRect:CGRectMake(-config.headRight, 
+                              -config.headTop, 
                               config.headRight + config.headLeft, 
                               config.headBottom + config.headTop)];
     [_torso setRect:CGRectMake(-config.torsoWidth / 2.0f, 
-                               - config.torsoWidth / 2.0f, 
+                               -config.torsoHeight + config.torsoWidth / 2.0f, 
                                config.torsoWidth, 
                                config.torsoHeight)];
     

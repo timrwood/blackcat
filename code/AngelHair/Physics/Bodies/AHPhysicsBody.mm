@@ -23,6 +23,7 @@
     if (self) {
         _bodyType = b2_dynamicBody;
         restitution = 0.3f;
+        group = 0;
         _joints = [[NSMutableArray alloc] init];
     }
     return self;
@@ -120,8 +121,9 @@
 }
 
 - (void)setLinearVelocity:(GLKVector2)vel {
+    _velocity = b2Vec2(vel.x, vel.y);
     if (_body) {
-        _body->SetLinearVelocity(b2Vec2(vel.x, vel.y));
+        _body->SetLinearVelocity(_velocity);
     }
 }
 
@@ -170,6 +172,7 @@
     _body = [[AHPhysicsManager cppManager] world]->CreateBody(bodyDef);
     _body->SetUserData((__bridge void *) self);
     _body->SetType(_bodyType);
+    _body->SetLinearVelocity(_velocity);
 }
 
 - (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef {
@@ -298,6 +301,15 @@
 
 - (int)category {
     return _category;
+}
+
+
+#pragma mark -
+#pragma mark group
+
+
+- (void)setGroup:(int16)_group {
+    group = _group;
 }
 
 

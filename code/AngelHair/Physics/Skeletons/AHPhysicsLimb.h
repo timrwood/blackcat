@@ -52,4 +52,11 @@
 - (float)rotationB;
 
 
+#pragma mark -
+#pragma mark group
+
+
+- (void)setGroup:(int16)group;
+
+
 @end

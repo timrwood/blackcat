@@ -31,8 +31,6 @@
 
 
 - (void)setup {
-    dlog(@"setup joint");
-    
     if (!self->_bodyA) {
         dlog(@"ERROR: Body not defined yet");
     }
@@ -55,6 +53,8 @@
         revJointDef.enableMotor = YES;
     }
     
+    revJointDef.referenceAngle = _rotation;
+    
     [self addJointToWorld:&revJointDef];
 }
 
@@ -62,6 +62,10 @@
 #pragma mark -
 #pragma mark rotation
 
+
+- (void)setRotation:(float)rotation {
+    _rotation = rotation;
+}
 
 - (float)rotation {
     if (self->_joint) {

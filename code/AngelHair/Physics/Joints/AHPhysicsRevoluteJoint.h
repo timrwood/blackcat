@@ -23,6 +23,8 @@
     
     BOOL _isMotorized;
     float _motorSpeed;
+    
+    float _rotation;
 }
 
 
@@ -39,6 +41,7 @@
 #pragma mark rotation
 
 
+- (void)setRotation:(float)rotation;
 - (float)rotation;
 
 

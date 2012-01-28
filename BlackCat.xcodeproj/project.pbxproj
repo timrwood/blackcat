@@ -833,8 +833,6 @@
 		15AC4D7814B7B3BB00283A06 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
-				150F1D2514D1E36D00592E87 /* Joints */,
-				150F1D2014D1DF0F00592E87 /* Skeletons */,
 				15AC4D7D14B7B3BB00283A06 /* AHPhysicsManager.h */,
 				15AC4D7E14B7B3BB00283A06 /* AHPhysicsManager.mm */,
 				1587704814BBC35E009886D2 /* AHPhysicsManagerCPP.h */,
@@ -842,6 +840,8 @@
 				1587704D14BBC9C9009886D2 /* Bodies */,
 				1587704B14BBC984009886D2 /* Contacts */,
 				1587704414BBC28D009886D2 /* Debug */,
+				150F1D2514D1E36D00592E87 /* Joints */,
+				150F1D2014D1DF0F00592E87 /* Skeletons */,
 			);
 			path = Physics;
 			sourceTree = "<group>";

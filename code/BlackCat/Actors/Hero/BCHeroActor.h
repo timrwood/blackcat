@@ -45,6 +45,8 @@
     
     AHAnimationSkeletonTrack *_track;
     AHSkeletonConfig config;
+    
+    BOOL _resetWhenDestroyed;
 }
 
 
