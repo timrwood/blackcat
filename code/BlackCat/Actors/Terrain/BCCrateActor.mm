@@ -37,6 +37,17 @@
 
 
 #pragma mark -
+#pragma mark update
+
+
+- (void)updateBeforeAnimation {
+    if (GLKVector2Length([_body linearVelocity]) > 3.0f) {
+        _hasBeenUpset = YES;
+    }
+}
+
+
+#pragma mark -
 #pragma mark contacts
 
 

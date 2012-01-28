@@ -263,7 +263,7 @@
     _resetWhenDestroyed = NO;
     
     BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton] andSkeletonConfig:config];
-    //[ragdoll setLinearVelocity:[_body linearVelocity]];
+    [ragdoll setLinearVelocity:[_body linearVelocity]];
     [[AHActorManager manager] add:ragdoll];
     
     AHSkeleton upper;
