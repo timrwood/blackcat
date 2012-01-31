@@ -298,7 +298,7 @@ static AHGraphicsCamera *_camera = nil;
     [layer addObject:object];
 }
 
-- (void)addObjectToHUDLayer:(AHGraphicsObject *)object {
+- (void)addObjectToHudLayer:(AHGraphicsObject *)object {
     [object removeFromParentLayer];
     [_hudLayer addObject:object];
 }

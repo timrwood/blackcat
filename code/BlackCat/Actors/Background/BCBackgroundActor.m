@@ -36,17 +36,18 @@
         _top = [[AHGraphicsRect alloc] init];
         _mid = [[AHGraphicsRect alloc] init];
         _bot = [[AHGraphicsRect alloc] init];
-        [self addComponent:_top];
-        [self addComponent:_mid];
-        [self addComponent:_bot];
         
-        [_top addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
-        [_mid addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
-        [_bot addToLayerIndex:(int)GFX_LAYER_BACKGROUND];
+        [_top setLayerIndex:GFX_LAYER_BACKGROUND];
+        [_mid setLayerIndex:GFX_LAYER_BACKGROUND];
+        [_bot setLayerIndex:GFX_LAYER_BACKGROUND];
         
         [_top setTextureKey:@"background.png"];
         [_mid setTextureKey:@"background.png"];
         [_bot setTextureKey:@"background.png"];
+        
+        [self addComponent:_top];
+        [self addComponent:_mid];
+        [self addComponent:_bot];
         
         topMidTexSize = CGSizeMake(0.5f, 5.0f / 32.0f);
         bottomTexSize = CGSizeMake(0.5f, 3.0f / 16.0f);

@@ -12,7 +12,6 @@
 
 @interface AHScene : NSObject {
 @private;
-    NSMutableArray *buttons;
 }
 
 
@@ -23,8 +22,6 @@
 - (void)addButtonsFromJSONFile:(NSString *)filename;
 - (void)addButtonFromDictionary:(NSDictionary *)dictionary;
 - (void)addButton:(AHButton *)button;
-- (void)removeButton:(AHButton *)button;
-- (void)removeAllButtons;
 
 
 #pragma mark -

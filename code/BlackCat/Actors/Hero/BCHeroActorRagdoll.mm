@@ -53,8 +53,8 @@
         [_skin setLegsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [[_skin torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [[_skin head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skin setLayerIndex:GFX_LAYER_BACKGROUND];
         
-        [[AHGraphicsManager manager] addObject:_skin toLayerIndex:GFX_LAYER_BACKGROUND];
         [self addComponent:_skin];
         [self addComponent:_ragdoll];
     }

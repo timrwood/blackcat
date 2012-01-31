@@ -37,8 +37,12 @@
 #pragma mark layer
 
 
-- (void)addToLayerIndex:(int)i {
-    [[AHGraphicsManager manager] addObject:self toLayerIndex:i];
+- (void)setHudLayer:(BOOL)isForHud {
+    _isForHud = isForHud;
+}
+
+- (void)setLayerIndex:(int)i {
+    _layerIndex = i;
 }
 
 - (void)setLayer:(AHGraphicsLayer *)layer {
@@ -58,7 +62,11 @@
 
 
 - (void)setup {
-    
+    if (_isForHud) {
+        [[AHGraphicsManager manager] addObjectToHudLayer:self];
+    } else {
+        [[AHGraphicsManager manager] addObject:self toLayerIndex:_layerIndex];
+    }
 }
 
 

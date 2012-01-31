@@ -38,8 +38,8 @@
         [_skin setRectFromCenter:GLKVector2Make(0.0f, 0.0f) andRadius:CRATE_SIZE];
         [_skin setTextureKey:@"debug-grid.png"];
         [_skin setTexFromCenter:GLKVector2Make(0.5f, 0.5f) andRadius:0.5f];
+        [_skin setLayerIndex:GFK_LAYER_BUILDINGS];
         [self addComponent:_skin];
-        [[AHGraphicsManager manager] addObject:_skin toLayerIndex:GFK_LAYER_BUILDINGS];
     }
     return self;
 }
@@ -83,6 +83,17 @@
 
 + (float)size {
     return CRATE_SIZE;
+}
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupBeforeDestruction {
+    _skin = nil;
+    _body = nil;
+    [super cleanupBeforeDestruction];
 }
 
 

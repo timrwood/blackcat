@@ -116,7 +116,7 @@
 
 
 - (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i;
-- (void)addObjectToHUDLayer:(AHGraphicsObject *)object;
+- (void)addObjectToHudLayer:(AHGraphicsObject *)object;
 
 
 #pragma mark -

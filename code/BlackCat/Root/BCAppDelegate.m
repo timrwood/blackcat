@@ -35,7 +35,7 @@
     [[AHSuperSystem manager] setRenderDraw:YES];
     
     // setup fps
-    [self.viewController setPreferredFramesPerSecond:30];
+    [self.viewController setPreferredFramesPerSecond:60];
     [[AHTimeManager manager] setFramesPerSecond:[self.viewController framesPerSecond]];
     
     self.window.rootViewController = self.viewController;

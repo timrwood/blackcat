@@ -17,7 +17,6 @@
 
 @interface AHButton : AHActor <AHInputDelegate> {
 @private
-    CGRect _rect;
     int _identifier;
     AHGraphicsRect *_graphics;
     AHInputComponent *_input;

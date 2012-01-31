@@ -20,6 +20,8 @@
     AHTextureInfo *_texture;
     
     int _count;
+    int _layerIndex;
+    BOOL _isForHud;
     
     BOOL _isOffset;
 @protected;
@@ -35,7 +37,8 @@
 #pragma mark layer
 
 
-- (void)addToLayerIndex:(int)i;
+- (void)setHudLayer:(BOOL)isForHud;
+- (void)setLayerIndex:(int)i;
 - (void)setLayer:(AHGraphicsLayer *)layer;
 - (void)removeFromParentLayer;
 

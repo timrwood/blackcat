@@ -29,10 +29,6 @@
     return self;
 }
 
-- (void)dealloc {
-    
-}
-
 
 #pragma mark -
 #pragma mark joints
@@ -268,8 +264,8 @@
 
 - (void)cleanupAfterRemoval {
     delegate = nil;
-    [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
     [self removeAllJoints];
+    [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
     [super cleanupAfterRemoval];
 }
 

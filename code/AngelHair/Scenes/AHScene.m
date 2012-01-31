@@ -24,7 +24,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        buttons = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
@@ -75,24 +75,8 @@
 }
 
 - (void)addButton:(AHButton *)button {
-    if (![buttons containsObject:button]) {
-        [buttons addObject:button];
-    }
     [[AHActorManager manager] add:button];
     [button setScene:self];
-}
-
-- (void)removeButton:(AHButton *)button {
-    if ([buttons containsObject:button]) {
-        [buttons removeObject:button];
-    }
-    [[AHActorManager manager] destroy:button];
-}
-
-- (void)removeAllButtons {
-    while ([buttons count] > 0) {
-        [self removeButton:(AHButton *) [buttons objectAtIndex:0]];
-    }
 }
 
 

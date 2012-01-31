@@ -36,8 +36,8 @@
         [_skin setRectFromCenter:position andSize:size];
         [_skin setTextureKey:@"debug-grid.png"];
         [_skin setTexFromCenter:GLKVector2Make(0.5f, 0.5f) andRadius:0.5f];
+        [_skin setLayerIndex:GFK_LAYER_BUILDINGS];
         [self addComponent:_skin];
-        [[AHGraphicsManager manager] addObject:_skin toLayerIndex:GFK_LAYER_BUILDINGS];
         
         _distanceCoveredRight = position.x + size.width;
         _distanceCoveredLeft = position.x - size.width;

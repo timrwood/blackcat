@@ -29,7 +29,6 @@
 
 
 - (void)resetSetup {
-    dlog(@"reset");
     [[AHTimeManager manager] setWorldToRealRatio:1.0f];
     
     [[BCGlobalManager manager] setHeroPosition:GLKVector2Make(0.0f, 0.0f)];

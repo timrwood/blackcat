@@ -88,15 +88,15 @@
         
         _resetWhenDestroyed = YES;
         
+        [_skeleton setLayerIndex:GFX_LAYER_BACKGROUND];
         [self addComponent:_skeleton];
-        [[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];
         
         _runSpeed = 8.0f;
         
         _upwardSlowing = powf(BASE_UPWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
         _downwardSlowing = powf(BASE_DOWNWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
         
-        _speedIncrease = 0.01f * 60.0f / [[AHTimeManager manager] realFramesPerSecond];
+        _speedIncrease = 0.01f * [[AHTimeManager manager] realFramesPerSecond] / 60.0f;
         
         _track = [[AHAnimationSkeletonCache manager] animationForKey:@"demo"];
     }
