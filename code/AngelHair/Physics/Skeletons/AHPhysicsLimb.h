@@ -59,4 +59,11 @@
 - (void)setGroup:(int16)group;
 
 
+#pragma mark -
+#pragma mark velocity
+
+
+- (void)setLinearVelocity:(GLKVector2)velocity;
+
+
 @end

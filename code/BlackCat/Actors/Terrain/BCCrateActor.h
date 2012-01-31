@@ -12,10 +12,12 @@
 
 
 @class AHPhysicsRect;
+@class AHGraphicsRect;
 
 
 @interface BCCrateActor : AHActor <AHContactDelegate> {
 @private;
+    AHGraphicsRect *_skin;
     AHPhysicsRect *_body;
     BOOL _hasBeenUpset;
 }

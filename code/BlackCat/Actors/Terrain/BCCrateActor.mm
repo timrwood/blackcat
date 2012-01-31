@@ -10,6 +10,8 @@
 #define CRATE_SIZE 0.2f
 
 
+#import "AHGraphicsManager.h"
+#import "AHGraphicsRect.h"
 #import "AHPhysicsRect.h"
 
 #import "BCGlobalTypes.h"
@@ -31,6 +33,13 @@
         [_body addTag:PHY_TAG_DEBRIS];
         [_body setDelegate:self];
         [self addComponent:_body];
+        
+        _skin = [[AHGraphicsRect alloc] init];
+        [_skin setRectFromCenter:GLKVector2Make(0.0f, 0.0f) andRadius:CRATE_SIZE];
+        [_skin setTextureKey:@"debug-grid.png"];
+        [_skin setTexFromCenter:GLKVector2Make(0.5f, 0.5f) andRadius:0.5f];
+        [self addComponent:_skin];
+        [[AHGraphicsManager manager] addObject:_skin toLayerIndex:GFK_LAYER_BUILDINGS];
     }
     return self;
 }
@@ -44,6 +53,8 @@
     if (GLKVector2Length([_body linearVelocity]) > 3.0f) {
         _hasBeenUpset = YES;
     }
+    [_skin setRotation:[_body rotation]];
+    [_skin setPosition:[_body position]];
 }
 
 

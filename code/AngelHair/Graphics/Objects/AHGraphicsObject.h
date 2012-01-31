@@ -20,9 +20,14 @@
     AHTextureInfo *_texture;
     
     int _count;
+    
+    BOOL _isOffset;
 @protected;
     GLKVector2 *vertices;
     GLKVector2 *textures;
+    
+    GLKVector2 _position;
+    float _rotation;
 }
 
 
@@ -40,6 +45,14 @@
 
 
 - (void)setVertexCount:(int)newCount;
+
+
+#pragma mark -
+#pragma mark offset
+
+
+- (void)setPosition:(GLKVector2)position;
+- (void)setRotation:(float)rotation;
 
 
 #pragma mark -

@@ -53,10 +53,12 @@
     [_graphics setRect:rect];
     [_graphics setTex:tex];
     [_graphics setTextureKey:key];
+    [self addComponent:_graphics];
     [[AHGraphicsManager manager] addObjectToHUDLayer:_graphics];
     
     // input
     _input = [[AHInputComponent alloc] initWithScreenRect:rect];
+    [self addComponent:_input];
     [[AHInputManager manager] addInputComponent:_input];
     [_input setDelegate:self];
     return self;
@@ -76,10 +78,27 @@
 #pragma mark touch
 
 
+- (void)touchBegan {
+    [_graphics setPosition:GLKVector2Make(0.0f, 3.0f)];
+}
+
+- (void)touchLeft {
+    [_graphics setPosition:GLKVector2Make(0.0f, 0.0f)];
+}
+
+- (void)touchEntered {
+    [_graphics setPosition:GLKVector2Make(0.0f, 3.0f)];
+}
+
 - (void)touchEndedInside {
     if (_scene) {
         [_scene buttonWasTapped:self];
     }
+    [_graphics setPosition:GLKVector2Make(0.0f, 0.0f)];
+}
+
+- (void)touchEndedOutside {
+    [_graphics setPosition:GLKVector2Make(0.0f, 0.0f)];
 }
 
 

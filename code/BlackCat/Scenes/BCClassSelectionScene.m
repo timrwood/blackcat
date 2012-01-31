@@ -15,6 +15,9 @@ typedef enum {
 
 
 #import "AHButton.h"
+#import "AHSceneManager.h"
+
+#import "BCMainScene.h"
 #import "BCClassSelectionScene.h"
 
 
@@ -38,7 +41,7 @@ typedef enum {
 - (void)buttonWasTapped:(AHButton *)button {
     switch ((BCClassSelectionType) [button identifier]) {
         case CLASS_A:
-            dlog(@"choosing a");
+            [[AHSceneManager manager] goToScene:[[BCMainScene alloc] init]];
             break;
         case CLASS_B:
             dlog(@"choosing b");

@@ -114,12 +114,44 @@
 
 
 - (void)draw {
+    if (_isOffset) {
+        [[AHGraphicsManager manager] modelPush];
+        if (_rotation == 0.0f) {
+            [[AHGraphicsManager manager] modelMove:_position];
+        } else {
+            [[AHGraphicsManager manager] modelMove:_position thenRotate:_rotation];
+        }
+    } else if (_rotation != 0.0f) {
+        [[AHGraphicsManager manager] modelPush];
+        [[AHGraphicsManager manager] modelRotate:_rotation];
+    }
     if (_count > 0) {
         [[AHGraphicsManager manager] drawPointerArrayPosition:self->vertices
                                                    andTexture:self->textures
                                                      andCount:_count 
                                                   andDrawType:GL_TRIANGLE_STRIP];
     }
+    if (_isOffset || _rotation != 0.0f) {
+        [[AHGraphicsManager manager] modelPop];
+    }
+}
+
+
+#pragma mark -
+#pragma mark offset
+
+
+- (void)setPosition:(GLKVector2)position {
+    _position = position;
+    if (position.x == 0 && position.y == 0) {
+        _isOffset = NO;
+    } else {
+        _isOffset = YES;
+    }
+}
+
+- (void)setRotation:(float)rotation {
+    _rotation = rotation;
 }
 
 

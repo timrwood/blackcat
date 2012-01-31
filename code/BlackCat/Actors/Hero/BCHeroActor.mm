@@ -54,6 +54,7 @@
         [_body setRestitution:0.1f];
         [_body setStatic:NO];
         [_body setCategory:PHY_CAT_HERO];
+        [_body setRestitution:0.0f];
         [self addComponent:_body];
         
         CGRect inputRect = [[UIScreen mainScreen] bounds];
@@ -88,7 +89,7 @@
         _resetWhenDestroyed = YES;
         
         [self addComponent:_skeleton];
-        //[[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];
+        [[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];
         
         _runSpeed = 8.0f;
         

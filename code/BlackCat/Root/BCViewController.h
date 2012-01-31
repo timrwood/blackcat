@@ -10,7 +10,7 @@
 #import <GLKit/GLKit.h>
 
 
-@interface ViewController : GLKViewController {
+@interface BCViewController : GLKViewController {
     EAGLContext *_context;
 }
 

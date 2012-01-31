@@ -7,7 +7,7 @@
 //
 
 
-#import "ViewController.h"
+#import "BCViewController.h"
 #import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
@@ -17,7 +17,7 @@
 #import "BCMainScene.h"
 
 
-@implementation ViewController
+@implementation BCViewController
 
 
 - (void)viewDidLoad {

@@ -11,10 +11,12 @@
 
 
 @class AHPhysicsRect;
+@class AHGraphicsRect;
 
 
 @interface BCBuildingActor : AHActor {
 @private;
+    AHGraphicsRect *_skin;
     AHPhysicsRect *_body;
     float _distanceCoveredRight;
     float _distanceCoveredLeft;

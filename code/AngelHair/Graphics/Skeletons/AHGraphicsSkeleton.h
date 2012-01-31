@@ -26,8 +26,7 @@
     AHGraphicsRect *_torso;
     
     GLKVector2 _shoulderPosition;
-    
-    GLKVector2 _position;
+
     AHSkeleton _skeleton;
     
     AHSkeletonConfig _config;
@@ -45,7 +44,6 @@
 - (void)setArmWidth:(float)width;
 - (void)setArmLength:(float)length;
 - (void)setShoulderPosition:(GLKVector2)position;
-- (void)setPosition:(GLKVector2)position;
 
 
 #pragma mark -

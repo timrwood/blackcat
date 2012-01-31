@@ -7,6 +7,9 @@
 //
 
 
+#define CAMERA_JUMP_DISTANCE 4.0f
+
+
 #import "AHTimeManager.h"
 #import "AHSceneManager.h"
 #import "AHSuperSystem.h"
@@ -15,6 +18,7 @@
 #import "AHPhysicsSkeleton.h"
 #import "AHGraphicsSkeleton.h"
 
+#import "BCGlobalManager.h"
 #import "BCHeroActorRagdoll.h"
 #import "BCGlobalTypes.h"
 
@@ -82,6 +86,19 @@
 
 - (void)updateBeforeAnimation {
     [_skin setSkeleton:[_ragdoll skeleton]];
+    
+    GLKVector2 cameraPos;
+    cameraPos.x = [_ragdoll skeleton].x;
+    cameraPos.y = [_ragdoll skeleton].y;
+    
+    float buildingHeight = [[BCGlobalManager manager] buildingHeight];
+    float jumpPercent = fmaxf(buildingHeight - CAMERA_JUMP_DISTANCE, fminf(cameraPos.y, buildingHeight));
+    jumpPercent = (jumpPercent - buildingHeight) / CAMERA_JUMP_DISTANCE;
+    
+    cameraPos.x += 4.0f;
+    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
+    
+    [[AHGraphicsManager camera] setWorldPosition:cameraPos];
 }
 
 

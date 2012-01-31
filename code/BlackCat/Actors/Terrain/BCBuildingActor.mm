@@ -7,6 +7,8 @@
 //
 
 
+#import "AHGraphicsManager.h"
+#import "AHGraphicsRect.h"
 #import "AHPhysicsRect.h"
 #import "AHMathUtils.h"
 
@@ -29,6 +31,13 @@
         [_body setCategory:PHY_CAT_BUILDING];
         [_body addTag:PHY_TAG_JUMPABLE];
         [self addComponent:_body];
+        
+        _skin = [[AHGraphicsRect alloc] init];
+        [_skin setRectFromCenter:position andSize:size];
+        [_skin setTextureKey:@"debug-grid.png"];
+        [_skin setTexFromCenter:GLKVector2Make(0.5f, 0.5f) andRadius:0.5f];
+        [self addComponent:_skin];
+        [[AHGraphicsManager manager] addObject:_skin toLayerIndex:GFK_LAYER_BUILDINGS];
         
         _distanceCoveredRight = position.x + size.width;
         _distanceCoveredLeft = position.x - size.width;

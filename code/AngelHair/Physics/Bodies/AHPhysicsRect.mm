@@ -88,7 +88,7 @@
     b2FixtureDef *fixtureDef = new b2FixtureDef;
     fixtureDef->density = 1.0f;
     fixtureDef->restitution = self->restitution;
-    fixtureDef->restitution = self->friction;
+    fixtureDef->friction = self->friction;
     fixtureDef->shape = (b2Shape *) polygonShape;
     fixtureDef->isSensor = self->_isSensor;
     fixtureDef->filter.groupIndex = self->group;

@@ -7,7 +7,9 @@
 //
 
 
+#import "AHActorManager.h"
 #import "AHSceneManager.h"
+#import "AHTimeManager.h"
 #import "AHScene.h"
 
 
@@ -73,6 +75,9 @@ static AHSceneManager *_manager = nil;
 
 - (void)goToNextScene {
     [_currentScene teardown];
+    [[AHActorManager manager] destroyAll];
+    [[AHActorManager manager] updateAfterEverything];
+    [[AHTimeManager manager] reset];
     [_nextScene setup];
     
     _currentScene = _nextScene;

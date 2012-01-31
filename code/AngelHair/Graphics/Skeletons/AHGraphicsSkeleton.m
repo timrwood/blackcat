@@ -109,10 +109,6 @@
     _shoulderPosition = position;
 }
 
-- (void)setPosition:(GLKVector2)position {
-    _position = position;
-}
-
 
 #pragma mark -
 #pragma mark texture
@@ -180,7 +176,7 @@
     AHGraphicsManager *m = [AHGraphicsManager manager];
     // set skeleton origin
     
-    [m modelMove:GLKVector2Add(_position, GLKVector2Make(_skeleton.x, _skeleton.y))];
+    [m modelMove:GLKVector2Add(self->_position, GLKVector2Make(_skeleton.x, _skeleton.y))];
     
     // draw the back leg
     [m modelPush];

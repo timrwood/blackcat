@@ -253,7 +253,12 @@
 
 
 - (void)setLinearVelocity:(GLKVector2)velocity {
+    [_head setLinearVelocity:GLKVector2MultiplyScalar(velocity, 0.9f)];
     [_torso setLinearVelocity:velocity];
+    [_armA setLinearVelocity:GLKVector2MultiplyScalar(velocity, 0.9f)];
+    [_armB setLinearVelocity:GLKVector2MultiplyScalar(velocity, 0.8f)];
+    [_legA setLinearVelocity:GLKVector2MultiplyScalar(velocity, 0.9f)];
+    [_legB setLinearVelocity:GLKVector2MultiplyScalar(velocity, 0.8f)];
 }
 
 

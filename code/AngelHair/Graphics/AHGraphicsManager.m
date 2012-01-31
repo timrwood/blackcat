@@ -123,7 +123,7 @@ static AHGraphicsCamera *_camera = nil;
     if (_popPushIndex < 0) {
         derror(@"Model View pop is less than zero");
     }
-    _currentModelViewMatrix = _popPushStack[_popPushIndex];
+    [self setModelMatrix:_popPushStack[_popPushIndex]];
 }
 
 - (void)modelMove:(GLKVector2)move {

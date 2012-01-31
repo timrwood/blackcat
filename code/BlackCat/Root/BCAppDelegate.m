@@ -6,13 +6,15 @@
 //  Copyright (c) 2011 Broken Pixel Studios. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "ViewController.h"
+#import "BCAppDelegate.h"
+#import "BCViewController.h"
+
 #import "AHTimeManager.h"
 #import "AHSuperSystem.h"
 
 
-@implementation AppDelegate
+@implementation BCAppDelegate
+
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
@@ -22,14 +24,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
+        self.viewController = [[BCViewController alloc] initWithNibName:@"BCViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
+        self.viewController = [[BCViewController alloc] initWithNibName:@"BCViewController_iPad" bundle:nil];
     }
     
     // init super system
     [[AHSuperSystem manager] setup];
-    [[AHSuperSystem manager] setDebugDraw:YES];
+    //[[AHSuperSystem manager] setDebugDraw:YES];
     [[AHSuperSystem manager] setRenderDraw:YES];
     
     // setup fps

@@ -160,6 +160,16 @@
 }
 
 
+#pragma mark -
+#pragma mark velocity
+
+
+- (void)setLinearVelocity:(GLKVector2)velocity {
+    [_bodyA setLinearVelocity:velocity];
+    [_bodyB setLinearVelocity:velocity];
+}
+
+
 @end
 
 
