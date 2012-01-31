@@ -7,6 +7,7 @@
 //
 
 
+#import "AHShaderManager.h"
 #import "AHGraphicsManager.h"
 #import "AHTextureManager.h"
 #import "AHFileManager.h"
@@ -150,8 +151,24 @@ static AHTextureManager *_manager = nil;
 #pragma mark activate
 
 
-- (void)activateTexture:(AHTextureInfo *)texture {
-    [[AHGraphicsManager manager] setTexture0:[texture name]];
+- (void)activateBaseTexture:(AHTextureInfo *)texture {
+    if ([texture name] != _currentBaseTexture) {
+        glPushGroupMarkerEXT(0, "Enabling Base Texture");
+        _currentBaseTexture = [texture name];
+        glActiveTexture(GL_TEXTURE0 + AH_TEXTURE_SAMPLE_BASE);
+        glBindTexture(GL_TEXTURE_2D, _currentBaseTexture);
+        glPopGroupMarkerEXT();
+    }
+}
+
+- (void)activateNormalTexture:(AHTextureInfo *)texture {
+    if ([texture name] != _currentNormalTexture) {
+        glPushGroupMarkerEXT(0, "Enabling Base Texture");
+        _currentNormalTexture = [texture name];
+        glActiveTexture(GL_TEXTURE0 + AH_TEXTURE_SAMPLE_NORMAL);
+        glBindTexture(GL_TEXTURE_2D, _currentNormalTexture);
+        glPopGroupMarkerEXT();
+    }
 }
 
 

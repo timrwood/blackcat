@@ -66,9 +66,8 @@
 
 
 - (void)draw {
-    //dlog(@"drawing");
     for (AHGraphicsObject *object in _objects) {
-        [[AHTextureManager manager] activateTexture:[object texture]];
+        [[AHTextureManager manager] activateBaseTexture:[object texture]];
         [object draw];
     }
 }

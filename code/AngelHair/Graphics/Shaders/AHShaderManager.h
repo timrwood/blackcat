@@ -7,14 +7,17 @@
 //
 
 
-#define AH_SHADER_MODELVIEW_UNIFORM 0
-#define AH_SHADER_PROJECTION_UNIFORM 1
-#define AH_SHADER_TEXTURE_UNIFORM 2
-#define AH_SHADER_COLOR_UNIFORM 3
+#define AH_SHADER_UNIFORM_MODELVIEW 0
+#define AH_SHADER_UNIFORM_PROJECTION 1
+#define AH_SHADER_UNIFORM_TEXTURE 2
+#define AH_SHADER_UNIFORM_COLOR 3
 #define AH_SHADER_UNIFORM_COUNT 4
 
-#define AH_SHADER_POSITION_ATTRIB 0
-#define AH_SHADER_TEXTURE_ATTRIB 1
+#define AH_TEXTURE_SAMPLE_BASE 0
+#define AH_TEXTURE_SAMPLE_NORMAL 1
+
+#define AH_SHADER_ATTRIB_POS_COORD 0
+#define AH_SHADER_ATTRIB_TEX_COORD 1
 
 
 @interface AHShaderManager : NSObject {
@@ -30,8 +33,6 @@
     
     GLKMatrix4 currentModelview;
     GLKMatrix4 currentProjection;
-    
-    GLuint _currentTexture;
 }
 
 
@@ -66,13 +67,6 @@
 
 - (void)setModelViewMatrix:(GLKMatrix4)matrix;
 - (void)setProjectionMatrix:(GLKMatrix4)matrix;
-
-
-#pragma mark -
-#pragma mark texture
-
-
-- (void)setTexture0:(GLuint)tex0;
 
 
 #pragma mark -

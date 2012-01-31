@@ -7,6 +7,7 @@
 //
 
 
+#import "AHTimeManager.h"
 #import "AHSceneManager.h"
 #import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
@@ -28,6 +29,8 @@
 - (id)initFromSkeleton:(AHSkeleton)skeleton andSkeletonConfig:(AHSkeletonConfig)config {
     self = [super init];
     if (self) {
+        [[AHTimeManager manager] setWorldToRealRatio:5.0f];
+        
         _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:config];
         
         CGRect inputRect = [[UIScreen mainScreen] bounds];

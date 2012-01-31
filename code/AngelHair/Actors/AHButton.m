@@ -7,6 +7,9 @@
 //
 
 
+#import "AHInputManager.h"
+#import "AHGraphicsManager.h"
+#import "AHScene.h"
 #import "AHButton.h"
 
 
@@ -17,44 +20,75 @@
 #pragma mark init
 
 
-- (id)initFromDictionary:(NSDictionary *)dictionary {
-    int rx = [[dictionary objectForKey:@"rx"] intValue];
-    int ry = [[dictionary objectForKey:@"ry"] intValue];
-    int rw = [[dictionary objectForKey:@"rw"] intValue];
-    int rh = [[dictionary objectForKey:@"rh"] intValue];
-    int tx = [[dictionary objectForKey:@"tx"] intValue];
-    int ty = [[dictionary objectForKey:@"ty"] intValue];
-    int tw = [[dictionary objectForKey:@"tw"] intValue];
-    int th = [[dictionary objectForKey:@"th"] intValue];
+- (id)initFromRectDictionary:(NSDictionary *)rDict andTexDictionary:(NSDictionary *)tDict {
+    int rx = [[rDict objectForKey:@"rx"] intValue];
+    int ry = [[rDict objectForKey:@"ry"] intValue];
+    int rw = [[rDict objectForKey:@"rw"] intValue];
+    int rh = [[rDict objectForKey:@"rh"] intValue];
     
-    NSString *_key = [[dictionary objectForKey:@"key"] stringValue];
-    int _identifier = [[dictionary objectForKey:@"id"] intValue];
+    float tx = [[tDict objectForKey:@"tx"] floatValue];
+    float ty = [[tDict objectForKey:@"ty"] floatValue];
+    float tw = [[tDict objectForKey:@"tw"] floatValue];
+    float th = [[tDict objectForKey:@"th"] floatValue];
+    
+    NSString *key = [tDict objectForKey:@"key"];
+    int identifier = [[tDict objectForKey:@"id"] intValue];
     
     return [self initFromRect:CGRectMake(rx, ry, rw, rh)
                    andTexRect:CGRectMake(tx, ty, tw, th) 
-                    andTexKey:_key 
-                        andId:_identifier];
+                    andTexKey:key 
+                        andId:identifier];
 }
 
-- (id)initFromRect:(CGRect)_rect
-        andTexRect:(CGRect)_tex
-         andTexKey:(NSString *)_key
-             andId:(int)_identifier {
+- (id)initFromRect:(CGRect)rect
+        andTexRect:(CGRect)tex
+         andTexKey:(NSString *)key
+             andId:(int)identifier {
     self = [super init];
-    rect = _rect;
-    identifier = _identifier;
-    graphics = [[AHGraphicsRect alloc] init];
-    [graphics setRect:rect];
-    [graphics setTex:_tex];
-    /*
-    input = [[AHInputRect alloc] initFromRect:_rect
-                                 withDelegate:self];
-     */
+    _rect = _rect;
+    _identifier = identifier;
+    
+    // graphics
+    _graphics = [[AHGraphicsRect alloc] init];
+    [_graphics setRect:rect];
+    [_graphics setTex:tex];
+    [_graphics setTextureKey:key];
+    [[AHGraphicsManager manager] addObjectToHUDLayer:_graphics];
+    
+    // input
+    _input = [[AHInputComponent alloc] initWithScreenRect:rect];
+    [[AHInputManager manager] addInputComponent:_input];
+    [_input setDelegate:self];
     return self;
 }
 
-- (void)dealloc {
-    
+
+#pragma mark -
+#pragma mark scene
+
+
+- (void)setScene:(AHScene *)scene {
+    _scene = scene;
+}
+
+
+#pragma mark -
+#pragma mark touch
+
+
+- (void)touchEndedInside {
+    if (_scene) {
+        [_scene buttonWasTapped:self];
+    }
+}
+
+
+#pragma mark -
+#pragma mark identifier
+
+
+- (int)identifier {
+    return _identifier;
 }
 
 

@@ -7,11 +7,11 @@
 //
 
 
-varying lowp vec2 texture_coordinate;
+varying lowp vec2 texcoordFragment;
 
-uniform sampler2D texture;
+uniform sampler2D textureBase;
 
 
 void main(void) {
-    gl_FragColor = texture2D(texture, texture_coordinate);
+    gl_FragColor = texture2D(textureBase, texcoordFragment);
 }

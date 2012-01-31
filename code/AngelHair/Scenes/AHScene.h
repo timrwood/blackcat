@@ -51,4 +51,11 @@
 - (void)resetTeardown;
 
 
+#pragma mark -
+#pragma mark button
+
+
+- (void)buttonWasTapped:(AHButton *)button;
+
+
 @end

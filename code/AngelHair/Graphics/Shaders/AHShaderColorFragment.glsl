@@ -7,9 +7,9 @@
 //
 
 
-varying lowp vec4 destColor;
+varying lowp vec4 colorFragment;
 
 
 void main(void) {
-    gl_FragColor = destColor;
+    gl_FragColor = colorFragment;
 }

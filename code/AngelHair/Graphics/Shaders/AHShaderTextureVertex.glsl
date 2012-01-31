@@ -7,17 +7,17 @@
 //
 
 
-attribute vec4 position;
+attribute vec4 poscoord;
 attribute vec2 texcoord;
 
-varying lowp vec2 texture_coordinate;
+varying lowp vec2 texcoordFragment;
 
 uniform mat4 projection;
 uniform mat4 modelview;
 
 
 void main(void) {
-    texture_coordinate = texcoord;
+    texcoordFragment = texcoord;
     
-    gl_Position = projection * modelview * position;
+    gl_Position = projection * modelview * poscoord;
 }

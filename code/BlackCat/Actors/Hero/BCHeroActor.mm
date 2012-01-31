@@ -88,7 +88,7 @@
         _resetWhenDestroyed = YES;
         
         [self addComponent:_skeleton];
-        [[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];
+        //[[AHGraphicsManager manager] addObject:_skeleton toLayerIndex:GFX_LAYER_BACKGROUND];
         
         _runSpeed = 8.0f;
         

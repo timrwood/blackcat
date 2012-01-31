@@ -13,6 +13,7 @@
 #import "AHInputManager.h"
 #import "AHSceneManager.h"
 
+#import "BCClassSelectionScene.h"
 #import "BCMainScene.h"
 
 
@@ -23,14 +24,15 @@
     [super viewDidLoad];
     
     // debug
-    [[AHSceneManager manager] goToScene:[[BCMainScene alloc] init]];
+    [[AHSceneManager manager] setTimeToFadeIn:0.0f];
+    [[AHSceneManager manager] goToScene:[[BCClassSelectionScene alloc] init]];
     
     _context = [[AHGraphicsManager manager] context];
     
     GLKView *view = (GLKView *) self.view;
     view.context = _context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-    //view.drawableMultisample = GLKViewDrawableMultisample4X;
+    view.drawableMultisample = GLKViewDrawableMultisample4X;
 
 }
 

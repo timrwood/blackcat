@@ -9,14 +9,19 @@
 
 #import "AHActor.h"
 #import "AHGraphicsRect.h"
+#import "AHInputComponent.h"
 
 
-@interface AHButton : AHActor /* <AHInputComponent> */ {
+@class AHScene;
+
+
+@interface AHButton : AHActor <AHInputDelegate> {
 @private
-    CGRect rect;
-    int identifier;
-    AHGraphicsRect *graphics;
-    // AHInputRect *input;
+    CGRect _rect;
+    int _identifier;
+    AHGraphicsRect *_graphics;
+    AHInputComponent *_input;
+    AHScene *_scene;
 }
 
 
@@ -24,11 +29,26 @@
 #pragma mark init
 
 
-- (id)initFromDictionary:(NSDictionary *)dictionary;
+- (id)initFromRectDictionary:(NSDictionary *)rDict
+            andTexDictionary:(NSDictionary *)tDict;
 - (id)initFromRect:(CGRect)_rect
         andTexRect:(CGRect)_tex
          andTexKey:(NSString *)_key
              andId:(int)_identifier;
+
+
+#pragma mark -
+#pragma mark scene
+
+
+- (void)setScene:(AHScene *)scene;
+
+
+#pragma mark -
+#pragma mark identifier
+
+
+- (int)identifier;
 
 
 @end

@@ -18,7 +18,8 @@
     GLKTextureLoader *_loader;
     
     int _unloadedTextures;
-    GLuint _currentTexture;
+    GLuint _currentBaseTexture;
+    GLuint _currentNormalTexture;
 }
 
 
@@ -51,7 +52,8 @@
 #pragma mark activate
 
 
-- (void)activateTexture:(AHTextureInfo *)texture;
+- (void)activateBaseTexture:(AHTextureInfo *)texture;
+- (void)activateNormalTexture:(AHTextureInfo *)texture;
 
 
 @end

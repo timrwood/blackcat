@@ -56,7 +56,7 @@ static AHGraphicsCamera *_camera = nil;
     self = [super init];
     if (self) {
         _layers = [[NSMutableArray alloc] init];
-        _baseEffect = [[GLKBaseEffect alloc] init];
+        _hudLayer = [[AHGraphicsLayer alloc] init];
         _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         
         _popPushStack = malloc(sizeof(GLKMatrix4) * MAX_POP_PUSH_STACK);
@@ -92,32 +92,11 @@ static AHGraphicsCamera *_camera = nil;
 #pragma mark effect
 
 
-- (void)setTexture0:(GLuint)tex {
-    if (tex != _currentTex0) {
-        glPushGroupMarkerEXT(0, "Enabling texture");
-        
-        //dlog(@"Activating texture %i", tex);
-        _currentTex0 = tex;
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, _currentTex0);
-        [_shaderManager setTexture0:_currentTex0];
-        
-        glPopGroupMarkerEXT();
-         
-    }
-}
-
 - (void)setCameraMatrix:(GLKMatrix4)matrix {
-    //_baseEffect.transform.projectionMatrix = matrix;
-    //[_baseEffect prepareToDraw];
     [_shaderManager setProjectionMatrix:matrix];
 }
 
 - (void)setModelMatrix:(GLKMatrix4)matrix {
-    /*_baseEffect.transform.modelviewMatrix = matrix;
-    glPushGroupMarkerEXT(0, "Set Model Matrix");
-    [_baseEffect prepareToDraw];
-    glPopGroupMarkerEXT();*/
     _currentModelViewMatrix = matrix;
     [_shaderManager setModelViewMatrix:matrix];
 }
@@ -139,12 +118,12 @@ static AHGraphicsCamera *_camera = nil;
     }
 }
 
-- (void)modelPop {_popPushIndex --;
+- (void)modelPop {
+    _popPushIndex --;
     if (_popPushIndex < 0) {
         derror(@"Model View pop is less than zero");
     }
     _currentModelViewMatrix = _popPushStack[_popPushIndex];
-    //[self setModelMatrix:_popPushStack[_popPushIndex]];
 }
 
 - (void)modelMove:(GLKVector2)move {
@@ -235,7 +214,6 @@ static AHGraphicsCamera *_camera = nil;
 
 - (void)teardown {
     [EAGLContext setCurrentContext:_eaglContext];
-    _baseEffect = nil;
 }
 
 
@@ -247,6 +225,7 @@ static AHGraphicsCamera *_camera = nil;
     for (AHGraphicsLayer *layer in _layers) {
         [layer update];
     }
+    [_hudLayer update];
 }
 
 
@@ -258,26 +237,14 @@ static AHGraphicsCamera *_camera = nil;
     [_camera prepareToDrawWorld];
     
     glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     for (AHGraphicsLayer *layer in _layers) {
         [layer draw];
     }
-}
-
-
-#pragma mark -
-#pragma mark color
-
-
-- (void)setDrawColor:(GLKVector4)color {
-    if (!GLKVector4AllEqualToVector4(color, _currentColor)) {
-        _currentColor = color;
-        _baseEffect.useConstantColor = YES;
-        _baseEffect.texture2d0.enabled = NO;
-        _baseEffect.constantColor = _currentColor;
-        //[_baseEffect prepareToDraw];
-    }
+    
+    [_camera prepareToDrawScreen];
+    [_hudLayer draw];
 }
 
 
@@ -321,8 +288,6 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i {
-    //dlog(@"object");
-    
     if (i >= [_layers count] || ![_layers objectAtIndex:i]) {
         [self addLayer:[[AHGraphicsLayer alloc] init] atIndex:i];
     }
@@ -331,6 +296,11 @@ static AHGraphicsCamera *_camera = nil;
     
     [object removeFromParentLayer];
     [layer addObject:object];
+}
+
+- (void)addObjectToHUDLayer:(AHGraphicsObject *)object {
+    [object removeFromParentLayer];
+    [_hudLayer addObject:object];
 }
 
 
@@ -342,9 +312,8 @@ static AHGraphicsCamera *_camera = nil;
                       andTexture:(GLKVector2 *)texture
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
-    glVertexAttribPointer(AH_SHADER_TEXTURE_ATTRIB, 2, GL_FLOAT, GL_FALSE, 0, texture);
-    //dlog(@"tex %F %F %F %F", texture[0].x, texture[1].x, texture[2].x, texture[3].x);
-    glVertexAttribPointer(AH_SHADER_POSITION_ATTRIB, 2, GL_FLOAT, GL_FALSE, 0, position);
+    glVertexAttribPointer(AH_SHADER_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, texture);
+    glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 2, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
 }
 
@@ -353,7 +322,7 @@ static AHGraphicsCamera *_camera = nil;
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
     [_shaderManager setColor:color];
-    glVertexAttribPointer(AH_SHADER_POSITION_ATTRIB, 2, GL_FLOAT, GL_FALSE, 0, position);
+    glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 2, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
 }
 

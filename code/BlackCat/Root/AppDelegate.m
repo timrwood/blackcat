@@ -10,7 +10,6 @@
 #import "ViewController.h"
 #import "AHTimeManager.h"
 #import "AHSuperSystem.h"
-#import "AHActorManager.h"
 
 
 @implementation AppDelegate

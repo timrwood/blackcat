@@ -20,12 +20,11 @@
 @interface AHGraphicsManager : NSObject <AHSubSystem> {
 @private;
     NSMutableArray *_layers;
+    AHGraphicsLayer *_hudLayer;
     
     EAGLContext *_eaglContext;
     
     AHShaderManager *_shaderManager;
-    
-    GLKBaseEffect *_baseEffect;
     
     GLKMatrix4 _currentModelViewMatrix;
     GLKMatrix4 _currentProjectionMatrix;
@@ -33,8 +32,6 @@
     int _popPushIndex;
     
     GLKVector4 _currentColor;
-    
-    GLuint _currentTex0;
 }
 
 
@@ -57,8 +54,8 @@
 #pragma mark effect
 
 
-- (void)setTexture0:(GLuint)tex;
 - (void)setCameraMatrix:(GLKMatrix4)matrix;
+- (void)setModelMatrix:(GLKMatrix4)matrix;
 
 
 #pragma mark -
@@ -105,13 +102,6 @@
 
 
 #pragma mark -
-#pragma mark color
-
-
-- (void)setDrawColor:(GLKVector4)color;
-
-
-#pragma mark -
 #pragma mark layers
 
 
@@ -126,6 +116,7 @@
 
 
 - (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i;
+- (void)addObjectToHUDLayer:(AHGraphicsObject *)object;
 
 
 #pragma mark -

@@ -27,9 +27,9 @@
         _position = GLKVector2Make(0.0f, 0.0f);
         [self cacheWorldMatrix];
         _screenMatrix = GLKMatrix4MakeOrtho(0.0f, 
-                                            _screenRect.size.width, 
-                                            0.0f, 
                                             _screenRect.size.height, 
+                                            0.0f, 
+                                            _screenRect.size.width, 
                                             -1.0f, 
                                             1.0f);
     }

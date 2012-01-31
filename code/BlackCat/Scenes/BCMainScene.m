@@ -8,6 +8,7 @@
 
 
 #import "AHActorManager.h"
+#import "AHTimeManager.h"
 #import "AHGraphicsManager.h"
 
 #import "BCBackgroundActor.h"
@@ -29,10 +30,12 @@
 
 - (void)resetSetup {
     dlog(@"reset");
+    [[AHTimeManager manager] setWorldToRealRatio:1.0f];
+    
     [[BCGlobalManager manager] setHeroPosition:GLKVector2Make(0.0f, 0.0f)];
     [[BCGlobalManager manager] setHeroSpeed:0.0f];
     
-    //[[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
+    [[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
     [[AHActorManager manager] add:[[BCHeroActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];

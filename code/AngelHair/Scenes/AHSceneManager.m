@@ -7,9 +7,6 @@
 //
 
 
-#define TIME_TO_FADE_IN 0.5f
-
-
 #import "AHSceneManager.h"
 #import "AHScene.h"
 
@@ -54,7 +51,7 @@ static AHSceneManager *_manager = nil;
 - (id)init {
     self = [super init];
     if (self) {
-        
+        _timeToFadeIn = 0.5f;
     }
     return self;
 }
@@ -105,6 +102,10 @@ static AHSceneManager *_manager = nil;
 #pragma mark reset
 
 
+- (void)setTimeToFadeIn:(float)time {
+    _timeToFadeIn = time;
+}
+
 - (void)reset {
     _needsToBeReset = YES;
 }
@@ -128,7 +129,7 @@ static AHSceneManager *_manager = nil;
 - (void)updateResetTimer {
     if (_needsToBeReset) {
         _timeToReset += 0.03f; // change to use global time
-        if (_timeToReset > TIME_TO_FADE_IN) {
+        if (_timeToReset > _timeToFadeIn) {
             [_currentScene reset];
             _needsToBeReset = NO;
         }
@@ -141,7 +142,7 @@ static AHSceneManager *_manager = nil;
 - (void)updateNextSceneTimer {
     if (_nextScene) {
         _timeToNewScene += 0.03f; // change to use global time
-        if (_timeToNewScene > TIME_TO_FADE_IN) {
+        if (_timeToNewScene > _timeToFadeIn) {
             [self goToNextScene];
         }
     } else {
@@ -150,5 +151,6 @@ static AHSceneManager *_manager = nil;
         }
     }
 }
+
 
 @end

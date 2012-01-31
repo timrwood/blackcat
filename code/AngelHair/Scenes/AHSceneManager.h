@@ -21,6 +21,8 @@
     float _timeToNewScene;
     float _timeToReset;
     BOOL _needsToBeReset;
+    
+    float _timeToFadeIn;
 }
 
 
@@ -35,6 +37,7 @@
 #pragma mark reset
 
 
+- (void)setTimeToFadeIn:(float)time;
 - (void)reset;
 
 

@@ -45,6 +45,7 @@
 
 - (void)addButtonFromDictionary:(NSDictionary *)dictionary {
     NSDictionary *deviceSpecific;
+    NSDictionary *texture;
     if (YES) { // check for ipad/iphone
         id dict = [dictionary objectForKey:@"ipad"];
         if ([dict isKindOfClass:[NSDictionary class]]) {
@@ -60,23 +61,38 @@
             dlog(@"No iphone dictionary found for button");
         }
     }
-    if (deviceSpecific) {
-        [self addButton:[[AHButton alloc] initFromDictionary:deviceSpecific]];
+    id tex = [dictionary objectForKey:@"tex"];
+    if ([tex isKindOfClass:[NSDictionary class]]) {
+        texture = (NSDictionary *) tex;
+    } else {
+        dlog(@"No texture dictionary found for button");
+    }
+    if (deviceSpecific && texture) {
+        [self addButton:[[AHButton alloc] initFromRectDictionary:deviceSpecific andTexDictionary:texture]];
     } else {
         dlog(@"No dictionary found for button");
     }
 }
 
 - (void)addButton:(AHButton *)button {
-    
+    if (![buttons containsObject:button]) {
+        [buttons addObject:button];
+    }
+    [[AHActorManager manager] add:button];
+    [button setScene:self];
 }
 
 - (void)removeButton:(AHButton *)button {
-    
+    if ([buttons containsObject:button]) {
+        [buttons removeObject:button];
+    }
+    [[AHActorManager manager] destroy:button];
 }
 
 - (void)removeAllButtons {
-    
+    while ([buttons count] > 0) {
+        [self removeButton:(AHButton *) [buttons objectAtIndex:0]];
+    }
 }
 
 
@@ -119,6 +135,15 @@
 }
 
 - (void)resetTeardown {
+    
+}
+
+
+#pragma mark -
+#pragma mark button
+
+
+- (void)buttonWasTapped:(AHButton *)button {
     
 }
 

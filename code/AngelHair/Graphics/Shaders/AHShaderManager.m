@@ -86,10 +86,8 @@
 
 - (void)compileColorShaders {
     // load shaders
-    GLuint vertexShader = [self compileShader:@"AHShaderColorVertex" 
-                                     withType:GL_VERTEX_SHADER];
-    GLuint fragmentShader = [self compileShader:@"AHShaderColorFragment" 
-                                       withType:GL_FRAGMENT_SHADER];
+    GLuint vertexShader = [self compileShader:@"AHShaderColorVertex" withType:GL_VERTEX_SHADER];
+    GLuint fragmentShader = [self compileShader:@"AHShaderColorFragment" withType:GL_FRAGMENT_SHADER];
     
     // create program
     _colorProgram = glCreateProgram();
@@ -97,7 +95,7 @@
     glAttachShader(_colorProgram, fragmentShader);
     
     // assign pointers for position and color
-    glBindAttribLocation(_colorProgram, AH_SHADER_POSITION_ATTRIB, "position");
+    glBindAttribLocation(_colorProgram, AH_SHADER_ATTRIB_POS_COORD, "poscoord");
     
     // link program
     glLinkProgram(_colorProgram);
@@ -117,26 +115,24 @@
     glUseProgram(_colorProgram);
     
     // enable pointers
-    glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
+    glEnableVertexAttribArray(AH_SHADER_ATTRIB_POS_COORD);
     
     // assign pointers for
-    _colorUniforms[AH_SHADER_MODELVIEW_UNIFORM] = glGetUniformLocation(_colorProgram, "modelview");
-    _colorUniforms[AH_SHADER_PROJECTION_UNIFORM] = glGetUniformLocation(_colorProgram, "projection");
-    _colorUniforms[AH_SHADER_COLOR_UNIFORM] = glGetUniformLocation(_colorProgram, "sourceColor");
+    _colorUniforms[AH_SHADER_UNIFORM_MODELVIEW] = glGetUniformLocation(_colorProgram, "modelview");
+    _colorUniforms[AH_SHADER_UNIFORM_PROJECTION] = glGetUniformLocation(_colorProgram, "projection");
+    _colorUniforms[AH_SHADER_UNIFORM_COLOR] = glGetUniformLocation(_colorProgram, "color");
     
-    dlog(@"Compiled color modelview uniform %i", _colorUniforms[AH_SHADER_MODELVIEW_UNIFORM]);
-    dlog(@"Compiled color projection uniform %i", _colorUniforms[AH_SHADER_PROJECTION_UNIFORM]);
-    dlog(@"Compiled color sourceColor uniform %i", _colorUniforms[AH_SHADER_COLOR_UNIFORM]);
+    dlog(@"Compiled color modelview uniform %i", _colorUniforms[AH_SHADER_UNIFORM_MODELVIEW]);
+    dlog(@"Compiled color projection uniform %i", _colorUniforms[AH_SHADER_UNIFORM_PROJECTION]);
+    dlog(@"Compiled color sourceColor uniform %i", _colorUniforms[AH_SHADER_UNIFORM_COLOR]);
     
     dlog(@"Compiled color shaders");
 }
 
 - (void)compileTextureShaders {
     // load shaders
-    GLuint vertexShader = [self compileShader:@"AHShaderTextureVertex" 
-                                     withType:GL_VERTEX_SHADER];
-    GLuint fragmentShader = [self compileShader:@"AHShaderTextureFragment" 
-                                       withType:GL_FRAGMENT_SHADER];
+    GLuint vertexShader = [self compileShader:@"AHShaderTextureVertex" withType:GL_VERTEX_SHADER];
+    GLuint fragmentShader = [self compileShader:@"AHShaderTextureFragment" withType:GL_FRAGMENT_SHADER];
     
     // create program
     _textureProgram = glCreateProgram();
@@ -144,8 +140,8 @@
     glAttachShader(_textureProgram, fragmentShader);
     
     // assign pointers for position and color
-    glBindAttribLocation(_textureProgram, AH_SHADER_POSITION_ATTRIB, "position");
-    glBindAttribLocation(_textureProgram, AH_SHADER_TEXTURE_ATTRIB, "texcoord");
+    glBindAttribLocation(_textureProgram, AH_SHADER_ATTRIB_POS_COORD, "poscoord");
+    glBindAttribLocation(_textureProgram, AH_SHADER_ATTRIB_TEX_COORD, "texcoord");
     
     // link program
     glLinkProgram(_textureProgram);
@@ -165,17 +161,19 @@
     glUseProgram(_textureProgram);
     
     // enable pointers
-    glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
-    glEnableVertexAttribArray(AH_SHADER_TEXTURE_ATTRIB);
+    glEnableVertexAttribArray(AH_SHADER_ATTRIB_POS_COORD);
+    glEnableVertexAttribArray(AH_SHADER_ATTRIB_TEX_COORD);
     
     // assign pointers for
-    _textureUniforms[AH_SHADER_MODELVIEW_UNIFORM] = glGetUniformLocation(_textureProgram, "modelview");
-    _textureUniforms[AH_SHADER_PROJECTION_UNIFORM] = glGetUniformLocation(_textureProgram, "projection");
-    _textureUniforms[AH_SHADER_TEXTURE_UNIFORM] = glGetUniformLocation(_textureProgram, "texture");
+    _textureUniforms[AH_SHADER_UNIFORM_MODELVIEW] = glGetUniformLocation(_textureProgram, "modelview");
+    _textureUniforms[AH_SHADER_UNIFORM_PROJECTION] = glGetUniformLocation(_textureProgram, "projection");
+    _textureUniforms[AH_SHADER_UNIFORM_TEXTURE] = glGetUniformLocation(_textureProgram, "textureBase");
     
-    dlog(@"Compiled texture modelview uniform %i", _textureUniforms[AH_SHADER_MODELVIEW_UNIFORM]);
-    dlog(@"Compiled texture projection uniform %i", _textureUniforms[AH_SHADER_PROJECTION_UNIFORM]);
-    dlog(@"Compiled texture texture uniform %i", _textureUniforms[AH_SHADER_TEXTURE_UNIFORM]);
+    glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_TEXTURE], AH_TEXTURE_SAMPLE_BASE);
+    
+    dlog(@"Compiled texture modelview uniform %i", _textureUniforms[AH_SHADER_UNIFORM_MODELVIEW]);
+    dlog(@"Compiled texture projection uniform %i", _textureUniforms[AH_SHADER_UNIFORM_PROJECTION]);
+    dlog(@"Compiled texture texture uniform %i", _textureUniforms[AH_SHADER_UNIFORM_TEXTURE]);
     
     dlog(@"Compiled texture shaders");
 }
@@ -192,9 +190,6 @@
             _currentUniforms[i] = _textureUniforms[i];
         }
         glUseProgram(_textureProgram);
-        glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
-        glEnableVertexAttribArray(AH_SHADER_TEXTURE_ATTRIB);
-        [self setTexture0:_currentTexture];
         [self setModelViewMatrix:currentModelview];
         [self setProjectionMatrix:currentProjection];
     }
@@ -207,7 +202,6 @@
             _currentUniforms[i] = _colorUniforms[i];
         }
         glUseProgram(_colorProgram);
-        glEnableVertexAttribArray(AH_SHADER_POSITION_ATTRIB);
         [self setModelViewMatrix:currentModelview];
         [self setProjectionMatrix:currentProjection];
     }
@@ -220,7 +214,7 @@
 
 - (void)setColor:(GLKVector4)color {
     if (!_isUsingTextureProgram) {
-        glUniform4fv(_currentUniforms[AH_SHADER_COLOR_UNIFORM], 1, color.v);
+        glUniform4fv(_currentUniforms[AH_SHADER_UNIFORM_COLOR], 1, color.v);
     }
 }
 
@@ -230,27 +224,15 @@
 
 
 - (void)setModelViewMatrix:(GLKMatrix4)matrix {
-    glUniformMatrix4fv(_currentUniforms[AH_SHADER_MODELVIEW_UNIFORM], 1, 0, matrix.m);
+    glUniformMatrix4fv(_currentUniforms[AH_SHADER_UNIFORM_MODELVIEW], 1, 0, matrix.m);
     currentModelview = matrix;
     [self debug];
 }
 
 - (void)setProjectionMatrix:(GLKMatrix4)matrix {
-    glUniformMatrix4fv(_currentUniforms[AH_SHADER_PROJECTION_UNIFORM], 1, 0, matrix.m);
+    glUniformMatrix4fv(_currentUniforms[AH_SHADER_UNIFORM_PROJECTION], 1, 0, matrix.m);
     currentProjection = matrix;
     [self debug];
-}
-
-
-#pragma mark -
-#pragma mark texture
-
-
-- (void)setTexture0:(GLuint)tex0 {
-    _currentTexture = tex0;
-    if (_isUsingTextureProgram) {
-        glUniform1i(_currentUniforms[AH_SHADER_TEXTURE_UNIFORM], _currentTexture);
-    }
 }
 
 
