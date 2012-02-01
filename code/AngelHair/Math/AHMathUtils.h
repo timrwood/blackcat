@@ -3,7 +3,7 @@
 //  BlackCat
 //
 //  Created by Tim Wood on 1/12/12.
-//  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
+//  Copyright (c) 2012 Infinite Beta. All rights reserved.
 //
 
 #ifndef __AH_MATH_UTILS_H

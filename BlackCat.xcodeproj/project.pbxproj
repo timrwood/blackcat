@@ -130,6 +130,8 @@
 		15AC4E4114B7BB3700283A06 /* AHShaderTextureVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* AHShaderTextureVertex.glsl */; };
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
 		15C5EBC314C0F17200FB5BAF /* AHActorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */; };
+		15C98D9C14D9B5E700B34918 /* BCHeroType.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9B14D9B5E700B34918 /* BCHeroType.m */; };
+		15C98D9F14D9B71600B34918 /* BCHeroTypeRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9E14D9B71600B34918 /* BCHeroTypeRunner.m */; };
 		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
 		15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */; };
 /* End PBXBuildFile section */
@@ -268,9 +270,9 @@
 		15AC4D7514B7B3BB00283A06 /* AHShaderTextureVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AHShaderTextureVertex.glsl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		15AC4D7D14B7B3BB00283A06 /* AHPhysicsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsManager.h; sourceTree = "<group>"; };
 		15AC4D7E14B7B3BB00283A06 /* AHPhysicsManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsManager.mm; sourceTree = "<group>"; };
-		15AC4D8614B7B3BB00283A06 /* BCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = BCAppDelegate.h; sourceTree = "<group>"; };
+		15AC4D8614B7B3BB00283A06 /* BCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAppDelegate.h; sourceTree = "<group>"; };
 		15AC4D8714B7B3BB00283A06 /* BCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAppDelegate.m; sourceTree = "<group>"; };
-		15AC4D8814B7B3BB00283A06 /* BCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = BCViewController.h; sourceTree = "<group>"; };
+		15AC4D8814B7B3BB00283A06 /* BCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCViewController.h; sourceTree = "<group>"; };
 		15AC4D8914B7B3BB00283A06 /* BCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCViewController.m; sourceTree = "<group>"; };
 		15AC4D8A14B7B3BB00283A06 /* BCViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BCViewController_iPad.xib; sourceTree = "<group>"; };
 		15AC4D8B14B7B3BB00283A06 /* BCViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BCViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -376,6 +378,10 @@
 		15C5EBC114C0F17200FB5BAF /* AHActorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorMessage.h; sourceTree = "<group>"; };
 		15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActorMessage.m; sourceTree = "<group>"; };
 		15C5EBC414C0FB3A00FB5BAF /* BCGlobalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalTypes.h; path = Global/BCGlobalTypes.h; sourceTree = "<group>"; };
+		15C98D9A14D9B5E700B34918 /* BCHeroType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroType.h; path = Actors/Hero/Types/BCHeroType.h; sourceTree = "<group>"; };
+		15C98D9B14D9B5E700B34918 /* BCHeroType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCHeroType.m; path = Actors/Hero/Types/BCHeroType.m; sourceTree = "<group>"; };
+		15C98D9D14D9B71600B34918 /* BCHeroTypeRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroTypeRunner.h; path = Actors/Hero/Types/BCHeroTypeRunner.h; sourceTree = "<group>"; };
+		15C98D9E14D9B71600B34918 /* BCHeroTypeRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCHeroTypeRunner.m; path = Actors/Hero/Types/BCHeroTypeRunner.m; sourceTree = "<group>"; };
 		15CEA5C514BF75D20052D6BC /* BCGlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalManager.h; path = Global/BCGlobalManager.h; sourceTree = "<group>"; };
 		15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCGlobalManager.m; path = Global/BCGlobalManager.m; sourceTree = "<group>"; };
 		15CEA5CA14BF84690052D6BC /* BCCrateActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCrateActor.h; path = Actors/Terrain/BCCrateActor.h; sourceTree = "<group>"; };
@@ -731,6 +737,7 @@
 		15AAFBF914BE2B970058F014 /* Hero */ = {
 			isa = PBXGroup;
 			children = (
+				15C98D9814D9B58600B34918 /* Types */,
 				15AAFBFA14BE2BC30058F014 /* BCHeroActor.h */,
 				15AAFBFB14BE2BC30058F014 /* BCHeroActor.mm */,
 				150F1D2F14D2338600592E87 /* BCHeroActorRagdoll.h */,
@@ -1109,6 +1116,17 @@
 			name = Camera;
 			sourceTree = "<group>";
 		};
+		15C98D9814D9B58600B34918 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				15C98D9A14D9B5E700B34918 /* BCHeroType.h */,
+				15C98D9B14D9B5E700B34918 /* BCHeroType.m */,
+				15C98D9D14D9B71600B34918 /* BCHeroTypeRunner.h */,
+				15C98D9E14D9B71600B34918 /* BCHeroTypeRunner.m */,
+			);
+			name = Types;
+			sourceTree = "<group>";
+		};
 		15CEA5C914BF75D60052D6BC /* Global */ = {
 			isa = PBXGroup;
 			children = (
@@ -1307,6 +1325,8 @@
 				150F1D2E14D1F60600592E87 /* AHPhysicsLimb.mm in Sources */,
 				150F1D3114D2338600592E87 /* BCHeroActorRagdoll.mm in Sources */,
 				159A08A414D75D03009CA4AF /* BCClassSelectionScene.m in Sources */,
+				15C98D9C14D9B5E700B34918 /* BCHeroType.m in Sources */,
+				15C98D9F14D9B71600B34918 /* BCHeroTypeRunner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
