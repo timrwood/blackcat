@@ -68,23 +68,25 @@
         
         AHSkeleton skeleton;
         _skeleton = [[AHGraphicsSkeleton alloc] init];
-        config.armWidth = 0.1f;
-        config.armLength = 1.0f;
-        config.legWidth = 0.1f;
+        config.armWidth = 0.15f;
+        config.armLength = 0.9f;
+        config.legWidth = 0.15f;
         config.legLength = 1.0f;
-        config.torsoWidth = 0.2f;
+        config.torsoWidth = 0.25f;
         config.torsoHeight = 0.6f;
-        config.headTop = 0.2f;
-        config.headBottom = 0.1f;
+        config.headTop = 0.22f;
+        config.headBottom = 0.08f;
         config.headLeft = 0.1f;
-        config.headRight = 0.1f;
+        config.headRight = 0.15f;
         [_skeleton setSkeleton:skeleton];
         [_skeleton setFromSkeletonConfig:config];
-        [_skeleton setTextureKey:@"debug-grid.png"];
-        [_skeleton setArmsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_skeleton setLegsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [[_skeleton torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [[_skeleton head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skeleton setTextureKey:@"body-detective.png"];
+        [_skeleton setArmATextureRect:CGRectMake(0.25f, 0.0f, 0.25f, 0.5f)];
+        [_skeleton setArmBTextureRect:CGRectMake(0.0f, 0.0f, 0.25f, 0.5f)];
+        [_skeleton setLegATextureRect:CGRectMake(0.25f, 0.5f, 0.25f, 0.5f)];
+        [_skeleton setLegBTextureRect:CGRectMake(0.0f, 0.5f, 0.25f, 0.5f)];
+        [[_skeleton torso] setTex:CGRectMake(0.5f, 0.5f, 0.5f, 0.5f)];
+        [[_skeleton head] setTex:CGRectMake(0.5f, 0.25f, 0.5f, 0.25f)];
         
         _resetWhenDestroyed = YES;
         
@@ -221,16 +223,12 @@
 }
 
 - (void)updateCamera {
-    float buildingHeight = [[BCGlobalManager manager] buildingHeight];
-    float jumpPercent = fmaxf(buildingHeight - CAMERA_JUMP_DISTANCE, fminf([_body position].y, buildingHeight));
-    jumpPercent = (jumpPercent - buildingHeight) / CAMERA_JUMP_DISTANCE;
-    
-    GLKVector2 cameraPos = [_body position];
-    cameraPos.x += 4.0f;
-    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
+    GLKVector2 cameraPos;
+    cameraPos.x = [_body position].x + 2.0f;
+    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 2.0f;
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
-    //[[AHGraphicsManager camera] setWorldZoom:100.0f];
+    [[AHGraphicsManager camera] setWorldZoom:3.0f];
     
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
@@ -276,7 +274,7 @@
     upper.elbowB = 0.0f;
     upper.shoulderA = M_TAU_4;
     upper.shoulderB = M_TAU_4;
-    upper.neck = M_TAU_8;
+    upper.neck = M_TAU_16;
     
     AHSkeleton lower;
     lower.hipA = -(M_TAU_4 + M_TAU_8);
@@ -287,7 +285,7 @@
     lower.elbowB = -(M_TAU_4 + M_TAU_8);
     lower.shoulderA = -M_TAU_2;
     lower.shoulderB = -M_TAU_2;
-    lower.neck = -M_TAU_8;
+    lower.neck = -M_TAU_16;
     
     [ragdoll setUpperLimits:upper andLowerLimits:lower];
     

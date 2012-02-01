@@ -27,7 +27,8 @@
 #pragma mark static vars
 
 
-+ (float)size;
++ (float)width;
++ (float)height;
 
 
 #pragma mark -

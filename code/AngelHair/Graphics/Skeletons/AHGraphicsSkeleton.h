@@ -26,6 +26,7 @@
     AHGraphicsRect *_torso;
     
     GLKVector2 _shoulderPosition;
+    GLKVector2 _neckPosition;
 
     AHSkeleton _skeleton;
     

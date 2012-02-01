@@ -79,27 +79,28 @@
 }
 
 - (void)buildCratesAtPosition:(GLKVector2)position {
-    float size = [BCCrateActor size];
-    
+    float width = [BCCrateActor width];
+    float height = [BCCrateActor height];
+
     GLKVector2 pos = position;
-    pos.y -= size;
+    pos.y -= height;
     [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
     
-    pos.x -= size * 2;
+    pos.x -= width * 2;
     [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
     
-    pos.x += size * 4;
+    pos.x += width * 4;
     [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
     
-    pos.x -= size;
-    pos.y -= size * 2;
+    pos.x -= width;
+    pos.y -= height * 2;
     [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
     
-    pos.x -= size * 2;
+    pos.x -= width * 2;
     [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
     
-    pos.x += size;
-    pos.y -= size * 4;
+    pos.x += width;
+    pos.y -= height * 4;
     [[AHActorManager manager] add:[[BCCrateActor alloc] initAtPosition:pos]];
 }
 

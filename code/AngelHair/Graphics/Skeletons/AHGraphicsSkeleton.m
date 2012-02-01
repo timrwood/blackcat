@@ -58,8 +58,10 @@
 
 - (void)setFromSkeletonConfig:(AHSkeletonConfig)config {
     // shoulder
-    _shoulderPosition.x = 0.0f;
     _shoulderPosition.y = -(config.torsoHeight - config.torsoWidth);
+    
+    // neck
+    _neckPosition.y = -(config.torsoHeight - config.torsoWidth / 2.0f);
     
     // arms and legs
     [self setLegWidth:config.legWidth];
@@ -68,7 +70,7 @@
     [self setArmLength:config.armLength];
     
     // head and torso
-    [_head setRect:CGRectMake(-config.headRight, 
+    [_head setRect:CGRectMake(-config.headLeft, 
                               -config.headTop, 
                               config.headRight + config.headLeft, 
                               config.headBottom + config.headTop)];
@@ -192,19 +194,25 @@
     [_armA draw];
     [m modelPop];
     
-    // draw the torso
+    // draw the front leg
     [m modelPush];
+    [m modelRotate:_skeleton.hipB];
+    [_legB draw];
+    [m modelPop];
     
     // push the waist angle
+    [m modelPush];
     [m modelRotate:_skeleton.waist];
-    [_torso draw];
     
     // draw the head
     [m modelPush];
-    [m modelMove:_shoulderPosition 
+    [m modelMove:_neckPosition 
       thenRotate:_skeleton.neck];
     [_head draw];
     [m modelPop];
+    
+    // draw the torso
+    [_torso draw];
     
     // draw the front arm
     [m modelPush];
@@ -214,12 +222,6 @@
     [m modelPop];
     
     // pop the waist angle
-    [m modelPop];
-    
-    // draw the front leg
-    [m modelPush];
-    [m modelRotate:_skeleton.hipB];
-    [_legB draw];
     [m modelPop];
     glPopGroupMarkerEXT();
     

@@ -28,10 +28,6 @@
         _bodyB = [[AHPhysicsRect alloc] init];
         _jointA = [[AHPhysicsRevoluteJoint alloc] init];
         _jointB = [[AHPhysicsRevoluteJoint alloc] init];
-        
-        // debug
-        //[_bodyA setStatic:YES];
-        //[_bodyB setStatic:YES];
     }
     return self;
 }

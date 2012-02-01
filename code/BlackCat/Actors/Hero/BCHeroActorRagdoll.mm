@@ -48,11 +48,14 @@
         _skin = [[AHGraphicsSkeleton alloc] init];
         [_skin setFromSkeletonConfig:config];
         [_skin setSkeleton:skeleton];
-        [_skin setTextureKey:@"debug-grid.png"];
-        [_skin setArmsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_skin setLegsTextureRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [[_skin torso] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [[_skin head] setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skin setTextureKey:@"body-detective.png"];
+        //[_skin setTextureKey:@"debug-grid.png"];
+        [_skin setArmATextureRect:CGRectMake(0.25f, 0.0f, 0.25f, 0.5f)];
+        [_skin setArmBTextureRect:CGRectMake(0.0f, 0.0f, 0.25f, 0.5f)];
+        [_skin setLegATextureRect:CGRectMake(0.25f, 0.5f, 0.25f, 0.5f)];
+        [_skin setLegBTextureRect:CGRectMake(0.0f, 0.5f, 0.25f, 0.5f)];
+        [[_skin torso] setTex:CGRectMake(0.5f, 0.5f, 0.5f, 0.5f)];
+        [[_skin head] setTex:CGRectMake(0.5f, 0.25f, 0.5f, 0.25f)];
         [_skin setLayerIndex:GFX_LAYER_BACKGROUND];
         
         [self addComponent:_skin];
@@ -88,15 +91,8 @@
     [_skin setSkeleton:[_ragdoll skeleton]];
     
     GLKVector2 cameraPos;
-    cameraPos.x = [_ragdoll skeleton].x;
-    cameraPos.y = [_ragdoll skeleton].y;
-    
-    float buildingHeight = [[BCGlobalManager manager] buildingHeight];
-    float jumpPercent = fmaxf(buildingHeight - CAMERA_JUMP_DISTANCE, fminf(cameraPos.y, buildingHeight));
-    jumpPercent = (jumpPercent - buildingHeight) / CAMERA_JUMP_DISTANCE;
-    
-    cameraPos.x += 4.0f;
-    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 3.0f - (jumpPercent * 2.0f);
+    cameraPos.x = [_ragdoll skeleton].x + 2.0f;
+    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 2.0f;
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
 }

@@ -22,7 +22,8 @@
     self = [super init];
     if (self) {
         _bodyType = b2_dynamicBody;
-        restitution = 0.3f;
+        restitution = 0.2f;
+        friction = 0.8f;
         group = 0;
         _joints = [[NSMutableArray alloc] init];
     }
@@ -125,7 +126,7 @@
 
 - (void)setLinearVelocity:(GLKVector2)vel atWorldPoint:(GLKVector2)point {
     if (_body) {
-        _body->ApplyLinearImpulse(b2Vec2(vel.x, vel.y), b2Vec2(point.x, point.y));
+        _body->ApplyForce(b2Vec2(vel.x, vel.y), b2Vec2(point.x, point.y));
     }
 }
 

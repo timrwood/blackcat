@@ -7,7 +7,7 @@
 //
 
 
-//static int SKELETON_OFFSET = 0;
+static int SKELETON_OFFSET = 0;
 
 
 #import "AHMathUtils.h"
@@ -42,18 +42,14 @@
         [self setFromSkeletonConfig:config];
         _skeleton = skeleton;
         
-        // debug
-        //[_torso setStatic:YES];
-        //[_head setStatic:YES];
+        SKELETON_OFFSET--;
+        [_armA setGroup:SKELETON_OFFSET];
+        [_armB setGroup:SKELETON_OFFSET];
+        [_legA setGroup:SKELETON_OFFSET];
+        [_legB setGroup:SKELETON_OFFSET];
         
-        //SKELETON_OFFSET--;
-        [_armA setGroup:-1];
-        [_armB setGroup:-1];
-        [_legA setGroup:-1];
-        [_legB setGroup:-1];
-        
-        [_torso setGroup:-1];
-        [_head setGroup:-1];
+        [_torso setGroup:SKELETON_OFFSET];
+        [_head setGroup:SKELETON_OFFSET];
     }
     return self;
 }
@@ -94,29 +90,6 @@
     skeleton.hipB = [_legB rotationA];
     skeleton.kneeA = [_legA rotationB];
     skeleton.kneeB = [_legB rotationB];
-    
-    /*
-     skeleton.hipA = M_TAU_8;
-     skeleton.hipB = -M_TAU_4;
-     skeleton.kneeA = M_TAU_4;
-     skeleton.kneeB = M_TAU_4;
-     skeleton.elbowA = -M_TAU_4;
-     skeleton.elbowB = -M_TAU_4;
-     skeleton.shoulderA = -M_TAU_4;
-     skeleton.shoulderB = M_TAU_8;
-     skeleton.neck = M_TAU_8;
-     skeleton.waist = M_TAU_8 / 2.0f;
-     */
-    
-    /*
-    
-    dlog(@"hipA %F %F %F", skeleton.hipA, _skeleton.hipA, M_TAU_8);
-    dlog(@"hipB %F %F %F", skeleton.hipB, _skeleton.hipB, -M_TAU_4);
-    dlog(@"kneeA %F %F %F", skeleton.kneeA, _skeleton.kneeA, M_TAU_4);
-    dlog(@"kneeB %F %F %F", skeleton.kneeB, _skeleton.kneeB, M_TAU_4);
-    
-    dlog(@"neck %F %F %F", skeleton.neck, _skeleton.neck, M_TAU_8);
-     */
     
     float distanceBetweenCenterAndWaist = -(_config.torsoHeight - _config.torsoWidth) / 2.0f;
     GLKVector2 position = GLKVector2MakeFromRotationAndLength(skeleton.waist - M_TAU_4, distanceBetweenCenterAndWaist);
@@ -186,6 +159,7 @@
 
 - (void)setup {
     float distanceBetweenWaistAndShoulder = _config.torsoHeight - _config.torsoWidth;
+    float distanceBetweenWaistAndNeck = _config.torsoHeight - (_config.torsoWidth / 2.0f);
     
     GLKVector2 waistRotationNormalized = GLKVector2Make(sinf(_skeleton.waist), -cosf(_skeleton.waist));
     GLKVector2 waistPosition = GLKVector2Add(_position, GLKVector2Make(_skeleton.x, _skeleton.y));
@@ -193,14 +167,17 @@
     GLKVector2 waistToShoulder = GLKVector2MultiplyScalar(waistRotationNormalized, distanceBetweenWaistAndShoulder);
     GLKVector2 shoulderPosition = GLKVector2Add(waistPosition, waistToShoulder);
     
+    GLKVector2 waistToNeck = GLKVector2MultiplyScalar(waistRotationNormalized, distanceBetweenWaistAndNeck);
+    GLKVector2 neckPosition = GLKVector2Add(waistPosition, waistToNeck);
+    
     CGSize torsoSize = CGSizeMake(_config.torsoWidth / 2.0f, _config.torsoHeight / 2.0f);
     CGSize headSize = CGSizeMake((_config.headLeft + _config.headRight) / 2.0f, 
                                  (_config.headTop + _config.headBottom) / 2.0f);
     
-    GLKVector2 headOffset = GLKVector2Make(-(headSize.width - _config.headLeft), -(headSize.height - _config.headBottom));
+    GLKVector2 headOffset = GLKVector2Make(-(headSize.width - _config.headRight), -(headSize.height - _config.headBottom));
     GLKVector2 headOffsetRotation = GLKVector2Rotate(headOffset, _skeleton.waist + _skeleton.neck);
     
-    GLKVector2 headCenter = GLKVector2Add(shoulderPosition, headOffsetRotation);
+    GLKVector2 headCenter = GLKVector2Add(neckPosition, headOffsetRotation);
     GLKVector2 torsoCenter = GLKVector2Add(waistPosition, GLKVector2MultiplyScalar(waistToShoulder, 0.5f));
     
     [_torso setSize:torsoSize andRotation:_skeleton.waist andPosition:torsoCenter];
@@ -223,8 +200,7 @@
     [_armB setPosition:shoulderPosition];
     [_legA setPosition:waistPosition];
     [_legB setPosition:waistPosition];
-    [_neck joinBodyA:_torso toBodyB:_head atPosition:shoulderPosition];
-    //[_neck setRotation:_skeleton.waist + _skeleton.neck];
+    [_neck joinBodyA:_torso toBodyB:_head atPosition:neckPosition];
     
     [_armA attachToBody:_torso];
     [_armB attachToBody:_torso];

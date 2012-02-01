@@ -7,9 +7,10 @@
 //
 
 
-#define CRATE_SIZE 0.2f
+#define CRATE_SIZE 0.1f
 
 
+#import "AHMathUtils.h"
 #import "AHGraphicsManager.h"
 #import "AHGraphicsRect.h"
 #import "AHPhysicsRect.h"
@@ -28,16 +29,29 @@
 - (id)initAtPosition:(GLKVector2)position {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsRect alloc] initFromSize:CGSizeMake(CRATE_SIZE, CRATE_SIZE) andPosition:position];
+        CGSize size = CGSizeMake([BCCrateActor width], [BCCrateActor height]);
+        
+        _body = [[AHPhysicsRect alloc] initFromSize:size andPosition:position];
         [_body setStatic:NO];
         [_body addTag:PHY_TAG_DEBRIS];
         [_body setDelegate:self];
         [self addComponent:_body];
         
+        size.width *= 1.1f;
+        size.height *= 1.1f;
+        
         _skin = [[AHGraphicsRect alloc] init];
-        [_skin setRectFromCenter:GLKVector2Make(0.0f, 0.0f) andRadius:CRATE_SIZE];
-        [_skin setTextureKey:@"debug-grid.png"];
-        [_skin setTexFromCenter:GLKVector2Make(0.5f, 0.5f) andRadius:0.5f];
+        [_skin setRectFromCenter:GLKVector2Make(0.0f, 0.0f) andSize:size];
+        [_skin setTextureKey:@"misc-objects.png"];
+        float x = 0.0f;
+        float y = 0.0f;
+        if (rand() % 2 == 0) {
+            x = TX_1_16;
+        }
+        if (rand() % 2 == 0) {
+            y = TX_1_16;
+        }
+        [_skin setTex:CGRectMake(x, y, TX_1_16, TX_1_16)];
         [_skin setLayerIndex:GFK_LAYER_BUILDINGS];
         [self addComponent:_skin];
     }
@@ -65,9 +79,9 @@
 - (BOOL)willCollideWith:(AHPhysicsBody *)contact {
     if ([contact category] == PHY_CAT_HERO) {
         if (!_hasBeenUpset) {
-            GLKVector2 force = [contact force];
-            force.x *= 2.0f;
-            force.y *= 2.0f;
+            GLKVector2 force = [contact linearVelocity];
+            force.x *= 1.2f;
+            force.y *= 1.2f;
             [_body setLinearVelocity:force atWorldPoint:[contact position]];
             _hasBeenUpset = YES;
         }
@@ -81,8 +95,12 @@
 #pragma mark static vars
 
 
-+ (float)size {
++ (float)width {
     return CRATE_SIZE;
+}
+
++ (float)height {
+    return CRATE_SIZE * 0.8f;
 }
 
 

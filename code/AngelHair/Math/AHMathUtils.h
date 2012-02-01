@@ -28,6 +28,10 @@ extern "C" {
 #define M_TAU_16  M_PI_4 * 0.5f
 #define M_TAU_32  M_PI_4 * 0.25f
     
+#define TX_1_2 0.25f
+#define TX_1_4 0.25f
+#define TX_1_8 0.125f
+#define TX_1_16 0.0625f
     
 #pragma mark -
 #pragma mark float lerp

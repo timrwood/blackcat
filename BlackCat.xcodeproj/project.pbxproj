@@ -35,6 +35,8 @@
 		1547316E14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1547316D14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm */; };
 		1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547317114C62E7D00DDEBA5 /* AHTimeManager.m */; };
 		154D871E14D09E4400147A99 /* AHShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D871D14D09E4400147A99 /* AHShaderManager.m */; };
+		154D919A14D9FD4300E4FE9A /* misc-objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 154D919914D9FD4300E4FE9A /* misc-objects.png */; };
+		155D407614D9D64A00D4B826 /* body-detective.png in Resources */ = {isa = PBXBuildFile; fileRef = 155D407514D9D64A00D4B826 /* body-detective.png */; };
 		156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156A86FA14C7B30E00B85E04 /* libz.dylib */; };
 		1579F1EE14CF3BDA000C0833 /* debug-grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 1579F1ED14CF3BDA000C0833 /* debug-grid.png */; };
 		158346F914B7BFE700C1DA04 /* AHSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 158346F814B7BFE700C1DA04 /* AHSceneManager.m */; };
@@ -190,6 +192,8 @@
 		1547317114C62E7D00DDEBA5 /* AHTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHTimeManager.m; path = Time/AHTimeManager.m; sourceTree = "<group>"; };
 		154D871C14D09E4400147A99 /* AHShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHShaderManager.h; sourceTree = "<group>"; };
 		154D871D14D09E4400147A99 /* AHShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHShaderManager.m; sourceTree = "<group>"; };
+		154D919914D9FD4300E4FE9A /* misc-objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc-objects.png"; sourceTree = "<group>"; };
+		155D407514D9D64A00D4B826 /* body-detective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-detective.png"; sourceTree = "<group>"; };
 		156A86FA14C7B30E00B85E04 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1579F1ED14CF3BDA000C0833 /* debug-grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "debug-grid.png"; sourceTree = "<group>"; };
 		158346F714B7BFE700C1DA04 /* AHSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSceneManager.h; path = Scenes/AHSceneManager.h; sourceTree = "<group>"; };
@@ -477,6 +481,8 @@
 		15132C2214C8CB680017BBD0 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				154D919914D9FD4300E4FE9A /* misc-objects.png */,
+				155D407514D9D64A00D4B826 /* body-detective.png */,
 				1579F1ED14CF3BDA000C0833 /* debug-grid.png */,
 				15132C2314C8CB680017BBD0 /* background.png */,
 			);
@@ -1206,6 +1212,8 @@
 				15AC4E0314B7B3BC00283A06 /* BCViewController_iPad.xib in Resources */,
 				15AC4E0414B7B3BC00283A06 /* BCViewController_iPhone.xib in Resources */,
 				159A08A814D75E6D009CA4AF /* class-selection.scene in Resources */,
+				155D407614D9D64A00D4B826 /* body-detective.png in Resources */,
+				154D919A14D9FD4300E4FE9A /* misc-objects.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
