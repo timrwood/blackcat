@@ -18,9 +18,11 @@
     AHGraphicsRect *_top;
     AHGraphicsRect *_mid;
     AHGraphicsRect *_bot;
+    AHGraphicsRect *_bot2;
     
     CGSize topMidTexSize;
     CGSize bottomTexSize;
+    CGSize bottomTexSize2;
 }
 
 

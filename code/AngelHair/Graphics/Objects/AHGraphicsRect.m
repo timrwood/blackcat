@@ -61,7 +61,11 @@
 }
 
 - (void)setTexFromCenter:(GLKVector2)center andSize:(CGSize)size {
-    CGRect rect = CGRectInset(CGRectMake(center.x, center.y, 0.0f, 0.0f), -size.width, -size.height);
+    CGRect rect;
+    rect.origin.x = center.x - size.width;
+    rect.origin.y = center.y - size.height;
+    rect.size.width = size.width * 2.0f;
+    rect.size.height = size.height * 2.0f;
     [self setTex:rect];
 }
 

@@ -204,7 +204,10 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)setup {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 
@@ -235,9 +238,6 @@ static AHGraphicsCamera *_camera = nil;
 
 - (void)draw {
     [_camera prepareToDrawWorld];
-    
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     for (AHGraphicsLayer *layer in _layers) {
         [layer draw];
