@@ -74,7 +74,9 @@
 		159A08A814D75E6D009CA4AF /* class-selection.scene in Resources */ = {isa = PBXBuildFile; fileRef = 159A08A714D75E6D009CA4AF /* class-selection.scene */; };
 		15AAFBFC14BE2BC30058F014 /* BCHeroActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15AAFBFB14BE2BC30058F014 /* BCHeroActor.mm */; };
 		15AAFBFF14BE2CAA0058F014 /* BCTerrainBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AAFBFE14BE2CAA0058F014 /* BCTerrainBuilder.m */; };
-		15AAFC0214BE2CD90058F014 /* BCBuildingActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15AAFC0114BE2CD90058F014 /* BCBuildingActor.mm */; };
+		15AC187914DB6AF900E85EBF /* BCBuildingThreeStepped.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15AC187814DB6AF900E85EBF /* BCBuildingThreeStepped.mm */; };
+		15AC187C14DB6B1100E85EBF /* BCBuildingType.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AC187B14DB6B1100E85EBF /* BCBuildingType.m */; };
+		15AC188114DB723500E85EBF /* BCBuildingFlat.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15AC188014DB723500E85EBF /* BCBuildingFlat.mm */; };
 		15AC4DF814B7B3BC00283A06 /* AHActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4D6D14B7B3BB00283A06 /* AHActor.m */; };
 		15AC4DF914B7B3BC00283A06 /* AHActorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4D7014B7B3BB00283A06 /* AHActorManager.m */; };
 		15AC4DFE14B7B3BC00283A06 /* AHPhysicsManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4D7E14B7B3BB00283A06 /* AHPhysicsManager.mm */; };
@@ -263,8 +265,12 @@
 		15AAFBFB14BE2BC30058F014 /* BCHeroActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroActor.mm; path = Actors/Hero/BCHeroActor.mm; sourceTree = "<group>"; };
 		15AAFBFD14BE2CAA0058F014 /* BCTerrainBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCTerrainBuilder.h; path = Actors/Terrain/BCTerrainBuilder.h; sourceTree = "<group>"; };
 		15AAFBFE14BE2CAA0058F014 /* BCTerrainBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCTerrainBuilder.m; path = Actors/Terrain/BCTerrainBuilder.m; sourceTree = "<group>"; };
-		15AAFC0014BE2CD90058F014 /* BCBuildingActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingActor.h; path = Actors/Terrain/BCBuildingActor.h; sourceTree = "<group>"; };
-		15AAFC0114BE2CD90058F014 /* BCBuildingActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingActor.mm; path = Actors/Terrain/BCBuildingActor.mm; sourceTree = "<group>"; };
+		15AC187714DB6AF900E85EBF /* BCBuildingThreeStepped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingThreeStepped.h; path = Actors/Terrain/Buildings/BCBuildingThreeStepped.h; sourceTree = "<group>"; };
+		15AC187814DB6AF900E85EBF /* BCBuildingThreeStepped.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingThreeStepped.mm; path = Actors/Terrain/Buildings/BCBuildingThreeStepped.mm; sourceTree = "<group>"; };
+		15AC187A14DB6B1100E85EBF /* BCBuildingType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingType.h; path = Actors/Terrain/Buildings/BCBuildingType.h; sourceTree = "<group>"; };
+		15AC187B14DB6B1100E85EBF /* BCBuildingType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCBuildingType.m; path = Actors/Terrain/Buildings/BCBuildingType.m; sourceTree = "<group>"; };
+		15AC187D14DB721100E85EBF /* BCBuildingFlat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingFlat.h; path = Actors/Terrain/Buildings/BCBuildingFlat.h; sourceTree = "<group>"; };
+		15AC188014DB723500E85EBF /* BCBuildingFlat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingFlat.mm; path = Actors/Terrain/Buildings/BCBuildingFlat.mm; sourceTree = "<group>"; };
 		15AC4D6C14B7B3BB00283A06 /* AHActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActor.h; sourceTree = "<group>"; };
 		15AC4D6D14B7B3BB00283A06 /* AHActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActor.m; sourceTree = "<group>"; };
 		15AC4D6E14B7B3BB00283A06 /* AHActorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorComponent.h; sourceTree = "<group>"; };
@@ -728,8 +734,7 @@
 		15AAFBF714BE2B6F0058F014 /* Terrain */ = {
 			isa = PBXGroup;
 			children = (
-				15AAFC0014BE2CD90058F014 /* BCBuildingActor.h */,
-				15AAFC0114BE2CD90058F014 /* BCBuildingActor.mm */,
+				15AC187514DB6A8500E85EBF /* Buildings */,
 				15CEA5CA14BF84690052D6BC /* BCCrateActor.h */,
 				15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */,
 				15AAFBFD14BE2CAA0058F014 /* BCTerrainBuilder.h */,
@@ -754,6 +759,19 @@
 				1547316D14C62C8E00DDEBA5 /* BCHeroPlaybackActor.mm */,
 			);
 			name = Hero;
+			sourceTree = "<group>";
+		};
+		15AC187514DB6A8500E85EBF /* Buildings */ = {
+			isa = PBXGroup;
+			children = (
+				15AC187D14DB721100E85EBF /* BCBuildingFlat.h */,
+				15AC188014DB723500E85EBF /* BCBuildingFlat.mm */,
+				15AC187714DB6AF900E85EBF /* BCBuildingThreeStepped.h */,
+				15AC187814DB6AF900E85EBF /* BCBuildingThreeStepped.mm */,
+				15AC187A14DB6B1100E85EBF /* BCBuildingType.h */,
+				15AC187B14DB6B1100E85EBF /* BCBuildingType.m */,
+			);
+			name = Buildings;
 			sourceTree = "<group>";
 		};
 		15AC4D6914B7B3BB00283A06 /* code */ = {
@@ -1302,7 +1320,6 @@
 				15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */,
 				15AAFBFC14BE2BC30058F014 /* BCHeroActor.mm in Sources */,
 				15AAFBFF14BE2CAA0058F014 /* BCTerrainBuilder.m in Sources */,
-				15AAFC0214BE2CD90058F014 /* BCBuildingActor.mm in Sources */,
 				1589E2EE14BE565F008442DA /* AHActorComponent.m in Sources */,
 				1589E2F214BE5848008442DA /* BCTerrainCleaner.mm in Sources */,
 				158ABE3014BE731F00E274BB /* AHInputManager.m in Sources */,
@@ -1335,6 +1352,9 @@
 				159A08A414D75D03009CA4AF /* BCClassSelectionScene.m in Sources */,
 				15C98D9C14D9B5E700B34918 /* BCHeroType.m in Sources */,
 				15C98D9F14D9B71600B34918 /* BCHeroTypeRunner.m in Sources */,
+				15AC187914DB6AF900E85EBF /* BCBuildingThreeStepped.mm in Sources */,
+				15AC187C14DB6B1100E85EBF /* BCBuildingType.m in Sources */,
+				15AC188114DB723500E85EBF /* BCBuildingFlat.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

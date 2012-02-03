@@ -7,20 +7,32 @@
 //
 
 
+typedef enum {
+    BUILDING_FLAT_ORIGIN,
+    BUILDING_FLAT,
+    BUILDING_THREE_STEPPED_101,
+    BUILDING_THREE_STEPPED_121,
+    BUILDING_THREE_STEPPED_012,
+    BUILDING_THREE_STEPPED_210,
+    BUILDING_TYPE_LENGTH
+} BCBuildingTypes;
+
+
 #import "AHActor.h"
 
 
-@class BCBuildingActor;
+@class BCBuildingType;
 
 
 @interface BCTerrainBuilder : AHActor {
 @private;
-    BCBuildingActor *_currentBuilding;
-    BCBuildingActor *_nextBuilding;
+    BCBuildingType *_currentBuilding;
+    BCBuildingType *_nextBuilding;
+    
+    int _buildingOffset;
+    
     int _randKey;
     int _randOffset;
-    
-    float _lastBuildingHeight;
 }
 
 
@@ -35,9 +47,15 @@
 #pragma mark build
 
 
-- (void)buildBuildingWithSize:(CGSize)size;
 - (void)buildBuilding;
-- (void)buildCratesAtPosition:(GLKVector2)position;
+- (void)buildBuildingWithType:(BCBuildingTypes)type;
+
+
+#pragma mark -
+#pragma mark update
+
+
+- (void)updateBuildingHeight;
 
 
 #pragma mark -

@@ -51,7 +51,7 @@
     self = [super init];
     if (self) {
         _body = [[AHPhysicsCircle alloc] initFromRadius:RADIUS andPosition:GLKVector2Make(0.0f, 0.0f)];
-        [_body setRestitution:0.1f];
+        [_body setRestitution:0.0f];
         [_body setStatic:NO];
         [_body setCategory:PHY_CAT_HERO];
         [_body setRestitution:0.0f];
