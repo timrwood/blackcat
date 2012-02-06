@@ -57,6 +57,8 @@
 - (void)updateVelocity;
 - (void)updateJumpability;
 - (void)updateCamera;
+- (void)updateSkeleton;
+- (void)updateCrash;
 
 
 #pragma mark -
@@ -65,6 +67,13 @@
 
 - (void)inputJump;
 - (void)inputDash;
+
+
+#pragma mark -
+#pragma mark ragdoll
+
+
+- (void)makeRagdoll;
 
 
 @end

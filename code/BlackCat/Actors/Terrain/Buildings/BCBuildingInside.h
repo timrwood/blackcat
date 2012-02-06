@@ -14,10 +14,13 @@
 @class AHGraphicsRect;
 
 
-@interface BCBuildingFlat : BCBuildingType {
+@interface BCBuildingInside : BCBuildingType {
 @private;
-    AHPhysicsRect *_body;
-    AHGraphicsRect *_skin;
+    AHPhysicsRect *_bodyTop;
+    AHPhysicsRect *_bodyBot;
+    
+    AHGraphicsRect *_skinTop;
+    AHGraphicsRect *_skinBot;
 }
 
 

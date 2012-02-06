@@ -38,21 +38,6 @@
 
 
 #pragma mark -
-#pragma mark setup
-
-
-- (void)setActor:(AHActor *)actor {
-    [super setActor:actor];
-    [actor addComponent:_armA];
-    [actor addComponent:_armB];
-    [actor addComponent:_legA];
-    [actor addComponent:_legB];
-    [actor addComponent:_head];
-    [actor addComponent:_torso];
-}
-
-
-#pragma mark -
 #pragma mark sizes
 
 

@@ -15,6 +15,7 @@
 #import "BCTerrainBuilder.h"
 #import "BCBuildingType.h"
 #import "BCBuildingFlat.h"
+#import "BCBuildingInside.h"
 #import "BCBuildingThreeStepped.h"
 #import "BCCrateActor.h"
 #import "BCGlobalManager.h"
@@ -56,10 +57,13 @@
 
 - (void)buildBuilding {
     [self buildBuildingWithType:_buildingOffset];
+    
     _buildingOffset ++;
     if (_buildingOffset >= BUILDING_TYPE_LENGTH) {
         _buildingOffset = BUILDING_FLAT;
     }
+    
+    _buildingOffset = BUILDING_INSIDE;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -68,8 +72,8 @@
         lastEnd = [_nextBuilding endCorner];
     }
     
-    float spacing = 4.0f;
-    float nextHeight = [self seededRandomBetweenFloat:2.0f andFloat:-2.0f];
+    float spacing = 2.0f;
+    float nextHeight = [self seededRandomBetweenFloat:1.0f andFloat:-1.0f];
     
     BCBuildingType *newBuilding;
     switch (type) {
@@ -100,6 +104,9 @@
             newBuilding = [[BCBuildingThreeStepped alloc] init];
             [(BCBuildingThreeStepped *)newBuilding setStep1to2Up:NO];
             [(BCBuildingThreeStepped *)newBuilding setStep2to3Up:NO];
+            break;
+        case BUILDING_INSIDE:
+            newBuilding = [[BCBuildingInside alloc] init];
             break;
         case BUILDING_TYPE_LENGTH:
             dlog(@"Trying to make a building with an unknown type : BUILDING_TYPE_LENGTH");
@@ -136,7 +143,7 @@
     if (_nextBuilding) {
         nextStart = [_nextBuilding startCorner];
     } else {
-        dlog(@"no next building, building one now");
+        //dlog(@"no next building, building one now");
         [self buildBuilding];
         return;
     }
@@ -144,7 +151,7 @@
     if (_currentBuilding) {
         curEnd = [_currentBuilding endCorner];
     } else {
-        dlog(@"no current building, building one now");
+        //dlog(@"no current building, building one now");
         [self buildBuilding];
         return;
     }
@@ -156,7 +163,7 @@
         buildingHeight = FloatLerp(curEnd.y, nextStart.y, percent);
     } else {
         buildingHeight = [_nextBuilding heightAtXPosition:heroX];
-        dlog(@"moved onto new building, building new one now");
+        //dlog(@"moved onto new building, building new one now");
         [self buildBuilding];
     }
     

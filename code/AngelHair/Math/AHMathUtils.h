@@ -43,6 +43,9 @@ extern "C" {
     // lerp a float
     static __inline__ float FloatLerp(float start, float end, float t);
     
+    // modulate between two numbers
+    static __inline__ float FloatModBetween(float num, float lower, float upper);
+    
     
 #pragma mark -
 #pragma mark implimentations
@@ -54,6 +57,15 @@ extern "C" {
     
     static __inline__ float FloatLerp(float start, float end, float t) {
         return start + ((end - start) * t);
+    }
+    
+    static __inline__ float FloatModBetween(float num, float lower, float upper) {
+        float diff = upper - lower;
+        if (num > 0.0f) {
+            return fmodf(num + lower, diff) - lower;
+        } else {
+            return fmodf(num - lower, diff) + lower;
+        }
     }
     
     

@@ -7,6 +7,9 @@
 //
 
 
+#import "AHMathUtils.h"
+
+
 typedef struct _AHSkeleton {
 	float x;
 	float y;
@@ -62,6 +65,20 @@ static inline AHSkeleton AHSkeletonAtPercentToSkeleton(AHSkeleton skeletonA, AHS
                          AHSkeletonMultiply(skeletonB, 1.0f - percent));
 }
 
+static inline AHSkeleton AHSkeletonModRotationBetween(AHSkeleton skelIn, float lower, float upper) {
+    AHSkeleton skelOut = skelIn;
+    skelOut.waist     = FloatModBetween(skelIn.waist,     lower, upper);
+    skelOut.neck      = FloatModBetween(skelIn.neck,      lower, upper);
+    skelOut.shoulderA = FloatModBetween(skelIn.shoulderA, lower, upper);
+    skelOut.shoulderB = FloatModBetween(skelIn.shoulderB, lower, upper);
+    skelOut.elbowA    = FloatModBetween(skelIn.elbowA,    lower, upper);
+    skelOut.elbowB    = FloatModBetween(skelIn.elbowB,    lower, upper);
+    skelOut.hipA      = FloatModBetween(skelIn.hipA,      lower, upper);
+    skelOut.hipB      = FloatModBetween(skelIn.hipB,      lower, upper);
+    skelOut.kneeA     = FloatModBetween(skelIn.kneeA,     lower, upper);
+    skelOut.kneeB     = FloatModBetween(skelIn.kneeB,     lower, upper);
+    return skelOut;
+}
 
 typedef struct _AHSkeletonConfig {
 	float torsoWidth;

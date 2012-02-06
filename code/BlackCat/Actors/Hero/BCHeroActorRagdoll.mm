@@ -92,7 +92,7 @@
     
     GLKVector2 cameraPos;
     cameraPos.x = [_ragdoll skeleton].x + 2.0f;
-    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 2.0f;
+    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 1.0f;
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
 }

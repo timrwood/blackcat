@@ -42,7 +42,7 @@
     [[AHActorManager manager] add:_recorderActor];
     
     if (_lastRecording) {
-        [[AHActorManager manager] add:[[BCHeroPlaybackActor alloc] initWithData:_lastRecording]];
+        //[[AHActorManager manager] add:[[BCHeroPlaybackActor alloc] initWithData:_lastRecording]];
          _lastRecording = nil;
     }
 }

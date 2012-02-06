@@ -40,7 +40,7 @@ static int SKELETON_OFFSET = 0;
         
         // config and skeleton
         [self setFromSkeletonConfig:config];
-        _skeleton = skeleton;
+        _skeleton = AHSkeletonModRotationBetween(skeleton, -M_TAU_2, M_TAU_2);
         
         SKELETON_OFFSET--;
         [_armA setGroup:SKELETON_OFFSET];

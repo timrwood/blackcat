@@ -24,7 +24,8 @@ typedef enum {
 typedef enum {
     PHY_TAG_NONE        = 0x0000,
     PHY_TAG_JUMPABLE    = 0x0001,
-    PHY_TAG_DEBRIS      = 0x0002
+    PHY_TAG_DEBRIS      = 0x0002,
+    PHY_TAG_CRASHABLE   = 0x0004
 } BCPhysicsBodyTypes;
 
 

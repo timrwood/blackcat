@@ -8,14 +8,20 @@
 
 
 #define CAMERA_JUMP_DISTANCE 4.0f
+
 #define RADIUS 0.5f
 #define RAYCAST_RADIUS_RATIO 1.4f
+
 #define MAX_SAFETY_RANGE_FRAMES 3
 
-#define BASE_UPWARD_SLOWING 1.2f
-#define BASE_DOWNWARD_SLOWING 1.1f
+#define JUMP_INITIAL_VELOCITY 25.0f
+
+#define JUMP_UPWARD_SLOWING 1.4f
+#define JUMP_DOWNWARD_SLOWING 1.2f
 
 #define DASH_SLOW_SPEED 1.0f
+
+#define INITIAL_RUN_SPEED 8.0f
 
 
 #import "AHTimeManager.h"
@@ -93,10 +99,10 @@
         [_skeleton setLayerIndex:GFX_LAYER_BACKGROUND];
         [self addComponent:_skeleton];
         
-        _runSpeed = 8.0f;
+        _runSpeed = INITIAL_RUN_SPEED;
         
-        _upwardSlowing = powf(BASE_UPWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
-        _downwardSlowing = powf(BASE_DOWNWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
+        _upwardSlowing = powf(JUMP_UPWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
+        _downwardSlowing = powf(JUMP_DOWNWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
         
         _speedIncrease = 0.01f * [[AHTimeManager manager] realFramesPerSecond] / 60.0f;
         
@@ -114,60 +120,8 @@
     [self updateVelocity];
     [self updateCamera];
     [self updateJumpability];
-    
-    
-    _limbAngle += 0.02f;
-    //[_limb setAngle:_limbAngle];
-    AHSkeleton skeleton;
-    //skeleton.x = 2.0f;
-    //skeleton.y = 1.0f;
-    
-    skeleton.hipA = _limbAngle;
-    skeleton.hipB = _limbAngle / 2.0f;
-    skeleton.elbowA = _limbAngle;
-    skeleton.elbowB = -_limbAngle / 2.0f;
-    skeleton.kneeA = -_limbAngle;
-    skeleton.kneeB = _limbAngle / 2.0f;
-    skeleton.shoulderA = -_limbAngle;
-    skeleton.shoulderB = _limbAngle / 2.0f;
-    skeleton.neck = _limbAngle;
-    skeleton.waist = -_limbAngle / 2.0f;
-    
-    /*
-    skeleton.hipA = M_TAU_8;
-    skeleton.hipB = -M_TAU_4;
-    skeleton.kneeA = M_TAU_8;
-    skeleton.kneeB = M_TAU_4 + M_TAU_8;
-    skeleton.elbowA = -M_TAU_4;
-    skeleton.elbowB = -M_TAU_4;
-    skeleton.shoulderA = -M_TAU_4;
-    skeleton.shoulderB = M_TAU_8;
-    skeleton.neck = M_TAU_8;
-    skeleton.waist = M_TAU_8 / 2.0f;
-     */
-    
-    //AHSkeleton skeleton;
-    skeleton.x = [_body position].x;
-    skeleton.y = [_body position].y;
-    /*skeleton.hipA = 0.0f;
-    skeleton.hipB = 0.0f;
-    skeleton.kneeA = 0.0f;
-    skeleton.kneeB = 0.0f;
-    skeleton.elbowA = 0.0f;
-    skeleton.elbowB = 0.0f;
-    skeleton.shoulderA = 0.0f;
-    skeleton.shoulderB = 0.0f;
-    skeleton.neck = 0.0f;
-    skeleton.waist = 0.0f;*/
-    [_skeleton setSkeleton:skeleton];
-    
-    //[[AHGraphicsManager camera] setWorldPosition:GLKVector2Make(2.0f, 0.0f)];
-    //[[AHGraphicsManager camera] setWorldZoom:3.0f];
-    
-    // debug
-    //float time = fmodf([_body position].x, 2.5f) / 2.5f;
-    //AHSkeleton skeleton = [_track valueAtTime:time];
-    //dlog(@"skeleton %F %F", skeleton.x, skeleton.y);
+    [self updateSkeleton];
+    [self updateCrash];
 }
 
 - (void)updateVelocity {
@@ -204,6 +158,8 @@
                                                                      from:[_body position] 
                                                                        to:foot];
     
+    //PHY_TAG_CRASHABLE
+    
     if (cat != PHY_CAT_NONE) {
         _canJump = YES;
         _safetyRange = MAX_SAFETY_RANGE_FRAMES;
@@ -225,12 +181,43 @@
 - (void)updateCamera {
     GLKVector2 cameraPos;
     cameraPos.x = [_body position].x + 2.0f;
-    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 2.0f;
+    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 1.0f;
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
     [[AHGraphicsManager camera] setWorldZoom:3.0f];
     
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
+}
+
+- (void)updateSkeleton {
+    //_limbAngle += 0.02f;
+    AHSkeleton skeleton;
+    skeleton.x = [_body position].x;
+    skeleton.y = [_body position].y;
+    skeleton.hipA = _limbAngle;
+    skeleton.hipB = _limbAngle / 2.0f;
+    skeleton.elbowA = _limbAngle;
+    skeleton.elbowB = -_limbAngle / 2.0f;
+    skeleton.kneeA = -_limbAngle;
+    skeleton.kneeB = _limbAngle / 2.0f;
+    skeleton.shoulderA = -_limbAngle;
+    skeleton.shoulderB = _limbAngle / 2.0f;
+    skeleton.neck = _limbAngle;
+    skeleton.waist = -_limbAngle / 2.0f;
+    [_skeleton setSkeleton:skeleton];
+}
+
+- (void)updateCrash {
+    GLKVector2 front = [_body position];
+    front.x += RADIUS * 1.1f;
+    
+    int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_CRASHABLE 
+                                                                     from:[_body position] 
+                                                                       to:front];
+    
+    if (cat != PHY_CAT_NONE) {
+        [self makeRagdoll];
+    }
 }
 
 
@@ -249,7 +236,7 @@
 - (void)inputJump {
     if (_canJump) {
         float velx = [_body linearVelocity].x;
-        [_body setLinearVelocity:GLKVector2Make(velx, -30.0f)];
+        [_body setLinearVelocity:GLKVector2Make(velx, -JUMP_INITIAL_VELOCITY)];
         _canJump = NO;
         _isJumping = YES;
         [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_JUMP]];
@@ -257,12 +244,34 @@
 }
 
 - (void)inputDash {
+    if (_dashSpeed == 0.0f) {
+        _dashSpeed = 30.0f;
+    }
+}
+
+#pragma mark -
+#pragma mark destruction
+
+
+- (void)cleanupBeforeDestruction {
+    if (_resetWhenDestroyed) {
+        [[AHSceneManager manager] reset];
+    }
+    [super cleanupBeforeDestruction];
+}
+
+
+#pragma mark -
+#pragma mark ragdoll
+
+
+- (void)makeRagdoll {
     [self safeDestroy];
     
     _resetWhenDestroyed = NO;
     
     BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton] andSkeletonConfig:config];
-    [ragdoll setLinearVelocity:[_body linearVelocity]];
+    [ragdoll setLinearVelocity:GLKVector2Make(_runSpeed, [_body linearVelocity].y)];
     [[AHActorManager manager] add:ragdoll];
     
     AHSkeleton upper;
@@ -288,21 +297,6 @@
     lower.neck = -M_TAU_16;
     
     [ragdoll setUpperLimits:upper andLowerLimits:lower];
-    
-    if (_dashSpeed == 0.0f) {
-        _dashSpeed = 30.0f;
-    }
-}
-
-#pragma mark -
-#pragma mark destruction
-
-
-- (void)cleanupBeforeDestruction {
-    if (_resetWhenDestroyed) {
-        [[AHSceneManager manager] reset];
-    }
-    [super cleanupBeforeDestruction];
 }
 
 

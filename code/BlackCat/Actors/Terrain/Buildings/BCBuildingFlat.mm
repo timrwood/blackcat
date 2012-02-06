@@ -35,7 +35,14 @@
         [_body setStatic:YES];
         [_body setCategory:PHY_CAT_BUILDING];
         [_body addTag:PHY_TAG_JUMPABLE];
+        [_body addTag:PHY_TAG_CRASHABLE];
+        
         [self addComponent:_body];
+        
+        _skin = [[AHGraphicsRect alloc] init];
+        [_skin setTextureKey:@"debug-grid.png"];
+        [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [self addComponent:_skin];
     }
     return self;
 }
@@ -52,6 +59,7 @@
     center.x = self->_startCorner.x + (BUILDING_WIDTH / 2.0f);
     center.y = self->_startCorner.y + (BUILDING_HEIGHT / 2.0f);
     
+    [_skin setRectFromCenter:center andSize:size];
     [_body setSize:size andPosition:center];
     [super setup];
 }

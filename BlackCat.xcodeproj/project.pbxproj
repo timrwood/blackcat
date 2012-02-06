@@ -138,6 +138,7 @@
 		15C98D9F14D9B71600B34918 /* BCHeroTypeRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9E14D9B71600B34918 /* BCHeroTypeRunner.m */; };
 		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
 		15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */; };
+		15EE652114E07724001121C6 /* BCBuildingInside.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15EE652014E07724001121C6 /* BCBuildingInside.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -397,6 +398,8 @@
 		15CEA5CA14BF84690052D6BC /* BCCrateActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCrateActor.h; path = Actors/Terrain/BCCrateActor.h; sourceTree = "<group>"; };
 		15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCCrateActor.mm; path = Actors/Terrain/BCCrateActor.mm; sourceTree = "<group>"; };
 		15CEA5CE14BFB7760052D6BC /* AHMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHMathUtils.h; path = Math/AHMathUtils.h; sourceTree = "<group>"; };
+		15EE651F14E07724001121C6 /* BCBuildingInside.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingInside.h; path = Actors/Terrain/Buildings/BCBuildingInside.h; sourceTree = "<group>"; };
+		15EE652014E07724001121C6 /* BCBuildingInside.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingInside.mm; path = Actors/Terrain/Buildings/BCBuildingInside.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -766,6 +769,8 @@
 			children = (
 				15AC187D14DB721100E85EBF /* BCBuildingFlat.h */,
 				15AC188014DB723500E85EBF /* BCBuildingFlat.mm */,
+				15EE651F14E07724001121C6 /* BCBuildingInside.h */,
+				15EE652014E07724001121C6 /* BCBuildingInside.mm */,
 				15AC187714DB6AF900E85EBF /* BCBuildingThreeStepped.h */,
 				15AC187814DB6AF900E85EBF /* BCBuildingThreeStepped.mm */,
 				15AC187A14DB6B1100E85EBF /* BCBuildingType.h */,
@@ -1355,6 +1360,7 @@
 				15AC187914DB6AF900E85EBF /* BCBuildingThreeStepped.mm in Sources */,
 				15AC187C14DB6B1100E85EBF /* BCBuildingType.m in Sources */,
 				15AC188114DB723500E85EBF /* BCBuildingFlat.mm in Sources */,
+				15EE652114E07724001121C6 /* BCBuildingInside.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
