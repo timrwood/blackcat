@@ -16,10 +16,10 @@
 
 #define MAX_SAFETY_RANGE_FRAMES 3
 
-#define JUMP_INITIAL_VELOCITY 25.0f
+#define JUMP_INITIAL_VELOCITY 30.0f
 
-#define JUMP_UPWARD_SLOWING 1.4f
-#define JUMP_DOWNWARD_SLOWING 1.2f
+#define JUMP_UPWARD_SLOWING 1.35f
+#define JUMP_DOWNWARD_SLOWING 1.4f
 
 #define DASH_SLOW_SPEED 1.0f
 
@@ -184,7 +184,8 @@
 - (void)updateCamera {
     GLKVector2 cameraPos;
     cameraPos.x = [_body position].x + 2.0f;
-    cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 1.0f;
+    //cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 1.0f;
+    cameraPos.y = [_body position].y;
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
     [[AHGraphicsManager camera] setWorldZoom:3.0f];
@@ -218,7 +219,7 @@
     
     int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_CRASHABLE from:startPos to:endPos];
     
-    if (cat != PHY_CAT_NONE) {
+    if (cat != PHY_CAT_NONE && [_type willCollideWithAnyObstacle]) {
         [self makeRagdoll];
     }
 }
@@ -299,9 +300,11 @@
 - (BOOL)willCollideWith:(AHPhysicsBody *)contact {
     if ([contact hasTag:PHY_TAG_BREAKABLE] || [contact hasTag:PHY_TAG_PHASEWALKABLE]) {
         // is crashable
-        if ([contact position].x > [_body position].x) {
-            // is to left of collidable object
-            return [_type willCollideWithObstacle:contact];
+        return [_type willCollideWithObstacle:contact];
+    }
+    if ([contact hasTag:PHY_TAG_ONE_WAY_FLOOR]) {
+        if ([contact position].y < [_body position].y + HERO_HEIGHT) {
+            return NO;
         }
     }
     return YES;

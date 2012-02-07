@@ -28,7 +28,8 @@ typedef enum {
     PHY_TAG_DEBRIS        = 0x0002,
     PHY_TAG_CRASHABLE     = 0x0004,
     PHY_TAG_PHASEWALKABLE = 0x0008,
-    PHY_TAG_BREAKABLE     = 0x0010
+    PHY_TAG_BREAKABLE     = 0x0010,
+    PHY_TAG_ONE_WAY_FLOOR = 0x0020
 } BCPhysicsBodyTypes;
 
 

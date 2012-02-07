@@ -20,22 +20,19 @@
 - (id)init {
     self = [super init];
     if (self) {
-        
+        _isLooped = YES;
     }
     return self;
 }
 
 - (id)initFromPoints:(GLKVector2 *)points andCount:(int)count {
-    self = [super init];
-    if (self) {
-        [self setPoints:points andCount:count];
-    }
-    return self;
+    return [self initFromPoints:points andCount:count andPosition:GLKVector2Make(0.0f, 0.0f)];
 }
 
 - (id)initFromPoints:(GLKVector2 *)points andCount:(int)count andPosition:(GLKVector2)position {
     self = [super init];
     if (self) {
+        _isLooped = YES;
         [self setPoints:points andCount:count];
         [self setPosition:position];
     }
@@ -48,6 +45,9 @@
 
 
 - (void)setPoints:(GLKVector2 *)points andCount:(int)count {
+    if (_points) {
+        free(_points);
+    }
     _points = (b2Vec2 *) malloc(sizeof(b2Vec2) * count);
     _count = count;
     for (int i = 0; i < count; i++) {
@@ -65,6 +65,10 @@
     [super setRotation:rotation];
 }
 
+- (void)setLooped:(BOOL)looped {
+    _isLooped = looped;
+}
+
 
 #pragma mark -
 #pragma mark setup
@@ -72,15 +76,19 @@
 
 - (void)setup {
     // shape
-    b2PolygonShape *polygonShape = new b2PolygonShape;
-    polygonShape->Set(_points, _count);
+    b2ChainShape *chainShape = new b2ChainShape;
+    if (_isLooped) {
+        chainShape->CreateLoop(_points, _count);
+    } else {
+        chainShape->CreateChain(_points, _count);
+    }
     
     // fixture
     b2FixtureDef *fixtureDef = new b2FixtureDef;
     fixtureDef->density = 1.0f;
     fixtureDef->restitution = self->restitution;
     fixtureDef->friction = self->friction;
-    fixtureDef->shape = (b2Shape *) polygonShape;
+    fixtureDef->shape = (b2Shape *) chainShape;
     fixtureDef->isSensor = self->isSensor;
     fixtureDef->filter.groupIndex = self->group;
     
@@ -98,7 +106,7 @@
     // cleanup
     delete bodyDef;
     delete fixtureDef;
-    delete polygonShape;
+    delete chainShape;
 }
 
 

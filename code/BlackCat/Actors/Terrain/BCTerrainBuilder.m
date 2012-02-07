@@ -13,12 +13,14 @@
 #import "AHGraphicsManager.h"
 
 #import "BCTerrainBuilder.h"
+#import "BCCrateActor.h"
+#import "BCGlobalManager.h"
+
 #import "BCBuildingType.h"
 #import "BCBuildingFlat.h"
 #import "BCBuildingInside.h"
 #import "BCBuildingThreeStepped.h"
-#import "BCCrateActor.h"
-#import "BCGlobalManager.h"
+#import "BCBuildingSplitter.h"
 
 
 @implementation BCTerrainBuilder
@@ -58,12 +60,20 @@
 - (void)buildBuilding {
     [self buildBuildingWithType:_buildingOffset];
     
+    // increment buildings
     _buildingOffset ++;
     if (_buildingOffset >= BUILDING_TYPE_LENGTH) {
         _buildingOffset = BUILDING_FLAT;
     }
     
-    _buildingOffset = BUILDING_INSIDE;
+    // random building
+    _buildingOffset = [self seededRandomBetweenFloat:1 andFloat:BUILDING_TYPE_LENGTH];
+    if (_buildingOffset == BUILDING_TYPE_LENGTH) {
+        _buildingOffset--;
+    }
+    
+    // same building
+    //_buildingOffset = BUILDING_SPLITTER;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -107,6 +117,9 @@
             break;
         case BUILDING_INSIDE:
             newBuilding = [[BCBuildingInside alloc] init];
+            break;
+        case BUILDING_SPLITTER:
+            newBuilding = [[BCBuildingSplitter alloc] init];
             break;
         case BUILDING_TYPE_LENGTH:
             dlog(@"Trying to make a building with an unknown type : BUILDING_TYPE_LENGTH");

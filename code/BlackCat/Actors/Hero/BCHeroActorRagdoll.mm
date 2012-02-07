@@ -7,6 +7,9 @@
 //
 
 
+#define FINAL_SLOW_MOTION_SPEED 5.0f
+#define INCREMENT_SLOW_MOTION_SPEED 2.0f
+
 #define SECONDS_BEFORE_CAN_RESET 1.0f
 
 #define CAMERA_JUMP_DISTANCE 4.0f
@@ -57,7 +60,8 @@
                 break;
         }
         
-        [[AHTimeManager manager] setWorldToRealRatio:5.0f];
+        // time
+        _timeRatio = 1.0f;
         
         // physics
         _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:[_type physicsConfig]];
@@ -108,11 +112,20 @@
 - (void)updateBeforeAnimation {
     [_skin setSkeleton:[_ragdoll skeleton]];
     
+    /*
     GLKVector2 cameraPos;
     cameraPos.x = [_ragdoll skeleton].x + 2.0f;
     cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 1.0f;
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPos];
+     */
+    
+    if (_timeRatio < FINAL_SLOW_MOTION_SPEED) {
+        _timeRatio += [[AHTimeManager manager] realSecondsPerFrame] * INCREMENT_SLOW_MOTION_SPEED;
+    } else {
+        _timeRatio = FINAL_SLOW_MOTION_SPEED;
+    }
+    [[AHTimeManager manager] setWorldToRealRatio:_timeRatio];
 }
 
 

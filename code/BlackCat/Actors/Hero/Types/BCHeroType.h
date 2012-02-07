@@ -51,6 +51,7 @@
 #pragma mark collision
 
 
+- (BOOL)willCollideWithAnyObstacle;
 - (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle;
 
 

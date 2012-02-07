@@ -81,7 +81,7 @@
 #pragma mark collision
 
 
-- (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle {
+- (BOOL)willCollideWithAnyObstacle {
     if ([[AHTimeManager manager] realTime] - _timeLastTappedSecondary < TIME_TO_GHOST_WALK) {
         return NO;
     }

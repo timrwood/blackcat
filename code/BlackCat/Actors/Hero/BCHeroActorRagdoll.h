@@ -21,6 +21,8 @@
     AHPhysicsSkeleton *_ragdoll;
     AHGraphicsSkeleton *_skin;
     
+    float _timeRatio;
+    
     float _creationTime;
 }
 

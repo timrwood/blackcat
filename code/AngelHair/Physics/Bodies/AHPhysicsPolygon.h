@@ -18,6 +18,8 @@
     GLKVector2 _position;
     
     float _rotation;
+    
+    BOOL _isLooped;
 }
 
 
@@ -25,15 +27,19 @@
 #pragma mark init
 
 
-- (id)initFromPoints:(GLKVector2 *)points andCount:(int)count;
-         
+- (id)initFromPoints:(GLKVector2 *)points 
+            andCount:(int)count;
+- (id)initFromPoints:(GLKVector2 *)points 
+            andCount:(int)count 
+         andPosition:(GLKVector2)position;
+
          
 #pragma mark -
 #pragma mark setters
          
          
 - (void)setPoints:(GLKVector2 *)points andCount:(int)count;
-
+- (void)setLooped:(BOOL)looped;
        
 
 @end

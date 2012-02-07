@@ -102,8 +102,12 @@
 #pragma mark collision
 
 
-- (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle {
+- (BOOL)willCollideWithAnyObstacle {
     return YES;
+}
+
+- (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle {
+    return [self willCollideWithAnyObstacle];
 }
 
 
