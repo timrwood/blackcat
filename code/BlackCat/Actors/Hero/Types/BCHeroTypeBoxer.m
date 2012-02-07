@@ -1,16 +1,16 @@
 //
-//  BCHeroTypeRunner.m
+//  BCHeroTypeBoxer.m
 //  BlackCat
 //
-//  Created by Tim Wood on 2/1/12.
-//  Copyright (c) 2012 Infinite Beta. All rights reserved.
+//  Created by Tim Wood on 2/6/12.
+//  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
 
-#import "BCHeroTypeDetective.h"
+#import "BCHeroTypeBoxer.h"
 
 
-@implementation BCHeroTypeDetective
+@implementation BCHeroTypeBoxer
 
 
 #pragma mark -
@@ -20,7 +20,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _timeLastTappedSecondary = 0;
+        
     }
     return self;
 }
@@ -31,7 +31,7 @@
 
 
 - (void)configSkeletonSkin:(AHGraphicsSkeleton *)skeleton {
-    [skeleton setTextureKey:@"body-detective.png"];
+    [skeleton setTextureKey:@"body-boxer.png"];
     [skeleton setArmATextureRect:CGRectMake(0.25f, 0.0f, 0.25f, 0.5f)];
     [skeleton setArmBTextureRect:CGRectMake(0.0f, 0.0f, 0.25f, 0.5f)];
     [skeleton setLegATextureRect:CGRectMake(0.25f, 0.5f, 0.25f, 0.5f)];
@@ -46,11 +46,11 @@
 
 - (AHSkeletonConfig)graphicsConfig {
     AHSkeletonConfig config;
-    config.armWidth = 0.15f;
+    config.armWidth = 0.25f;
     config.armLength = 0.9f;
-    config.legWidth = 0.15f;
+    config.legWidth = 0.25f;
     config.legLength = 1.0f;
-    config.torsoWidth = 0.25f;
+    config.torsoWidth = 0.3f;
     config.torsoHeight = 0.6f;
     config.headTop = 0.22f;
     config.headBottom = 0.08f;

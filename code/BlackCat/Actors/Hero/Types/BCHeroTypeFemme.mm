@@ -1,16 +1,20 @@
 //
-//  BCHeroTypeRunner.m
+//  BCHeroTypeFemme.mm
 //  BlackCat
 //
-//  Created by Tim Wood on 2/1/12.
-//  Copyright (c) 2012 Infinite Beta. All rights reserved.
+//  Created by Tim Wood on 2/6/12.
+//  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
 
-#import "BCHeroTypeDetective.h"
+#define TIME_TO_GHOST_WALK 1.0f
+
+#import "AHTimeManager.h"
+
+#import "BCHeroTypeFemme.h"
 
 
-@implementation BCHeroTypeDetective
+@implementation BCHeroTypeFemme
 
 
 #pragma mark -
@@ -31,7 +35,7 @@
 
 
 - (void)configSkeletonSkin:(AHGraphicsSkeleton *)skeleton {
-    [skeleton setTextureKey:@"body-detective.png"];
+    [skeleton setTextureKey:@"body-femme.png"];
     [skeleton setArmATextureRect:CGRectMake(0.25f, 0.0f, 0.25f, 0.5f)];
     [skeleton setArmBTextureRect:CGRectMake(0.0f, 0.0f, 0.25f, 0.5f)];
     [skeleton setLegATextureRect:CGRectMake(0.25f, 0.5f, 0.25f, 0.5f)];
@@ -46,11 +50,11 @@
 
 - (AHSkeletonConfig)graphicsConfig {
     AHSkeletonConfig config;
-    config.armWidth = 0.15f;
+    config.armWidth = 0.20f;
     config.armLength = 0.9f;
-    config.legWidth = 0.15f;
+    config.legWidth = 0.20f;
     config.legLength = 1.0f;
-    config.torsoWidth = 0.25f;
+    config.torsoWidth = 0.28f;
     config.torsoHeight = 0.6f;
     config.headTop = 0.22f;
     config.headBottom = 0.08f;
@@ -69,7 +73,7 @@
 
 
 - (void)tappedSecondaryAtPoint:(GLKVector2)point {
-    
+    _timeLastTappedSecondary = [[AHTimeManager manager] realTime];
 }
 
 
@@ -78,6 +82,9 @@
 
 
 - (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle {
+    if ([[AHTimeManager manager] realTime] - _timeLastTappedSecondary < TIME_TO_GHOST_WALK) {
+        return NO;
+    }
     return YES;
 }
 

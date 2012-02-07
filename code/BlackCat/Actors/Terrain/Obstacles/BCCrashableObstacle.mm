@@ -32,6 +32,8 @@
         
         _body = [[AHPhysicsRect alloc] initFromSize:size andPosition:position];
         [_body addTag:PHY_TAG_CRASHABLE];
+        [_body addTag:PHY_TAG_BREAKABLE];
+        [_body addTag:PHY_TAG_PHASEWALKABLE];
         [_body setCategory:PHY_CAT_CRASHABLE];
         [_body setStatic:YES];
         [self addComponent:_body];

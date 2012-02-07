@@ -10,7 +10,7 @@
 #import "AHActorComponent.h"
 
 
-@class AHPhysicsRect;
+@class AHPhysicsPill;
 @class AHPhysicsRevoluteJoint;
 
 
@@ -23,8 +23,8 @@
     float _rotation;
     
     AHPhysicsBody *_bodyOrigin;
-    AHPhysicsRect *_bodyA;
-    AHPhysicsRect *_bodyB;
+    AHPhysicsPill *_bodyA;
+    AHPhysicsPill *_bodyB;
     AHPhysicsRevoluteJoint *_jointA;
     AHPhysicsRevoluteJoint *_jointB;
 }

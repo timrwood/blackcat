@@ -13,16 +13,16 @@
 #import "AHContactDelegate.h"
 
 
-@class AHPhysicsCircle;
+@class AHPhysicsPill;
 @class AHAnimationSkeletonTrack;
 @class AHGraphicsLimb;
 @class AHGraphicsSkeleton;
 @class BCHeroType;
 
 
-@interface BCHeroActor : AHActor <AHInputDelegate> {
+@interface BCHeroActor : AHActor <AHInputDelegate, AHContactDelegate> {
 @private;
-    AHPhysicsCircle *_body;
+    AHPhysicsPill *_body;
     AHInputComponent *_input;
     
     BCHeroType *_type;
@@ -49,6 +49,8 @@
     AHAnimationSkeletonTrack *_track;
     
     BOOL _resetWhenDestroyed;
+    
+    BOOL _madeRagdoll;
 }
 
 

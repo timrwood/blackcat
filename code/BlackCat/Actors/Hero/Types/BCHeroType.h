@@ -7,12 +7,12 @@
 //
 
 
+#import "AHGraphicsSkeleton.h"
 #import "AHActorComponent.h"
 
 
 @class BCHeroActor;
 @class AHPhysicsBody;
-@class AHGraphicsSkeleton;
 @class AHPhysicsSkeleton;
 
 

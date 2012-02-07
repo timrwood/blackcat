@@ -13,7 +13,7 @@
 
 @class AHPhysicsRevoluteJoint;
 @class AHPhysicsLimb;
-@class AHPhysicsRect;
+@class AHPhysicsPill;
 
 
 @interface AHPhysicsSkeleton : AHActorComponent {
@@ -23,8 +23,8 @@
     AHPhysicsLimb *_legA;
     AHPhysicsLimb *_legB;
     
-    AHPhysicsRect *_torso;
-    AHPhysicsRect *_head;
+    AHPhysicsPill *_torso;
+    AHPhysicsPill *_head;
     AHPhysicsRevoluteJoint *_neck;
     
     GLKVector2 _position;

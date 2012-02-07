@@ -12,7 +12,7 @@ static int SKELETON_OFFSET = 0;
 
 #import "AHMathUtils.h"
 #import "AHActor.h"
-#import "AHPhysicsRect.h"
+#import "AHPhysicsPill.h"
 #import "AHPhysicsLimb.h"
 #import "AHPhysicsRevoluteJoint.h"
 #import "AHPhysicsSkeleton.h"
@@ -33,8 +33,8 @@ static int SKELETON_OFFSET = 0;
         _legA = [[AHPhysicsLimb alloc] init];
         _legB = [[AHPhysicsLimb alloc] init];
         
-        _torso = [[AHPhysicsRect alloc] init];
-        _head = [[AHPhysicsRect alloc] init];
+        _torso = [[AHPhysicsPill alloc] init];
+        _head = [[AHPhysicsPill alloc] init];
         
         _neck = [[AHPhysicsRevoluteJoint alloc] init];
         

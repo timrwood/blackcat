@@ -31,7 +31,7 @@
     
     // init super system
     [[AHSuperSystem manager] setup];
-    //[[AHSuperSystem manager] setDebugDraw:YES];
+    [[AHSuperSystem manager] setDebugDraw:YES];
     [[AHSuperSystem manager] setRenderDraw:YES];
     
     // setup fps

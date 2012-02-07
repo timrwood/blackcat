@@ -26,7 +26,7 @@ void AHDebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, con
 		glVertices[i] = GLKVector2Make(old_vertices[i].x, old_vertices[i].y);
 	}
     
-    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 1.0f);
+    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
@@ -40,13 +40,13 @@ void AHDebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount
 		glVertices[i] = GLKVector2Make(old_vertices[i].x, old_vertices[i].y);
 	}
     
-    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
+    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.25f);
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
                                                  andCount:vertexCount 
                                               andDrawType:GL_TRIANGLE_FAN];
-    _color.a = 1.0f;
+    _color.a = 0.5f;
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
@@ -67,7 +67,7 @@ void AHDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color
 		theta += k_increment;
 	}
     
-    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
+    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.25f);
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
@@ -88,13 +88,13 @@ void AHDebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2
 		theta += k_increment;
 	}
     
-    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
+    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.25f);
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
                                                  andCount:vertexCount 
                                               andDrawType:GL_TRIANGLE_FAN];
-    _color.a = 1.0f;
+    _color.a = 0.5f;
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
@@ -112,7 +112,7 @@ void AHDebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color&
 	};
     
     
-    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 1.0f);
+    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
@@ -122,7 +122,7 @@ void AHDebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color&
 
 void AHDebugDraw::DrawTransform(const b2Transform& xf) {
 	b2Vec2 p1 = xf.p, p2;
-	const float32 k_axisScale = 0.4f;
+	const float32 k_axisScale = 0.2f;
     
     p2 = p1 + k_axisScale * xf.q.GetXAxis();
     DrawSegment(p1, p2, b2Color(0, 0, 1.0f));
@@ -139,7 +139,7 @@ void AHDebugDraw::DrawPoint(const b2Vec2& p, float32 size, const b2Color& color)
 	};
     
     
-    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 1.0f);
+    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color
@@ -161,7 +161,7 @@ void AHDebugDraw::DrawAABB(b2AABB* aabb, const b2Color& color) {
 		aabb->lowerBound.x, aabb->upperBound.y
 	};
     
-    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 1.0f);
+    GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
     
     [[AHGraphicsManager manager] drawPointerArrayPosition:glVertices
                                                  andColor:_color

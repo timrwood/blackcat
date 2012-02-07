@@ -9,10 +9,8 @@
 
 #import "AHSkeletonStruct.h"
 #import "AHGraphicsObject.h"
-
-
-@class AHGraphicsLimb;
-@class AHGraphicsRect;
+#import "AHGraphicsRect.h"
+#import "AHGraphicsLimb.h"
 
 
 @interface AHGraphicsSkeleton : AHGraphicsObject {

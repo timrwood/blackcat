@@ -52,7 +52,7 @@
     fixtureDef->restitution = self->restitution;
     fixtureDef->friction = self->friction;
 	fixtureDef->shape = (b2Shape *) circleShape;
-    fixtureDef->isSensor = self->_isSensor;
+    fixtureDef->isSensor = self->isSensor;
     fixtureDef->filter.groupIndex = self->group;
 	
 	// body
@@ -61,6 +61,7 @@
     bodyDef->angularDamping = 1.0f;
     bodyDef->fixedRotation = false;
 	bodyDef->position = b2Vec2(_position.x, _position.y);
+    bodyDef->fixedRotation = self->isFixedRotation;
 	
     // create body
     [self addBodyToWorld:bodyDef];

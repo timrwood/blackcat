@@ -7,10 +7,10 @@
 //
 
 
-#import "AHActor.h"
-#import "AHPhysicsRect.h"
-#import "AHPhysicsRevoluteJoint.h"
 #import "AHMathUtils.h"
+#import "AHActor.h"
+#import "AHPhysicsPill.h"
+#import "AHPhysicsRevoluteJoint.h"
 #import "AHPhysicsLimb.h"
 
 
@@ -24,8 +24,8 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _bodyA = [[AHPhysicsRect alloc] init];
-        _bodyB = [[AHPhysicsRect alloc] init];
+        _bodyA = [[AHPhysicsPill alloc] init];
+        _bodyB = [[AHPhysicsPill alloc] init];
         _jointA = [[AHPhysicsRevoluteJoint alloc] init];
         _jointB = [[AHPhysicsRevoluteJoint alloc] init];
     }

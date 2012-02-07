@@ -23,7 +23,7 @@
     if (self) {
         _bodyType = b2_dynamicBody;
         restitution = 0.2f;
-        friction = 0.8f;
+        friction = 0.3f;
         group = 0;
         _joints = [[NSMutableArray alloc] init];
     }
@@ -84,6 +84,10 @@
     if (_body) {
         _body->SetTransform(_body->GetPosition(), rotation);
     }
+}
+
+- (void)setFixedRotation:(BOOL)isFixed {
+    isFixedRotation = isFixed;
 }
 
 
@@ -192,13 +196,13 @@
     }
 }
 
-- (void)setSensor:(BOOL)isSensor {
+- (void)setSensor:(BOOL)_isSensor {
     if (_body) {
         for (b2Fixture *fixture = _body->GetFixtureList(); fixture; fixture = fixture->GetNext()) {
-            fixture->SetSensor(isSensor);
+            fixture->SetSensor(_isSensor);
         }
     } else {
-        _isSensor = isSensor;
+        isSensor = _isSensor;
     }
 }
 
@@ -266,7 +270,9 @@
 - (void)cleanupAfterRemoval {
     delegate = nil;
     [self removeAllJoints];
-    [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
+    if (_body) {
+        [[AHPhysicsManager cppManager] world]->DestroyBody(_body);
+    }
     [super cleanupAfterRemoval];
 }
 

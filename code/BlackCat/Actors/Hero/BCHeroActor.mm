@@ -9,8 +9,9 @@
 
 #define CAMERA_JUMP_DISTANCE 4.0f
 
-#define RADIUS 0.5f
-#define RAYCAST_RADIUS_RATIO 1.4f
+#define HERO_WIDTH 0.2f
+#define HERO_HEIGHT 0.8f
+#define RAYCAST_RADIUS_RATIO 1.5f
 
 #define MAX_SAFETY_RANGE_FRAMES 3
 
@@ -35,7 +36,7 @@
 #import "AHAnimationSkeletonTrack.h"
 #import "AHActorManager.h"
 #import "AHActorMessage.h"
-#import "AHPhysicsCircle.h"
+#import "AHPhysicsPill.h"
 #import "AHGraphicsRect.h"
 #import "AHGraphicsLimb.h"
 #import "AHGraphicsSkeleton.h"
@@ -45,7 +46,9 @@
 #import "BCGlobalTypes.h"
 #import "BCGlobalManager.h"
 
+#import "BCHeroTypeBoxer.h"
 #import "BCHeroTypeDetective.h"
+#import "BCHeroTypeFemme.h"
 
 
 @implementation BCHeroActor
@@ -58,11 +61,14 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsCircle alloc] initFromRadius:RADIUS andPosition:GLKVector2Make(0.0f, 0.0f)];
+        _body = [[AHPhysicsPill alloc] initFromSize:CGSizeMake(HERO_WIDTH, HERO_HEIGHT)];
         [_body setRestitution:0.0f];
         [_body setStatic:NO];
         [_body setCategory:PHY_CAT_HERO];
         [_body setRestitution:0.0f];
+        [_body setDelegate:self];
+        [_body setFixedRotation:YES];
+        [_body setFriction:0.0f];
         [self addComponent:_body];
         
         // input
@@ -85,13 +91,13 @@
         // init the type
         switch ([[BCGlobalManager manager] heroType]) {
             case HERO_TYPE_BOXER:
-                _type = [[BCHeroTypeDetective alloc] init];
+                _type = [[BCHeroTypeBoxer alloc] init];
                 break;
             case HERO_TYPE_DETECTIVE:
                 _type = [[BCHeroTypeDetective alloc] init];
                 break;
             case HERO_TYPE_FEMME:
-                _type = [[BCHeroTypeDetective alloc] init];
+                _type = [[BCHeroTypeFemme alloc] init];
                 break;
             default:
                 break;
@@ -156,7 +162,7 @@
 
 - (void)updateJumpability {
     GLKVector2 foot = [_body position];
-    foot.y += RADIUS * RAYCAST_RADIUS_RATIO;
+    foot.y += HERO_HEIGHT * RAYCAST_RADIUS_RATIO;
     
     int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_JUMPABLE 
                                                                      from:[_body position] 
@@ -210,14 +216,19 @@
 }
 
 - (void)updateCrash {
-    GLKVector2 front = [_body position];
-    front.x += RADIUS * 1.1f;
+    GLKVector2 startPos = [_body position];
+    startPos.y += HERO_HEIGHT - HERO_WIDTH;
+    GLKVector2 endPos = startPos;
+    endPos.x += HERO_WIDTH * RAYCAST_RADIUS_RATIO;
     
     int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_CRASHABLE 
-                                                                     from:[_body position] 
-                                                                       to:front];
+                                                                     from:startPos 
+                                                                       to:endPos];
+    
+    dlog(@"make ragdoll %i", cat);
     
     if (cat != PHY_CAT_NONE) {
+        dlog(@"make ragdoll");
         [self makeRagdoll];
     }
 }
@@ -229,9 +240,9 @@
 
 - (void)touchBeganAtPoint:(GLKVector2)point {
     if (point.x > _halfScreenWidth) {
-        [self inputDash];
-    } else {
         [_type tappedSecondaryAtPoint:point];
+    } else {
+        [self inputJump];
     }
 }
 
@@ -277,6 +288,12 @@
 - (void)makeRagdoll {
     [self safeDestroy];
     
+    // dont make more than one ragdoll
+    if (_madeRagdoll) {
+        return;
+    }
+    _madeRagdoll = YES;
+    
     _resetWhenDestroyed = NO;
     
     BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton]];
@@ -306,6 +323,22 @@
     lower.neck = -M_TAU_16;
     
     [ragdoll setUpperLimits:upper andLowerLimits:lower];
+}
+
+
+#pragma mark -
+#pragma mark contacts
+
+
+- (BOOL)willCollideWith:(AHPhysicsBody *)contact {
+    if ([contact hasTag:PHY_TAG_BREAKABLE] || [contact hasTag:PHY_TAG_PHASEWALKABLE]) {
+        // is crashable
+        if ([contact position].x > [_body position].x) {
+            // is to left of collidable object
+            return [_type willCollideWithObstacle:contact];
+        }
+    }
+    return YES;
 }
 
 

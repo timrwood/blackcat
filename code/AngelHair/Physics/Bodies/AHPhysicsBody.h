@@ -24,8 +24,9 @@
 @protected;
     float restitution;
     float friction;
-    BOOL _isSensor;
+    BOOL isSensor;
     int16 group;
+    BOOL isFixedRotation;
 @private;
     NSMutableArray *_joints;
     NSObject <AHContactDelegate> *delegate;
@@ -62,6 +63,7 @@
 - (void)setPosition:(GLKVector2)newPosition;
 - (float)rotation;
 - (void)setRotation:(float)rotation;
+- (void)setFixedRotation:(BOOL)isFixed;
 
 
 #pragma mark -

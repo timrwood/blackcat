@@ -43,6 +43,7 @@
         [_bodyBot setRestitution:0.0f];
         [_bodyBot setStatic:YES];
         [_bodyBot setCategory:PHY_CAT_BUILDING];
+        [_bodyBot addTag:PHY_TAG_CRASHABLE];
         [_bodyBot addTag:PHY_TAG_JUMPABLE];
         [self addComponent:_bodyBot];
         

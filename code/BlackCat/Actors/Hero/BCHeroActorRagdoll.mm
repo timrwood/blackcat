@@ -20,11 +20,14 @@
 #import "AHPhysicsSkeleton.h"
 #import "AHGraphicsSkeleton.h"
 
+#import "BCClassSelectionScene.h"
 #import "BCGlobalManager.h"
 #import "BCHeroActorRagdoll.h"
 #import "BCGlobalTypes.h"
 
+#import "BCHeroTypeBoxer.h"
 #import "BCHeroTypeDetective.h"
+#import "BCHeroTypeFemme.h"
 
 
 @implementation BCHeroActorRagdoll
@@ -41,13 +44,13 @@
         BCHeroType *_type;
         switch ([[BCGlobalManager manager] heroType]) {
             case HERO_TYPE_BOXER:
-                _type = [[BCHeroTypeDetective alloc] init];
+                _type = [[BCHeroTypeBoxer alloc] init];
                 break;
             case HERO_TYPE_DETECTIVE:
                 _type = [[BCHeroTypeDetective alloc] init];
                 break;
             case HERO_TYPE_FEMME:
-                _type = [[BCHeroTypeDetective alloc] init];
+                _type = [[BCHeroTypeFemme alloc] init];
                 break;
             default:
                 break;
@@ -131,6 +134,7 @@
 
 - (void)cleanupBeforeDestruction {
     [[AHSceneManager manager] reset];
+    //[[AHSceneManager manager] goToScene:[[BCClassSelectionScene alloc] init]];
     [super cleanupBeforeDestruction];
 }
 

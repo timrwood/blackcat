@@ -36,6 +36,7 @@
 		1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547317114C62E7D00DDEBA5 /* AHTimeManager.m */; };
 		154D871E14D09E4400147A99 /* AHShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D871D14D09E4400147A99 /* AHShaderManager.m */; };
 		154D919A14D9FD4300E4FE9A /* misc-objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 154D919914D9FD4300E4FE9A /* misc-objects.png */; };
+		155D2ABA14E0EFDE0030E752 /* AHPhysicsPill.mm in Sources */ = {isa = PBXBuildFile; fileRef = 155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */; };
 		155D407614D9D64A00D4B826 /* body-detective.png in Resources */ = {isa = PBXBuildFile; fileRef = 155D407514D9D64A00D4B826 /* body-detective.png */; };
 		156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156A86FA14C7B30E00B85E04 /* libz.dylib */; };
 		1579F1EE14CF3BDA000C0833 /* debug-grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 1579F1ED14CF3BDA000C0833 /* debug-grid.png */; };
@@ -142,6 +143,8 @@
 		15EE652514E07E66001121C6 /* body-boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = 15EE652314E07E66001121C6 /* body-boxer.png */; };
 		15EE652614E07E66001121C6 /* body-femme.png in Resources */ = {isa = PBXBuildFile; fileRef = 15EE652414E07E66001121C6 /* body-femme.png */; };
 		15EE652A14E08714001121C6 /* BCCrashableObstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15EE652914E08714001121C6 /* BCCrashableObstacle.mm */; };
+		15F3589514E0AFDF008DAB65 /* BCHeroTypeFemme.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15F3589414E0AFDF008DAB65 /* BCHeroTypeFemme.mm */; };
+		15F3589914E0B017008DAB65 /* BCHeroTypeBoxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F3589814E0B017008DAB65 /* BCHeroTypeBoxer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +202,8 @@
 		154D871C14D09E4400147A99 /* AHShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHShaderManager.h; sourceTree = "<group>"; };
 		154D871D14D09E4400147A99 /* AHShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHShaderManager.m; sourceTree = "<group>"; };
 		154D919914D9FD4300E4FE9A /* misc-objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc-objects.png"; sourceTree = "<group>"; };
+		155D2AB814E0EFDE0030E752 /* AHPhysicsPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsPill.h; sourceTree = "<group>"; };
+		155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsPill.mm; sourceTree = "<group>"; };
 		155D407514D9D64A00D4B826 /* body-detective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-detective.png"; sourceTree = "<group>"; };
 		156A86FA14C7B30E00B85E04 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1579F1ED14CF3BDA000C0833 /* debug-grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "debug-grid.png"; sourceTree = "<group>"; };
@@ -394,7 +399,7 @@
 		15C5EBC414C0FB3A00FB5BAF /* BCGlobalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalTypes.h; path = Global/BCGlobalTypes.h; sourceTree = "<group>"; };
 		15C98D9A14D9B5E700B34918 /* BCHeroType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroType.h; path = Actors/Hero/Types/BCHeroType.h; sourceTree = "<group>"; };
 		15C98D9B14D9B5E700B34918 /* BCHeroType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroType.mm; path = Actors/Hero/Types/BCHeroType.mm; sourceTree = "<group>"; };
-		15C98D9D14D9B71600B34918 /* BCHeroTypeDetective.h */ = {isa = PBXFileReference; fileEncoding = 4; name = BCHeroTypeDetective.h; path = Actors/Hero/Types/BCHeroTypeDetective.h; sourceTree = "<group>"; };
+		15C98D9D14D9B71600B34918 /* BCHeroTypeDetective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroTypeDetective.h; path = Actors/Hero/Types/BCHeroTypeDetective.h; sourceTree = "<group>"; };
 		15C98D9E14D9B71600B34918 /* BCHeroTypeDetective.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroTypeDetective.mm; path = Actors/Hero/Types/BCHeroTypeDetective.mm; sourceTree = "<group>"; };
 		15CEA5C514BF75D20052D6BC /* BCGlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalManager.h; path = Global/BCGlobalManager.h; sourceTree = "<group>"; };
 		15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCGlobalManager.m; path = Global/BCGlobalManager.m; sourceTree = "<group>"; };
@@ -405,8 +410,12 @@
 		15EE652014E07724001121C6 /* BCBuildingInside.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingInside.mm; path = Actors/Terrain/Buildings/BCBuildingInside.mm; sourceTree = "<group>"; };
 		15EE652314E07E66001121C6 /* body-boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-boxer.png"; sourceTree = "<group>"; };
 		15EE652414E07E66001121C6 /* body-femme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-femme.png"; sourceTree = "<group>"; };
-		15EE652814E08714001121C6 /* BCCrashableObstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; name = BCCrashableObstacle.h; path = Actors/Terrain/Obstacles/BCCrashableObstacle.h; sourceTree = "<group>"; };
+		15EE652814E08714001121C6 /* BCCrashableObstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCrashableObstacle.h; path = Actors/Terrain/Obstacles/BCCrashableObstacle.h; sourceTree = "<group>"; };
 		15EE652914E08714001121C6 /* BCCrashableObstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCCrashableObstacle.mm; path = Actors/Terrain/Obstacles/BCCrashableObstacle.mm; sourceTree = "<group>"; };
+		15F3589314E0AFDF008DAB65 /* BCHeroTypeFemme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroTypeFemme.h; path = Actors/Hero/Types/BCHeroTypeFemme.h; sourceTree = "<group>"; };
+		15F3589414E0AFDF008DAB65 /* BCHeroTypeFemme.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroTypeFemme.mm; path = Actors/Hero/Types/BCHeroTypeFemme.mm; sourceTree = "<group>"; };
+		15F3589714E0B017008DAB65 /* BCHeroTypeBoxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroTypeBoxer.h; path = Actors/Hero/Types/BCHeroTypeBoxer.h; sourceTree = "<group>"; };
+		15F3589814E0B017008DAB65 /* BCHeroTypeBoxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCHeroTypeBoxer.m; path = Actors/Hero/Types/BCHeroTypeBoxer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -709,6 +718,8 @@
 				1587705414BBC9C9009886D2 /* AHPhysicsRect.h */,
 				1587705514BBC9C9009886D2 /* AHPhysicsRect.mm */,
 				152839FD14BF62DC002D7513 /* AHContactDelegate.h */,
+				155D2AB814E0EFDE0030E752 /* AHPhysicsPill.h */,
+				155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */,
 			);
 			path = Bodies;
 			sourceTree = "<group>";
@@ -1162,6 +1173,10 @@
 				15C98D9B14D9B5E700B34918 /* BCHeroType.mm */,
 				15C98D9D14D9B71600B34918 /* BCHeroTypeDetective.h */,
 				15C98D9E14D9B71600B34918 /* BCHeroTypeDetective.mm */,
+				15F3589314E0AFDF008DAB65 /* BCHeroTypeFemme.h */,
+				15F3589414E0AFDF008DAB65 /* BCHeroTypeFemme.mm */,
+				15F3589714E0B017008DAB65 /* BCHeroTypeBoxer.h */,
+				15F3589814E0B017008DAB65 /* BCHeroTypeBoxer.m */,
 			);
 			name = Types;
 			sourceTree = "<group>";
@@ -1383,6 +1398,9 @@
 				15AC188114DB723500E85EBF /* BCBuildingFlat.mm in Sources */,
 				15EE652114E07724001121C6 /* BCBuildingInside.mm in Sources */,
 				15EE652A14E08714001121C6 /* BCCrashableObstacle.mm in Sources */,
+				15F3589514E0AFDF008DAB65 /* BCHeroTypeFemme.mm in Sources */,
+				15F3589914E0B017008DAB65 /* BCHeroTypeBoxer.m in Sources */,
+				155D2ABA14E0EFDE0030E752 /* AHPhysicsPill.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

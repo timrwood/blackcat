@@ -11,6 +11,7 @@
 
 
 @interface AHPhysicsRect : AHPhysicsBody {
+@protected;
     float _rotation;
     CGSize _size;
     GLKVector2 _position;

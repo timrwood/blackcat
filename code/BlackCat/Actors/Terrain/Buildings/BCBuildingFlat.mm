@@ -37,6 +37,7 @@
         [_body setStatic:YES];
         [_body setCategory:PHY_CAT_BUILDING];
         [_body addTag:PHY_TAG_JUMPABLE];
+        [_body addTag:PHY_TAG_CRASHABLE];
         
         [self addComponent:_body];
         

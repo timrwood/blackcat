@@ -11,8 +11,6 @@
 
 #import "AHGraphicsManager.h"
 #import "AHActor.h"
-#import "AHGraphicsLimb.h"
-#import "AHGraphicsRect.h"
 
 
 @implementation AHGraphicsSkeleton
