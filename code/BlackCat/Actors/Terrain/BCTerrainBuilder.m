@@ -62,6 +62,8 @@
     if (_buildingOffset >= BUILDING_TYPE_LENGTH) {
         _buildingOffset = BUILDING_FLAT;
     }
+    
+    _buildingOffset = BUILDING_INSIDE;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {

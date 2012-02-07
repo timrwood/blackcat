@@ -24,12 +24,8 @@
 @private;
     AHPhysicsPill *_body;
     AHInputComponent *_input;
-    
     BCHeroType *_type;
-    
     AHGraphicsSkeleton *_skeleton;
-    AHGraphicsLimb *_limb;
-    float _limbAngle;
     
     BOOL _canJump;
     BOOL _isJumping;
@@ -43,10 +39,6 @@
     float _speedIncrease;
     
     float _dashSpeed;
-    
-    float _halfScreenWidth;
-    
-    AHAnimationSkeletonTrack *_track;
     
     BOOL _resetWhenDestroyed;
     

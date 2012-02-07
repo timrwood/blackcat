@@ -10,11 +10,15 @@
 #define BUILDING_WIDTH 16.0f
 #define BUILDING_HEIGHT 4.0f
 
-#define OPENING_HEIGHT 3.0f
+#define CORNER_HEIGHT_PERCENT 0.4f
+#define CORNER_WIDTH_PERCENT 0.2f
+
+#define OPENING_HEIGHT 2.0f
 
 
 #import "AHGraphicsManager.h"
 #import "AHGraphicsRect.h"
+#import "AHPhysicsPolygon.h"
 #import "AHPhysicsRect.h"
 #import "AHMathUtils.h"
 
@@ -32,7 +36,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _bodyTop = [[AHPhysicsRect alloc] init];
+        _bodyTop = [[AHPhysicsPolygon alloc] init];
         [_bodyTop setRestitution:0.0f];
         [_bodyTop setStatic:YES];
         [_bodyTop setCategory:PHY_CAT_BUILDING];
@@ -77,10 +81,29 @@
     centerBot.y = self->_startCorner.y + (BUILDING_HEIGHT / 2.0f);
     
     [_skinTop setRectFromCenter:centerTop andSize:size];
-    [_bodyTop setSize:size andPosition:centerTop];
     
     [_skinBot setRectFromCenter:centerBot andSize:size];
     [_bodyBot setSize:size andPosition:centerBot];
+    
+    // top corner
+    float left = - BUILDING_WIDTH / 2.0f;
+    float right = BUILDING_WIDTH / 2.0f;
+    float top = - BUILDING_HEIGHT / 2.0f;
+    float bot = BUILDING_HEIGHT / 2.0f;
+    float leftCorner = left + (BUILDING_WIDTH * CORNER_WIDTH_PERCENT);
+    float rightCorner = right - (BUILDING_WIDTH * CORNER_WIDTH_PERCENT);
+    float botCorner = bot - (BUILDING_HEIGHT * CORNER_HEIGHT_PERCENT);
+    
+    GLKVector2 topVector[6];
+    topVector[0] = GLKVector2Make(left,        top); // top left
+    topVector[1] = GLKVector2Make(right,       top); // top right
+    topVector[2] = GLKVector2Make(right,       botCorner); // bottom right
+    topVector[3] = GLKVector2Make(rightCorner, bot); // bottom right
+    topVector[4] = GLKVector2Make(leftCorner,  bot); // bottom corner
+    topVector[5] = GLKVector2Make(left,        botCorner); // left corner
+    [_bodyTop setPoints:topVector andCount:6];
+    [_bodyTop setPosition:centerTop];
+    
     [super setup];
 }
 

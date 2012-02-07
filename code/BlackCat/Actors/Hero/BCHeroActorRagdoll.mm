@@ -13,6 +13,7 @@
 
 
 #import "AHTimeManager.h"
+#import "AHScreenManager.h"
 #import "AHSceneManager.h"
 #import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
@@ -58,25 +59,23 @@
         
         [[AHTimeManager manager] setWorldToRealRatio:5.0f];
         
+        // physics
         _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:[_type physicsConfig]];
+        [_ragdoll setUpperLimits:[_type upperLimit] andLowerLimits:[_type lowerLimit]];
+        [self addComponent:_ragdoll];
         
-        CGRect inputRect = [[UIScreen mainScreen] bounds];
-        float w = inputRect.size.width;
-        inputRect.size.width = inputRect.size.height;
-        inputRect.size.height = w;
-        _input = [[AHInputComponent alloc] initWithScreenRect:inputRect];
+        // input
+        _input = [[AHInputComponent alloc] initWithScreenRect:[[AHScreenManager manager] screenRect]];
         [_input setDelegate:self];
         [self addComponent:_input];
         
+        // graphics
         _skin = [[AHGraphicsSkeleton alloc] init];
         [_skin setSkeleton:skeleton];
-        [self addComponent:_skin];
-        
-        [_type configSkeletonSkin:_skin];
         [_skin setFromSkeletonConfig:[_type graphicsConfig]];
         [_skin setLayerIndex:GFX_LAYER_BACKGROUND];
-        
-        [self addComponent:_ragdoll];
+        [_type configSkeletonSkin:_skin];
+        [self addComponent:_skin];
         
         _creationTime = [[AHTimeManager manager] realTime];
     }

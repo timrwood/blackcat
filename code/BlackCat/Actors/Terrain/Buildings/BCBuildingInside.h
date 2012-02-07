@@ -11,12 +11,13 @@
 
 
 @class AHPhysicsRect;
+@class AHPhysicsPolygon;
 @class AHGraphicsRect;
 
 
 @interface BCBuildingInside : BCBuildingType {
 @private;
-    AHPhysicsRect *_bodyTop;
+    AHPhysicsPolygon *_bodyTop;
     AHPhysicsRect *_bodyBot;
     
     AHGraphicsRect *_skinTop;

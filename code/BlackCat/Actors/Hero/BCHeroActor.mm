@@ -11,7 +11,8 @@
 
 #define HERO_WIDTH 0.2f
 #define HERO_HEIGHT 0.8f
-#define RAYCAST_RADIUS_RATIO 1.5f
+#define HERO_HEIGHT_RAYCAST_RADIUS_RATIO 1.1f
+#define HERO_WIDTH_RAYCAST_RADIUS_RATIO 1.5f
 
 #define MAX_SAFETY_RANGE_FRAMES 3
 
@@ -32,6 +33,7 @@
 
 #import "AHMathUtils.h"
 
+#import "AHScreenManager.h"
 #import "AHAnimationSkeletonCache.h"
 #import "AHAnimationSkeletonTrack.h"
 #import "AHActorManager.h"
@@ -72,12 +74,7 @@
         [self addComponent:_body];
         
         // input
-        CGRect inputRect = [[UIScreen mainScreen] bounds];
-        float w = inputRect.size.width;
-        inputRect.size.width = inputRect.size.height;
-        inputRect.size.height = w;
-        _halfScreenWidth = inputRect.size.width / 2.0f;
-        _input = [[AHInputComponent alloc] initWithScreenRect:inputRect];
+        _input = [[AHInputComponent alloc] initWithScreenRect:[[AHScreenManager manager] screenRect]];
         [_input setDelegate:self];
         [self addComponent:_input];
         
@@ -115,8 +112,6 @@
         // horizontal speeds
         _runSpeed = INITIAL_RUN_SPEED;
         _speedIncrease = 0.01f * [[AHTimeManager manager] realFramesPerSecond] / 60.0f;
-        
-        _track = [[AHAnimationSkeletonCache manager] animationForKey:@"demo"];
     }
     return self;
 }
@@ -162,7 +157,7 @@
 
 - (void)updateJumpability {
     GLKVector2 foot = [_body position];
-    foot.y += HERO_HEIGHT * RAYCAST_RADIUS_RATIO;
+    foot.y += HERO_HEIGHT * HERO_HEIGHT_RAYCAST_RADIUS_RATIO;
     
     int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_JUMPABLE 
                                                                      from:[_body position] 
@@ -202,7 +197,7 @@
     AHSkeleton skeleton;
     skeleton.x = [_body position].x;
     skeleton.y = [_body position].y;
-    skeleton.hipA = _limbAngle;
+    /*skeleton.hipA = _limbAngle;
     skeleton.hipB = _limbAngle / 2.0f;
     skeleton.elbowA = _limbAngle;
     skeleton.elbowB = -_limbAngle / 2.0f;
@@ -211,7 +206,7 @@
     skeleton.shoulderA = -_limbAngle;
     skeleton.shoulderB = _limbAngle / 2.0f;
     skeleton.neck = _limbAngle;
-    skeleton.waist = -_limbAngle / 2.0f;
+    skeleton.waist = -_limbAngle / 2.0f;*/
     [_skeleton setSkeleton:skeleton];
 }
 
@@ -219,16 +214,11 @@
     GLKVector2 startPos = [_body position];
     startPos.y += HERO_HEIGHT - HERO_WIDTH;
     GLKVector2 endPos = startPos;
-    endPos.x += HERO_WIDTH * RAYCAST_RADIUS_RATIO;
+    endPos.x += HERO_WIDTH * HERO_WIDTH_RAYCAST_RADIUS_RATIO;
     
-    int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_CRASHABLE 
-                                                                     from:startPos 
-                                                                       to:endPos];
-    
-    dlog(@"make ragdoll %i", cat);
+    int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_CRASHABLE from:startPos to:endPos];
     
     if (cat != PHY_CAT_NONE) {
-        dlog(@"make ragdoll");
         [self makeRagdoll];
     }
 }
@@ -239,7 +229,7 @@
 
 
 - (void)touchBeganAtPoint:(GLKVector2)point {
-    if (point.x > _halfScreenWidth) {
+    if (point.x > [[AHScreenManager manager] screenWidth] / 2.0f) {
         [_type tappedSecondaryAtPoint:point];
     } else {
         [self inputJump];
@@ -299,30 +289,6 @@
     BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton]];
     [ragdoll setLinearVelocity:GLKVector2Make(_runSpeed, [_body linearVelocity].y)];
     [[AHActorManager manager] add:ragdoll];
-    
-    AHSkeleton upper;
-    upper.hipA = M_TAU_16;
-    upper.hipB = M_TAU_16;
-    upper.kneeA = M_TAU_4 + M_TAU_8;
-    upper.kneeB = M_TAU_4 + M_TAU_8;
-    upper.elbowA = 0.0f;
-    upper.elbowB = 0.0f;
-    upper.shoulderA = M_TAU_4;
-    upper.shoulderB = M_TAU_4;
-    upper.neck = M_TAU_16;
-    
-    AHSkeleton lower;
-    lower.hipA = -(M_TAU_4 + M_TAU_8);
-    lower.hipB = -(M_TAU_4 + M_TAU_8);
-    lower.kneeA = 0.0f;
-    lower.kneeB = 0.0f;
-    lower.elbowA = -(M_TAU_4 + M_TAU_8);
-    lower.elbowB = -(M_TAU_4 + M_TAU_8);
-    lower.shoulderA = -M_TAU_2;
-    lower.shoulderB = -M_TAU_2;
-    lower.neck = -M_TAU_16;
-    
-    [ragdoll setUpperLimits:upper andLowerLimits:lower];
 }
 
 

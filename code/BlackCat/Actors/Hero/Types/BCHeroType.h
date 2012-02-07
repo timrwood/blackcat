@@ -36,6 +36,8 @@
 - (void)configSkeletonBody:(AHPhysicsSkeleton *)skeleton;
 - (AHSkeletonConfig)graphicsConfig;
 - (AHSkeletonConfig)physicsConfig;
+- (AHSkeleton)upperLimit;
+- (AHSkeleton)lowerLimit;
 
 
 #pragma mark -

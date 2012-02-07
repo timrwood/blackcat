@@ -26,6 +26,7 @@
 		1515F8A914C9E2FE004FE3BB /* AHGraphicsRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8A714C9E2FE004FE3BB /* AHGraphicsRect.m */; };
 		1515F8AF14C9E332004FE3BB /* AHGraphicsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8AE14C9E332004FE3BB /* AHGraphicsLayer.m */; };
 		1515F8B314C9F519004FE3BB /* BCBackgroundActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8B214C9F519004FE3BB /* BCBackgroundActor.m */; };
+		152F4AFF14E1A43D00B5E3BD /* AHScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 152F4AFE14E1A43D00B5E3BD /* AHScreenManager.m */; };
 		153EB11A14AD6EE50070DBB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11914AD6EE50070DBB9 /* UIKit.framework */; };
 		153EB11C14AD6EE50070DBB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11B14AD6EE50070DBB9 /* Foundation.framework */; };
 		153EB11E14AD6EE50070DBB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */; };
@@ -187,6 +188,8 @@
 		1515F8B214C9F519004FE3BB /* BCBackgroundActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCBackgroundActor.m; path = Actors/Background/BCBackgroundActor.m; sourceTree = "<group>"; };
 		152839FA14BF56AA002D7513 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		152839FD14BF62DC002D7513 /* AHContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHContactDelegate.h; sourceTree = "<group>"; };
+		152F4AFD14E1A43D00B5E3BD /* AHScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHScreenManager.h; path = Screen/AHScreenManager.h; sourceTree = "<group>"; };
+		152F4AFE14E1A43D00B5E3BD /* AHScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHScreenManager.m; path = Screen/AHScreenManager.m; sourceTree = "<group>"; };
 		153EB11514AD6EE50070DBB9 /* BlackCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		153EB11914AD6EE50070DBB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		153EB11B14AD6EE50070DBB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -557,6 +560,15 @@
 			name = Background;
 			sourceTree = "<group>";
 		};
+		152F4AFB14E1A3FF00B5E3BD /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				152F4AFD14E1A43D00B5E3BD /* AHScreenManager.h */,
+				152F4AFE14E1A43D00B5E3BD /* AHScreenManager.m */,
+			);
+			name = Screen;
+			sourceTree = "<group>";
+		};
 		153EB10A14AD6EE50070DBB9 = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +835,7 @@
 				15CEA5CD14BFB7530052D6BC /* Math */,
 				15AC4D7814B7B3BB00283A06 /* Physics */,
 				158346F614B7BF8000C1DA04 /* Scenes */,
+				152F4AFB14E1A3FF00B5E3BD /* Screen */,
 				15AC4D8314B7B3BB00283A06 /* Sound */,
 				15AC4E3A14B7B53400283A06 /* SubSystem */,
 				15AC4E3B14B7B54000283A06 /* SuperSystem */,
@@ -1401,6 +1414,7 @@
 				15F3589514E0AFDF008DAB65 /* BCHeroTypeFemme.mm in Sources */,
 				15F3589914E0B017008DAB65 /* BCHeroTypeBoxer.m in Sources */,
 				155D2ABA14E0EFDE0030E752 /* AHPhysicsPill.mm in Sources */,
+				152F4AFF14E1A43D00B5E3BD /* AHScreenManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
