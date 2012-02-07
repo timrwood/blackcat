@@ -17,12 +17,15 @@
 @class AHAnimationSkeletonTrack;
 @class AHGraphicsLimb;
 @class AHGraphicsSkeleton;
+@class BCHeroType;
 
 
 @interface BCHeroActor : AHActor <AHInputDelegate> {
 @private;
     AHPhysicsCircle *_body;
     AHInputComponent *_input;
+    
+    BCHeroType *_type;
     
     AHGraphicsSkeleton *_skeleton;
     AHGraphicsLimb *_limb;
@@ -44,7 +47,6 @@
     float _halfScreenWidth;
     
     AHAnimationSkeletonTrack *_track;
-    AHSkeletonConfig config;
     
     BOOL _resetWhenDestroyed;
 }

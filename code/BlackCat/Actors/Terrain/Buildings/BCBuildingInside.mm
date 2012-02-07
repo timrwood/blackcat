@@ -37,7 +37,6 @@
         [_bodyTop setStatic:YES];
         [_bodyTop setCategory:PHY_CAT_BUILDING];
         [_bodyTop addTag:PHY_TAG_JUMPABLE];
-        [_bodyTop addTag:PHY_TAG_CRASHABLE];
         [self addComponent:_bodyTop];
         
         _bodyBot = [[AHPhysicsRect alloc] init];
@@ -45,7 +44,6 @@
         [_bodyBot setStatic:YES];
         [_bodyBot setCategory:PHY_CAT_BUILDING];
         [_bodyBot addTag:PHY_TAG_JUMPABLE];
-        [_bodyBot addTag:PHY_TAG_CRASHABLE];
         [self addComponent:_bodyBot];
         
         _skinTop = [[AHGraphicsRect alloc] init];

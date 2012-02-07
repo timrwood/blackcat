@@ -17,7 +17,8 @@ typedef enum {
     PHY_CAT_NONE,
     PHY_CAT_BUILDING,
     PHY_CAT_HERO,
-    PHY_CAT_BOX
+    PHY_CAT_BOX,
+    PHY_CAT_CRASHABLE
 } BCPhysicsBodyCategories;
 
 
@@ -34,3 +35,10 @@ typedef enum {
     GFK_LAYER_BUILDINGS,
     GFK_LAYER_HERO
 } BCGraphicsLayers;
+
+
+typedef enum {
+    HERO_TYPE_DETECTIVE,
+    HERO_TYPE_FEMME,
+    HERO_TYPE_BOXER
+} BCHeroTypes;

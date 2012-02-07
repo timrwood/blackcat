@@ -20,6 +20,8 @@
     AHInputComponent *_input;
     AHPhysicsSkeleton *_ragdoll;
     AHGraphicsSkeleton *_skin;
+    
+    float _creationTime;
 }
 
 
@@ -27,8 +29,7 @@
 #pragma mark init
 
 
-- (id)initFromSkeleton:(AHSkeleton)skeleton
-     andSkeletonConfig:(AHSkeletonConfig)config;
+- (id)initFromSkeleton:(AHSkeleton)skeleton;
 
 
 #pragma mark -

@@ -134,11 +134,14 @@
 		15AC4E4114B7BB3700283A06 /* AHShaderTextureVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 15AC4D7514B7B3BB00283A06 /* AHShaderTextureVertex.glsl */; };
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
 		15C5EBC314C0F17200FB5BAF /* AHActorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */; };
-		15C98D9C14D9B5E700B34918 /* BCHeroType.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9B14D9B5E700B34918 /* BCHeroType.m */; };
-		15C98D9F14D9B71600B34918 /* BCHeroTypeRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9E14D9B71600B34918 /* BCHeroTypeRunner.m */; };
+		15C98D9C14D9B5E700B34918 /* BCHeroType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9B14D9B5E700B34918 /* BCHeroType.mm */; };
+		15C98D9F14D9B71600B34918 /* BCHeroTypeDetective.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9E14D9B71600B34918 /* BCHeroTypeDetective.mm */; };
 		15CEA5C714BF75D20052D6BC /* BCGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */; };
 		15CEA5CC14BF84690052D6BC /* BCCrateActor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */; };
 		15EE652114E07724001121C6 /* BCBuildingInside.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15EE652014E07724001121C6 /* BCBuildingInside.mm */; };
+		15EE652514E07E66001121C6 /* body-boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = 15EE652314E07E66001121C6 /* body-boxer.png */; };
+		15EE652614E07E66001121C6 /* body-femme.png in Resources */ = {isa = PBXBuildFile; fileRef = 15EE652414E07E66001121C6 /* body-femme.png */; };
+		15EE652A14E08714001121C6 /* BCCrashableObstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15EE652914E08714001121C6 /* BCCrashableObstacle.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -390,9 +393,9 @@
 		15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHActorMessage.m; sourceTree = "<group>"; };
 		15C5EBC414C0FB3A00FB5BAF /* BCGlobalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalTypes.h; path = Global/BCGlobalTypes.h; sourceTree = "<group>"; };
 		15C98D9A14D9B5E700B34918 /* BCHeroType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroType.h; path = Actors/Hero/Types/BCHeroType.h; sourceTree = "<group>"; };
-		15C98D9B14D9B5E700B34918 /* BCHeroType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCHeroType.m; path = Actors/Hero/Types/BCHeroType.m; sourceTree = "<group>"; };
-		15C98D9D14D9B71600B34918 /* BCHeroTypeRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroTypeRunner.h; path = Actors/Hero/Types/BCHeroTypeRunner.h; sourceTree = "<group>"; };
-		15C98D9E14D9B71600B34918 /* BCHeroTypeRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCHeroTypeRunner.m; path = Actors/Hero/Types/BCHeroTypeRunner.m; sourceTree = "<group>"; };
+		15C98D9B14D9B5E700B34918 /* BCHeroType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroType.mm; path = Actors/Hero/Types/BCHeroType.mm; sourceTree = "<group>"; };
+		15C98D9D14D9B71600B34918 /* BCHeroTypeDetective.h */ = {isa = PBXFileReference; fileEncoding = 4; name = BCHeroTypeDetective.h; path = Actors/Hero/Types/BCHeroTypeDetective.h; sourceTree = "<group>"; };
+		15C98D9E14D9B71600B34918 /* BCHeroTypeDetective.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCHeroTypeDetective.mm; path = Actors/Hero/Types/BCHeroTypeDetective.mm; sourceTree = "<group>"; };
 		15CEA5C514BF75D20052D6BC /* BCGlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCGlobalManager.h; path = Global/BCGlobalManager.h; sourceTree = "<group>"; };
 		15CEA5C614BF75D20052D6BC /* BCGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCGlobalManager.m; path = Global/BCGlobalManager.m; sourceTree = "<group>"; };
 		15CEA5CA14BF84690052D6BC /* BCCrateActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCrateActor.h; path = Actors/Terrain/BCCrateActor.h; sourceTree = "<group>"; };
@@ -400,6 +403,10 @@
 		15CEA5CE14BFB7760052D6BC /* AHMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHMathUtils.h; path = Math/AHMathUtils.h; sourceTree = "<group>"; };
 		15EE651F14E07724001121C6 /* BCBuildingInside.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingInside.h; path = Actors/Terrain/Buildings/BCBuildingInside.h; sourceTree = "<group>"; };
 		15EE652014E07724001121C6 /* BCBuildingInside.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingInside.mm; path = Actors/Terrain/Buildings/BCBuildingInside.mm; sourceTree = "<group>"; };
+		15EE652314E07E66001121C6 /* body-boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-boxer.png"; sourceTree = "<group>"; };
+		15EE652414E07E66001121C6 /* body-femme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-femme.png"; sourceTree = "<group>"; };
+		15EE652814E08714001121C6 /* BCCrashableObstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; name = BCCrashableObstacle.h; path = Actors/Terrain/Obstacles/BCCrashableObstacle.h; sourceTree = "<group>"; };
+		15EE652914E08714001121C6 /* BCCrashableObstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCCrashableObstacle.mm; path = Actors/Terrain/Obstacles/BCCrashableObstacle.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,10 +497,12 @@
 		15132C2214C8CB680017BBD0 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
-				154D919914D9FD4300E4FE9A /* misc-objects.png */,
-				155D407514D9D64A00D4B826 /* body-detective.png */,
-				1579F1ED14CF3BDA000C0833 /* debug-grid.png */,
 				15132C2314C8CB680017BBD0 /* background.png */,
+				15EE652314E07E66001121C6 /* body-boxer.png */,
+				155D407514D9D64A00D4B826 /* body-detective.png */,
+				15EE652414E07E66001121C6 /* body-femme.png */,
+				1579F1ED14CF3BDA000C0833 /* debug-grid.png */,
+				154D919914D9FD4300E4FE9A /* misc-objects.png */,
 			);
 			name = graphics;
 			path = resources/graphics;
@@ -737,6 +746,7 @@
 		15AAFBF714BE2B6F0058F014 /* Terrain */ = {
 			isa = PBXGroup;
 			children = (
+				15EE652714E08580001121C6 /* Obstacles */,
 				15AC187514DB6A8500E85EBF /* Buildings */,
 				15CEA5CA14BF84690052D6BC /* BCCrateActor.h */,
 				15CEA5CB14BF84690052D6BC /* BCCrateActor.mm */,
@@ -1149,9 +1159,9 @@
 			isa = PBXGroup;
 			children = (
 				15C98D9A14D9B5E700B34918 /* BCHeroType.h */,
-				15C98D9B14D9B5E700B34918 /* BCHeroType.m */,
-				15C98D9D14D9B71600B34918 /* BCHeroTypeRunner.h */,
-				15C98D9E14D9B71600B34918 /* BCHeroTypeRunner.m */,
+				15C98D9B14D9B5E700B34918 /* BCHeroType.mm */,
+				15C98D9D14D9B71600B34918 /* BCHeroTypeDetective.h */,
+				15C98D9E14D9B71600B34918 /* BCHeroTypeDetective.mm */,
 			);
 			name = Types;
 			sourceTree = "<group>";
@@ -1172,6 +1182,15 @@
 				15CEA5CE14BFB7760052D6BC /* AHMathUtils.h */,
 			);
 			name = Math;
+			sourceTree = "<group>";
+		};
+		15EE652714E08580001121C6 /* Obstacles */ = {
+			isa = PBXGroup;
+			children = (
+				15EE652814E08714001121C6 /* BCCrashableObstacle.h */,
+				15EE652914E08714001121C6 /* BCCrashableObstacle.mm */,
+			);
+			name = Obstacles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1237,6 +1256,8 @@
 				159A08A814D75E6D009CA4AF /* class-selection.scene in Resources */,
 				155D407614D9D64A00D4B826 /* body-detective.png in Resources */,
 				154D919A14D9FD4300E4FE9A /* misc-objects.png in Resources */,
+				15EE652514E07E66001121C6 /* body-boxer.png in Resources */,
+				15EE652614E07E66001121C6 /* body-femme.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,12 +1376,13 @@
 				150F1D2E14D1F60600592E87 /* AHPhysicsLimb.mm in Sources */,
 				150F1D3114D2338600592E87 /* BCHeroActorRagdoll.mm in Sources */,
 				159A08A414D75D03009CA4AF /* BCClassSelectionScene.m in Sources */,
-				15C98D9C14D9B5E700B34918 /* BCHeroType.m in Sources */,
-				15C98D9F14D9B71600B34918 /* BCHeroTypeRunner.m in Sources */,
+				15C98D9C14D9B5E700B34918 /* BCHeroType.mm in Sources */,
+				15C98D9F14D9B71600B34918 /* BCHeroTypeDetective.mm in Sources */,
 				15AC187914DB6AF900E85EBF /* BCBuildingThreeStepped.mm in Sources */,
 				15AC187C14DB6B1100E85EBF /* BCBuildingType.m in Sources */,
 				15AC188114DB723500E85EBF /* BCBuildingFlat.mm in Sources */,
 				15EE652114E07724001121C6 /* BCBuildingInside.mm in Sources */,
+				15EE652A14E08714001121C6 /* BCCrashableObstacle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

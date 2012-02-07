@@ -39,21 +39,18 @@
         [_step1 setRestitution:0.0f];
         [_step1 setCategory:PHY_CAT_BUILDING];
         [_step1 addTag:PHY_TAG_JUMPABLE];
-        [_step1 addTag:PHY_TAG_CRASHABLE];
         
         _step2 = [[AHPhysicsRect alloc] init];
         [_step2 setStatic:YES];
         [_step2 setRestitution:0.0f];
         [_step2 setCategory:PHY_CAT_BUILDING];
         [_step2 addTag:PHY_TAG_JUMPABLE];
-        [_step2 addTag:PHY_TAG_CRASHABLE];
         
         _step3 = [[AHPhysicsRect alloc] init];
         [_step3 setStatic:YES];
         [_step3 setRestitution:0.0f];
         [_step3 setCategory:PHY_CAT_BUILDING];
         [_step3 addTag:PHY_TAG_JUMPABLE];
-        [_step3 addTag:PHY_TAG_CRASHABLE];
         
         [self addComponent:_step1];
         [self addComponent:_step2];

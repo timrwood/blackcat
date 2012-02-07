@@ -10,23 +10,46 @@
 #import "AHActorComponent.h"
 
 
+@class BCHeroActor;
+@class AHPhysicsBody;
+@class AHGraphicsSkeleton;
+@class AHPhysicsSkeleton;
+
+
 @interface BCHeroType : AHActorComponent {
     
 }
 
 
 #pragma mark -
-#pragma mark speed
+#pragma mark vars
 
 
-- (float)runSpeed;
+@property (nonatomic, weak) BCHeroActor *hero;
 
 
 #pragma mark -
-#pragma mark jump
+#pragma mark skin
 
 
-- (float)jumpSpeed;
+- (void)configSkeletonSkin:(AHGraphicsSkeleton *)skeleton;
+- (void)configSkeletonBody:(AHPhysicsSkeleton *)skeleton;
+- (AHSkeletonConfig)graphicsConfig;
+- (AHSkeletonConfig)physicsConfig;
+
+
+#pragma mark -
+#pragma mark secondary
+
+
+- (void)tappedSecondaryAtPoint:(GLKVector2)point;
+
+
+#pragma mark -
+#pragma mark collision
+
+
+- (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle;
 
 
 @end

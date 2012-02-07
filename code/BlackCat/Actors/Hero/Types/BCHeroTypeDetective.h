@@ -10,7 +10,10 @@
 #import "BCHeroType.h"
 
 
-@interface BCHeroTypeRunner : BCHeroType
+@interface BCHeroTypeDetective : BCHeroType {
+@private;
+    float _timeLastTappedSecondary;
+}
 
 
 @end

@@ -11,12 +11,14 @@
 #define BUILDING_HEIGHT 4.0f
 
 
+#import "AHActorManager.h"
 #import "AHGraphicsManager.h"
 #import "AHGraphicsRect.h"
 #import "AHPhysicsRect.h"
 #import "AHMathUtils.h"
 
 #import "BCGlobalTypes.h"
+#import "BCCrashableObstacle.h"
 #import "BCBuildingFlat.h"
 
 
@@ -35,7 +37,6 @@
         [_body setStatic:YES];
         [_body setCategory:PHY_CAT_BUILDING];
         [_body addTag:PHY_TAG_JUMPABLE];
-        [_body addTag:PHY_TAG_CRASHABLE];
         
         [self addComponent:_body];
         
@@ -61,6 +62,12 @@
     
     [_skin setRectFromCenter:center andSize:size];
     [_body setSize:size andPosition:center];
+    
+    // add an obstacle
+    GLKVector2 obsPos = GLKVector2Make(center.x, self->_startCorner.y);
+    BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
+    [[AHActorManager manager] add:obstacle];
+    
     [super setup];
 }
 

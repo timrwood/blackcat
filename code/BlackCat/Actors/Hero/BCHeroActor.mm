@@ -45,6 +45,8 @@
 #import "BCGlobalTypes.h"
 #import "BCGlobalManager.h"
 
+#import "BCHeroTypeDetective.h"
+
 
 @implementation BCHeroActor
 
@@ -63,6 +65,7 @@
         [_body setRestitution:0.0f];
         [self addComponent:_body];
         
+        // input
         CGRect inputRect = [[UIScreen mainScreen] bounds];
         float w = inputRect.size.width;
         inputRect.size.width = inputRect.size.height;
@@ -72,38 +75,39 @@
         [_input setDelegate:self];
         [self addComponent:_input];
         
-        AHSkeleton skeleton;
+        // graphics
         _skeleton = [[AHGraphicsSkeleton alloc] init];
-        config.armWidth = 0.15f;
-        config.armLength = 0.9f;
-        config.legWidth = 0.15f;
-        config.legLength = 1.0f;
-        config.torsoWidth = 0.25f;
-        config.torsoHeight = 0.6f;
-        config.headTop = 0.22f;
-        config.headBottom = 0.08f;
-        config.headLeft = 0.1f;
-        config.headRight = 0.15f;
+        AHSkeleton skeleton;
         [_skeleton setSkeleton:skeleton];
-        [_skeleton setFromSkeletonConfig:config];
-        [_skeleton setTextureKey:@"body-detective.png"];
-        [_skeleton setArmATextureRect:CGRectMake(0.25f, 0.0f, 0.25f, 0.5f)];
-        [_skeleton setArmBTextureRect:CGRectMake(0.0f, 0.0f, 0.25f, 0.5f)];
-        [_skeleton setLegATextureRect:CGRectMake(0.25f, 0.5f, 0.25f, 0.5f)];
-        [_skeleton setLegBTextureRect:CGRectMake(0.0f, 0.5f, 0.25f, 0.5f)];
-        [[_skeleton torso] setTex:CGRectMake(0.5f, 0.5f, 0.5f, 0.5f)];
-        [[_skeleton head] setTex:CGRectMake(0.5f, 0.25f, 0.5f, 0.25f)];
-        
-        _resetWhenDestroyed = YES;
-        
         [_skeleton setLayerIndex:GFX_LAYER_BACKGROUND];
         [self addComponent:_skeleton];
         
-        _runSpeed = INITIAL_RUN_SPEED;
+        // init the type
+        switch ([[BCGlobalManager manager] heroType]) {
+            case HERO_TYPE_BOXER:
+                _type = [[BCHeroTypeDetective alloc] init];
+                break;
+            case HERO_TYPE_DETECTIVE:
+                _type = [[BCHeroTypeDetective alloc] init];
+                break;
+            case HERO_TYPE_FEMME:
+                _type = [[BCHeroTypeDetective alloc] init];
+                break;
+            default:
+                break;
+        }
+        [_type configSkeletonSkin:_skeleton];
+        [_skeleton setFromSkeletonConfig:[_type graphicsConfig]];
+        [_type setHero:self];
         
+        _resetWhenDestroyed = YES;
+        
+        // vertical speeds
         _upwardSlowing = powf(JUMP_UPWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
         _downwardSlowing = powf(JUMP_DOWNWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
         
+        // horizontal speeds
+        _runSpeed = INITIAL_RUN_SPEED;
         _speedIncrease = 0.01f * [[AHTimeManager manager] realFramesPerSecond] / 60.0f;
         
         _track = [[AHAnimationSkeletonCache manager] animationForKey:@"demo"];
@@ -158,8 +162,6 @@
                                                                      from:[_body position] 
                                                                        to:foot];
     
-    //PHY_TAG_CRASHABLE
-    
     if (cat != PHY_CAT_NONE) {
         _canJump = YES;
         _safetyRange = MAX_SAFETY_RANGE_FRAMES;
@@ -171,7 +173,7 @@
         }
     }
     
-    // send landing message
+    // we need to send a message so that the recorder can estimate paths better 
     if (_isJumping && _canJump) {
         _isJumping = NO;
         [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_LAND]];
@@ -229,7 +231,7 @@
     if (point.x > _halfScreenWidth) {
         [self inputDash];
     } else {
-        [self inputJump];
+        [_type tappedSecondaryAtPoint:point];
     }
 }
 
@@ -239,6 +241,8 @@
         [_body setLinearVelocity:GLKVector2Make(velx, -JUMP_INITIAL_VELOCITY)];
         _canJump = NO;
         _isJumping = YES;
+        
+        // we need to send a message so that the recorder can estimate paths better 
         [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_JUMP]];
     }
 }
@@ -257,6 +261,11 @@
     if (_resetWhenDestroyed) {
         [[AHSceneManager manager] reset];
     }
+    
+    // cleanup type
+    [_type setHero:nil];
+    _type = nil;
+    
     [super cleanupBeforeDestruction];
 }
 
@@ -270,7 +279,7 @@
     
     _resetWhenDestroyed = NO;
     
-    BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton] andSkeletonConfig:config];
+    BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton]];
     [ragdoll setLinearVelocity:GLKVector2Make(_runSpeed, [_body linearVelocity].y)];
     [[AHActorManager manager] add:ragdoll];
     

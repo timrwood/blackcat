@@ -7,6 +7,8 @@
 //
 
 
+#define SECONDS_BEFORE_CAN_RESET 1.0f
+
 #define CAMERA_JUMP_DISTANCE 4.0f
 
 
@@ -22,6 +24,8 @@
 #import "BCHeroActorRagdoll.h"
 #import "BCGlobalTypes.h"
 
+#import "BCHeroTypeDetective.h"
+
 
 @implementation BCHeroActorRagdoll
 
@@ -30,12 +34,28 @@
 #pragma mark init
 
 
-- (id)initFromSkeleton:(AHSkeleton)skeleton andSkeletonConfig:(AHSkeletonConfig)config {
+- (id)initFromSkeleton:(AHSkeleton)skeleton {
     self = [super init];
     if (self) {
+        // init the type
+        BCHeroType *_type;
+        switch ([[BCGlobalManager manager] heroType]) {
+            case HERO_TYPE_BOXER:
+                _type = [[BCHeroTypeDetective alloc] init];
+                break;
+            case HERO_TYPE_DETECTIVE:
+                _type = [[BCHeroTypeDetective alloc] init];
+                break;
+            case HERO_TYPE_FEMME:
+                _type = [[BCHeroTypeDetective alloc] init];
+                break;
+            default:
+                break;
+        }
+        
         [[AHTimeManager manager] setWorldToRealRatio:5.0f];
         
-        _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:config];
+        _ragdoll = [[AHPhysicsSkeleton alloc] initFromSkeleton:skeleton andSkeletonConfig:[_type physicsConfig]];
         
         CGRect inputRect = [[UIScreen mainScreen] bounds];
         float w = inputRect.size.width;
@@ -46,20 +66,16 @@
         [self addComponent:_input];
         
         _skin = [[AHGraphicsSkeleton alloc] init];
-        [_skin setFromSkeletonConfig:config];
         [_skin setSkeleton:skeleton];
-        [_skin setTextureKey:@"body-detective.png"];
-        //[_skin setTextureKey:@"debug-grid.png"];
-        [_skin setArmATextureRect:CGRectMake(0.25f, 0.0f, 0.25f, 0.5f)];
-        [_skin setArmBTextureRect:CGRectMake(0.0f, 0.0f, 0.25f, 0.5f)];
-        [_skin setLegATextureRect:CGRectMake(0.25f, 0.5f, 0.25f, 0.5f)];
-        [_skin setLegBTextureRect:CGRectMake(0.0f, 0.5f, 0.25f, 0.5f)];
-        [[_skin torso] setTex:CGRectMake(0.5f, 0.5f, 0.5f, 0.5f)];
-        [[_skin head] setTex:CGRectMake(0.5f, 0.25f, 0.5f, 0.25f)];
+        [self addComponent:_skin];
+        
+        [_type configSkeletonSkin:_skin];
+        [_skin setFromSkeletonConfig:[_type graphicsConfig]];
         [_skin setLayerIndex:GFX_LAYER_BACKGROUND];
         
-        [self addComponent:_skin];
         [self addComponent:_ragdoll];
+        
+        _creationTime = [[AHTimeManager manager] realTime];
     }
     return self;
 }
@@ -103,7 +119,9 @@
 
 
 - (void)touchBegan {
-    [[AHSceneManager manager] reset];
+    if ([[AHTimeManager manager] realTime] - _creationTime > SECONDS_BEFORE_CAN_RESET) {
+        [[AHSceneManager manager] reset];
+    }
 }
 
 

@@ -38,5 +38,7 @@ static BCGlobalManager *_manager = nil;
 
 @synthesize buildingHeight;
 
+@synthesize heroType;
+
 
 @end

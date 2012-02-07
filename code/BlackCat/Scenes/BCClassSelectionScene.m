@@ -7,16 +7,10 @@
 //
 
 
-typedef enum {
-    CLASS_A,
-    CLASS_B,
-    CLASS_C
-} BCClassSelectionType;
-
-
 #import "AHButton.h"
 #import "AHSceneManager.h"
 
+#import "BCGlobalManager.h"
 #import "BCMainScene.h"
 #import "BCClassSelectionScene.h"
 
@@ -39,20 +33,8 @@ typedef enum {
 
 
 - (void)buttonWasTapped:(AHButton *)button {
-    switch ((BCClassSelectionType) [button identifier]) {
-        case CLASS_A:
-            [[AHSceneManager manager] goToScene:[[BCMainScene alloc] init]];
-            break;
-        case CLASS_B:
-            dlog(@"choosing b");
-            break;
-        case CLASS_C:
-            dlog(@"choosing c");
-            break;
-        default:
-            dlog(@"error out of bounds");
-            break;
-    }
+    [[BCGlobalManager manager] setHeroType:(BCHeroTypes) [button identifier]];
+    [[AHSceneManager manager] goToScene:[[BCMainScene alloc] init]];
 }
 
 

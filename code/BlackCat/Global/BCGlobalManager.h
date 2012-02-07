@@ -7,6 +7,7 @@
 //
 
 
+#import "BCGlobalTypes.h"
 #import <Foundation/Foundation.h>
 
 
@@ -28,6 +29,8 @@
 @property (nonatomic) GLKVector2 heroPosition;
 
 @property (nonatomic) float buildingHeight;
+
+@property (nonatomic) BCHeroTypes heroType;
 
 
 @end
