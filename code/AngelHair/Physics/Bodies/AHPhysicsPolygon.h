@@ -20,6 +20,7 @@
     float _rotation;
     
     BOOL _isLooped;
+    BOOL _isEdge;
 }
 
 
@@ -40,6 +41,7 @@
          
 - (void)setPoints:(GLKVector2 *)points andCount:(int)count;
 - (void)setLooped:(BOOL)looped;
-       
+- (void)setEdge:(BOOL)edge;
+
 
 @end

@@ -9,6 +9,7 @@
 
 #import "AHGraphicsSkeleton.h"
 #import "AHActorComponent.h"
+#import "AHInputComponent.h"
 
 
 @class BCHeroActor;
@@ -16,7 +17,7 @@
 @class AHPhysicsSkeleton;
 
 
-@interface BCHeroType : AHActorComponent {
+@interface BCHeroType : AHActorComponent <AHInputDelegate> {
     
 }
 
@@ -41,10 +42,12 @@
 
 
 #pragma mark -
-#pragma mark secondary
+#pragma mark velocity
 
 
-- (void)tappedSecondaryAtPoint:(GLKVector2)point;
+- (GLKVector2)modifyVelocity:(GLKVector2)velocity;
+- (GLKVector2)velocityToPoint:(GLKVector2)point
+                      withMax:(float)velocity;
 
 
 #pragma mark -
@@ -53,6 +56,22 @@
 
 - (BOOL)willCollideWithAnyObstacle;
 - (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle;
+
+
+#pragma mark -
+#pragma mark update
+
+
+- (void)updateBeforePhysics;
+- (void)updateBeforeAnimation;
+- (void)updateBeforeRender;
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupAfterRemoval;
 
 
 @end

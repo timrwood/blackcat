@@ -69,6 +69,10 @@
     _isLooped = looped;
 }
 
+- (void)setEdge:(BOOL)edge {
+    _isEdge = edge;
+}
+
 
 #pragma mark -
 #pragma mark setup
@@ -77,10 +81,15 @@
 - (void)setup {
     // shape
     b2ChainShape *chainShape = new b2ChainShape;
-    if (_isLooped) {
-        chainShape->CreateLoop(_points, _count);
+    b2PolygonShape *polygonShape = new b2PolygonShape;
+    if (_isEdge) {
+        if (_isLooped) {
+            chainShape->CreateLoop(_points, _count);
+        } else {
+            chainShape->CreateChain(_points, _count);
+        }
     } else {
-        chainShape->CreateChain(_points, _count);
+        polygonShape->Set(_points, _count);
     }
     
     // fixture
@@ -88,7 +97,11 @@
     fixtureDef->density = 1.0f;
     fixtureDef->restitution = self->restitution;
     fixtureDef->friction = self->friction;
-    fixtureDef->shape = (b2Shape *) chainShape;
+    if (_isEdge) {
+        fixtureDef->shape = (b2Shape *) chainShape;
+    } else {
+        fixtureDef->shape = (b2Shape *) polygonShape;
+    }
     fixtureDef->isSensor = self->isSensor;
     fixtureDef->filter.groupIndex = self->group;
     
@@ -107,6 +120,7 @@
     delete bodyDef;
     delete fixtureDef;
     delete chainShape;
+    delete polygonShape;
 }
 
 

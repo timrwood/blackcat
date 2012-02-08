@@ -7,11 +7,25 @@
 //
 
 
-#define TIME_TO_GHOST_WALK 1.0f
+#define PHASEWALK_DISTANCE_TO_CANCEL 1.0f
+#define PHASEWALK_VELOCITY 3.0f
+
+#define TIME_TO_PHASE_WALK 0.5f
+#define TIMEOUT_FOR_PHASE_WALK 1.0f
 
 #import "AHTimeManager.h"
+#import "AHPhysicsBody.h"
+#import "AHGraphicsManager.h"
 
+#import "BCHeroActor.h"
 #import "BCHeroTypeFemme.h"
+
+
+typedef enum {
+    STATE_IS_PHASEWALKING,
+    STATE_CAN_PHASEWALK,
+    STATE_CANNOT_PHASEWALK
+} BCFemmePhasewalkState;
 
 
 @implementation BCHeroTypeFemme
@@ -24,7 +38,11 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _timeLastTappedSecondary = 0;
+        _phasewalkState = [[AHLogicState alloc] init];
+        [_phasewalkState changeState:STATE_CAN_PHASEWALK];
+        [_phasewalkState setDelegate:self];
+        
+        _timeStartedPhasewalk = 0.0f;
     }
     return self;
 }
@@ -69,11 +87,82 @@
 
 
 #pragma mark -
-#pragma mark secondary
+#pragma mark update
 
 
-- (void)tappedSecondaryAtPoint:(GLKVector2)point {
-    _timeLastTappedSecondary = [[AHTimeManager manager] realTime];
+- (void)updateBeforePhysics {
+    if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
+        GLKVector2 heroPosition;
+        if ([self hero]) {
+            heroPosition = [[[self hero] body] position];
+        }
+        GLKVector2 difference = GLKVector2Subtract(_targetPosition, heroPosition);
+        float distance = GLKVector2Length(difference);
+        if (distance < PHASEWALK_DISTANCE_TO_CANCEL) {
+            [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
+        }
+    }
+    
+    if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > TIMEOUT_FOR_PHASE_WALK) {
+        [_phasewalkState changeState:STATE_CAN_PHASEWALK];
+    } else if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > TIME_TO_PHASE_WALK) {
+        [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
+    }
+}
+
+
+#pragma mark -
+#pragma mark input
+
+
+- (void)touchBeganAtPoint:(GLKVector2)point {
+    if ([_phasewalkState isState:STATE_CAN_PHASEWALK]) {
+        _timeStartedPhasewalk = [[AHTimeManager manager] worldTime];
+        [_phasewalkState changeState:STATE_IS_PHASEWALKING];
+        _targetPosition = [[AHGraphicsManager camera] screenToWorld:point];
+        //dlog(@"!!phasewalk!! %@", NSStringFromGLKVector2([[[self hero] body] position]));
+    } else {
+        dlog(@"cannot phasewalk now");
+    }
+}
+
+
+#pragma mark -
+#pragma mark states
+
+
+- (void)stateChangedTo:(int)newState {
+    switch ((BCFemmePhasewalkState) newState) {
+        case STATE_IS_PHASEWALKING:
+            if ([self hero]) {
+                [[[self hero] body] setSensor:YES];
+            }
+            break;
+        case STATE_CAN_PHASEWALK:
+            if ([self hero]) {
+                [[[self hero] body] setSensor:NO];
+            }
+            break;
+        case STATE_CANNOT_PHASEWALK:
+            if ([self hero]) {
+                [[[self hero] body] setSensor:NO];
+            }
+            break;
+    }
+}
+
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (GLKVector2)modifyVelocity:(GLKVector2)velocity {
+    return GLKVector2Zero();
+    if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
+        return [self velocityToPoint:_targetPosition withMax:PHASEWALK_VELOCITY];
+    } else {
+        return velocity;
+    }
 }
 
 
@@ -82,10 +171,21 @@
 
 
 - (BOOL)willCollideWithAnyObstacle {
-    if ([[AHTimeManager manager] realTime] - _timeLastTappedSecondary < TIME_TO_GHOST_WALK) {
+    if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
         return NO;
     }
     return YES;
+}
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupAfterRemoval {
+    [_phasewalkState cleanupAfterRemoval];
+    _phasewalkState = nil;
+    [super cleanupAfterRemoval];
 }
 
 

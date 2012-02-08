@@ -65,15 +65,6 @@
 
 
 #pragma mark -
-#pragma mark secondary
-
-
-- (void)tappedSecondaryAtPoint:(GLKVector2)point {
-    
-}
-
-
-#pragma mark -
 #pragma mark collision
 
 

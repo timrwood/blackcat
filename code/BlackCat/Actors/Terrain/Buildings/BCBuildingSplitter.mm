@@ -165,6 +165,7 @@
     
     [_stairCeiling setPoints:points andCount:6];
     [_stairCeiling setPosition:center];
+    [_stairCeiling setEdge:YES];
     
     CGSize topSize = CGSizeMake((x2 - x1) / 2.0f, STAIR_CEILING_DEPTH / 2.0f);
     

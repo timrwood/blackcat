@@ -20,10 +20,15 @@
 
 #define JUMP_UPWARD_SLOWING 1.35f
 #define JUMP_DOWNWARD_SLOWING 1.4f
+#define JUMP_MAX_DOWNWARD_SLOWING 10.0f
 
 #define DASH_SLOW_SPEED 1.0f
 
 #define INITIAL_RUN_SPEED 8.0f
+
+#define STATE_CAN_JUMP 0
+#define STATE_IS_JUMPING 1
+#define STATE_CANNOT_JUMP 2
 
 
 #import "AHTimeManager.h"
@@ -34,14 +39,9 @@
 #import "AHMathUtils.h"
 
 #import "AHScreenManager.h"
-#import "AHAnimationSkeletonCache.h"
-#import "AHAnimationSkeletonTrack.h"
 #import "AHActorManager.h"
 #import "AHActorMessage.h"
 #import "AHPhysicsPill.h"
-#import "AHGraphicsRect.h"
-#import "AHGraphicsLimb.h"
-#import "AHGraphicsSkeleton.h"
 
 #import "BCHeroActor.h"
 #import "BCHeroActorRagdoll.h"
@@ -63,28 +63,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _body = [[AHPhysicsPill alloc] initFromSize:CGSizeMake(HERO_WIDTH, HERO_HEIGHT)];
-        [_body setRestitution:0.0f];
-        [_body setStatic:NO];
-        [_body setCategory:PHY_CAT_HERO];
-        [_body setRestitution:0.0f];
-        [_body setDelegate:self];
-        [_body setFixedRotation:YES];
-        [_body setFriction:0.0f];
-        [self addComponent:_body];
-        
-        // input
-        _input = [[AHInputComponent alloc] initWithScreenRect:[[AHScreenManager manager] screenRect]];
-        [_input setDelegate:self];
-        [self addComponent:_input];
-        
-        // graphics
-        _skeleton = [[AHGraphicsSkeleton alloc] init];
-        AHSkeleton skeleton;
-        [_skeleton setSkeleton:skeleton];
-        [_skeleton setLayerIndex:GFX_LAYER_BACKGROUND];
-        [self addComponent:_skeleton];
-        
         // init the type
         switch ([[BCGlobalManager manager] heroType]) {
             case HERO_TYPE_BOXER:
@@ -99,6 +77,43 @@
             default:
                 break;
         }
+        
+        _body = [[AHPhysicsPill alloc] initFromSize:CGSizeMake(HERO_WIDTH, HERO_HEIGHT)];
+        [_body setRestitution:0.0f];
+        [_body setStatic:NO];
+        [_body setCategory:PHY_CAT_HERO];
+        [_body setRestitution:0.0f];
+        [_body setDelegate:self];
+        [_body setFixedRotation:YES];
+        [_body setFriction:0.0f];
+        [self addComponent:_body];
+        
+        // jumping state
+        _jumpingState = [[AHLogicState alloc] init];
+        [_jumpingState setDelegate:self];
+        [self addComponent:_jumpingState];
+        
+        // input
+        CGRect rectLeft = [[AHScreenManager manager] screenRect];
+        rectLeft.size.width = [[AHScreenManager manager] screenWidth] * 0.25;
+        CGRect rectRight = [[AHScreenManager manager] screenRect];
+        rectRight.size.width = [[AHScreenManager manager] screenWidth] - rectLeft.size.width;
+        rectRight.origin.x = rectLeft.size.width;
+        AHInputComponent *_inputLeft = [[AHInputComponent alloc] initWithScreenRect:rectLeft];
+        AHInputComponent *_inputRight = [[AHInputComponent alloc] initWithScreenRect:rectRight];
+        [_inputLeft setDelegate:self];
+        [_inputRight setDelegate:_type];
+        [self addComponent:_inputLeft];
+        [self addComponent:_inputRight];
+        
+        // graphics
+        _skeleton = [[AHGraphicsSkeleton alloc] init];
+        AHSkeleton skeleton;
+        [_skeleton setSkeleton:skeleton];
+        [_skeleton setLayerIndex:GFX_LAYER_BACKGROUND];
+        [self addComponent:_skeleton];
+        
+        // setup the type
         [_type configSkeletonSkin:_skeleton];
         [_skeleton setFromSkeletonConfig:[_type graphicsConfig]];
         [_type setHero:self];
@@ -112,8 +127,19 @@
         // horizontal speeds
         _runSpeed = INITIAL_RUN_SPEED;
         _speedIncrease = 0.01f * [[AHTimeManager manager] realFramesPerSecond] / 60.0f;
+        
+        //[[AHTimeManager manager] setWorldToRealRatio:5.0f];
     }
     return self;
+}
+
+
+#pragma mark -
+#pragma mark body
+
+
+- (AHPhysicsBody *)body {
+    return _body;
 }
 
 
@@ -127,87 +153,68 @@
     [self updateJumpability];
     [self updateSkeleton];
     [self updateCrash];
+    [_type updateBeforeAnimation];
+}
+
+- (void)updateBeforePhysics {
+    [_type updateBeforePhysics];
+}
+
+- (void)updateBeforeRender {
+    [_type updateBeforeRender];
 }
 
 - (void)updateVelocity {
+    GLKVector2 velocity = [_body linearVelocity];
+    
     // increase velocity
-    float vely = [_body linearVelocity].y;
     if (_runSpeed < 15.0f) {
         _runSpeed += _speedIncrease;
     } else if (_runSpeed < 50.0f) {
         _runSpeed += _speedIncrease / 2.0f;
     }
+    velocity.x = _runSpeed;
     
     // make jumping snappier
-    if (vely > 0.0f) {
-        if (vely < 10.0f) {
-            vely *= _downwardSlowing; // travelling downward
-        }
-    } else {
-        vely /= _upwardSlowing; // travelling upward
+    if (velocity.y > 0.0f && velocity.y < JUMP_MAX_DOWNWARD_SLOWING) {
+        velocity.y *= _downwardSlowing;
+    } else if (velocity.y < 0.0f) {
+        velocity.y /= _upwardSlowing;
     }
     
-    // slow down dash
-    _dashSpeed = fmaxf(0.0f, _dashSpeed - DASH_SLOW_SPEED);
-    
     // set vars
-    [_body setLinearVelocity:GLKVector2Make(_runSpeed + _dashSpeed, vely)];
-    [[BCGlobalManager manager] setHeroSpeed:_runSpeed];
+    [_body setLinearVelocity:[_type modifyVelocity:velocity]];
+    //[_body setLinearVelocity:[_type modifyVelocity:GLKVector2Make(0.0f, 0.0f)]];
 }
 
 - (void)updateJumpability {
     GLKVector2 foot = [_body position];
     foot.y += HERO_HEIGHT * HERO_HEIGHT_RAYCAST_RADIUS_RATIO;
     
-    int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_JUMPABLE 
-                                                                     from:[_body position] 
-                                                                       to:foot];
+    int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_JUMPABLE from:[_body position] to:foot];
     
     if (cat != PHY_CAT_NONE) {
-        _canJump = YES;
+        [_jumpingState changeState:STATE_CAN_JUMP];
         _safetyRange = MAX_SAFETY_RANGE_FRAMES;
     } else {
         if (_safetyRange > 0) {
             _safetyRange--;
         } else {
-            _canJump = NO;
+            [_jumpingState changeState:STATE_CANNOT_JUMP];
         }
-    }
-    
-    // we need to send a message so that the recorder can estimate paths better 
-    if (_isJumping && _canJump) {
-        _isJumping = NO;
-        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_LAND]];
     }
 }
 
 - (void)updateCamera {
-    GLKVector2 cameraPos;
-    cameraPos.x = [_body position].x + 2.0f;
-    //cameraPos.y = [[BCGlobalManager manager] buildingHeight] - 1.0f;
-    cameraPos.y = [_body position].y;
-    
-    [[AHGraphicsManager camera] setWorldPosition:cameraPos];
-    [[AHGraphicsManager camera] setWorldZoom:3.0f];
-    
+    [[AHGraphicsManager camera] setWorldPosition:GLKVector2Add(GLKVector2Make(4.0f, 0.0f), [_body position])];
+    [[AHGraphicsManager camera] setWorldZoom:6.0f];
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
 
 - (void)updateSkeleton {
-    //_limbAngle += 0.02f;
     AHSkeleton skeleton;
     skeleton.x = [_body position].x;
     skeleton.y = [_body position].y;
-    /*skeleton.hipA = _limbAngle;
-    skeleton.hipB = _limbAngle / 2.0f;
-    skeleton.elbowA = _limbAngle;
-    skeleton.elbowB = -_limbAngle / 2.0f;
-    skeleton.kneeA = -_limbAngle;
-    skeleton.kneeB = _limbAngle / 2.0f;
-    skeleton.shoulderA = -_limbAngle;
-    skeleton.shoulderB = _limbAngle / 2.0f;
-    skeleton.neck = _limbAngle;
-    skeleton.waist = -_limbAngle / 2.0f;*/
     [_skeleton setSkeleton:skeleton];
 }
 
@@ -224,36 +231,37 @@
     }
 }
 
+#pragma mark -
+#pragma mark state
+
+
+- (void)stateChangedTo:(int)newState {
+    if (newState == STATE_IS_JUMPING ){
+        float velx = [_body linearVelocity].x;
+        [_body setLinearVelocity:GLKVector2Make(velx, -JUMP_INITIAL_VELOCITY)];
+        // we need to send a message so that the recorder can estimate paths better 
+        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_JUMP]];
+    }
+    if (newState == STATE_CAN_JUMP) {
+        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_LAND]];
+    }
+}
+
 
 #pragma mark -
 #pragma mark touch
 
 
 - (void)touchBeganAtPoint:(GLKVector2)point {
-    if (point.x > [[AHScreenManager manager] screenWidth] / 2.0f) {
-        [_type tappedSecondaryAtPoint:point];
-    } else {
-        [self inputJump];
-    }
+    [self inputJump];
 }
 
 - (void)inputJump {
-    if (_canJump) {
-        float velx = [_body linearVelocity].x;
-        [_body setLinearVelocity:GLKVector2Make(velx, -JUMP_INITIAL_VELOCITY)];
-        _canJump = NO;
-        _isJumping = YES;
-        
-        // we need to send a message so that the recorder can estimate paths better 
-        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_JUMP]];
+    if ([_jumpingState isState:STATE_CAN_JUMP]) {
+        [_jumpingState changeState:STATE_IS_JUMPING];
     }
 }
 
-- (void)inputDash {
-    if (_dashSpeed == 0.0f) {
-        _dashSpeed = 30.0f;
-    }
-}
 
 #pragma mark -
 #pragma mark destruction
@@ -265,7 +273,7 @@
     }
     
     // cleanup type
-    [_type setHero:nil];
+    [_type cleanupAfterRemoval];
     _type = nil;
     
     [super cleanupBeforeDestruction];
@@ -298,6 +306,10 @@
 
 
 - (BOOL)willCollideWith:(AHPhysicsBody *)contact {
+    if (![_type willCollideWithAnyObstacle]) {
+        return NO;
+    }
+    
     if ([contact hasTag:PHY_TAG_BREAKABLE] || [contact hasTag:PHY_TAG_PHASEWALKABLE]) {
         // is crashable
         return [_type willCollideWithObstacle:contact];

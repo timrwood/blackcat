@@ -7,12 +7,16 @@
 //
 
 
+#import "AHLogicState.h"
 #import "BCHeroType.h"
 
 
-@interface BCHeroTypeFemme : BCHeroType {
+@interface BCHeroTypeFemme : BCHeroType <AHLogicDelegate> {
 @private;
-    float _timeLastTappedSecondary;
+    float _timeStartedPhasewalk;
+    AHLogicState *_phasewalkState;
+    
+    GLKVector2 _targetPosition;
 }
 
 

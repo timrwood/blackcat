@@ -28,6 +28,7 @@
 		1515F8B314C9F519004FE3BB /* BCBackgroundActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515F8B214C9F519004FE3BB /* BCBackgroundActor.m */; };
 		152F4AFF14E1A43D00B5E3BD /* AHScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 152F4AFE14E1A43D00B5E3BD /* AHScreenManager.m */; };
 		152F4B0214E1BA0B00B5E3BD /* BCBuildingSplitter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 152F4B0114E1BA0A00B5E3BD /* BCBuildingSplitter.mm */; };
+		152F4B0514E1F99000B5E3BD /* AHLogicState.m in Sources */ = {isa = PBXBuildFile; fileRef = 152F4B0414E1F99000B5E3BD /* AHLogicState.m */; };
 		153EB11A14AD6EE50070DBB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11914AD6EE50070DBB9 /* UIKit.framework */; };
 		153EB11C14AD6EE50070DBB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11B14AD6EE50070DBB9 /* Foundation.framework */; };
 		153EB11E14AD6EE50070DBB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EB11D14AD6EE50070DBB9 /* CoreGraphics.framework */; };
@@ -193,6 +194,8 @@
 		152F4AFE14E1A43D00B5E3BD /* AHScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHScreenManager.m; path = Screen/AHScreenManager.m; sourceTree = "<group>"; };
 		152F4B0014E1BA0A00B5E3BD /* BCBuildingSplitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingSplitter.h; path = Actors/Terrain/Buildings/BCBuildingSplitter.h; sourceTree = "<group>"; };
 		152F4B0114E1BA0A00B5E3BD /* BCBuildingSplitter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingSplitter.mm; path = Actors/Terrain/Buildings/BCBuildingSplitter.mm; sourceTree = "<group>"; };
+		152F4B0314E1F99000B5E3BD /* AHLogicState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHLogicState.h; sourceTree = "<group>"; };
+		152F4B0414E1F99000B5E3BD /* AHLogicState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHLogicState.m; sourceTree = "<group>"; };
 		153EB11514AD6EE50070DBB9 /* BlackCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		153EB11914AD6EE50070DBB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		153EB11B14AD6EE50070DBB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -917,6 +920,8 @@
 		15AC4D7714B7B3BB00283A06 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				152F4B0314E1F99000B5E3BD /* AHLogicState.h */,
+				152F4B0414E1F99000B5E3BD /* AHLogicState.m */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -1421,6 +1426,7 @@
 				155D2ABA14E0EFDE0030E752 /* AHPhysicsPill.mm in Sources */,
 				152F4AFF14E1A43D00B5E3BD /* AHScreenManager.m in Sources */,
 				152F4B0214E1BA0B00B5E3BD /* BCBuildingSplitter.mm in Sources */,
+				152F4B0514E1F99000B5E3BD /* AHLogicState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

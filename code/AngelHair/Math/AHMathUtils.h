@@ -46,6 +46,9 @@ extern "C" {
     // modulate between two numbers
     static __inline__ float FloatModBetween(float num, float lower, float upper);
     
+    // modulate between two numbers
+    static __inline__ float FloatCloserToZero(float a, float b);
+    
     
 #pragma mark -
 #pragma mark implimentations
@@ -68,6 +71,14 @@ extern "C" {
         }
     }
     
+    static __inline__ float FloatCloserToZero(float a, float b) {
+        if (a < 0.0f) {
+            return fmaxf(a, b);
+        } else {
+            return fminf(a, b);
+        }
+    }
+    
     
 #pragma mark -
 #pragma mark conversions
@@ -80,6 +91,17 @@ extern "C" {
     static __inline__ CGPoint GLKVector2ToCGPoint(GLKVector2 point);
     static __inline__ CGPoint GLKVector2ToCGPoint(GLKVector2 point) {
         return CGPointMake(point.x, point.y);
+    }
+    
+    static __inline__ GLKVector2 GLKVector2CloserToZero(GLKVector2 a, GLKVector2 b);
+    static __inline__ GLKVector2 GLKVector2CloserToZero(GLKVector2 a, GLKVector2 b) {
+        return GLKVector2Make(FloatCloserToZero(a.x, b.x), 
+                              FloatCloserToZero(a.y, b.y));
+    }
+    
+    static __inline__ GLKVector2 GLKVector2Zero();
+    static __inline__ GLKVector2 GLKVector2Zero() {
+        return GLKVector2Make(0.0f, 0.0f);
     }
     
     

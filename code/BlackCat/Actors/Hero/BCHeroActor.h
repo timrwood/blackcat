@@ -11,39 +11,39 @@
 #import "AHActor.h"
 #import "AHInputComponent.h"
 #import "AHContactDelegate.h"
+#import "AHLogicState.h"
+#import "AHGraphicsSkeleton.h"
 
 
 @class AHPhysicsPill;
-@class AHAnimationSkeletonTrack;
-@class AHGraphicsLimb;
-@class AHGraphicsSkeleton;
 @class BCHeroType;
 
 
-@interface BCHeroActor : AHActor <AHInputDelegate, AHContactDelegate> {
+@interface BCHeroActor : AHActor <AHInputDelegate, AHContactDelegate, AHLogicDelegate> {
 @private;
     AHPhysicsPill *_body;
-    AHInputComponent *_input;
     BCHeroType *_type;
     AHGraphicsSkeleton *_skeleton;
+    AHLogicState *_jumpingState;
     
-    BOOL _canJump;
-    BOOL _isJumping;
-    
-    float _runSpeed;
     int _safetyRange;
     
     float _upwardSlowing;
     float _downwardSlowing;
     
+    float _runSpeed;
     float _speedIncrease;
     
-    float _dashSpeed;
-    
     BOOL _resetWhenDestroyed;
-    
     BOOL _madeRagdoll;
 }
+
+
+#pragma mark -
+#pragma mark body
+
+
+- (AHPhysicsBody *)body;
 
 
 #pragma mark -
@@ -62,7 +62,6 @@
 
 
 - (void)inputJump;
-- (void)inputDash;
 
 
 #pragma mark -
