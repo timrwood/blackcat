@@ -8,9 +8,25 @@
 
 
 #import "BCHeroType.h"
+#import "AHLogicState.h"
 
 
-@interface BCHeroTypeBoxer : BCHeroType
+@interface BCHeroTypeBoxer : BCHeroType <AHLogicDelegate> {
+@private;
+    AHLogicState *_dashState;
+    
+    GLKVector2 _targetPosition;
+    
+    float _timeStartedDash;
+}
+
+
+#pragma mark -
+#pragma mark dashing
+
+
+- (BOOL)isDashing;
+- (void)dashToPoint:(GLKVector2)point;
 
 
 @end

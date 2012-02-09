@@ -32,7 +32,7 @@
     // init super system
     [[AHSuperSystem manager] setup];
     [[AHSuperSystem manager] setDebugDraw:YES];
-    [[AHSuperSystem manager] setRenderDraw:YES];
+    //[[AHSuperSystem manager] setRenderDraw:NO];
     
     // setup fps
     [self.viewController setPreferredFramesPerSecond:30];

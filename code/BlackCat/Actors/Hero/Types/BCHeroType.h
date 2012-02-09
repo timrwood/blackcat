@@ -23,10 +23,11 @@
 
 
 #pragma mark -
-#pragma mark vars
+#pragma mark hero
 
 
 @property (nonatomic, weak) BCHeroActor *hero;
+- (GLKVector2)heroPosition;
 
 
 #pragma mark -

@@ -89,6 +89,11 @@
             chainShape->CreateChain(_points, _count);
         }
     } else {
+        for (int i = 0; i < _count; i++) {
+            dlog(@"points {%F, %F}", _points[i].x, _points[i].y);
+        }
+        dlog(@"------ end ----");
+        
         polygonShape->Set(_points, _count);
     }
     

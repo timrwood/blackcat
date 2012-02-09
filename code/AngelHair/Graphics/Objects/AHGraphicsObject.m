@@ -23,7 +23,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        
+        _drawType = GL_TRIANGLE_STRIP;
     }
     return self;
 }
@@ -88,6 +88,10 @@
     self->textures = (GLKVector2 *) malloc(sizeof(GLKVector2) * _count);
 }
 
+- (int)vertexCount {
+    return _count;
+}
+
 
 #pragma mark -
 #pragma mark cleanup
@@ -137,11 +141,15 @@
         [[AHGraphicsManager manager] drawPointerArrayPosition:self->vertices
                                                    andTexture:self->textures
                                                      andCount:_count 
-                                                  andDrawType:GL_TRIANGLE_STRIP];
+                                                  andDrawType:_drawType];
     }
     if (_isOffset || _rotation != 0.0f) {
         [[AHGraphicsManager manager] modelPop];
     }
+}
+
+- (void)setDrawType:(GLenum)drawType {
+    _drawType = drawType;
 }
 
 

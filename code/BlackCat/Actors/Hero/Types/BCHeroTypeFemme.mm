@@ -10,8 +10,8 @@
 #define PHASEWALK_DISTANCE_TO_CANCEL 1.0f
 #define PHASEWALK_VELOCITY 3.0f
 
-#define TIME_TO_PHASE_WALK 0.5f
-#define TIMEOUT_FOR_PHASE_WALK 1.0f
+#define PHASEWALK_MAX_TIME 0.5f
+#define PHASEWALK_TIMEOUT 1.0f
 
 #import "AHTimeManager.h"
 #import "AHPhysicsBody.h"
@@ -92,20 +92,16 @@ typedef enum {
 
 - (void)updateBeforePhysics {
     if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
-        GLKVector2 heroPosition;
-        if ([self hero]) {
-            heroPosition = [[[self hero] body] position];
-        }
-        GLKVector2 difference = GLKVector2Subtract(_targetPosition, heroPosition);
+        GLKVector2 difference = GLKVector2Subtract(_targetPosition, [self heroPosition]);
         float distance = GLKVector2Length(difference);
         if (distance < PHASEWALK_DISTANCE_TO_CANCEL) {
             [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
         }
     }
     
-    if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > TIMEOUT_FOR_PHASE_WALK) {
+    if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > PHASEWALK_TIMEOUT) {
         [_phasewalkState changeState:STATE_CAN_PHASEWALK];
-    } else if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > TIME_TO_PHASE_WALK) {
+    } else if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > PHASEWALK_MAX_TIME) {
         [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
     }
 }

@@ -7,17 +7,11 @@
 //
 
 
-#import "AHGraphicsRect.h"
 #import "AHActor.h"
 
 
-@class AHPhysicsRect;
-
-
 @interface BCCrashableObstacle : AHActor {
-@private;
-    AHPhysicsRect *_body;
-    AHGraphicsRect *_skin;
+    
 }
 
 

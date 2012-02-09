@@ -33,10 +33,17 @@
 
 
 #pragma mark -
-#pragma mark vars
+#pragma mark hero
 
 
 @synthesize hero;
+
+- (GLKVector2)heroPosition {
+    if (hero) {
+        return [[hero body] position];
+    }
+    return GLKVector2Zero();
+}
 
 
 #pragma mark -
@@ -102,11 +109,7 @@
 
 - (GLKVector2)velocityToPoint:(GLKVector2)point
                       withMax:(float)velocity {
-    GLKVector2 heroPosition;
-    if (hero) {
-        heroPosition = [[hero body] position];
-    }
-    GLKVector2 idealLocation = GLKVector2Subtract(point, heroPosition);
+    GLKVector2 idealLocation = GLKVector2Subtract(point, [self heroPosition]);
     //dlog(@"idealLocation %@", NSStringFromGLKVector2(idealLocation));
     GLKVector2 normalizedLocation = GLKVector2MultiplyScalar(GLKVector2Normalize(idealLocation), velocity);
     //dlog(@"normalizedLocation %@", NSStringFromGLKVector2(normalizedLocation));

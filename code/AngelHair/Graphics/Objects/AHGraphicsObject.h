@@ -30,6 +30,8 @@
     
     GLKVector2 _position;
     float _rotation;
+    
+    GLenum _drawType;
 }
 
 
@@ -48,6 +50,7 @@
 
 
 - (void)setVertexCount:(int)newCount;
+- (int)vertexCount;
 
 
 #pragma mark -
@@ -71,6 +74,7 @@
 
 
 - (void)draw;
+- (void)setDrawType:(GLenum)drawType;
 
 
 #pragma mark -
