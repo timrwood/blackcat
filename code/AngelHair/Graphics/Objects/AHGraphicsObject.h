@@ -18,6 +18,7 @@
 @private;
     AHGraphicsLayer *_layer;
     AHTextureInfo *_texture;
+    AHTextureInfo *_normalTexture;
     
     int _count;
     int _layerIndex;
@@ -65,8 +66,10 @@
 #pragma mark textures
 
 
+- (void)setNormalTextureKey:(NSString *)key;
 - (void)setTextureKey:(NSString *)key;
 - (AHTextureInfo *)texture;
+- (AHTextureInfo *)normalTexture;
 
 
 #pragma mark -

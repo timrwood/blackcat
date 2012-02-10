@@ -97,12 +97,16 @@ typedef enum {
         if (distance < PHASEWALK_DISTANCE_TO_CANCEL) {
             [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
         }
+    } else if (xOffset > 0.0f) {
+        [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
+    } else {
+        [_phasewalkState changeState:STATE_CAN_PHASEWALK];
     }
     
-    if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > PHASEWALK_TIMEOUT) {
-        [_phasewalkState changeState:STATE_CAN_PHASEWALK];
-    } else if ([[AHTimeManager manager] worldTime] - _timeStartedPhasewalk > PHASEWALK_MAX_TIME) {
-        [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
+    if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
+        xOffset = [self heroPosition].x - cameraPositionX;
+    } else {
+        xOffset = fmaxf(xOffset - 0.2f, 0.0f);
     }
 }
 
@@ -116,6 +120,9 @@ typedef enum {
         _timeStartedPhasewalk = [[AHTimeManager manager] worldTime];
         [_phasewalkState changeState:STATE_IS_PHASEWALKING];
         _targetPosition = [[AHGraphicsManager camera] screenToWorld:point];
+        cameraPositionX = [self heroPosition].x;
+        xOffset = 0.0f;
+        dlog(@"xoffset %F", xOffset);
         //dlog(@"!!phasewalk!! %@", NSStringFromGLKVector2([[[self hero] body] position]));
     } else {
         dlog(@"cannot phasewalk now");
@@ -153,7 +160,7 @@ typedef enum {
 
 
 - (GLKVector2)modifyVelocity:(GLKVector2)velocity {
-    return GLKVector2Zero();
+    //return GLKVector2Zero();
     if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
         return [self velocityToPoint:_targetPosition withMax:PHASEWALK_VELOCITY];
     } else {
@@ -182,6 +189,17 @@ typedef enum {
     [_phasewalkState cleanupAfterRemoval];
     _phasewalkState = nil;
     [super cleanupAfterRemoval];
+}
+
+
+#pragma mark -
+#pragma mark camera
+
+
+- (GLKVector2)modifyCameraPosition:(GLKVector2)heroPosition {
+    GLKVector2 pos = heroPosition;
+    pos.x -= xOffset;
+    return pos;
 }
 
 

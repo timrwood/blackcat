@@ -161,4 +161,13 @@
 }
 
 
+#pragma mark -
+#pragma mark camera
+
+
+- (GLKVector2)modifyCameraPosition:(GLKVector2)heroPosition {
+    return heroPosition;
+}
+
+
 @end

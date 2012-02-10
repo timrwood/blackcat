@@ -7,6 +7,8 @@
 //
 
 
+#define EXPLOSION_RADIUS 4.0f
+
 #define DASH_DISTANCE_TO_CANCEL 0.2f
 #define DASH_VELOCITY 3.0f
 
@@ -17,6 +19,7 @@
 #import "AHTimeManager.h"
 #import "AHPhysicsBody.h"
 
+#import "BCGlobalTypes.h"
 #import "BCHeroActor.h"
 #import "BCHeroTypeBoxer.h"
 
@@ -105,12 +108,23 @@ typedef enum {
         if (distance < DASH_DISTANCE_TO_CANCEL) {
             [_dashState changeState:STATE_CANNOT_DASH];
         }
+    } else if (xOffset > 0.0f) {
+        [_dashState changeState:STATE_CANNOT_DASH];
+    } else {
+        [_dashState changeState:STATE_CAN_DASH];
     }
     
+    /*
     if ([[AHTimeManager manager] worldTime] - _timeStartedDash > DASH_TIMEOUT) {
         [_dashState changeState:STATE_CAN_DASH];
     } else if ([[AHTimeManager manager] worldTime] - _timeStartedDash > DASH_MAX_TIME) {
         [_dashState changeState:STATE_CANNOT_DASH];
+    }*/
+    
+    if ([self isDashing]) {
+        xOffset = [self heroPosition].x - cameraPositionX;
+    } else {
+        xOffset = fmaxf(xOffset - 0.2f, 0.0f);
     }
 }
 
@@ -120,7 +134,7 @@ typedef enum {
 
 
 - (GLKVector2)modifyVelocity:(GLKVector2)velocity {
-    return GLKVector2Zero();
+    //return GLKVector2Zero();
     if ([self isDashing]) {
         return [self velocityToPoint:_targetPosition withMax:DASH_VELOCITY];
     } else {
@@ -141,9 +155,19 @@ typedef enum {
     return YES;
 }
 
+- (void)sendExplosionMessage:(int)type {
+    if ([self hero]) {
+        [[self hero] sendMessage:[[AHActorMessage alloc] initWithType:type 
+                                                             andPoint:[self heroPosition] 
+                                                             andFloat:EXPLOSION_RADIUS]];
+    }
+}
+
 - (void)dashToPoint:(GLKVector2)point {
     _targetPosition = GLKVector2Add([self heroPosition], point);
     _timeStartedDash = [[AHTimeManager manager] worldTime];
+    cameraPositionX = [self heroPosition].x;
+    xOffset = 0.0f;
 }
 
 
@@ -158,13 +182,14 @@ typedef enum {
         case STATE_CANNOT_DASH:
             break;
         case STATE_IS_DASHING_UP:
-            [self dashToPoint:GLKVector2Make(0.0f, -2.0f)];
+            [self dashToPoint:GLKVector2Make(0.0f, -3.0f)];
             break;
         case STATE_IS_DASHING_DOWN:
-            [self dashToPoint:GLKVector2Make(0.0f, 2.0f)];
+            [self dashToPoint:GLKVector2Make(0.0f, 3.0f)];
             break;
         case STATE_IS_DASHING_RIGHT:
-            [self dashToPoint:GLKVector2Make(2.0f, 0.0f)];
+            [self dashToPoint:GLKVector2Make(3.0f, 0.0f)];
+            [self sendExplosionMessage:MSG_EXPLOSION_RIGHT];
             break;
     }
 }
@@ -197,6 +222,17 @@ typedef enum {
     } else if (point.y < -3.0f) {
         [_dashState changeState:STATE_IS_DASHING_UP];
     }
+}
+
+
+#pragma mark -
+#pragma mark camera
+
+
+- (GLKVector2)modifyCameraPosition:(GLKVector2)heroPosition {
+    GLKVector2 pos = heroPosition;
+    pos.x -= xOffset;
+    return pos;
 }
 
 

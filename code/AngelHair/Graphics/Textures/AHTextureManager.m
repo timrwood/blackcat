@@ -163,7 +163,7 @@ static AHTextureManager *_manager = nil;
 
 - (void)activateNormalTexture:(AHTextureInfo *)texture {
     if ([texture name] != _currentNormalTexture) {
-        glPushGroupMarkerEXT(0, "Enabling Base Texture");
+        glPushGroupMarkerEXT(0, "Enabling Normal Texture");
         _currentNormalTexture = [texture name];
         glActiveTexture(GL_TEXTURE0 + AH_TEXTURE_SAMPLE_NORMAL);
         glBindTexture(GL_TEXTURE_2D, _currentNormalTexture);

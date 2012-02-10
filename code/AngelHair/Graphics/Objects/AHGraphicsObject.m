@@ -116,8 +116,16 @@
     _texture = [[AHTextureManager manager] textureForKey:key];
 }
 
+- (void)setNormalTextureKey:(NSString *)key {
+    _normalTexture = [[AHTextureManager manager] textureForKey:key];
+}
+
 - (AHTextureInfo *)texture {
     return _texture;
+}
+
+- (AHTextureInfo *)normalTexture {
+    return _normalTexture;
 }
 
 

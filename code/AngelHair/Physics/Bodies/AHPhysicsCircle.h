@@ -12,7 +12,6 @@
 
 @interface AHPhysicsCircle : AHPhysicsBody {
     float _radius;
-    GLKVector2 _position;
 }
 
 

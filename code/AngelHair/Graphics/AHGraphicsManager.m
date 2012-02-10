@@ -339,6 +339,10 @@ static AHGraphicsCamera *_camera = nil;
     }
 }
 
+- (void)enableNormal:(BOOL)enabled {
+    [_shaderManager enableNormal:enabled];
+}
+
 
 @end
 

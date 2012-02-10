@@ -138,6 +138,7 @@
 
 
 - (void)useTextureProgram:(BOOL)useTex;
+- (void)enableNormal:(BOOL)enabled;
 
 
 @end

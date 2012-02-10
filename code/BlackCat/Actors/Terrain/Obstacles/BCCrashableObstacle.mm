@@ -7,8 +7,8 @@
 //
 
 
-#define OBSTACLE_HALF_WIDTH  2.0f
-#define OBSTACLE_HALF_HEIGHT 0.25f
+#define OBSTACLE_HALF_WIDTH  0.1f
+#define OBSTACLE_HALF_HEIGHT 2.0f
 
 
 #import "BCBreakableRect.h"
@@ -32,10 +32,16 @@
         CGSize size = CGSizeMake(OBSTACLE_HALF_WIDTH, OBSTACLE_HALF_HEIGHT);
         GLKVector2 position = GLKVector2Make(bottomCenter.x, bottomCenter.y - OBSTACLE_HALF_HEIGHT);
         
-        [[AHActorManager manager] add:[[BCBreakableRect alloc] initWithCenter:position 
-                                                                      andSize:size 
-                                                                   andTexRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) 
-                                                                    andTexKey:@"debug-grid.png"]];
+        for (int i = 0; i < 4; i ++) {
+            BCBreakableRect *rect = [[BCBreakableRect alloc] initWithCenter:position 
+                                                                    andSize:size 
+                                                                 andTexRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) 
+                                                                  andTexKey:@"debug-grid.png"];
+            [rect setBreakMessageType:MSG_EXPLOSION_RIGHT];
+            position = GLKVector2Add(GLKVector2Make(OBSTACLE_HALF_WIDTH * 2.0f, 0.0f), position);
+            
+            [[AHActorManager manager] add:rect];
+        }
     }
     return self;
 }

@@ -7,17 +7,19 @@
 //
 
 
-#define AH_SHADER_UNIFORM_MODELVIEW 0
-#define AH_SHADER_UNIFORM_PROJECTION 1
-#define AH_SHADER_UNIFORM_TEXTURE 2
-#define AH_SHADER_UNIFORM_COLOR 3
-#define AH_SHADER_UNIFORM_COUNT 4
+#define AH_SHADER_UNIFORM_MODELVIEW      0
+#define AH_SHADER_UNIFORM_PROJECTION     1
+#define AH_SHADER_UNIFORM_TEXTURE_BASE   2
+#define AH_SHADER_UNIFORM_TEXTURE_NORMAL 3
+#define AH_SHADER_UNIFORM_ENABLE_NORMAL  4
+#define AH_SHADER_UNIFORM_COLOR          5
+#define AH_SHADER_UNIFORM_COUNT          6
 
 #define AH_TEXTURE_SAMPLE_BASE 0
-#define AH_TEXTURE_SAMPLE_NORMAL 1
+#define AH_TEXTURE_SAMPLE_NORMAL 2
 
 #define AH_SHADER_ATTRIB_POS_COORD 0
-#define AH_SHADER_ATTRIB_TEX_COORD 1
+#define AH_SHADER_ATTRIB_TEX_COORD 2
 
 
 @interface AHShaderManager : NSObject {
@@ -30,6 +32,7 @@
     GLuint _colorProgram;
     
     BOOL _isUsingTextureProgram;
+    BOOL _isUsingTextureNormals;
     
     GLKMatrix4 currentModelview;
     GLKMatrix4 currentProjection;
@@ -74,6 +77,13 @@
 
 
 - (void)debug;
+
+
+#pragma mark -
+#pragma mark textures
+
+
+- (void)enableNormal:(BOOL)enabled;
 
 
 @end

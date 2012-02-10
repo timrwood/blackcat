@@ -32,7 +32,7 @@
 
 - (id)initFromRadius:(float)radius andPosition:(GLKVector2)position {
     _radius = radius;
-    _position = position;
+    [self setPosition:position];
     return [self init];
 }
 
@@ -48,20 +48,10 @@
 	
 	// fixture
 	b2FixtureDef *fixtureDef = new b2FixtureDef;
-	fixtureDef->density = 1.0f;
-    fixtureDef->restitution = self->restitution;
-    fixtureDef->friction = self->friction;
 	fixtureDef->shape = (b2Shape *) circleShape;
-    fixtureDef->isSensor = self->isSensor;
-    fixtureDef->filter.groupIndex = self->group;
 	
 	// body
 	b2BodyDef *bodyDef = new b2BodyDef;
-    bodyDef->linearDamping = 0.0f;
-    bodyDef->angularDamping = 1.0f;
-    bodyDef->fixedRotation = false;
-	bodyDef->position = b2Vec2(_position.x, _position.y);
-    bodyDef->fixedRotation = self->isFixedRotation;
 	
     // create body
     [self addBodyToWorld:bodyDef];

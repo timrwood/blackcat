@@ -7,10 +7,14 @@
 //
 
 
+#define OTHER_EDGE_MULTIPLE 1.4f
+
+#define MIN_EDGE_PERCENT 0.05f
+#define MIN_SIZE_TO_LEAVE_ALONE 0.5f
+
 #define MIN_PERCENT_TO_LEAVE 0.7f
 
-
-static BOOL isFirstToBuild = YES;
+#define MIN_BLOCK_SIZE 0.1f
 
 
 #import "AHActorManager.h"
@@ -62,12 +66,6 @@ static BOOL isFirstToBuild = YES;
         _texKey = texKey;
         _size = size;
         _center = center;
-        
-        if (isFirstToBuild) {
-            isFirstToBuild = NO;
-            // debug
-            [self breakAtPoint:GLKVector2Add(center, GLKVector2Make(0.5f, 0.5f)) withRadius:0.5f];
-        }
     }
     return self;
 }
@@ -77,10 +75,54 @@ static BOOL isFirstToBuild = YES;
 #pragma mark breaking
 
 
+- (BOOL)isCloseEnoughToBreak {
+    GLKVector2 distFromCenterToPoint = GLKVector2Subtract(_breakPoint, _center);
+    GLKVector2 closestCornerToPoint;
+    
+    // get closest corner x
+    if (_center.x > _breakPoint.x) {
+        closestCornerToPoint.x = _center.x - _size.width;
+    } else {
+        closestCornerToPoint.x = _center.x + _size.height;
+    }
+    
+    // get closest corner y
+    if (_center.y > _breakPoint.y) {
+        closestCornerToPoint.y = _center.y - _size.width;
+    } else {
+        closestCornerToPoint.y = _center.y + _size.height;
+    }
+    
+    // to far away in width
+    if (fabsf(distFromCenterToPoint.x) > _size.width + _breakRadius) {
+        //dlog(@"too far from center x %F < %F + %F", fabsf(distFromCenterToPoint.x), _size.width, radius);
+        return NO;
+    }
+    
+    // to far away in height
+    if (fabsf(distFromCenterToPoint.y) > _size.height + _breakRadius) {
+        //dlog(@"too far from center y");
+        return NO;
+    }
+    
+    if (GLKVector2Distance(_breakPoint, closestCornerToPoint) > _breakRadius) {
+        //dlog(@"too far from corner");
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)breakAtPoint:(GLKVector2)point
           withRadius:(float)radius {
+    //dlog(@"should break");
     _breakPoint = point;
     _breakRadius = radius;
+    
+    if (![self isCloseEnoughToBreak]) {
+        return;
+    }
+    
     if (_size.width > _size.height) {
         [self breakHorizontally];
     } else {
@@ -98,27 +140,27 @@ static BOOL isFirstToBuild = YES;
     
     // get the distance above the point to break
     float xDistAbovePoint = -sqrtf(_breakRadius * _breakRadius - yDistFromPointToClosestWall * yDistFromPointToClosestWall);
-    dlog(@"yDistFromPointToClosestWall %F", yDistFromPointToClosestWall);
-    dlog(@"xDistAbovePoint %F", xDistAbovePoint);
+    //dlog(@"yDistFromPointToClosestWall %F", yDistFromPointToClosestWall);
+    //dlog(@"xDistAbovePoint %F", xDistAbovePoint);
     
     // get the top and bottom break points
     float topBreakLocal = (_breakPoint.x - _center.x) + xDistAbovePoint;
     float botBreakLocal = (_breakPoint.x - _center.x) - xDistAbovePoint;
-    dlog(@"topBreakLocal %F", topBreakLocal);
-    dlog(@"botBreakLocal %F", botBreakLocal);
+    //dlog(@"topBreakLocal %F", topBreakLocal);
+    //dlog(@"botBreakLocal %F", botBreakLocal);
     
     if (topBreakLocal > -_size.width * MIN_PERCENT_TO_LEAVE) {
-        dlog(@"build a");
+        //dlog(@"build a");
         [self buildHorizontalBreakableFromBottom:topBreakLocal toTop:-_size.width];
     } else {
-        dlog(@"too small to build a");
+        //dlog(@"too small to build a");
         topBreakLocal = -_size.width;
     }
     if (botBreakLocal < _size.width * MIN_PERCENT_TO_LEAVE) {
-        dlog(@"build b");
+        //dlog(@"build b");
         [self buildHorizontalBreakableFromBottom:_size.width toTop:botBreakLocal];
     } else {
-        dlog(@"too small to build b");
+        //dlog(@"too small to build b");
         botBreakLocal = _size.width;
     }
     [self buildHorizontalBrokenFromBottom:botBreakLocal toTop:topBreakLocal];
@@ -178,8 +220,6 @@ static BOOL isFirstToBuild = YES;
     texRect.origin.y = FloatLerp(_texRect.origin.y, _texRect.origin.y + _texRect.size.height, topPercent);
     texRect.size.height = (bottomPercent - topPercent) * _texRect.size.height;
     
-    
-    
     [[AHActorManager manager] add:[[BCBreakableRect alloc] initWithCenter:center
                                                                   andSize:size
                                                                andTexRect:texRect
@@ -187,34 +227,50 @@ static BOOL isFirstToBuild = YES;
 }
 
 - (void)buildVerticalBrokenFromBottom:(float)bottom toTop:(float)top {
-    float lefts[5];
-    float rights[5];
-    
-    lefts[0] = top;
-    lefts[4] = bottom;
-    
-    rights[0] = top;
-    rights[4] = bottom;
-    
-    if (_breakPoint.x > _center.x) {
-        lefts[1] = FloatLerp(top, bottom, 0.25f);
-        lefts[2] = FloatLerp(top, bottom, 0.5f);
-        lefts[3] = FloatLerp(top, bottom, 0.75f);
-        
-        rights[1] = FloatLerp(top, bottom, 0.1f);
-        rights[2] = FloatLerp(top, bottom, 0.5f);
-        rights[3] = FloatLerp(top, bottom, 0.9f);
-    } else {
-        lefts[1] = FloatLerp(top, bottom, 0.1f);
-        lefts[2] = FloatLerp(top, bottom, 0.5f);
-        lefts[3] = FloatLerp(top, bottom, 0.9f);
-        
-        rights[1] = FloatLerp(top, bottom, 0.25f);
-        rights[2] = FloatLerp(top, bottom, 0.5f);
-        rights[3] = FloatLerp(top, bottom, 0.75f);
+    if (fabsf(bottom - top) < MIN_BLOCK_SIZE) {
+        return;
     }
     
-    [self buildVerticalBrokenWithLefts:lefts andRights:rights andCount:4];
+    if (top > bottom) {
+        //dlog(@"top cannot be bigger than bottom");
+        return;
+    }
+    
+    int count = 1;
+    if (_size.width > MIN_SIZE_TO_LEAVE_ALONE || _size.height > MIN_SIZE_TO_LEAVE_ALONE) {
+        count = 8;
+    }
+    
+    float lefts[count + 1];
+    float rights[count + 1];
+    
+    lefts[0] = top;
+    lefts[count] = bottom;
+    
+    rights[0] = top;
+    rights[count] = bottom;
+    
+    //MIN_EDGE_LENGTH
+    
+    for (int i = 1; i < count; i++) {
+        float aPercent = (float)i / float(count);
+        float bPercent = ((aPercent - 0.5f) * OTHER_EDGE_MULTIPLE) + 0.5f;
+        bPercent = fminf(1.0f - MIN_EDGE_PERCENT, fmaxf(MIN_EDGE_PERCENT, bPercent));
+        //dlog(@"aPercent %F", aPercent);
+        //dlog(@"bPercent %F", bPercent);
+        if (_breakPoint.x < _center.x) {
+            lefts[i] = FloatLerp(top, bottom, aPercent);
+            rights[i] = FloatLerp(top, bottom, bPercent);
+        } else {
+            lefts[i] = FloatLerp(top, bottom, bPercent);
+            rights[i] = FloatLerp(top, bottom, aPercent);
+        }
+        //dlog(@"lefts[%i] %F", i, lefts[i]);
+        //dlog(@"rights[%i] %F", i, rights[i]);
+    }
+    //dlog(@"count %i %F %F", count, top, bottom);
+    
+    [self buildVerticalBrokenWithLefts:lefts andRights:rights andCount:count];
 }
 
 - (void)buildVerticalBrokenWithLefts:(float *)lefts andRights:(float *)rights andCount:(int)count {
@@ -254,9 +310,12 @@ static BOOL isFirstToBuild = YES;
         texQuad.b.y = texRights[i];
         texQuad.c.y = texRights[i + 1];
         texQuad.d.y = texLefts[i + 1];
-        [[AHActorManager manager] add:[[BCBrokenPolygon alloc] initFromQuad:quad
-                                                                 andTexQuad:texQuad
-                                                              andTextureKey:_texKey]];
+        
+        BCBrokenPolygon *poly = [[BCBrokenPolygon alloc] initFromQuad:quad
+                                                           andTexQuad:texQuad
+                                                        andTextureKey:_texKey];
+        [poly setExplosionPoint:_breakPoint];
+        [[AHActorManager manager] add:poly];
     }
 }
 
@@ -271,8 +330,8 @@ static BOOL isFirstToBuild = YES;
     float topPercent = FloatPercentBetween(-_size.width, _size.width, top);
     float bottomPercent = FloatPercentBetween(-_size.width, _size.width, bottom);
     
-    dlog(@"topPercent %F", topPercent);
-    dlog(@"bottomPercent %F", bottomPercent);
+    //dlog(@"topPercent %F", topPercent);
+    //dlog(@"bottomPercent %F", bottomPercent);
     
     CGRect texRect = _texRect;
     texRect.origin.x = FloatLerp(_texRect.origin.x, _texRect.origin.x + _texRect.size.width, topPercent);
@@ -287,34 +346,49 @@ static BOOL isFirstToBuild = YES;
 }
 
 - (void)buildHorizontalBrokenFromBottom:(float)bottom toTop:(float)top {
-    float lefts[5];
-    float rights[5];
-    
-    lefts[0] = top;
-    lefts[4] = bottom;
-    
-    rights[0] = top;
-    rights[4] = bottom;
-    
-    if (_breakPoint.y > _center.y) {
-        lefts[1] = FloatLerp(top, bottom, 0.25f);
-        lefts[2] = FloatLerp(top, bottom, 0.5f);
-        lefts[3] = FloatLerp(top, bottom, 0.75f);
-        
-        rights[1] = FloatLerp(top, bottom, 0.1f);
-        rights[2] = FloatLerp(top, bottom, 0.5f);
-        rights[3] = FloatLerp(top, bottom, 0.9f);
-    } else {
-        lefts[1] = FloatLerp(top, bottom, 0.1f);
-        lefts[2] = FloatLerp(top, bottom, 0.5f);
-        lefts[3] = FloatLerp(top, bottom, 0.9f);
-        
-        rights[1] = FloatLerp(top, bottom, 0.25f);
-        rights[2] = FloatLerp(top, bottom, 0.5f);
-        rights[3] = FloatLerp(top, bottom, 0.75f);
+    if (fabsf(bottom - top) < MIN_BLOCK_SIZE) {
+        return;
     }
     
-    [self buildHorizontalBrokenWithLefts:lefts andRights:rights andCount:4];
+    if (top > bottom) {
+        //dlog(@"top cannot be bigger than bottom");
+        return;
+    }
+    
+    int count = 1;
+    if (_size.width > MIN_SIZE_TO_LEAVE_ALONE || _size.height > MIN_SIZE_TO_LEAVE_ALONE) {
+        count = 3;
+    }
+    
+    float lefts[count + 1];
+    float rights[count + 1];
+    
+    lefts[0] = top;
+    lefts[count] = bottom;
+    
+    rights[0] = top;
+    rights[count] = bottom;
+    
+    //MIN_EDGE_LENGTH
+    
+    for (int i = 1; i < count; i++) {
+        float aPercent = (float)i / float(count);
+        float bPercent = (aPercent - 0.5f) * OTHER_EDGE_MULTIPLE + 0.5f;
+        bPercent = fminf(1.0f - MIN_EDGE_PERCENT, fmaxf(MIN_EDGE_PERCENT, bPercent));
+        //dlog(@"aPercent %F", aPercent);
+        //dlog(@"bPercent %F", bPercent);
+        if (_breakPoint.y > _center.y) {
+            lefts[i] = FloatLerp(top, bottom, aPercent);
+            rights[i] = FloatLerp(top, bottom, bPercent);
+        } else {
+            lefts[i] = FloatLerp(top, bottom, bPercent);
+            rights[i] = FloatLerp(top, bottom, aPercent);
+        }
+        //dlog(@"lefts[%i] %F", i, lefts[i]);
+        //dlog(@"rights[%i] %F", i, rights[i]);
+    }
+    
+    [self buildHorizontalBrokenWithLefts:lefts andRights:rights andCount:count];
 }
 
 - (void)buildHorizontalBrokenWithLefts:(float *)lefts andRights:(float *)rights andCount:(int)count {
@@ -354,9 +428,29 @@ static BOOL isFirstToBuild = YES;
         texQuad.b.x = texLefts[i + 1];
         texQuad.c.x = texRights[i + 1];
         texQuad.d.x = texRights[i];
-        [[AHActorManager manager] add:[[BCBrokenPolygon alloc] initFromQuad:quad
-                                                                 andTexQuad:texQuad
-                                                              andTextureKey:_texKey]];
+        
+        BCBrokenPolygon *poly = [[BCBrokenPolygon alloc] initFromQuad:quad
+                                                           andTexQuad:texQuad
+                                                        andTextureKey:_texKey];
+        [poly setExplosionPoint:_breakPoint];
+        [[AHActorManager manager] add:poly];
+    }
+}
+
+
+#pragma mark -
+#pragma mark messages
+
+
+- (void)setBreakMessageType:(int)breakMessageType {
+    _breakMessageType = breakMessageType;
+}
+
+- (void)recieveMessage:(AHActorMessage *)message {
+    if ([message type] == MSG_EXPLOSION_ALL || [message type] == _breakMessageType) {
+        GLKVector2 point = [message firstPoint];
+        float radius = [message thirdFloat];
+        [self breakAtPoint:point withRadius:radius];
     }
 }
 

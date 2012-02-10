@@ -55,11 +55,6 @@
     }
 }
 
-- (void)setPosition:(GLKVector2)newPosition {
-    _position = newPosition;
-    [super setPosition:newPosition];
-}
-
 - (void)setRotation:(float)rotation {
     _rotation = rotation;
     [super setRotation:rotation];
@@ -89,33 +84,26 @@
             chainShape->CreateChain(_points, _count);
         }
     } else {
+        /*
         for (int i = 0; i < _count; i++) {
             dlog(@"points {%F, %F}", _points[i].x, _points[i].y);
         }
         dlog(@"------ end ----");
-        
+         */
+
         polygonShape->Set(_points, _count);
     }
     
     // fixture
     b2FixtureDef *fixtureDef = new b2FixtureDef;
-    fixtureDef->density = 1.0f;
-    fixtureDef->restitution = self->restitution;
-    fixtureDef->friction = self->friction;
     if (_isEdge) {
         fixtureDef->shape = (b2Shape *) chainShape;
     } else {
         fixtureDef->shape = (b2Shape *) polygonShape;
     }
-    fixtureDef->isSensor = self->isSensor;
-    fixtureDef->filter.groupIndex = self->group;
     
     // body
     b2BodyDef *bodyDef = new b2BodyDef;
-    bodyDef->angularDamping = .9f;
-    bodyDef->position = b2Vec2(_position.x, _position.y);
-    bodyDef->angle = _rotation;
-    bodyDef->fixedRotation = self->isFixedRotation;
     
     // create body
     [self addBodyToWorld:bodyDef];

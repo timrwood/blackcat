@@ -22,10 +22,13 @@
     self = [super init];
     if (self) {
         _bodyType = b2_dynamicBody;
-        restitution = 0.2f;
-        friction = 0.3f;
-        group = 0;
+        _restitution = 0.2f;
+        _friction = 0.3f;
+        _category = 0x0001;
+        _group = 0;
+        _isFixedRotation = NO;
         _joints = [[NSMutableArray alloc] init];
+        _masks = 0xFFFF;
     }
     return self;
 }
@@ -70,6 +73,8 @@
 - (void)setPosition:(GLKVector2)newPosition {
     if (_body) {
         _body->SetTransform(b2Vec2(newPosition.x, newPosition.y), _body->GetAngle());
+    } else {
+        _position = newPosition;
     }
 }
 
@@ -87,7 +92,7 @@
 }
 
 - (void)setFixedRotation:(BOOL)isFixed {
-    isFixedRotation = isFixed;
+    _isFixedRotation = isFixed;
 }
 
 
@@ -150,11 +155,11 @@
 }
 
 - (void)setFriction:(float)newFriction {
-    friction = newFriction;
+    _friction = newFriction;
 }
 
 - (void)setRestitution:(float)newRestitution {
-    restitution = newRestitution;
+    _restitution = newRestitution;
 }
 
 
@@ -169,14 +174,25 @@
     return _body;
 }
 
-- (void)addBodyToWorld:(const b2BodyDef *)bodyDef {
+- (void)addBodyToWorld:(b2BodyDef *)bodyDef {
+    bodyDef->linearDamping = 0.0f;
+    bodyDef->angularDamping = 1.0f;
+    bodyDef->fixedRotation = _isFixedRotation;
+	bodyDef->position = b2Vec2(_position.x, _position.y);
     _body = [[AHPhysicsManager cppManager] world]->CreateBody(bodyDef);
     _body->SetUserData((__bridge void *) self);
     _body->SetType(_bodyType);
     _body->SetLinearVelocity(_velocity);
 }
 
-- (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef {
+- (void)addFixtureToBody:(b2FixtureDef *)fixtureDef {
+    fixtureDef->density = 1.0f;
+    fixtureDef->restitution = _restitution;
+    fixtureDef->friction = _friction;
+    fixtureDef->isSensor = _isSensor;
+    fixtureDef->filter.groupIndex = _group;
+    fixtureDef->filter.maskBits = _masks;
+    fixtureDef->filter.categoryBits = _category;
     _body->CreateFixture(fixtureDef);
 }
 
@@ -196,13 +212,13 @@
     }
 }
 
-- (void)setSensor:(BOOL)_isSensor {
+- (void)setSensor:(BOOL)isSensor {
     if (_body) {
         for (b2Fixture *fixture = _body->GetFixtureList(); fixture; fixture = fixture->GetNext()) {
-            fixture->SetSensor(_isSensor);
+            fixture->SetSensor(isSensor);
         }
     } else {
-        isSensor = _isSensor;
+        _isSensor = isSensor;
     }
 }
 
@@ -302,6 +318,10 @@
     _category = category;
 }
 
+- (void)ignoreCategory:(int)category {
+    _masks = _masks ^ category;
+}
+
 - (int)category {
     return _category;
 }
@@ -311,8 +331,8 @@
 #pragma mark group
 
 
-- (void)setGroup:(int16)_group {
-    group = _group;
+- (void)setGroup:(int16)group {
+    _group = group;
 }
 
 

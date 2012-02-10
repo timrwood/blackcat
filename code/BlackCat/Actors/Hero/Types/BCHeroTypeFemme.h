@@ -17,6 +17,9 @@
     AHLogicState *_phasewalkState;
     
     GLKVector2 _targetPosition;
+    
+    float cameraPositionX;
+    float xOffset;
 }
 
 

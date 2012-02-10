@@ -73,7 +73,7 @@
     }
     
     // same building
-    //_buildingOffset = BUILDING_SPLITTER;
+    _buildingOffset = BUILDING_FLAT;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -82,7 +82,7 @@
         lastEnd = [_nextBuilding endCorner];
     }
     
-    float spacing = 2.0f;
+    float spacing = 0.5f;
     float nextHeight = [self seededRandomBetweenFloat:1.0f andFloat:-1.0f];
     
     BCBuildingType *newBuilding;

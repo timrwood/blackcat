@@ -167,13 +167,19 @@
     // assign pointers for
     _textureUniforms[AH_SHADER_UNIFORM_MODELVIEW] = glGetUniformLocation(_textureProgram, "modelview");
     _textureUniforms[AH_SHADER_UNIFORM_PROJECTION] = glGetUniformLocation(_textureProgram, "projection");
-    _textureUniforms[AH_SHADER_UNIFORM_TEXTURE] = glGetUniformLocation(_textureProgram, "textureBase");
+    _textureUniforms[AH_SHADER_UNIFORM_TEXTURE_BASE] = glGetUniformLocation(_textureProgram, "textureBase");
+    _textureUniforms[AH_SHADER_UNIFORM_TEXTURE_NORMAL] = glGetUniformLocation(_textureProgram, "textureNormal");
+    _textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL] = glGetUniformLocation(_textureProgram, "isNormalEnabled");
     
-    glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_TEXTURE], AH_TEXTURE_SAMPLE_BASE);
+    glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_TEXTURE_BASE], AH_TEXTURE_SAMPLE_BASE);
+    glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_TEXTURE_NORMAL], AH_TEXTURE_SAMPLE_NORMAL);
+    glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL], 0);
     
     dlog(@"Compiled texture modelview uniform %i", _textureUniforms[AH_SHADER_UNIFORM_MODELVIEW]);
     dlog(@"Compiled texture projection uniform %i", _textureUniforms[AH_SHADER_UNIFORM_PROJECTION]);
-    dlog(@"Compiled texture texture uniform %i", _textureUniforms[AH_SHADER_UNIFORM_TEXTURE]);
+    dlog(@"Compiled texture texture uniform %i", _textureUniforms[AH_SHADER_UNIFORM_TEXTURE_BASE]);
+    dlog(@"Compiled texture texture uniform %i", _textureUniforms[AH_SHADER_UNIFORM_TEXTURE_NORMAL]);
+    dlog(@"Compiled texture texture uniform %i", _textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL]);
     
     dlog(@"Compiled texture shaders");
 }
@@ -190,6 +196,7 @@
             _currentUniforms[i] = _textureUniforms[i];
         }
         glUseProgram(_textureProgram);
+        [self enableNormal:_isUsingTextureNormals];
         [self setModelViewMatrix:currentModelview];
         [self setProjectionMatrix:currentProjection];
     }
@@ -264,6 +271,22 @@
         dlog(@"OpenGL Error (%i) %@", error, errorCode);
         [self debug];
         //exit(1);
+    }
+}
+
+
+#pragma mark -
+#pragma mark textures
+
+
+- (void)enableNormal:(BOOL)enabled {
+    _isUsingTextureNormals = enabled;
+    if (_isUsingTextureProgram) {
+        if (enabled) {
+            glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL], 1);
+        } else {
+            glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL], 0);
+        }
     }
 }
 

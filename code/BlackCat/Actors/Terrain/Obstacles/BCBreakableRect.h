@@ -26,6 +26,8 @@
     GLKVector2 _breakPoint;
     float _breakRadius;
     
+    int _breakMessageType;
+    
     NSString *_texKey;
 }
 
@@ -47,6 +49,7 @@
 #pragma mark breaking
 
 
+- (BOOL)isCloseEnoughToBreak;
 - (void)breakAtPoint:(GLKVector2)point
           withRadius:(float)radius;
 - (void)breakHorizontally;
@@ -77,6 +80,12 @@
 - (void)buildHorizontalBrokenWithLefts:(float *)lefts
                            andRights:(float *)rights
                             andCount:(int)count;
+
+#pragma mark -
+#pragma mark messages
+
+
+- (void)setBreakMessageType:(int)breakMessageType;
 
 
 @end

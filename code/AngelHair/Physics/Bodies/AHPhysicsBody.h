@@ -21,20 +21,27 @@
 
 
 @interface AHPhysicsBody : AHActorComponent <AHContactDelegate> {
-@protected;
-    float restitution;
-    float friction;
-    BOOL isSensor;
-    int16 group;
-    BOOL isFixedRotation;
 @private;
+    // body
+    BOOL _isFixedRotation;
+    b2BodyType _bodyType;
+    b2Vec2 _velocity;
+    GLKVector2 _position;
+    
+    // fixture
+    float _restitution;
+    float _friction;
+    BOOL _isSensor;
+    int16 _group;
+    int _category;
+    int _masks;
+    
+    // identification
+    int _tags;
+    
     NSMutableArray *_joints;
     NSObject <AHContactDelegate> *delegate;
     b2Body *_body;
-    b2BodyType _bodyType;
-    int _tags;
-    int _category;
-    b2Vec2 _velocity;
 }
 
 
@@ -83,8 +90,8 @@
 
 
 - (b2Body *)body;
-- (void)addBodyToWorld:(const b2BodyDef *)bodyDef;
-- (void)addFixtureToBody:(const b2FixtureDef *)fixtureDef;
+- (void)addBodyToWorld:(b2BodyDef *)bodyDef;
+- (void)addFixtureToBody:(b2FixtureDef *)fixtureDef;
 - (void)setStatic:(BOOL)isStatic;
 - (void)setSensor:(BOOL)isSensor;
 
@@ -110,6 +117,7 @@
 
 
 - (void)setCategory:(int)category;
+- (void)ignoreCategory:(int)category;
 - (int)category;
 
 

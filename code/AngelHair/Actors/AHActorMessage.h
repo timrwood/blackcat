@@ -12,6 +12,8 @@
     int _type;
     float _a;
     float _b;
+    float _c;
+    float _d;
 }
 
 
@@ -19,9 +21,13 @@
 #pragma mark init
 
 
-- (id)initWithType:(int)newId;
-- (id)initWithType:(int)newId andFloat:(float)newFloat;
-- (id)initWithType:(int)newId andPoint:(GLKVector2)point;
+- (id)initWithType:(int)type;
+- (id)initWithType:(int)type andFloat:(float)newFloat;
+- (id)initWithType:(int)type andFloat:(float)newFloat andFloat:(float)newFloat;
+- (id)initWithType:(int)type andPoint:(GLKVector2)point;
+- (id)initWithType:(int)type andPoint:(GLKVector2)point andFloat:(float)newFloat;
+- (id)initWithType:(int)type andPoint:(GLKVector2)point andPoint:(GLKVector2)point;
+- (id)initWithType:(int)type and4Floats:(float *)floats;
 
 
 #pragma mark -
@@ -29,8 +35,12 @@
 
 
 - (int)type;
-- (float)valueAsFloat;
-- (GLKVector2)valueAsPoint;
+- (float)firstFloat;
+- (float)secondFloat;
+- (float)thirdFloat;
+- (float)fourthFloat;
+- (GLKVector2)firstPoint;
+- (GLKVector2)secondPoint;
 
 
 @end

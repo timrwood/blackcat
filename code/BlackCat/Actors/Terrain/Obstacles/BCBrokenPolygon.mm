@@ -29,9 +29,12 @@
         
         _body = [[AHPhysicsPolygon alloc] initFromPoints:averagedQuad.p andCount:4];
         [_body addTag:PHY_TAG_BREAKABLE];
+        [_body setCategory:PHY_CAT_DEBRIS];
         [_body setPosition:center];
-        [_body setStatic:YES];
+        [_body setStatic:NO];
         [self addComponent:_body];
+        
+        _center = center;
         
         _skin = [[AHGraphicsPolygon alloc] initFromPoints:averagedQuad.p andTexPoints:texQuad.p andCount:4];
         [_skin setTextureKey:texKey];
@@ -39,6 +42,29 @@
         [self addComponent:_skin];
     }
     return self;
+}
+
+
+#pragma mark -
+#pragma mark setters
+
+
+- (void)setExplosionPoint:(GLKVector2)point {
+    _explosionPoint = point;
+}
+
+
+#pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    [super setup];
+    GLKVector2 explosionVelocity = GLKVector2Subtract(_center, _explosionPoint);
+    explosionVelocity = GLKVector2MultiplyScalar(explosionVelocity, 3.0f);
+    //dlog(@"velocity %@", NSStringFromGLKVector2(explosionVelocity));
+    [_body setLinearVelocity:explosionVelocity];
+    //[_body setLinearVelocity:explosionVelocity atWorldPoint:_explosionPoint];
 }
 
 

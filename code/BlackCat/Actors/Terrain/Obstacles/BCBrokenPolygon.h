@@ -18,6 +18,9 @@
 @private;
     AHPhysicsPolygon *_body;
     AHGraphicsPolygon *_skin;
+    
+    GLKVector2 _explosionPoint;
+    GLKVector2 _center;
 }
 
 
@@ -28,6 +31,13 @@
 - (id)initFromQuad:(AHPolygonQuad)quad
         andTexQuad:(AHPolygonQuad)texQuad
      andTextureKey:(NSString *)texKey;
+
+
+#pragma mark -
+#pragma mark setters
+
+
+- (void)setExplosionPoint:(GLKVector2)point;
 
 
 @end

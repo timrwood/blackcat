@@ -24,7 +24,7 @@
 
 #define DASH_SLOW_SPEED 1.0f
 
-#define INITIAL_RUN_SPEED 8.0f
+#define INITIAL_RUN_SPEED 4.0f
 
 #define STATE_CAN_JUMP 0
 #define STATE_IS_JUMPING 1
@@ -82,6 +82,7 @@
         [_body setRestitution:0.0f];
         [_body setStatic:NO];
         [_body setCategory:PHY_CAT_HERO];
+        [_body ignoreCategory:PHY_CAT_DEBRIS];
         [_body setRestitution:0.0f];
         [_body setDelegate:self];
         [_body setFixedRotation:YES];
@@ -206,7 +207,11 @@
 }
 
 - (void)updateCamera {
-    [[AHGraphicsManager camera] setWorldPosition:GLKVector2Add(GLKVector2Make(4.0f, 0.0f), [_body position])];
+    GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
+    cameraPosition.y = [[BCGlobalManager manager] buildingHeight];
+    cameraPosition.x += [[AHGraphicsManager camera] worldSize].width * 0.7f;
+    
+    [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
     [[AHGraphicsManager camera] setWorldZoom:6.0f];
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }

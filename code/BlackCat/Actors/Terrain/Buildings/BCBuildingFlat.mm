@@ -42,8 +42,9 @@
         [self addComponent:_body];
         
         _skin = [[AHGraphicsRect alloc] init];
-        [_skin setTextureKey:@"debug-grid.png"];
-        [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skin setTextureKey:@"grate-base.jpg"];
+        [_skin setNormalTextureKey:@"grate-normal.jpg"];
+        [_skin setTex:CGRectMake(0.0f, 0.0f, 8.0f, 2.0f)];
         [self addComponent:_skin];
     }
     return self;

@@ -18,6 +18,9 @@
     GLKVector2 _targetPosition;
     
     float _timeStartedDash;
+    
+    float cameraPositionX;
+    float xOffset;
 }
 
 
@@ -26,6 +29,7 @@
 
 
 - (BOOL)isDashing;
+- (void)sendExplosionMessage:(int)type;
 - (void)dashToPoint:(GLKVector2)point;
 
 

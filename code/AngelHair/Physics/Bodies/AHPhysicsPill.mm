@@ -35,19 +35,11 @@
     
     // fixture
     b2FixtureDef *fixtureDef = new b2FixtureDef;
-    fixtureDef->density = 1.0f;
-    fixtureDef->restitution = self->restitution;
-    fixtureDef->friction = self->friction;
     fixtureDef->shape = (b2Shape *) polygonShape;
-    fixtureDef->isSensor = self->isSensor;
-    fixtureDef->filter.groupIndex = self->group;
     
     // body
     b2BodyDef *bodyDef = new b2BodyDef;
-    bodyDef->angularDamping = .9f;
-    bodyDef->position = b2Vec2(_position.x, _position.y);
     bodyDef->angle = _rotation;
-    bodyDef->fixedRotation = self->isFixedRotation;
     
     // create body
     [self addBodyToWorld:bodyDef];
