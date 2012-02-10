@@ -82,7 +82,7 @@
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    [[AHGraphicsManager camera] prepareToDrawWorld];
+    [[AHGraphicsManager camera] prepareToDrawWorldOrtho];
     
     if (_world) {
         _world->DrawDebugData();

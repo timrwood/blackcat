@@ -1,17 +1,16 @@
 //
-//  AHGraphicsRect.m
+//  AHGraphicsCube.m
 //  BlackCat
 //
-//  Created by Tim Wood on 1/9/12.
-//  Copyright (c) 2012 Infinite Beta. All rights reserved.
+//  Created by Tim Wood on 2/10/12.
+//  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
 
-#import "AHGraphicsManager.h"
-#import "AHGraphicsRect.h"
+#import "AHGraphicsCube.h"
 
 
-@interface AHGraphicsRect()
+@interface AHGraphicsCube()
 
 
 - (void)updateVertices;
@@ -20,7 +19,7 @@
 @end
 
 
-@implementation AHGraphicsRect
+@implementation AHGraphicsCube
 
 
 #pragma mark -
@@ -30,10 +29,13 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _depth = 3.0f;
-        [self setVertexCount:4];
+        [self setVertexCount:8];
     }
     return self;
+}
+
+- (void)dealloc {
+    
 }
 
 
@@ -55,8 +57,9 @@
     [self updateVertices];
 }
 
-- (void)setDepth:(float)depth {
-    _depth = depth;
+- (void)setStartDepth:(float)startDepth endDepth:(float)endDepth {
+    _startDepth = startDepth;
+    _endDepth = endDepth;
     [self updateVertices];
 }
 
@@ -65,11 +68,17 @@
     float r = _rect.origin.x + _rect.size.width;
     float t = _rect.origin.y;
     float b = _rect.origin.y + _rect.size.height;
-
-    self->vertices[0] = GLKVector3Make(l, t, _depth);
-    self->vertices[1] = GLKVector3Make(l, b, _depth);
-    self->vertices[2] = GLKVector3Make(r, t, _depth);
-    self->vertices[3] = GLKVector3Make(r, b, _depth);
+    float c = _startDepth;
+    float f = _endDepth;
+    
+    self->vertices[0] = GLKVector3Make(l, t, f);
+    self->vertices[1] = GLKVector3Make(l, b, f);
+    self->vertices[2] = GLKVector3Make(l, t, c);
+    self->vertices[3] = GLKVector3Make(l, b, c);
+    self->vertices[4] = GLKVector3Make(r, t, c);
+    self->vertices[5] = GLKVector3Make(r, b, c);
+    self->vertices[6] = GLKVector3Make(r, t, f);
+    self->vertices[7] = GLKVector3Make(r, b, f);
 }
 
 
@@ -95,6 +104,10 @@
     self->textures[1] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
     self->textures[2] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
     self->textures[3] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    self->textures[4] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
+    self->textures[5] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
+    self->textures[6] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
+    self->textures[7] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
 }
 
 

@@ -51,3 +51,19 @@ typedef enum {
     HERO_TYPE_FEMME,
     HERO_TYPE_BOXER
 } BCHeroTypes;
+
+
+#define Z_NEAR_LIMIT 1.0f
+#define Z_FAR_LIMIT 15.0f
+
+
+#define Z_BUILDING_FRONT -3.0f
+#define Z_PHYSICS_DEPTH -4.0f
+#define Z_BUILDING_BACK -5.0f
+
+
+
+
+
+
+

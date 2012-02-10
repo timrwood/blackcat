@@ -1,19 +1,20 @@
 //
-//  AHGraphicsRect.h
+//  AHGraphicsCube.h
 //  BlackCat
 //
-//  Created by Tim Wood on 1/9/12.
-//  Copyright (c) 2012 Infinite Beta. All rights reserved.
+//  Created by Tim Wood on 2/10/12.
+//  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
 
 #import "AHGraphicsObject.h"
 
 
-@interface AHGraphicsRect : AHGraphicsObject {
+@interface AHGraphicsCube : AHGraphicsObject {
 @private;
+    float _startDepth;
+    float _endDepth;
     CGRect _rect;
-    float _depth;
 }
 
 
@@ -24,7 +25,7 @@
 - (void)setRectFromCenter:(GLKVector2)center andRadius:(float)radius;
 - (void)setRectFromCenter:(GLKVector2)center andSize:(CGSize)size;
 - (void)setRect:(CGRect)rect;
-- (void)setDepth:(float)depth;
+- (void)setStartDepth:(float)startDepth endDepth:(float)endDepth;
 
 
 #pragma mark -

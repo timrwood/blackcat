@@ -22,5 +22,5 @@ void main(void) {
     
     gl_Position = projection * modelview * poscoord;
     
-    lightPosition = vec2(gl_Position) + vec2(0.5, 0.5);
+    lightPosition = vec2(-0.5, 0.0) - vec2(gl_Position);
 }

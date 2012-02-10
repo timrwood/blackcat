@@ -111,6 +111,7 @@
         _skeleton = [[AHGraphicsSkeleton alloc] init];
         AHSkeleton skeleton;
         [_skeleton setSkeleton:skeleton];
+        [_skeleton setDepth:Z_PHYSICS_DEPTH];
         [_skeleton setLayerIndex:GFX_LAYER_BACKGROUND];
         [self addComponent:_skeleton];
         
@@ -153,7 +154,7 @@
     [self updateCamera];
     [self updateJumpability];
     [self updateSkeleton];
-    [self updateCrash];
+    //[self updateCrash];
     [_type updateBeforeAnimation];
 }
 
@@ -209,7 +210,8 @@
 - (void)updateCamera {
     GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
     cameraPosition.y = [[BCGlobalManager manager] buildingHeight];
-    cameraPosition.x += [[AHGraphicsManager camera] worldSize].width * 0.7f;
+    cameraPosition.y -= [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].height * 0.5f;
+    cameraPosition.x += [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].width * 0.7f;
     
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
     [[AHGraphicsManager camera] setWorldZoom:6.0f];

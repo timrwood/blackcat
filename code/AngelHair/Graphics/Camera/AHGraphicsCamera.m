@@ -25,14 +25,17 @@
         _screenRect = [[AHScreenManager manager] screenRect];
         _aspectRatio = _screenRect.size.width / _screenRect.size.height;
         _zoom = 5.0f;
+        _nearLimit = 1.0f;
+        _farLimit = 15.0f;
+        _centerDepth = 5.0f;
         _position = GLKVector2Make(0.0f, 0.0f);
         [self cacheWorldMatrix];
         _screenMatrix = GLKMatrix4MakeOrtho(0.0f, 
                                             _screenRect.size.width,
                                             _screenRect.size.height,
                                             0.0f,
-                                            -1.0f, 
-                                            1.0f);
+                                            -10.0f, 
+                                            10.0f);
     }
     return self;
 }
@@ -50,8 +53,38 @@
     [[AHGraphicsManager manager] setCameraMatrix:_screenMatrix];
 }
 
+- (void)prepareToDrawWorldOrtho {
+    [[AHGraphicsManager manager] setCameraMatrix:_orthoMatrix];
+}
+
 - (void)prepareToDrawWorld {
     [[AHGraphicsManager manager] setCameraMatrix:_worldMatrix];
+}
+
+
+#pragma mark -
+#pragma mark z index
+
+
+- (void)setNearLimit:(float)near {
+    if (near > 0.0f) {
+        _nearLimit = near;
+        [self cacheFrustumMatrix];
+    }
+}
+
+- (void)setFarLimit:(float)far {
+    if (far > 0.0f) {
+        _farLimit = far;
+        [self cacheFrustumMatrix];
+    }
+}
+
+- (void)setCenterDepth:(float)depth {
+    if (depth > 0.0f) {
+        _centerDepth = depth;
+        [self cacheFrustumMatrix];
+    }
 }
 
 
@@ -63,13 +96,32 @@
     return CGSizeMake(_zoom * _aspectRatio, _zoom);
 }
 
+- (CGSize)worldSizeAt:(float)depth {
+    float zoomRatio = _zoom / (depth + _nearLimit / _nearLimit);
+    return CGSizeMake(zoomRatio * _aspectRatio, zoomRatio);
+}
+
+- (void)cacheFrustumMatrix {
+    float zoomRatio = _zoom / (_centerDepth + _nearLimit / _nearLimit);
+    _frustumMatrix = GLKMatrix4MakeFrustum(- zoomRatio * _aspectRatio, 
+                                           zoomRatio * _aspectRatio, 
+                                           zoomRatio, 
+                                           - zoomRatio, 
+                                           _nearLimit, 
+                                           _farLimit);
+}
+
 - (void)cacheWorldMatrix {
-    _worldMatrix = GLKMatrix4MakeOrtho(_position.x - _zoom * _aspectRatio, 
+    _worldMatrix = GLKMatrix4Translate(_frustumMatrix, -_position.x, -_position.y, 0.0f);
+}
+
+- (void)cacheOrthoMatrix {
+    _orthoMatrix = GLKMatrix4MakeOrtho(_position.x - _zoom * _aspectRatio, 
                                        _position.x + _zoom * _aspectRatio, 
                                        _position.y + _zoom, 
                                        _position.y - _zoom, 
-                                       -1.0f, 
-                                       1.0f);
+                                       -4.0f, 
+                                       4.0f);
 }
 
 - (GLKVector2)worldPosition {
@@ -79,6 +131,7 @@
 - (void)setWorldPosition:(GLKVector2)newPosition {
     _position = newPosition;
     [self cacheWorldMatrix];
+    [self cacheOrthoMatrix];
 }
 
 - (float)worldZoom {
@@ -87,7 +140,8 @@
 
 - (void)setWorldZoom:(float)newZoom {
     _zoom = newZoom;
-    [self cacheWorldMatrix];
+    [self cacheFrustumMatrix];
+    [self cacheOrthoMatrix];
 }
 
 

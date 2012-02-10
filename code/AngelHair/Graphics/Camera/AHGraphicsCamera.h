@@ -16,8 +16,14 @@
     GLKVector2 _position;
     CGRect _screenRect;
     float _aspectRatio;
+    GLKMatrix4 _orthoMatrix;
     GLKMatrix4 _screenMatrix;
+    GLKMatrix4 _frustumMatrix;
     GLKMatrix4 _worldMatrix;
+    
+    float _nearLimit;
+    float _farLimit;
+    float _centerDepth;
 }
 
 
@@ -26,7 +32,17 @@
 
 
 - (void)prepareToDrawScreen;
+- (void)prepareToDrawWorldOrtho;
 - (void)prepareToDrawWorld;
+
+
+#pragma mark -
+#pragma mark z index
+
+
+- (void)setNearLimit:(float)near;
+- (void)setFarLimit:(float)far;
+- (void)setCenterDepth:(float)depth;
 
 
 #pragma mark -
@@ -34,7 +50,10 @@
 
 
 - (CGSize)worldSize;
+- (CGSize)worldSizeAt:(float)depth;
+- (void)cacheFrustumMatrix;
 - (void)cacheWorldMatrix;
+- (void)cacheOrthoMatrix;
 - (GLKVector2)worldPosition;
 - (void)setWorldPosition:(GLKVector2)newPosition;
 - (float)worldZoom;

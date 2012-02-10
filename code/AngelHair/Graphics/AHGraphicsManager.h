@@ -32,6 +32,8 @@
     int _popPushIndex;
     
     GLKVector4 _currentColor;
+    
+    GLuint _depthRenderBuffer;
 }
 
 
@@ -123,11 +125,11 @@
 #pragma mark draw array
 
 
-- (void)drawPointerArrayPosition:(GLKVector2 *)position
+- (void)drawPointerArrayPosition:(GLKVector3 *)position
                       andTexture:(GLKVector2 *)texture
                         andCount:(int)count 
                      andDrawType:(GLenum)type;
-- (void)drawPointerArrayPosition:(GLKVector2 *)position
+- (void)drawPointerArrayPosition:(GLKVector3 *)position
                         andColor:(GLKVector4)color
                         andCount:(int)count 
                      andDrawType:(GLenum)type;

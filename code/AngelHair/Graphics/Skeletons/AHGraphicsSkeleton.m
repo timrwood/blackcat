@@ -94,6 +94,15 @@
     _shoulderPosition = position;
 }
 
+- (void)setDepth:(float)depth {
+    [_armA setDepth:depth];
+    [_armB setDepth:depth];
+    [_legB setDepth:depth];
+    [_legA setDepth:depth];
+    [_head setDepth:depth];
+    [_torso setDepth:depth];
+}
+
 
 #pragma mark -
 #pragma mark texture

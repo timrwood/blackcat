@@ -7,6 +7,7 @@
 //
 
 
+#import "AHMathUtils.h"
 #import "AHGraphicsPolygon.h"
 
 
@@ -34,7 +35,7 @@
 
 - (void)setPositionVertices:(GLKVector2 *)verts {
     for (int i = 0; i < [self vertexCount]; i++) {
-        self->vertices[i] = verts[i];
+        self->vertices[i] = GLKVector3MakeWithVector2(verts[i], _depth);
     }
 }
 
@@ -44,8 +45,11 @@
     }
 }
 
-- (void)setDisplayAsFan:(BOOL)asFan {
-    
+- (void)setDepth:(float)depth {
+    _depth = depth;
+    for (int i = 0; i < [self vertexCount]; i++) {
+        self->vertices[i].z = _depth;
+    }
 }
 
 

@@ -43,6 +43,7 @@
 - (void)setArmWidth:(float)width;
 - (void)setArmLength:(float)length;
 - (void)setShoulderPosition:(GLKVector2)position;
+- (void)setDepth:(float)depth;
 
 
 #pragma mark -

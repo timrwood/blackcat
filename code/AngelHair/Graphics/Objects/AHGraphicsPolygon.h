@@ -10,7 +10,10 @@
 #import "AHGraphicsObject.h"
 
 
-@interface AHGraphicsPolygon : AHGraphicsObject
+@interface AHGraphicsPolygon : AHGraphicsObject {
+@private;
+    float _depth;
+}
 
 
 #pragma mark -
@@ -28,7 +31,6 @@
 
 - (void)setPositionVertices:(GLKVector2 *)verts;
 - (void)setTextureVertices:(GLKVector2 *)verts;
-- (void)setDisplayAsFan:(BOOL)asFan;
-
+- (void)setDepth:(float)depth;
 
 @end

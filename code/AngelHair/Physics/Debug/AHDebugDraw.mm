@@ -21,9 +21,9 @@ AHDebugDraw::AHDebugDraw() {
 }
 
 void AHDebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color) {
-	GLKVector2 glVertices[vertexCount];
+	GLKVector3 glVertices[vertexCount];
 	for (int i = 0; i < vertexCount; i++) {
-		glVertices[i] = GLKVector2Make(old_vertices[i].x, old_vertices[i].y);
+		glVertices[i] = GLKVector3Make(old_vertices[i].x, old_vertices[i].y, 0.0f);
 	}
     
     GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);
@@ -35,9 +35,9 @@ void AHDebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, con
 }
 
 void AHDebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color) {
-	GLKVector2 glVertices[vertexCount];
+	GLKVector3 glVertices[vertexCount];
 	for (int i = 0; i < vertexCount; i++) {
-		glVertices[i] = GLKVector2Make(old_vertices[i].x, old_vertices[i].y);
+		glVertices[i] = GLKVector3Make(old_vertices[i].x, old_vertices[i].y, 0.0f);
 	}
     
     GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.25f);
@@ -60,10 +60,10 @@ void AHDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color
 	const float32 k_increment = 2.0f * b2_pi / k_segments;
 	float32 theta = 0.0f;
 	
-	GLKVector2 glVertices[vertexCount * 3];
+	GLKVector3 glVertices[vertexCount * 3];
 	for (int32 i = 0; i < k_segments; ++i) {
 		b2Vec2 v = center + radius * b2Vec2(cosf(theta), sinf(theta));
-		glVertices[i] = GLKVector2Make(v.x, v.y);
+		glVertices[i] = GLKVector3Make(v.x, v.y, 0.0f);
 		theta += k_increment;
 	}
     
@@ -81,10 +81,10 @@ void AHDebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2
 	const float32 k_increment = 2.0f * b2_pi / k_segments;
 	float32 theta = 0.0f;
 	
-	GLKVector2 glVertices[vertexCount * 3];
+	GLKVector3 glVertices[vertexCount * 3];
 	for (int32 i = 0; i < k_segments; ++i) {
 		b2Vec2 v = center + radius * b2Vec2(cosf(theta), sinf(theta));
-		glVertices[i] = GLKVector2Make(v.x, v.y);
+		glVertices[i] = GLKVector3Make(v.x, v.y, 0.0f);
 		theta += k_increment;
 	}
     
@@ -106,9 +106,9 @@ void AHDebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2
 }
 
 void AHDebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color){
-    GLKVector2 glVertices[] = {
-		p1.x, p1.y,
-		p2.x, p2.y
+    GLKVector3 glVertices[] = {
+		p1.x, p1.y, 0.0f,
+		p2.x, p2.y, 0.0f
 	};
     
     
@@ -134,8 +134,8 @@ void AHDebugDraw::DrawTransform(const b2Transform& xf) {
 void AHDebugDraw::DrawPoint(const b2Vec2& p, float32 size, const b2Color& color) {
 	glPointSize(size);
     
-	GLKVector2 glVertices[] = {
-		p.x, p.y
+	GLKVector3 glVertices[] = {
+		p.x, p.y, 0.0f
 	};
     
     
@@ -154,11 +154,11 @@ void AHDebugDraw::DrawString(int x, int y, const char *string, ...) {
 }
 
 void AHDebugDraw::DrawAABB(b2AABB* aabb, const b2Color& color) {
-	GLKVector2 glVertices[4] = {
-		aabb->lowerBound.x, aabb->lowerBound.y,
-		aabb->upperBound.x, aabb->lowerBound.y,
-		aabb->upperBound.x, aabb->upperBound.y,
-		aabb->lowerBound.x, aabb->upperBound.y
+	GLKVector3 glVertices[4] = {
+		aabb->lowerBound.x, aabb->lowerBound.y, 0.0f,
+		aabb->upperBound.x, aabb->lowerBound.y, 0.0f,
+		aabb->upperBound.x, aabb->upperBound.y, 0.0f,
+		aabb->lowerBound.x, aabb->upperBound.y, 0.0f
 	};
     
     GLKVector4 _color = GLKVector4Make(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, 0.5f);

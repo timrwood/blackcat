@@ -11,13 +11,13 @@
 
 
 @class AHPhysicsRect;
-@class AHGraphicsRect;
+@class AHGraphicsCube;
 
 
 @interface BCBuildingFlat : BCBuildingType {
 @private;
     AHPhysicsRect *_body;
-    AHGraphicsRect *_skin;
+    AHGraphicsCube *_skin;
 }
 
 

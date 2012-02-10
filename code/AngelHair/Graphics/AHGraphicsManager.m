@@ -10,6 +10,7 @@
 #define MAX_POP_PUSH_STACK 8
 
 
+#import "AHScreenManager.h"
 #import "AHShaderManager.h"
 #import "AHGraphicsObject.h"
 #import "AHGraphicsLayer.h"
@@ -107,7 +108,7 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)modelIdentity {
-    [self setModelMatrix:GLKMatrix4Identity];
+    [self setModelMatrix:GLKMatrix4Translate(GLKMatrix4Identity, 0.0f, 0.0f, 0.0f)];
 }
 
 - (void)modelPush {
@@ -308,21 +309,21 @@ static AHGraphicsCamera *_camera = nil;
 #pragma mark offsets
 
 
-- (void)drawPointerArrayPosition:(GLKVector2 *)position
+- (void)drawPointerArrayPosition:(GLKVector3 *)position
                       andTexture:(GLKVector2 *)texture
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
     glVertexAttribPointer(AH_SHADER_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, texture);
-    glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 2, GL_FLOAT, GL_FALSE, 0, position);
+    glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 3, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
 }
 
-- (void)drawPointerArrayPosition:(GLKVector2 *)position
+- (void)drawPointerArrayPosition:(GLKVector3 *)position
                         andColor:(GLKVector4)color
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
     [_shaderManager setColor:color];
-    glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 2, GL_FLOAT, GL_FALSE, 0, position);
+    glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 3, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
 }
 

@@ -44,6 +44,11 @@
         [_bot setLayerIndex:GFX_LAYER_BACKGROUND];
         [_bot2 setLayerIndex:GFX_LAYER_BACKGROUND];
         
+        [_top setDepth:-8.0f];
+        [_mid setDepth:-7.0f];
+        [_bot setDepth:-6.0f];
+        [_bot2 setDepth:-5.0f];
+        
         [_top setTextureKey:@"background.png"];
         [_mid setTextureKey:@"background.png"];
         [_bot setTextureKey:@"background.png"];

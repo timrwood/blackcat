@@ -26,7 +26,7 @@
     
     BOOL _isOffset;
 @protected;
-    GLKVector2 *vertices;
+    GLKVector3 *vertices;
     GLKVector2 *textures;
     
     GLKVector2 _position;

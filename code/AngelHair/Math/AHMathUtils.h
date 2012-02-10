@@ -99,6 +99,11 @@ extern "C" {
                               FloatCloserToZero(a.y, b.y));
     }
     
+    static __inline__ GLKVector3 GLKVector3MakeWithVector2(GLKVector2 vector, float z);
+    static __inline__ GLKVector3 GLKVector3MakeWithVector2(GLKVector2 vector, float z) {
+        return GLKVector3Make(vector.x, vector.y, z);
+    }
+    
     static __inline__ GLKVector2 GLKVector2Zero();
     static __inline__ GLKVector2 GLKVector2Zero() {
         return GLKVector2Make(0.0f, 0.0f);

@@ -16,6 +16,7 @@
     float _width;
     float _angle;
     CGRect _rect;
+    float _depth;
     
     BOOL _canUseVertexCache;
     BOOL _canUseTextureCache;
@@ -29,6 +30,7 @@
 - (void)setWidth:(float)width;
 - (void)setLength:(float)length;
 - (void)setAngle:(float)angle;
+- (void)setDepth:(float)depth;
 
 
 #pragma mark -

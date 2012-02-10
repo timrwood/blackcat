@@ -44,11 +44,12 @@
 
 
 - (void)cleanupWorld {
+    float buildingHeight = [[BCGlobalManager manager] buildingHeight];
     float cameraX = [[BCGlobalManager manager] heroPosition].x;
     for (b2Body *body = [[AHPhysicsManager cppManager] world]->GetBodyList(); body; body = body->GetNext()) {
         b2Vec2 pos = body->GetPosition();
         AHPhysicsBody *wrapper = (__bridge AHPhysicsBody *) body->GetUserData();
-		if (pos.x < cameraX - METERS_BEHIND_HERO_TO_CLEANUP || pos.y > METERS_BELOW_HERO_TO_CLEANUP) {
+		if (pos.x < cameraX - METERS_BEHIND_HERO_TO_CLEANUP || pos.y > buildingHeight + METERS_BELOW_HERO_TO_CLEANUP) {
             [wrapper destroyActor];
         }
 	}

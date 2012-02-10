@@ -83,7 +83,7 @@
     }
     
     float spacing = 0.5f;
-    float nextHeight = [self seededRandomBetweenFloat:1.0f andFloat:-1.0f];
+    float nextHeight = [self seededRandomBetweenFloat:0.0f andFloat:2.0f];
     
     BCBuildingType *newBuilding;
     switch (type) {

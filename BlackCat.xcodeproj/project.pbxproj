@@ -29,6 +29,7 @@
 		15285AB714E320FD00E2E8A9 /* BCBreakableRect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15285AB614E320FD00E2E8A9 /* BCBreakableRect.mm */; };
 		15285ABC14E3272500E2E8A9 /* AHGraphicsPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 15285ABB14E3272500E2E8A9 /* AHGraphicsPolygon.m */; };
 		15285ABF14E328DF00E2E8A9 /* BCBrokenPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15285ABE14E328DF00E2E8A9 /* BCBrokenPolygon.mm */; };
+		1528E90E14E58A4100606361 /* AHGraphicsCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 1528E90D14E58A4100606361 /* AHGraphicsCube.m */; };
 		152F4AFF14E1A43D00B5E3BD /* AHScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 152F4AFE14E1A43D00B5E3BD /* AHScreenManager.m */; };
 		152F4B0214E1BA0B00B5E3BD /* BCBuildingSplitter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 152F4B0114E1BA0A00B5E3BD /* BCBuildingSplitter.mm */; };
 		152F4B0514E1F99000B5E3BD /* AHLogicState.m in Sources */ = {isa = PBXBuildFile; fileRef = 152F4B0414E1F99000B5E3BD /* AHLogicState.m */; };
@@ -203,6 +204,8 @@
 		15285ABB14E3272500E2E8A9 /* AHGraphicsPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsPolygon.m; path = Objects/AHGraphicsPolygon.m; sourceTree = "<group>"; };
 		15285ABD14E328DF00E2E8A9 /* BCBrokenPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBrokenPolygon.h; path = Actors/Terrain/Obstacles/BCBrokenPolygon.h; sourceTree = "<group>"; };
 		15285ABE14E328DF00E2E8A9 /* BCBrokenPolygon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBrokenPolygon.mm; path = Actors/Terrain/Obstacles/BCBrokenPolygon.mm; sourceTree = "<group>"; };
+		1528E90C14E58A4100606361 /* AHGraphicsCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsCube.h; path = Objects/AHGraphicsCube.h; sourceTree = "<group>"; };
+		1528E90D14E58A4100606361 /* AHGraphicsCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsCube.m; path = Objects/AHGraphicsCube.m; sourceTree = "<group>"; };
 		152F4AFD14E1A43D00B5E3BD /* AHScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHScreenManager.h; path = Screen/AHScreenManager.h; sourceTree = "<group>"; };
 		152F4AFE14E1A43D00B5E3BD /* AHScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHScreenManager.m; path = Screen/AHScreenManager.m; sourceTree = "<group>"; };
 		152F4B0014E1BA0A00B5E3BD /* BCBuildingSplitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingSplitter.h; path = Actors/Terrain/Buildings/BCBuildingSplitter.h; sourceTree = "<group>"; };
@@ -574,6 +577,8 @@
 				1515F8A714C9E2FE004FE3BB /* AHGraphicsRect.m */,
 				15285ABA14E3272500E2E8A9 /* AHGraphicsPolygon.h */,
 				15285ABB14E3272500E2E8A9 /* AHGraphicsPolygon.m */,
+				1528E90C14E58A4100606361 /* AHGraphicsCube.h */,
+				1528E90D14E58A4100606361 /* AHGraphicsCube.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -1459,6 +1464,7 @@
 				15285AB714E320FD00E2E8A9 /* BCBreakableRect.mm in Sources */,
 				15285ABC14E3272500E2E8A9 /* AHGraphicsPolygon.m in Sources */,
 				15285ABF14E328DF00E2E8A9 /* BCBrokenPolygon.mm in Sources */,
+				1528E90E14E58A4100606361 /* AHGraphicsCube.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

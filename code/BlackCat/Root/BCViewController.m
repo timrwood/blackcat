@@ -7,12 +7,13 @@
 //
 
 
-#import "BCViewController.h"
 #import "AHSuperSystem.h"
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
 #import "AHSceneManager.h"
 
+#import "BCGlobalTypes.h"
+#import "BCViewController.h"
 #import "BCClassSelectionScene.h"
 #import "BCMainScene.h"
 
@@ -26,6 +27,9 @@
     // debug
     [[AHSceneManager manager] setTimeToFadeIn:0.0f];
     [[AHSceneManager manager] goToScene:[[BCClassSelectionScene alloc] init]];
+    [[AHGraphicsManager camera] setNearLimit:Z_NEAR_LIMIT];
+    [[AHGraphicsManager camera] setFarLimit:Z_FAR_LIMIT];
+    [[AHGraphicsManager camera] setCenterDepth:Z_PHYSICS_DEPTH];
     
     _context = [[AHGraphicsManager manager] context];
     

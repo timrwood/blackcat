@@ -84,7 +84,7 @@
         }
     }
     _count = newCount;
-    self->vertices = (GLKVector2 *) malloc(sizeof(GLKVector2) * _count);
+    self->vertices = (GLKVector3 *) malloc(sizeof(GLKVector3) * _count);
     self->textures = (GLKVector2 *) malloc(sizeof(GLKVector2) * _count);
 }
 
