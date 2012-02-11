@@ -72,8 +72,12 @@
         _buildingOffset--;
     }
     
+    if (_buildingOffset == BUILDING_SPLITTER) {
+        _buildingOffset--;
+    }
+    
     // same building
-    _buildingOffset = BUILDING_FLAT;
+    //_buildingOffset = BUILDING_INSIDE;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {

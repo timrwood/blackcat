@@ -17,7 +17,7 @@
 
 
 #import "AHMathUtils.h"
-#import "AHGraphicsRect.h"
+#import "AHGraphicsCube.h"
 #import "AHPhysicsRect.h"
 
 #import "BCGlobalTypes.h"
@@ -59,9 +59,9 @@
         [self addComponent:_step2];
         [self addComponent:_step3];
         
-        _skin1 = [[AHGraphicsRect alloc] init];
-        _skin2 = [[AHGraphicsRect alloc] init];
-        _skin3 = [[AHGraphicsRect alloc] init];
+        _skin1 = [[AHGraphicsCube alloc] init];
+        _skin2 = [[AHGraphicsCube alloc] init];
+        _skin3 = [[AHGraphicsCube alloc] init];
         
         [self addComponent:_skin1];
         [self addComponent:_skin2];
@@ -71,9 +71,21 @@
         [_skin2 setTextureKey:@"debug-grid.png"];
         [_skin3 setTextureKey:@"debug-grid.png"];
         
-        [_skin1 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_skin2 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_skin3 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        
+        [_skin1 setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin1 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin1 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin1 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
+        
+        [_skin2 setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin2 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin2 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin2 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
+        
+        [_skin3 setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin3 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin3 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin3 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
     }
     return self;
 }

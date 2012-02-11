@@ -10,7 +10,7 @@
 #import "BCBuildingType.h"
 
 
-@class AHGraphicsRect;
+@class AHGraphicsCube;
 @class AHPhysicsRect;
 
 
@@ -20,9 +20,9 @@
     AHPhysicsRect *_step2;
     AHPhysicsRect *_step3;
     
-    AHGraphicsRect *_skin1;
-    AHGraphicsRect *_skin2;
-    AHGraphicsRect *_skin3;
+    AHGraphicsCube *_skin1;
+    AHGraphicsCube *_skin2;
+    AHGraphicsCube *_skin3;
     
     BOOL _step1to2isUp;
     BOOL _step2to3isUp;

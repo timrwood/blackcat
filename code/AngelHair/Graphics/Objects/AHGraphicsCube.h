@@ -35,6 +35,8 @@
 - (void)setTexFromCenter:(GLKVector2)center andRadius:(float)radius;
 - (void)setTexFromCenter:(GLKVector2)center andSize:(CGSize)size;
 - (void)setTex:(CGRect)rect;
+- (void)setTopTex:(CGRect)rect;
+- (void)setBotTex:(CGRect)rect;
 
 
 @end

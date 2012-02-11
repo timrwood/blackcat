@@ -13,11 +13,11 @@
 #define CORNER_HEIGHT_PERCENT 0.4f
 #define CORNER_WIDTH_PERCENT 0.2f
 
-#define OPENING_HEIGHT 2.0f
+#define OPENING_HEIGHT 3.0f
 
 
 #import "AHGraphicsManager.h"
-#import "AHGraphicsRect.h"
+#import "AHGraphicsCube.h"
 #import "AHPhysicsPolygon.h"
 #import "AHPhysicsRect.h"
 #import "AHMathUtils.h"
@@ -51,14 +51,20 @@
         [_bodyBot addTag:PHY_TAG_JUMPABLE];
         [self addComponent:_bodyBot];
         
-        _skinTop = [[AHGraphicsRect alloc] init];
+        _skinTop = [[AHGraphicsCube alloc] init];
         [_skinTop setTextureKey:@"debug-grid.png"];
-        [_skinTop setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skinTop setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinTop setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinTop setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinTop setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         [self addComponent:_skinTop];
         
-        _skinBot = [[AHGraphicsRect alloc] init];
+        _skinBot = [[AHGraphicsCube alloc] init];
         [_skinBot setTextureKey:@"debug-grid.png"];
-        [_skinBot setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skinBot setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinBot setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinBot setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinBot setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         [self addComponent:_skinBot];
     }
     return self;

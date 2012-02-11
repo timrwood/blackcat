@@ -29,7 +29,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self setVertexCount:8];
+        [self setVertexCount:20];
     }
     return self;
 }
@@ -79,6 +79,26 @@
     self->vertices[5] = GLKVector3Make(r, b, c);
     self->vertices[6] = GLKVector3Make(r, t, f);
     self->vertices[7] = GLKVector3Make(r, b, f);
+    
+    // seperate side and top
+    self->vertices[8] = GLKVector3Make(r, b, f);
+    self->vertices[9] = GLKVector3Make(l, t, f);
+    
+    // top
+    self->vertices[10] = GLKVector3Make(l, t, f);
+    self->vertices[11] = GLKVector3Make(l, t, c);
+    self->vertices[12] = GLKVector3Make(r, t, f);
+    self->vertices[13] = GLKVector3Make(r, t, c);
+    
+    // seperate top and bottom
+    self->vertices[14] = GLKVector3Make(r, t, c);
+    self->vertices[15] = GLKVector3Make(l, b, f);
+    
+    // bottom
+    self->vertices[16] = GLKVector3Make(l, b, f);
+    self->vertices[17] = GLKVector3Make(l, b, c);
+    self->vertices[18] = GLKVector3Make(r, b, f);
+    self->vertices[19] = GLKVector3Make(r, b, c);
 }
 
 
@@ -108,6 +128,20 @@
     self->textures[5] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
     self->textures[6] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
     self->textures[7] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+}
+
+- (void)setTopTex:(CGRect)rect {
+    self->textures[10] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
+    self->textures[11] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
+    self->textures[12] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
+    self->textures[13] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+}
+
+- (void)setBotTex:(CGRect)rect {
+    self->textures[16] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
+    self->textures[17] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
+    self->textures[18] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
+    self->textures[19] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
 }
 
 

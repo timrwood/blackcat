@@ -12,7 +12,7 @@
 
 @class AHPhysicsRect;
 @class AHPhysicsPolygon;
-@class AHGraphicsRect;
+@class AHGraphicsCube;
 
 
 @interface BCBuildingInside : BCBuildingType {
@@ -20,8 +20,8 @@
     AHPhysicsPolygon *_bodyTop;
     AHPhysicsRect *_bodyBot;
     
-    AHGraphicsRect *_skinTop;
-    AHGraphicsRect *_skinBot;
+    AHGraphicsCube *_skinTop;
+    AHGraphicsCube *_skinBot;
 }
 
 
