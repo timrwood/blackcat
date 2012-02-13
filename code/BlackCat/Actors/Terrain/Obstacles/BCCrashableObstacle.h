@@ -7,11 +7,14 @@
 //
 
 
+#import "AHGraphicsCube.h"
 #import "AHActor.h"
 
 
 @interface BCCrashableObstacle : AHActor {
-    
+@private;
+    AHGraphicsCube *_frontSkin;
+    AHGraphicsCube *_backSkin;
 }
 
 

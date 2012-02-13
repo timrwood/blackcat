@@ -32,6 +32,7 @@
     if (self) {
         _depth = 3.0f;
         [self setVertexCount:4];
+        [self setIndexCount:4];
     }
     return self;
 }
@@ -70,6 +71,11 @@
     self->vertices[1] = GLKVector3Make(l, b, _depth);
     self->vertices[2] = GLKVector3Make(r, t, _depth);
     self->vertices[3] = GLKVector3Make(r, b, _depth);
+    
+    self->indices[0] = 0;
+    self->indices[1] = 1;
+    self->indices[2] = 2;
+    self->indices[3] = 3;
 }
 
 

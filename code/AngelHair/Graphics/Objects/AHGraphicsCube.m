@@ -43,6 +43,12 @@
 #pragma mark rect
 
 
+- (void)setRightYTopOffset:(float)top andRightYBottomOffset:(float)bot {
+    _offsetYT = top;
+    _offsetYB = bot;
+    [self updateVertices];
+}
+
 - (void)setRectFromCenter:(GLKVector2)center andRadius:(float)radius {
     [self setRectFromCenter:center andSize:CGSizeMake(radius, radius)];
 }
@@ -71,34 +77,44 @@
     float c = _startDepth;
     float f = _endDepth;
     
-    self->vertices[0] = GLKVector3Make(l, t, f);
-    self->vertices[1] = GLKVector3Make(l, b, f);
-    self->vertices[2] = GLKVector3Make(l, t, c);
-    self->vertices[3] = GLKVector3Make(l, b, c);
-    self->vertices[4] = GLKVector3Make(r, t, c);
-    self->vertices[5] = GLKVector3Make(r, b, c);
-    self->vertices[6] = GLKVector3Make(r, t, f);
-    self->vertices[7] = GLKVector3Make(r, b, f);
+    GLKVector3 ltf = GLKVector3Make(l,             t, f);
+    GLKVector3 lbf = GLKVector3Make(l,             b, f);
+    GLKVector3 ltc = GLKVector3Make(l,             t, c);
+    GLKVector3 lbc = GLKVector3Make(l,             b, c);
+    GLKVector3 rtc = GLKVector3Make(r, t + _offsetYT, c);
+    GLKVector3 rbc = GLKVector3Make(r, b + _offsetYB, c);
+    GLKVector3 rtf = GLKVector3Make(r, t + _offsetYT, f);
+    GLKVector3 rbf = GLKVector3Make(r, b + _offsetYB, f);
+    
+    
+    self->vertices[0] = ltf;
+    self->vertices[1] = lbf;
+    self->vertices[2] = ltc;
+    self->vertices[3] = lbc;
+    self->vertices[4] = rtc;
+    self->vertices[5] = rbc;
+    self->vertices[6] = rtf;
+    self->vertices[7] = rbf;
     
     // seperate side and top
-    self->vertices[8] = GLKVector3Make(r, b, f);
-    self->vertices[9] = GLKVector3Make(l, t, f);
+    self->vertices[8] = rbf;
+    self->vertices[9] = ltf;
     
     // top
-    self->vertices[10] = GLKVector3Make(l, t, f);
-    self->vertices[11] = GLKVector3Make(l, t, c);
-    self->vertices[12] = GLKVector3Make(r, t, f);
-    self->vertices[13] = GLKVector3Make(r, t, c);
+    self->vertices[10] = ltf;
+    self->vertices[11] = ltc;
+    self->vertices[12] = rtf;
+    self->vertices[13] = rtc;
     
     // seperate top and bottom
-    self->vertices[14] = GLKVector3Make(r, t, c);
-    self->vertices[15] = GLKVector3Make(l, b, f);
+    self->vertices[14] = rtc;
+    self->vertices[15] = lbf;
     
     // bottom
-    self->vertices[16] = GLKVector3Make(l, b, f);
-    self->vertices[17] = GLKVector3Make(l, b, c);
-    self->vertices[18] = GLKVector3Make(r, b, f);
-    self->vertices[19] = GLKVector3Make(r, b, c);
+    self->vertices[16] = lbf;
+    self->vertices[17] = lbc;
+    self->vertices[18] = rbf;
+    self->vertices[19] = rbc;
 }
 
 
@@ -120,14 +136,18 @@
 }
 
 - (void)setTex:(CGRect)rect {
+    float convert = rect.size.height / _rect.size.height;
+    float rightTop = _offsetYT * convert;
+    float rightBot = _offsetYB * convert;
+    
     self->textures[0] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
     self->textures[1] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
     self->textures[2] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
     self->textures[3] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
-    self->textures[4] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
-    self->textures[5] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
-    self->textures[6] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
-    self->textures[7] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    self->textures[4] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rightTop);
+    self->textures[5] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height + rightBot);
+    self->textures[6] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rightTop);
+    self->textures[7] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height + rightBot);
 }
 
 - (void)setTopTex:(CGRect)rect {

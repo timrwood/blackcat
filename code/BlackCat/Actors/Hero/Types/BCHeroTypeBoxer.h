@@ -29,7 +29,7 @@
 
 
 - (BOOL)isDashing;
-- (void)sendExplosionMessage:(int)type;
+- (void)sendExplosionMessage:(int)type withRadius:(float)radius;
 - (void)dashToPoint:(GLKVector2)point;
 
 

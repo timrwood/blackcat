@@ -77,7 +77,7 @@
     }
     
     // same building
-    //_buildingOffset = BUILDING_INSIDE;
+    _buildingOffset = BUILDING_FLAT;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {

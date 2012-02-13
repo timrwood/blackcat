@@ -43,7 +43,7 @@
         
         _skin = [[AHGraphicsCube alloc] init];
         [_skin setTextureKey:@"grate-base.jpg"];
-        [_skin setNormalTextureKey:@"debug-normal.jpg"];
+        //[_skin setNormalTextureKey:@"debug-normal.jpg"];
         [_skin setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
@@ -69,9 +69,9 @@
     [_body setSize:size andPosition:center];
     
     // add an obstacle
-    //GLKVector2 obsPos = GLKVector2Make(center.x, self->_startCorner.y);
-    //BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
-    //[[AHActorManager manager] add:obstacle];
+    GLKVector2 obsPos = GLKVector2Make(center.x, self->_startCorner.y);
+    BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
+    [[AHActorManager manager] add:obstacle];
     
     [super setup];
 }

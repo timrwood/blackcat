@@ -7,7 +7,7 @@
 //
 
 
-#import "AHGraphicsRect.h"
+#import "AHGraphicsCube.h"
 #import "AHActor.h"
 
 
@@ -17,7 +17,7 @@
 @interface BCBreakableRect : AHActor {
 @private;
     AHPhysicsRect *_body;
-    AHGraphicsRect *_skin;
+    AHGraphicsCube *_skin;
     
     CGRect _texRect;
     CGSize _size;
@@ -25,10 +25,14 @@
     
     GLKVector2 _breakPoint;
     float _breakRadius;
+    BOOL _hasBroken;
     
     int _breakMessageType;
     
     NSString *_texKey;
+    
+    float _backDepth;
+    float _frontDepth;
 }
 
 
@@ -43,6 +47,7 @@
          andSize:(CGSize)size
         andTexRect:(CGRect)texRect
          andTexKey:(NSString *)texKey;
+- (void)setStartDepth:(float)front endDepth:(float)back;
 
 
 #pragma mark -

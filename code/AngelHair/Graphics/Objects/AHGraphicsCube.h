@@ -15,6 +15,9 @@
     float _startDepth;
     float _endDepth;
     CGRect _rect;
+    
+    float _offsetYT;
+    float _offsetYB;
 }
 
 
@@ -22,6 +25,7 @@
 #pragma mark rect
 
 
+- (void)setRightYTopOffset:(float)top andRightYBottomOffset:(float)bot;
 - (void)setRectFromCenter:(GLKVector2)center andRadius:(float)radius;
 - (void)setRectFromCenter:(GLKVector2)center andSize:(CGSize)size;
 - (void)setRect:(CGRect)rect;

@@ -27,6 +27,7 @@
     b2BodyType _bodyType;
     b2Vec2 _velocity;
     GLKVector2 _position;
+    BOOL _isBullet;
     
     // fixture
     float _restitution;
@@ -77,6 +78,7 @@
 #pragma mark velocity
 
 
+- (void)setBullet:(BOOL)isBullet;
 - (GLKVector2)force;
 - (GLKVector2)linearVelocity;
 - (float)angularVelocity;

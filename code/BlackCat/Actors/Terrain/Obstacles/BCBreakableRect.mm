@@ -54,11 +54,14 @@
         [_body setStatic:YES];
         [self addComponent:_body];
         
-        // skin
-        _skin = [[AHGraphicsRect alloc] init];
+        
+        _skin = [[AHGraphicsCube alloc] init];
         [_skin setRectFromCenter:center andSize:size];
         [_skin setTex:texRect];
         [_skin setTextureKey:texKey];
+        [_skin setTopTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skin setBotTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_PHYSICS_FRONT];
         [self addComponent:_skin];
         
         // save vars for later
@@ -70,12 +73,33 @@
     return self;
 }
 
+- (void)setStartDepth:(float)front endDepth:(float)back {
+    _frontDepth = front;
+    _backDepth = back;
+    [_skin setStartDepth:_frontDepth endDepth:_backDepth];
+}
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupBeforeDestruction {
+    _body = nil;
+    _skin = nil;
+    [super cleanupBeforeDestruction];
+}
+
 
 #pragma mark -
 #pragma mark breaking
 
 
 - (BOOL)isCloseEnoughToBreak {
+    if (_hasBroken) {
+        return NO;
+    }
+    
     GLKVector2 distFromCenterToPoint = GLKVector2Subtract(_breakPoint, _center);
     GLKVector2 closestCornerToPoint;
     
@@ -95,7 +119,7 @@
     
     // to far away in width
     if (fabsf(distFromCenterToPoint.x) > _size.width + _breakRadius) {
-        //dlog(@"too far from center x %F < %F + %F", fabsf(distFromCenterToPoint.x), _size.width, radius);
+        //dlog(@"too far from center x %F < %F + %F", fabsf(distFromCenterToPoint.x), _size.width, _breakRadius);
         return NO;
     }
     
@@ -105,8 +129,16 @@
         return NO;
     }
     
+    // close enough in width and height
+    if (fabsf(distFromCenterToPoint.x) < _size.width + _breakRadius &&
+        fabsf(distFromCenterToPoint.y) < _size.height + _breakRadius) {
+        //dlog(@"within bounds");
+        return YES;
+    }
+    
     if (GLKVector2Distance(_breakPoint, closestCornerToPoint) > _breakRadius) {
-        //dlog(@"too far from corner");
+        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
+        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
         return NO;
     }
     
@@ -115,7 +147,6 @@
 
 - (void)breakAtPoint:(GLKVector2)point
           withRadius:(float)radius {
-    //dlog(@"should break");
     _breakPoint = point;
     _breakRadius = radius;
     
@@ -129,6 +160,7 @@
         [self breakVertically];
     }
     [self safeDestroy];
+    _hasBroken = YES;
 }
 
 - (void)breakHorizontally {
@@ -220,10 +252,12 @@
     texRect.origin.y = FloatLerp(_texRect.origin.y, _texRect.origin.y + _texRect.size.height, topPercent);
     texRect.size.height = (bottomPercent - topPercent) * _texRect.size.height;
     
-    [[AHActorManager manager] add:[[BCBreakableRect alloc] initWithCenter:center
-                                                                  andSize:size
-                                                               andTexRect:texRect
-                                                                andTexKey:_texKey]];
+    BCBreakableRect * rect = [[BCBreakableRect alloc] initWithCenter:center
+                                                             andSize:size
+                                                          andTexRect:texRect
+                                                           andTexKey:_texKey];
+    [rect setStartDepth:_frontDepth endDepth:_backDepth];
+    [[AHActorManager manager] add:rect];
 }
 
 - (void)buildVerticalBrokenFromBottom:(float)bottom toTop:(float)top {
@@ -238,7 +272,7 @@
     
     int count = 1;
     if (_size.width > MIN_SIZE_TO_LEAVE_ALONE || _size.height > MIN_SIZE_TO_LEAVE_ALONE) {
-        count = 8;
+        count = 3;
     }
     
     float lefts[count + 1];
@@ -302,10 +336,10 @@
         quad = AHPolygonQuadAddVector(quad, _center);
         
         AHPolygonQuad texQuad;
-        texQuad.a.x = texLeft;
-        texQuad.b.x = texRight;
-        texQuad.c.x = texRight;
-        texQuad.d.x = texLeft;
+        texQuad.a.x = texRight;
+        texQuad.b.x = texLeft;
+        texQuad.c.x = texLeft;
+        texQuad.d.x = texRight;
         texQuad.a.y = texLefts[i];
         texQuad.b.y = texRights[i];
         texQuad.c.y = texRights[i + 1];
@@ -337,12 +371,12 @@
     texRect.origin.x = FloatLerp(_texRect.origin.x, _texRect.origin.x + _texRect.size.width, topPercent);
     texRect.size.width = (bottomPercent - topPercent) * _texRect.size.width;
     
-    
-    
-    [[AHActorManager manager] add:[[BCBreakableRect alloc] initWithCenter:center
-                                                                  andSize:size
-                                                               andTexRect:texRect
-                                                                andTexKey:_texKey]];
+    BCBreakableRect * rect = [[BCBreakableRect alloc] initWithCenter:center
+                                                             andSize:size
+                                                          andTexRect:texRect
+                                                           andTexKey:_texKey];
+    [rect setStartDepth:_frontDepth endDepth:_backDepth];
+    [[AHActorManager manager] add:rect];
 }
 
 - (void)buildHorizontalBrokenFromBottom:(float)bottom toTop:(float)top {

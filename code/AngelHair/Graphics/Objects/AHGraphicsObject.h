@@ -20,20 +20,36 @@
     AHTextureInfo *_texture;
     AHTextureInfo *_normalTexture;
     
+    int _indexCount;
     int _count;
     int _layerIndex;
     BOOL _isForHud;
     
     BOOL _isOffset;
+    
+    BOOL _isBuffered;
+    BOOL _canBeBuffered;
+    
+    GLuint _bufferId;
+    GLuint _arrayId;
 @protected;
     GLKVector3 *vertices;
     GLKVector2 *textures;
+    GLubyte *indices;
     
     GLKVector2 _position;
     float _rotation;
     
     GLenum _drawType;
 }
+
+
+#pragma mark -
+#pragma mark cache
+
+
+- (void)doNotBuffer;
+- (void)buffer;
 
 
 #pragma mark -
@@ -51,6 +67,7 @@
 
 
 - (void)setVertexCount:(int)newCount;
+- (void)setIndexCount:(int)newCount;
 - (int)vertexCount;
 
 
@@ -77,6 +94,7 @@
 
 
 - (void)draw;
+- (void)drawActual;
 - (void)setDrawType:(GLenum)drawType;
 
 

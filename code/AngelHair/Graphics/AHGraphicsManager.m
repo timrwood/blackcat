@@ -253,7 +253,7 @@ static AHGraphicsCamera *_camera = nil;
 #pragma mark layers
 
 
-- (void)addLayer:(AHGraphicsLayer *)layer atIndex:(int)i {
+- (void)addLayer:(AHGraphicsLayer *)layer {
     if (![_layers containsObject:layer]) {
         [_layers addObject:layer];
     }
@@ -289,8 +289,8 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)addObject:(AHGraphicsObject *)object toLayerIndex:(int)i {
-    if (i >= [_layers count] || ![_layers objectAtIndex:i]) {
-        [self addLayer:[[AHGraphicsLayer alloc] init] atIndex:i];
+    while ([_layers count] < i + 1) {
+        [self addLayer:[[AHGraphicsLayer alloc] init]];
     }
     
     AHGraphicsLayer *layer = [_layers objectAtIndex:i];

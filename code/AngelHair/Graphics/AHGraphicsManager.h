@@ -107,7 +107,7 @@
 #pragma mark layers
 
 
-- (void)addLayer:(AHGraphicsLayer *)layer atIndex:(int)i;
+- (void)addLayer:(AHGraphicsLayer *)layer;
 - (void)removeLayer:(AHGraphicsLayer *)layer;
 - (void)removeAllUnusedLayers;
 - (void)removeAllLayers;

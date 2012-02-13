@@ -7,10 +7,10 @@
 //
 
 
-#define EXPLOSION_RADIUS 4.0f
+#define EXPLOSION_RADIUS 2.0f
 
 #define DASH_DISTANCE_TO_CANCEL 0.2f
-#define DASH_VELOCITY 3.0f
+#define DASH_VELOCITY 4.0f
 
 #define DASH_MAX_TIME 0.1f
 #define DASH_TIMEOUT 0.2f
@@ -89,15 +89,6 @@ typedef enum {
 
 
 #pragma mark -
-#pragma mark collision
-
-
-- (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle {
-    return YES;
-}
-
-
-#pragma mark -
 #pragma mark update
 
 
@@ -108,6 +99,7 @@ typedef enum {
         if (distance < DASH_DISTANCE_TO_CANCEL) {
             [_dashState changeState:STATE_CANNOT_DASH];
         }
+        //[self sendExplosionMessage:MSG_EXPLOSION_RIGHT withRadius:1.2f];
     } else if (xOffset > 0.0f) {
         [_dashState changeState:STATE_CANNOT_DASH];
     } else {
@@ -155,11 +147,11 @@ typedef enum {
     return YES;
 }
 
-- (void)sendExplosionMessage:(int)type {
+- (void)sendExplosionMessage:(int)type withRadius:(float)radius {
     if ([self hero]) {
         [[self hero] sendMessage:[[AHActorMessage alloc] initWithType:type 
                                                              andPoint:[self heroPosition] 
-                                                             andFloat:EXPLOSION_RADIUS]];
+                                                             andFloat:radius]];
     }
 }
 
@@ -182,14 +174,14 @@ typedef enum {
         case STATE_CANNOT_DASH:
             break;
         case STATE_IS_DASHING_UP:
-            [self dashToPoint:GLKVector2Make(0.0f, -3.0f)];
+            [self dashToPoint:GLKVector2Make(0.0f, -4.0f)];
             break;
         case STATE_IS_DASHING_DOWN:
-            [self dashToPoint:GLKVector2Make(0.0f, 3.0f)];
+            [self dashToPoint:GLKVector2Make(0.0f, 4.0f)];
             break;
         case STATE_IS_DASHING_RIGHT:
-            [self dashToPoint:GLKVector2Make(3.0f, 0.0f)];
-            [self sendExplosionMessage:MSG_EXPLOSION_RIGHT];
+            [self dashToPoint:GLKVector2Make(4.0f, 0.0f)];
+            [self sendExplosionMessage:MSG_EXPLOSION_RIGHT withRadius:EXPLOSION_RADIUS];
             break;
     }
 }
@@ -198,11 +190,15 @@ typedef enum {
 #pragma mark -
 #pragma mark collision
 
-
-- (BOOL)willCollideWithAnyObstacle {
-    if ([self isDashing]) {
+- (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle {
+    if ([obstacle hasTag:PHY_TAG_BREAKABLE] && [self isDashing]) {
+        [self sendExplosionMessage:MSG_EXPLOSION_RIGHT withRadius:1.2f];
         return NO;
     }
+    return YES;
+}
+
+- (BOOL)willCollideWithAnyObstacle {
     return YES;
 }
 

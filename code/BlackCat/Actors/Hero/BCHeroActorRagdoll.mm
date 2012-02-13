@@ -77,6 +77,7 @@
         _skin = [[AHGraphicsSkeleton alloc] init];
         [_skin setSkeleton:skeleton];
         [_skin setFromSkeletonConfig:[_type graphicsConfig]];
+        [_skin setDepth:Z_PHYSICS_DEPTH];
         [_skin setLayerIndex:GFX_LAYER_BACKGROUND];
         [_type configSkeletonSkin:_skin];
         [self addComponent:_skin];

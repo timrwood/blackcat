@@ -87,6 +87,7 @@
         [_body setDelegate:self];
         [_body setFixedRotation:YES];
         [_body setFriction:0.0f];
+        [_body setBullet:YES];
         [self addComponent:_body];
         
         // jumping state
@@ -154,7 +155,7 @@
     [self updateCamera];
     [self updateJumpability];
     [self updateSkeleton];
-    //[self updateCrash];
+    [self updateCrash];
     [_type updateBeforeAnimation];
 }
 

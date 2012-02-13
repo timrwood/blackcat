@@ -7,7 +7,7 @@
 //
 
 
-#import "AHGraphicsPolygon.h"
+#import "AHGraphicsCube.h"
 #import "AHActor.h"
 
 
@@ -17,10 +17,12 @@
 @interface BCBrokenPolygon : AHActor {
 @private;
     AHPhysicsPolygon *_body;
-    AHGraphicsPolygon *_skin;
+    AHGraphicsCube *_skin;
     
     GLKVector2 _explosionPoint;
     GLKVector2 _center;
+    
+    float _rotationAddition;
 }
 
 

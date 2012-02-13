@@ -233,13 +233,13 @@
 - (void)setModelViewMatrix:(GLKMatrix4)matrix {
     glUniformMatrix4fv(_currentUniforms[AH_SHADER_UNIFORM_MODELVIEW], 1, 0, matrix.m);
     currentModelview = matrix;
-    [self debug];
+    //[self debug];
 }
 
 - (void)setProjectionMatrix:(GLKMatrix4)matrix {
     glUniformMatrix4fv(_currentUniforms[AH_SHADER_UNIFORM_PROJECTION], 1, 0, matrix.m);
     currentProjection = matrix;
-    [self debug];
+    //[self debug];
 }
 
 
@@ -280,14 +280,16 @@
 
 
 - (void)enableNormal:(BOOL)enabled {
-    _isUsingTextureNormals = enabled;
-    if (_isUsingTextureProgram) {
-        if (enabled) {
-            glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL], 1);
-        } else {
-            glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL], 0);
-        }
+    if (!_isUsingTextureProgram) {
+        return;
     }
+    if (_isUsingTextureNormals && !enabled) {
+        glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL], 0);
+    }
+    if (!_isUsingTextureNormals && enabled) {
+        glUniform1i(_textureUniforms[AH_SHADER_UNIFORM_ENABLE_NORMAL], 1);
+    }
+    _isUsingTextureNormals = enabled;
 }
 
 

@@ -100,6 +100,13 @@
 #pragma mark velocity
 
 
+- (void)setBullet:(BOOL)isBullet {
+    if (_body) {
+        _body->SetBullet(isBullet);
+    }
+    _isBullet = isBullet;
+}
+
 - (GLKVector2)force {
     if (_body) {
         float mass = _body->GetMass();
@@ -183,6 +190,7 @@
     _body->SetUserData((__bridge void *) self);
     _body->SetType(_bodyType);
     _body->SetLinearVelocity(_velocity);
+    _body->SetBullet(_isBullet);
 }
 
 - (void)addFixtureToBody:(b2FixtureDef *)fixtureDef {

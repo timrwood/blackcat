@@ -39,9 +39,10 @@ typedef enum {
 } BCPhysicsBodyTypes;
 
 
+// front should be near the top to take advantage of depth buffering
 typedef enum {
-    GFX_LAYER_BACKGROUND,
     GFK_LAYER_BUILDINGS,
+    GFX_LAYER_BACKGROUND,
     GFK_LAYER_HERO
 } BCGraphicsLayers;
 
@@ -58,8 +59,10 @@ typedef enum {
 
 
 #define Z_BUILDING_FRONT -3.0f
-#define Z_PHYSICS_DEPTH -4.0f
-#define Z_BUILDING_BACK -5.0f
+#define Z_PHYSICS_FRONT  -3.7f
+#define Z_PHYSICS_DEPTH  -4.0f
+#define Z_PHYSICS_BACK   -4.3f
+#define Z_BUILDING_BACK  -5.0f
 
 
 

@@ -7,6 +7,7 @@
 //
 
 
+#import "AHShaderManager.h"
 #import "AHGraphicsManager.h"
 #import "AHGraphicsLayer.h"
 #import "AHGraphicsObject.h"
@@ -24,12 +25,39 @@
     self = [super init];
     if (self) {
         _drawType = GL_TRIANGLE_STRIP;
+        _canBeBuffered = YES;
     }
     return self;
 }
 
 - (void)dealloc {
     
+}
+
+
+#pragma mark -
+#pragma mark cache
+
+
+- (void)doNotBuffer {
+    _canBeBuffered = NO;
+}
+
+- (void)buffer {
+    if (!_canBeBuffered) {
+        return;
+    }
+    glGenBuffers(1, &_bufferId);
+    glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
+    glBufferData(GL_ARRAY_BUFFER, _count * sizeof(GLKVector3), vertices, GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &_arrayId);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _arrayId);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indexCount * sizeof(GLubyte), indices, GL_STATIC_DRAW);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    _isBuffered = YES;
 }
 
 
@@ -67,6 +95,7 @@
     } else {
         [[AHGraphicsManager manager] addObject:self toLayerIndex:_layerIndex];
     }
+    //[self buffer];
 }
 
 
@@ -86,6 +115,16 @@
     _count = newCount;
     self->vertices = (GLKVector3 *) malloc(sizeof(GLKVector3) * _count);
     self->textures = (GLKVector2 *) malloc(sizeof(GLKVector2) * _count);
+}
+
+- (void)setIndexCount:(int)newCount {
+    if (_indexCount != newCount) {
+        if (indices) {
+            free(indices);
+        }
+    }
+    _indexCount = newCount;
+    self->indices = (GLubyte *) malloc(sizeof(GLubyte) * _indexCount);
 }
 
 - (int)vertexCount {
@@ -134,6 +173,7 @@
 
 
 - (void)draw {
+    glPushGroupMarkerEXT(0, "Drawing Graphics Object");
     if (_isOffset) {
         [[AHGraphicsManager manager] modelPush];
         if (_rotation == 0.0f) {
@@ -146,14 +186,28 @@
         [[AHGraphicsManager manager] modelRotate:_rotation];
     }
     if (_count > 0) {
-        [[AHGraphicsManager manager] drawPointerArrayPosition:self->vertices
-                                                   andTexture:self->textures
-                                                     andCount:_count 
-                                                  andDrawType:_drawType];
+        [self drawActual];
     }
     if (_isOffset || _rotation != 0.0f) {
         [[AHGraphicsManager manager] modelPop];
     }
+    glPopGroupMarkerEXT();
+}
+
+- (void)drawActual {
+    //glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
+    //glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    //glEnableVertexAttribArray(AH_SHADER_ATTRIB_POS_COORD);
+    //glVertexAttribPointer(AH_SHADER_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, self->textures);
+    //glEnableVertexAttribArray(AH_SHADER_ATTRIB_TEX_COORD);
+    
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _arrayId);
+    //glDrawElements(GL_TRIANGLE_STRIP, sizeof(indices)/sizeof(GLubyte), GL_UNSIGNED_BYTE, (void*)0);
+    
+    glVertexAttribPointer(AH_SHADER_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, self->textures);
+    glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 3, GL_FLOAT, GL_FALSE, 0, self->vertices);
+	glDrawArrays(_drawType, 0, _count);
+    //glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 - (void)setDrawType:(GLenum)drawType {

@@ -54,10 +54,10 @@
         [_bot setTextureKey:@"background.png"];
         [_bot2 setTextureKey:@"background.png"];
         
-        [self addComponent:_top];
-        [self addComponent:_mid];
-        [self addComponent:_bot];
         [self addComponent:_bot2];
+        [self addComponent:_bot];
+        [self addComponent:_mid];
+        [self addComponent:_top];
         
         topMidTexSize = CGSizeMake(0.5f, 5.0f / 32.0f);
         bottomTexSize = CGSizeMake(0.5f, 3.0f / 16.0f);
