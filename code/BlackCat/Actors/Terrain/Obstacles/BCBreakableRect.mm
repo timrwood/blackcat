@@ -54,7 +54,6 @@
         [_body setStatic:YES];
         [self addComponent:_body];
         
-        
         _skin = [[AHGraphicsCube alloc] init];
         [_skin setRectFromCenter:center andSize:size];
         [_skin setTex:texRect];

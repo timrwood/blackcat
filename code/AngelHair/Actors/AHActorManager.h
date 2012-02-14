@@ -44,6 +44,7 @@
 #pragma mark actors
 
 
+- (int)count;
 - (void)add:(AHActor *)actor;
 - (void)destroy:(AHActor *)actor;
 - (void)destroyAll;

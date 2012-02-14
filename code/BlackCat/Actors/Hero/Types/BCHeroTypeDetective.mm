@@ -7,6 +7,13 @@
 //
 
 
+#define CANNON_VELOCITY 20.0f
+
+
+#import "AHActorManager.h"
+#import "AHGraphicsManager.h"
+
+#import "BCWeaponCannon.h"
 #import "BCHeroTypeDetective.h"
 
 
@@ -63,6 +70,30 @@
     return [self graphicsConfig];
 }
 
+
+#pragma mark -
+#pragma mark velocity
+
+
+- (GLKVector2)modifyVelocity:(GLKVector2)velocity {
+    //return GLKVector2Zero();
+    return velocity;
+}
+
+
+#pragma mark -
+#pragma mark input
+
+
+- (void)touchBeganAtPoint:(GLKVector2)point {
+    GLKVector2 worldPoint = [[AHGraphicsManager camera] screenToWorld:point];
+    GLKVector2 velocity = GLKVector2Subtract(worldPoint, [self heroPosition]);
+    velocity = GLKVector2Normalize(velocity);
+    velocity = GLKVector2MultiplyScalar(velocity, CANNON_VELOCITY);
+    
+    BCWeaponCannon *cannon = [[BCWeaponCannon alloc] initAtPosition:[self heroPosition] andVelocity:velocity];
+    [[AHActorManager manager] add:cannon];
+}
 
 #pragma mark -
 #pragma mark collision

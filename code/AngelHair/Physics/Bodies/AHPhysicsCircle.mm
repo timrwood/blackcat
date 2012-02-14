@@ -26,12 +26,12 @@
 }
 
 - (id)initFromRadius:(float)radius {
-    _radius = radius;
+    [self setRadius:radius];
     return [self init];
 }
 
 - (id)initFromRadius:(float)radius andPosition:(GLKVector2)position {
-    _radius = radius;
+    [self setRadius:radius];
     [self setPosition:position];
     return [self init];
 }
@@ -44,7 +44,7 @@
 - (void)setup {
     // shape
 	b2CircleShape *circleShape = new b2CircleShape;
-	circleShape->m_radius = _radius;
+	circleShape->m_radius = [self radius];
 	
 	// fixture
 	b2FixtureDef *fixtureDef = new b2FixtureDef;

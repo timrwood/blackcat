@@ -51,6 +51,19 @@
 
 
 #pragma mark -
+#pragma mark radius
+
+
+- (void)setRadius:(float)radius {
+    _radius = radius;
+}
+
+- (float)radius {
+    return _radius;
+}
+
+
+#pragma mark -
 #pragma mark position + rotation
 
 
@@ -59,7 +72,7 @@
         b2Vec2 pos = _body->GetPosition();
         return GLKVector2Make(pos.x, pos.y);
     }
-    return GLKVector2Make(0.0f, 0.0f);
+    return _position;
 }
 
 - (void)setPosition:(GLKVector2)newPosition {
@@ -74,13 +87,14 @@
     if (_body) {
         return _body->GetAngle();
     }
-    return 0.0f;
+    return _rotation;
 }
 
 - (void)setRotation:(float)rotation {
     if (_body) {
         _body->SetTransform(_body->GetPosition(), rotation);
     }
+    _rotation = rotation;
 }
 
 - (void)setFixedRotation:(BOOL)isFixed {
@@ -178,6 +192,7 @@
     bodyDef->angularDamping = 1.0f;
     bodyDef->fixedRotation = _isFixedRotation;
 	bodyDef->position = b2Vec2(_position.x, _position.y);
+    bodyDef->angle = _rotation;
     _body = [[AHPhysicsManager cppManager] world]->CreateBody(bodyDef);
     _body->SetUserData((__bridge void *) self);
     _body->SetType(_bodyType);

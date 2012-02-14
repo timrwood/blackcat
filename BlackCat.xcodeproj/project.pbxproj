@@ -43,6 +43,8 @@
 		1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547317114C62E7D00DDEBA5 /* AHTimeManager.m */; };
 		154D871E14D09E4400147A99 /* AHShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D871D14D09E4400147A99 /* AHShaderManager.m */; };
 		154D919A14D9FD4300E4FE9A /* misc-objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 154D919914D9FD4300E4FE9A /* misc-objects.png */; };
+		1558383C14EAD69000D53710 /* BCWeaponCannon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1558383B14EAD69000D53710 /* BCWeaponCannon.mm */; };
+		1558383F14EAFB7600D53710 /* BCBuildingMultiLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1558383E14EAFB7600D53710 /* BCBuildingMultiLevel.mm */; };
 		155D2ABA14E0EFDE0030E752 /* AHPhysicsPill.mm in Sources */ = {isa = PBXBuildFile; fileRef = 155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */; };
 		155D407614D9D64A00D4B826 /* body-detective.png in Resources */ = {isa = PBXBuildFile; fileRef = 155D407514D9D64A00D4B826 /* body-detective.png */; };
 		156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156A86FA14C7B30E00B85E04 /* libz.dylib */; };
@@ -227,6 +229,10 @@
 		154D871C14D09E4400147A99 /* AHShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHShaderManager.h; sourceTree = "<group>"; };
 		154D871D14D09E4400147A99 /* AHShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHShaderManager.m; sourceTree = "<group>"; };
 		154D919914D9FD4300E4FE9A /* misc-objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc-objects.png"; sourceTree = "<group>"; };
+		1558383A14EAD69000D53710 /* BCWeaponCannon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCWeaponCannon.h; path = Actors/Hero/Weapons/BCWeaponCannon.h; sourceTree = "<group>"; };
+		1558383B14EAD69000D53710 /* BCWeaponCannon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCWeaponCannon.mm; path = Actors/Hero/Weapons/BCWeaponCannon.mm; sourceTree = "<group>"; };
+		1558383D14EAFB7500D53710 /* BCBuildingMultiLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingMultiLevel.h; path = Actors/Terrain/Buildings/BCBuildingMultiLevel.h; sourceTree = "<group>"; };
+		1558383E14EAFB7600D53710 /* BCBuildingMultiLevel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCBuildingMultiLevel.mm; path = Actors/Terrain/Buildings/BCBuildingMultiLevel.mm; sourceTree = "<group>"; };
 		155D2AB814E0EFDE0030E752 /* AHPhysicsPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsPill.h; sourceTree = "<group>"; };
 		155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsPill.mm; sourceTree = "<group>"; };
 		155D407514D9D64A00D4B826 /* body-detective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-detective.png"; sourceTree = "<group>"; };
@@ -651,6 +657,15 @@
 			name = Time;
 			sourceTree = "<group>";
 		};
+		1558383814EAD59100D53710 /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				1558383A14EAD69000D53710 /* BCWeaponCannon.h */,
+				1558383B14EAD69000D53710 /* BCWeaponCannon.mm */,
+			);
+			name = Weapons;
+			sourceTree = "<group>";
+		};
 		158346F514B7BF6A00C1DA04 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
@@ -816,6 +831,7 @@
 		15AAFBF914BE2B970058F014 /* Hero */ = {
 			isa = PBXGroup;
 			children = (
+				1558383814EAD59100D53710 /* Weapons */,
 				15C98D9814D9B58600B34918 /* Types */,
 				15AAFBFA14BE2BC30058F014 /* BCHeroActor.h */,
 				15AAFBFB14BE2BC30058F014 /* BCHeroActor.mm */,
@@ -842,6 +858,8 @@
 				15AC187B14DB6B1100E85EBF /* BCBuildingType.m */,
 				152F4B0014E1BA0A00B5E3BD /* BCBuildingSplitter.h */,
 				152F4B0114E1BA0A00B5E3BD /* BCBuildingSplitter.mm */,
+				1558383D14EAFB7500D53710 /* BCBuildingMultiLevel.h */,
+				1558383E14EAFB7600D53710 /* BCBuildingMultiLevel.mm */,
 			);
 			name = Buildings;
 			sourceTree = "<group>";
@@ -1465,6 +1483,8 @@
 				15285ABC14E3272500E2E8A9 /* AHGraphicsPolygon.m in Sources */,
 				15285ABF14E328DF00E2E8A9 /* BCBrokenPolygon.mm in Sources */,
 				1528E90E14E58A4100606361 /* AHGraphicsCube.m in Sources */,
+				1558383C14EAD69000D53710 /* BCWeaponCannon.mm in Sources */,
+				1558383F14EAFB7600D53710 /* BCBuildingMultiLevel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

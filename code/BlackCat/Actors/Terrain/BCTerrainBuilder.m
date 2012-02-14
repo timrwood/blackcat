@@ -24,6 +24,7 @@
 #import "BCBuildingInside.h"
 #import "BCBuildingThreeStepped.h"
 #import "BCBuildingSplitter.h"
+#import "BCBuildingMultiLevel.h"
 
 
 @implementation BCTerrainBuilder
@@ -80,7 +81,7 @@
     //}
     
     // same building
-    _buildingOffset = BUILDING_FLAT;
+    _buildingOffset = BUILDING_MULTI_LEVEL;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -89,8 +90,8 @@
         lastEnd = [_nextBuilding endCorner];
     }
     
-    float spacing = 0.5f;
-    float nextHeight = [self seededRandomBetweenFloat:0.0f andFloat:2.0f];
+    float spacing = 0.0f;
+    float nextHeight = [self seededRandomBetweenFloat:0.0f andFloat:0.0f];
     
     BCBuildingType *newBuilding;
     switch (type) {
@@ -127,6 +128,9 @@
             break;
         case BUILDING_SPLITTER:
             newBuilding = [[BCBuildingSplitter alloc] init];
+            break;
+        case BUILDING_MULTI_LEVEL:
+            newBuilding = [[BCBuildingMultiLevel alloc] init];
             break;
         case BUILDING_TYPE_LENGTH:
             dlog(@"Trying to make a building with an unknown type : BUILDING_TYPE_LENGTH");

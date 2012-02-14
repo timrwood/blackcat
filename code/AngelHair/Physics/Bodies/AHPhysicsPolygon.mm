@@ -55,11 +55,6 @@
     }
 }
 
-- (void)setRotation:(float)rotation {
-    _rotation = rotation;
-    [super setRotation:rotation];
-}
-
 - (void)setLooped:(BOOL)looped {
     _isLooped = looped;
 }
@@ -93,6 +88,13 @@
 
         polygonShape->Set(_points, _count);
     }
+    
+    // radius
+    float radius = 0.0f;
+    for (int i = 0; i < _count; i++) {
+        radius = fmaxf(radius, GLKVector2Length(GLKVector2Make(_points[i].x, _points[i].y)));
+    }
+    [self setRadius:radius];
     
     // fixture
     b2FixtureDef *fixtureDef = new b2FixtureDef;

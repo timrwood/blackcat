@@ -10,10 +10,7 @@
 #import "AHPhysicsBody.h"
 
 
-@interface AHPhysicsCircle : AHPhysicsBody {
-    float _radius;
-}
-
+@interface AHPhysicsCircle : AHPhysicsBody
 
 #pragma mark -
 #pragma mark init

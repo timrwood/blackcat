@@ -15,8 +15,6 @@
     int _count;
     b2Vec2 *_points;
     
-    float _rotation;
-    
     BOOL _isLooped;
     BOOL _isEdge;
 }

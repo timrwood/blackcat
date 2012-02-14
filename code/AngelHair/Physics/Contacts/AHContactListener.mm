@@ -18,13 +18,14 @@ void AHContactListener::PreSolve(b2Contact *contact, const b2Manifold* oldManifo
         contact2 &&
         [contact1 willCollideWith:contact2] &&
         [contact2 willCollideWith:contact1] &&
-        [contact1 willCollideWithButWillNotCall:contact2]){
+        [contact1 willCollideWithButWillNotCall:contact2]) {
+        // do nothing, the contact will be enabled
     } else {
         contact->SetEnabled(NO);
     }
 }
 
-void AHContactListener::BeginContact(b2Contact *contact, const b2Manifold* oldManifold) {
+void AHContactListener::BeginContact(b2Contact *contact) {
 	AHPhysicsBody *contact1 = (__bridge AHPhysicsBody *)contact->GetFixtureA()->GetBody()->GetUserData();
 	AHPhysicsBody *contact2 = (__bridge AHPhysicsBody *)contact->GetFixtureB()->GetBody()->GetUserData();
 	if (contact1 && contact2) {
@@ -34,7 +35,7 @@ void AHContactListener::BeginContact(b2Contact *contact, const b2Manifold* oldMa
     }
 }
 
-void AHContactListener::EndContact(b2Contact *contact, const b2Manifold* oldManifold) {
+void AHContactListener::EndContact(b2Contact *contact) {
 	AHPhysicsBody *contact1 = (__bridge AHPhysicsBody *)contact->GetFixtureA()->GetBody()->GetUserData();
 	AHPhysicsBody *contact2 = (__bridge AHPhysicsBody *)contact->GetFixtureB()->GetBody()->GetUserData();
 	if (contact1 && contact2) {

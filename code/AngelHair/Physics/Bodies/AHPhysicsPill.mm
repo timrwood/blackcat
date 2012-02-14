@@ -23,6 +23,9 @@
 	b2CircleShape *circleShape = new b2CircleShape;
     b2Vec2 circleOffset;
     
+    float radius = GLKVector2Length(GLKVector2Make(_size.width, _size.height));
+    [self setRadius:radius];
+    
     if (_size.width > _size.height) {
         circleShape->m_radius = _size.height;
         circleOffset = b2Vec2(_size.width - _size.height, 0.0f);
@@ -39,7 +42,6 @@
     
     // body
     b2BodyDef *bodyDef = new b2BodyDef;
-    bodyDef->angle = _rotation;
     
     // create body
     [self addBodyToWorld:bodyDef];

@@ -7,7 +7,7 @@
 //
 
 
-#define OBSTACLE_HALF_WIDTH  0.8f
+#define OBSTACLE_HALF_WIDTH  0.2f
 #define OBSTACLE_HALF_HEIGHT 2.0f
 
 

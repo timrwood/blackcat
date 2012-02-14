@@ -27,7 +27,7 @@
     
     // debug
     [[AHSceneManager manager] setTimeToFadeIn:0.0f];
-    [[BCGlobalManager manager] setHeroType:HERO_TYPE_FEMME];
+    [[BCGlobalManager manager] setHeroType:HERO_TYPE_DETECTIVE];
     [[AHSceneManager manager] goToScene:[[BCMainScene alloc] init]];
     [[AHGraphicsManager camera] setNearLimit:Z_NEAR_LIMIT];
     [[AHGraphicsManager camera] setFarLimit:Z_FAR_LIMIT];

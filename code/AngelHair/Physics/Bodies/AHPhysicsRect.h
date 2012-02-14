@@ -12,7 +12,6 @@
 
 @interface AHPhysicsRect : AHPhysicsBody {
 @protected;
-    float _rotation;
     CGSize _size;
 }
 

@@ -115,6 +115,15 @@ static AHActorManager *_manager = nil;
 
 
 #pragma mark -
+#pragma mark count
+
+
+- (int)count {
+    return [actors count];
+}
+
+
+#pragma mark -
 #pragma mark actors add
 
 

@@ -28,6 +28,8 @@
     b2Vec2 _velocity;
     GLKVector2 _position;
     BOOL _isBullet;
+    float _rotation;
+    float _radius;
     
     // fixture
     float _restitution;
@@ -51,6 +53,14 @@
 
 
 - (void)removeAllJoints;
+
+
+#pragma mark -
+#pragma mark radius
+
+
+- (void)setRadius:(float)radius;
+- (float)radius;
 
 
 #pragma mark -
