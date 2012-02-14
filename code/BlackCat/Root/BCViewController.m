@@ -12,6 +12,7 @@
 #import "AHInputManager.h"
 #import "AHSceneManager.h"
 
+#import "BCGlobalManager.h"
 #import "BCGlobalTypes.h"
 #import "BCViewController.h"
 #import "BCClassSelectionScene.h"
@@ -26,7 +27,8 @@
     
     // debug
     [[AHSceneManager manager] setTimeToFadeIn:0.0f];
-    [[AHSceneManager manager] goToScene:[[BCClassSelectionScene alloc] init]];
+    [[BCGlobalManager manager] setHeroType:HERO_TYPE_FEMME];
+    [[AHSceneManager manager] goToScene:[[BCMainScene alloc] init]];
     [[AHGraphicsManager camera] setNearLimit:Z_NEAR_LIMIT];
     [[AHGraphicsManager camera] setFarLimit:Z_FAR_LIMIT];
     [[AHGraphicsManager camera] setCenterDepth:Z_PHYSICS_DEPTH];

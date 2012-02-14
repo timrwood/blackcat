@@ -36,6 +36,7 @@ static BCGlobalManager *_manager = nil;
 @synthesize heroSpeed;
 @synthesize heroPosition;
 
+@synthesize buildingHeightXPosition;
 @synthesize buildingHeight;
 
 @synthesize heroType;

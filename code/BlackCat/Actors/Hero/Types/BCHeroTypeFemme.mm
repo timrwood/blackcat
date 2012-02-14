@@ -106,7 +106,7 @@ typedef enum {
     if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
         xOffset = [self heroPosition].x - cameraPositionX;
     } else {
-        xOffset = fmaxf(xOffset - 0.2f, 0.0f);
+        xOffset = fmaxf(xOffset - 0.3f, 0.0f);
     }
 }
 
@@ -138,16 +138,19 @@ typedef enum {
     switch ((BCFemmePhasewalkState) newState) {
         case STATE_IS_PHASEWALKING:
             if ([self hero]) {
+                [[[self hero] body] setStatic:NO];
                 [[[self hero] body] setSensor:YES];
             }
             break;
         case STATE_CAN_PHASEWALK:
             if ([self hero]) {
+                [[[self hero] body] setStatic:NO];
                 [[[self hero] body] setSensor:NO];
             }
             break;
         case STATE_CANNOT_PHASEWALK:
             if ([self hero]) {
+                [[[self hero] body] setStatic:YES];
                 [[[self hero] body] setSensor:NO];
             }
             break;

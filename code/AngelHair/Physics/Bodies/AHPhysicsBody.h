@@ -40,7 +40,7 @@
     // identification
     int _tags;
     
-    NSMutableArray *_joints;
+    // delegate
     NSObject <AHContactDelegate> *delegate;
     b2Body *_body;
 }
@@ -50,8 +50,6 @@
 #pragma mark joints
 
 
-- (void)addJoint:(AHPhysicsJoint *)joint;
-- (void)removeJoint:(AHPhysicsJoint *)joint;
 - (void)removeAllJoints;
 
 

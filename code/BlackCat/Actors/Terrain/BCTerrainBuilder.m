@@ -7,6 +7,9 @@
 //
 
 
+#define GAP_ADDITION_LERPING 2.0f
+
+
 #import "AHMathUtils.h"
 #import "AHActorManager.h"
 #import "AHGraphicsCamera.h"
@@ -72,9 +75,9 @@
         _buildingOffset--;
     }
     
-    if (_buildingOffset == BUILDING_SPLITTER) {
-        _buildingOffset--;
-    }
+    //if (_buildingOffset == BUILDING_SPLITTER) {
+    //    _buildingOffset--;
+    //}
     
     // same building
     _buildingOffset = BUILDING_FLAT;
@@ -92,7 +95,7 @@
     BCBuildingType *newBuilding;
     switch (type) {
         case BUILDING_FLAT_ORIGIN:
-            spacing = -1.0f;
+            spacing = -2.0f;
             nextHeight = 1.0f;
             newBuilding = [[BCBuildingFlat alloc] init];
             break;
@@ -151,7 +154,7 @@
 }
 
 - (void)updateBuildingHeight {
-    float heroX = [[BCGlobalManager manager] heroPosition].x;
+    float buildingX = [[BCGlobalManager manager] buildingHeightXPosition];
     float buildingHeight = 0.0f;
     
     GLKVector2 curEnd;
@@ -173,16 +176,20 @@
         return;
     }
     
-    if (heroX < curEnd.x) {
-        buildingHeight = [_currentBuilding heightAtXPosition:heroX];
-    } else if (heroX < nextStart.x) {
-        float percent = (heroX - curEnd.x) / (nextStart.x - curEnd.x);
+    if (buildingX < curEnd.x - GAP_ADDITION_LERPING) {
+        buildingHeight = [_currentBuilding heightAtXPosition:buildingX];
+    } else if (buildingX < nextStart.x + GAP_ADDITION_LERPING) {
+        float percent = (buildingX - (curEnd.x - GAP_ADDITION_LERPING)) / ((nextStart.x + GAP_ADDITION_LERPING) - (curEnd.x - GAP_ADDITION_LERPING));
         buildingHeight = FloatLerp(curEnd.y, nextStart.y, percent);
     } else {
-        buildingHeight = [_nextBuilding heightAtXPosition:heroX];
-        //dlog(@"moved onto new building, building new one now");
+        buildingHeight = [_nextBuilding heightAtXPosition:buildingX];
         [self buildBuilding];
     }
+    
+    /*
+    if (heroX > nextStart.x) {
+        [self buildBuilding];
+    }*/
     
     [[BCGlobalManager manager] setBuildingHeight:buildingHeight];
 }

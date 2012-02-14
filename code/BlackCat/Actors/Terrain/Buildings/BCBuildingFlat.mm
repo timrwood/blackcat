@@ -42,7 +42,7 @@
         [self addComponent:_body];
         
         _skin = [[AHGraphicsCube alloc] init];
-        [_skin setTextureKey:@"grate-base.jpg"];
+        [_skin setTextureKey:@"debug-grid.png"];
         //[_skin setNormalTextureKey:@"debug-normal.jpg"];
         [_skin setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];

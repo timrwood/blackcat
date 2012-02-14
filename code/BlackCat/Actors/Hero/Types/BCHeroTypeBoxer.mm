@@ -10,10 +10,10 @@
 #define EXPLOSION_RADIUS 2.0f
 
 #define DASH_DISTANCE_TO_CANCEL 0.2f
-#define DASH_VELOCITY 4.0f
+#define DASH_VELOCITY 0.1f
 
-#define DASH_MAX_TIME 0.1f
-#define DASH_TIMEOUT 0.2f
+#define DASH_MAX_TIME 4.0f
+#define DASH_TIMEOUT 4.0f
 
 
 #import "AHTimeManager.h"
@@ -106,12 +106,12 @@ typedef enum {
         [_dashState changeState:STATE_CAN_DASH];
     }
     
-    /*
+    
     if ([[AHTimeManager manager] worldTime] - _timeStartedDash > DASH_TIMEOUT) {
         [_dashState changeState:STATE_CAN_DASH];
     } else if ([[AHTimeManager manager] worldTime] - _timeStartedDash > DASH_MAX_TIME) {
         [_dashState changeState:STATE_CANNOT_DASH];
-    }*/
+    }
     
     if ([self isDashing]) {
         xOffset = [self heroPosition].x - cameraPositionX;

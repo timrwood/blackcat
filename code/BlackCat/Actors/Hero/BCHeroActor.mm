@@ -24,7 +24,7 @@
 
 #define DASH_SLOW_SPEED 1.0f
 
-#define INITIAL_RUN_SPEED 4.0f
+#define INITIAL_RUN_SPEED 8.0f
 
 #define STATE_CAN_JUMP 0
 #define STATE_IS_JUMPING 1
@@ -172,9 +172,9 @@
     
     // increase velocity
     if (_runSpeed < 15.0f) {
-        _runSpeed += _speedIncrease;
+        //_runSpeed += _speedIncrease;
     } else if (_runSpeed < 50.0f) {
-        _runSpeed += _speedIncrease / 2.0f;
+        //_runSpeed += _speedIncrease / 2.0f;
     }
     velocity.x = _runSpeed;
     
@@ -210,12 +210,20 @@
 
 - (void)updateCamera {
     GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
+    
+    // set the building height position based on the x position
+    [[BCGlobalManager manager] setBuildingHeightXPosition:cameraPosition.x];
+    
+    // move the camera forward on the screen
     cameraPosition.y = [[BCGlobalManager manager] buildingHeight];
     cameraPosition.y -= [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].height * 0.5f;
-    cameraPosition.x += [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].width * 0.7f;
+    cameraPosition.x += [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].width * 0.5f;
     
+    // update camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
     [[AHGraphicsManager camera] setWorldZoom:6.0f];
+    
+    // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
 

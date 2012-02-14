@@ -23,7 +23,6 @@
 
 
 #import "AHMathUtils.h"
-#import "AHGraphicsRect.h"
 #import "AHPhysicsPolygon.h"
 #import "AHPhysicsRect.h"
 
@@ -73,25 +72,60 @@
         [self addComponent:_stairCeiling];
         [self addComponent:_stairCeilingEnd];
         
-        _skin1 = [[AHGraphicsRect alloc] init];
-        _skin2 = [[AHGraphicsRect alloc] init];
-        _skinCeiling1 = [[AHGraphicsRect alloc] init];
-        _skinCeiling2 = [[AHGraphicsRect alloc] init];
+        _skin1 = [[AHGraphicsCube alloc] init];
+        _skin2 = [[AHGraphicsCube alloc] init];
+        _skinCeiling1 = [[AHGraphicsCube alloc] init];
+        _skinCeiling2 = [[AHGraphicsCube alloc] init];
+        _skinCeiling3 = [[AHGraphicsCube alloc] init];
+        _skinBack = [[AHGraphicsCube alloc] init];
+        _skinStair = [[AHGraphicsCube alloc] init];
         
         [self addComponent:_skin1];
         [self addComponent:_skin2];
         [self addComponent:_skinCeiling1];
         [self addComponent:_skinCeiling2];
+        [self addComponent:_skinCeiling3];
+        [self addComponent:_skinBack];
+        [self addComponent:_skinStair];
         
         [_skin1 setTextureKey:@"debug-grid.png"];
         [_skin2 setTextureKey:@"debug-grid.png"];
         [_skinCeiling1 setTextureKey:@"debug-grid.png"];
         [_skinCeiling2 setTextureKey:@"debug-grid.png"];
+        [_skinCeiling3 setTextureKey:@"debug-grid.png"];
+        [_skinBack setTextureKey:@"debug-grid.png"];
+        [_skinStair setTextureKey:@"debug-grid.png"];
         
         [_skin1 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skin2 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinCeiling1 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinCeiling2 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skinCeiling3 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skinBack setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        
+        [_skin1 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin2 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinCeiling1 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinCeiling2 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinCeiling3 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinBack setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinStair setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        
+        [_skin1 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin2 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinCeiling1 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinCeiling2 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinCeiling3 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinBack setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinStair setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        
+        [_skin1 setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
+        [_skin2 setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
+        [_skinCeiling1 setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
+        [_skinCeiling2 setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
+        [_skinCeiling3 setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
+        [_skinBack setStartDepth:Z_STAIR_BACK endDepth:Z_BUILDING_BACK];
+        [_skinStair setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
     }
     return self;
 }
@@ -105,29 +139,32 @@
     [self setupStep1];
     [self setupStep2];
     [self setupStairCeiling];
+    [self setupStairCeilingMiddle];
     [self setupStairCeilingEnd];
+    [self setupStepBack];
+    [self setupStairSteps];
     [super setup];
 }
 
 - (void)setupStep1 {
-    CGSize size = CGSizeMake((STEP_0_WIDTH + STAIR_WIDTH) / 2.0f, BUILDING_HEIGHT / 2.0f); 
+    CGSize size = CGSizeMake((STEP_0_WIDTH) / 2.0f, BUILDING_HEIGHT / 2.0f); 
     GLKVector2 center;
-    center.x = self->_startCorner.x + ((STEP_0_WIDTH + STAIR_WIDTH) / 2.0f);
+    center.x = self->_startCorner.x + size.width;
     center.y = self->_startCorner.y + (BUILDING_HEIGHT / 2.0f);
     
-    float right      = (STEP_0_WIDTH + STAIR_WIDTH) / 2.0f;
-    float left       = - right;
+    float right      = (STEP_0_WIDTH / 2.0f) + STAIR_WIDTH;
+    float left       = - (STEP_0_WIDTH / 2.0f);
     float bot        = BUILDING_HEIGHT / 2.0f;
     float top        = - bot;
     float topStair   = top + STAIR_HEIGHT;
     float rightStair = right - STAIR_WIDTH;
     
     GLKVector2 points[5];
-    points[0] = GLKVector2Make(left,       top); // top left
-    points[1] = GLKVector2Make(rightStair, top); // stair top
+    points[0] = GLKVector2Make(left,       top);      // top left
+    points[1] = GLKVector2Make(rightStair, top);      // stair top
     points[2] = GLKVector2Make(right,      topStair); // stair bot
-    points[3] = GLKVector2Make(right,      bot); // bot right
-    points[4] = GLKVector2Make(left,       bot); // bot left
+    points[3] = GLKVector2Make(right,      bot);      // bot right
+    points[4] = GLKVector2Make(left,       bot);      // bot left
     
     [_step1 setPoints:points andCount:5];
     [_step1 setPosition:center];
@@ -174,6 +211,21 @@
     [_skinCeiling1 setRectFromCenter:GLKVector2Add(topPos, center) andSize:topSize];
 }
 
+- (void)setupStairCeilingMiddle {
+    float cos45 = cosf(M_TAU_8);
+    float width = sqrtf(STAIR_CEILING_HEIGHT * STAIR_CEILING_HEIGHT + STAIR_CEILING_HEIGHT * STAIR_CEILING_HEIGHT);
+    float height = STAIR_CEILING_DEPTH * cos45 / 2.0f;
+    CGSize size = CGSizeMake(height, width / 2.0f);
+    GLKVector2 center;
+    center.x = self->_startCorner.x + STEP_0_WIDTH + STAIR_CEILING_OFFSET_RIGHT + STAIR_CEILING_HEIGHT / 2.0f - STAIR_CEILING_DEPTH / 4.0f;
+    center.y = self->_startCorner.y - (STAIR_CEILING_HEIGHT - STAIR_CEILING_DEPTH / 2.0f) / 2.0f;
+    
+    [_skinCeiling3 setRectFromCenter:GLKVector2Zero() andSize:size];
+    [_skinCeiling3 setPosition:center];
+    [_skinCeiling3 setRotation:M_TAU_8 + M_TAU_4];
+    [_skinCeiling3 setRightYTopOffset:-height * 2.0f andRightYBottomOffset:-height * 2.0f];
+}
+
 - (void)setupStairCeilingEnd {
     float width = ((STAIR_WIDTH + STEP_1_WIDTH) - (STAIR_CEILING_OFFSET_RIGHT + STAIR_CEILING_HEIGHT)) / 2.0f;
     CGSize size = CGSizeMake(width, STAIR_CEILING_DEPTH / 2.0f);
@@ -183,6 +235,24 @@
     
     [_stairCeilingEnd setSize:size andPosition:center];
     [_skinCeiling2 setRectFromCenter:center andSize:size];
+}
+
+- (void)setupStepBack {
+    CGSize size = CGSizeMake((STEP_0_WIDTH + STAIR_WIDTH + STEP_1_WIDTH) / 2.0f, BUILDING_HEIGHT / 2.0f); 
+    GLKVector2 center;
+    center.x = self->_startCorner.x + size.width;
+    center.y = self->_startCorner.y + (BUILDING_HEIGHT / 2.0f);
+    [_skinBack setRectFromCenter:center andSize:size];
+}
+
+- (void)setupStairSteps {
+    CGSize size = CGSizeMake(STAIR_WIDTH / 2.0f, BUILDING_HEIGHT / 2.0f); 
+    GLKVector2 center;
+    center.x = self->_startCorner.x + STEP_0_WIDTH + size.width;
+    center.y = self->_startCorner.y + (BUILDING_HEIGHT / 2.0f);
+    [_skinStair setRightYTopOffset:size.height andRightYBottomOffset:0.0f];
+    [_skinStair setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+    [_skinStair setRectFromCenter:center andSize:size];
 }
 
 

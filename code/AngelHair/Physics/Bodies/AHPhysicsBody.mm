@@ -27,7 +27,6 @@
         _category = 0x0001;
         _group = 0;
         _isFixedRotation = NO;
-        _joints = [[NSMutableArray alloc] init];
         _masks = 0xFFFF;
     }
     return self;
@@ -38,22 +37,15 @@
 #pragma mark joints
 
 
-- (void)addJoint:(AHPhysicsJoint *)joint {
-    if ([_joints containsObject:joint]) {
-        [_joints addObject:joint];
-    }
-}
-
-- (void)removeJoint:(AHPhysicsJoint *)joint {
-    if ([_joints containsObject:joint]) {
-        [_joints removeObject:joint];
-    }
-}
-
 - (void)removeAllJoints {
-    while ([_joints count] > 0) {
-        AHPhysicsJoint *joint = (AHPhysicsJoint *)[_joints objectAtIndex:0];
-        [joint cleanupAfterRemoval];
+    if (!_body) {
+        return;
+    }
+    for (b2JointEdge *edge = _body->GetJointList(); edge; edge = edge->next) {
+        if (edge->joint->GetUserData()) {
+            [(__bridge AHPhysicsJoint *)edge->joint->GetUserData() cleanupAfterRemoval];
+        }
+        [[AHPhysicsManager cppManager] world]->DestroyJoint(edge->joint);
     }
 }
 

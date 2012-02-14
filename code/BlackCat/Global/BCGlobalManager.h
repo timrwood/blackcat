@@ -28,6 +28,7 @@
 @property (nonatomic) float heroSpeed;
 @property (nonatomic) GLKVector2 heroPosition;
 
+@property (nonatomic) float buildingHeightXPosition;
 @property (nonatomic) float buildingHeight;
 
 @property (nonatomic) BCHeroTypes heroType;

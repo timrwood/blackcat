@@ -65,7 +65,8 @@ typedef enum {
 
 
 - (float)seededPercent;
-- (float)seededRandomBetweenFloat:(float)a andFloat:(float)b;
+- (float)seededRandomBetweenFloat:(float)a
+                         andFloat:(float)b;
 
 
 @end

@@ -36,7 +36,6 @@
 
 - (void)setBodyA:(AHPhysicsBody *)bodyA
         andBodyB:(AHPhysicsBody *)bodyB;
-- (void)removeSelfFromBodies;
 
 
 @end

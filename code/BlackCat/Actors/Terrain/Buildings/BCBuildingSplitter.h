@@ -6,11 +6,10 @@
 //  Copyright (c) 2012 Broken Pixel Studios. All rights reserved.
 //
 
-
+#import "AHGraphicsCube.h"
 #import "BCBuildingType.h"
 
 
-@class AHGraphicsRect;
 @class AHPhysicsRect;
 @class AHPhysicsPolygon;
 
@@ -22,10 +21,13 @@
     AHPhysicsRect *_stairCeilingEnd;
     AHPhysicsRect *_step2;
     
-    AHGraphicsRect *_skin1;
-    AHGraphicsRect *_skin2;
-    AHGraphicsRect *_skinCeiling1;
-    AHGraphicsRect *_skinCeiling2;
+    AHGraphicsCube *_skin1;
+    AHGraphicsCube *_skin2;
+    AHGraphicsCube *_skinCeiling1;
+    AHGraphicsCube *_skinCeiling2;
+    AHGraphicsCube *_skinCeiling3;
+    AHGraphicsCube *_skinBack;
+    AHGraphicsCube *_skinStair;
     
     BOOL _step1to2isUp;
     BOOL _step2to3isUp;
@@ -39,7 +41,10 @@
 - (void)setupStep1;
 - (void)setupStep2;
 - (void)setupStairCeiling;
+- (void)setupStairCeilingMiddle;
 - (void)setupStairCeilingEnd;
+- (void)setupStepBack;
+- (void)setupStairSteps;
 
 
 @end

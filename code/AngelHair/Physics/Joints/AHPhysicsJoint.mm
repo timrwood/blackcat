@@ -33,6 +33,7 @@
 
 - (void)addJointToWorld:(const b2JointDef *)jointDef {
     _joint = [[AHPhysicsManager cppManager] world]->CreateJoint(jointDef);
+    _joint->SetUserData((__bridge void *) self);
 }
 
 
@@ -44,13 +45,6 @@
         andBodyB:(AHPhysicsBody *)bodyB {
     _bodyA = bodyA;
     _bodyB = bodyB;
-    [_bodyA addJoint:self];
-    [_bodyB addJoint:self];
-}
-
-- (void)removeSelfFromBodies {
-    [_bodyA removeJoint:self];
-    [_bodyB removeJoint:self];
 }
 
 
@@ -59,7 +53,7 @@
 
 
 - (void)cleanupAfterRemoval {
-    [self removeSelfFromBodies];
+    
 }
 
 
