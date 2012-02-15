@@ -22,6 +22,8 @@
     self = [super init];
     if (self) {
         _programId = glCreateProgram();
+        _lightPositionUniform = -1;
+        
         dlog(@"program %i", _programId);
         [self compile];
     }
@@ -63,7 +65,7 @@
         GLchar messages[256];
         glGetShaderInfoLog(shaderHandle, sizeof(messages), 0, &messages[0]);
         NSString *messageString = [NSString stringWithUTF8String:messages];
-        dlog(@"%@", messageString);
+        dlog(@"Error compiling %@ %@", shaderName, messageString);
         exit(1);
     }
     
@@ -78,6 +80,17 @@
 #pragma mark -
 #pragma mark uniforms
 
+
+- (void)setLightPositionUniform:(GLuint)uniform {
+    _lightPositionUniform = uniform;
+}
+
+- (void)setLightPosition:(GLKVector3)position {
+    _lightPosition = position;
+    if (_isActive) {
+        glUniform3fv(_lightPositionUniform, 1, _lightPosition.v);
+    }
+}
 
 - (void)setProjectionUniform:(GLuint)uniform {
     _projectionUniform = uniform;
@@ -115,6 +128,9 @@
     glLinkProgram(_programId);
     glUniformMatrix4fv(_modelViewUniform, 1, 0, _modelViewMatrix.m);
     glUniformMatrix4fv(_projectionUniform, 1, 0, _projectionMatrix.m);
+    if (_lightPositionUniform > -1) {
+        glUniform3fv(_lightPositionUniform, 1, _lightPosition.v);
+    }
 }
 
 - (void)deactivate {

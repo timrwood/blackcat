@@ -7,8 +7,8 @@
 //
 
 
-varying highp vec2 lightPosition;
-varying highp vec2 texcoordFragment;
+varying highp vec3 lightPosition_frag;
+varying highp vec2 texcoord_frag;
 
 uniform bool isNormalEnabled;
 
@@ -35,6 +35,8 @@ void main(void) {
          
         //gl_FragColor = texture2D(textureNormal, texcoordFragment);
     } else {*/
-        gl_FragColor = texture2D(textureBase, texcoordFragment);
-    //}
+    
+    lowp float diffuse_value = max(dot(vec3(0.0, 0.0, -1.0), lightPosition_frag), 0.0);
+    
+    gl_FragColor = texture2D(textureBase, texcoord_frag);
 }

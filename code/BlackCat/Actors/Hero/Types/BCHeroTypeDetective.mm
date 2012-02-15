@@ -76,7 +76,7 @@
 
 
 - (GLKVector2)modifyVelocity:(GLKVector2)velocity {
-    //return GLKVector2Zero();
+    return GLKVector2Zero();
     return velocity;
 }
 

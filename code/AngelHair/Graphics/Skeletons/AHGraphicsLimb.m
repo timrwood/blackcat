@@ -23,6 +23,11 @@
     self = [super init];
     if (self) {
         [self setVertexCount:10];
+        [self setIndexCount:10];
+        
+        for (int i = 0; i < 10; i++) {
+            self->indices[i] = i;
+        }
     }
     return self;
 }

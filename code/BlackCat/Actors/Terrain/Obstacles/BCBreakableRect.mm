@@ -351,10 +351,10 @@
         quad = AHPolygonQuadAddVector(quad, _center);
         
         AHPolygonQuad texQuad;
-        texQuad.a.x = texRight;
-        texQuad.b.x = texLeft;
-        texQuad.c.x = texLeft;
-        texQuad.d.x = texRight;
+        texQuad.a.x = texLeft;
+        texQuad.b.x = texRight;
+        texQuad.c.x = texRight;
+        texQuad.d.x = texLeft;
         texQuad.a.y = texLefts[i];
         texQuad.b.y = texRights[i];
         texQuad.c.y = texRights[i + 1];

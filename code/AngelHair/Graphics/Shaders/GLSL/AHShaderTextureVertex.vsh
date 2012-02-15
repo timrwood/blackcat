@@ -10,17 +10,18 @@
 attribute vec4 poscoord;
 attribute vec2 texcoord;
 
-varying highp vec2 texcoordFragment;
-varying highp vec2 lightPosition;
+varying highp vec2 texcoord_frag;
+varying highp vec3 lightPosition_frag;
 
 uniform mat4 projection;
 uniform mat4 modelview;
+uniform vec3 lightPosition;
 
 
 void main(void) {
-    texcoordFragment = texcoord;
+    texcoord_frag = texcoord;
     
     gl_Position = projection * modelview * poscoord;
     
-    //lightPosition = vec2(-0.5, 0.0) - vec2(gl_Position);
+    lightPosition_frag = normalize(lightPosition);
 }

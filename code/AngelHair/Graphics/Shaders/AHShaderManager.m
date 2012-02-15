@@ -104,6 +104,11 @@ static AHShaderManager *_manager = nil;
     [_textureShader setProjection:matrix];
 }
 
+- (void)setLightPosition:(GLKVector3)lightPosition {
+    [_colorShader setLightPosition:lightPosition];
+    [_textureShader setLightPosition:lightPosition];
+}
+
 
 #pragma mark -
 #pragma mark debug

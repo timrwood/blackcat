@@ -50,6 +50,7 @@
 		1547317214C62E7D00DDEBA5 /* AHTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1547317114C62E7D00DDEBA5 /* AHTimeManager.m */; };
 		154D871E14D09E4400147A99 /* AHShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D871D14D09E4400147A99 /* AHShaderManager.m */; };
 		154D919A14D9FD4300E4FE9A /* misc-objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 154D919914D9FD4300E4FE9A /* misc-objects.png */; };
+		155317C314EC374F00E5C5B6 /* AHLightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 155317C214EC374F00E5C5B6 /* AHLightManager.m */; };
 		1558383C14EAD69000D53710 /* BCWeaponCannon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1558383B14EAD69000D53710 /* BCWeaponCannon.mm */; };
 		1558383F14EAFB7600D53710 /* BCBuildingMultiLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1558383E14EAFB7600D53710 /* BCBuildingMultiLevel.mm */; };
 		155D2ABA14E0EFDE0030E752 /* AHPhysicsPill.mm in Sources */ = {isa = PBXBuildFile; fileRef = 155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */; };
@@ -231,8 +232,8 @@
 		1541AE8514EC22D600ED9D58 /* AHShaderColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHShaderColor.m; path = Shaders/AHShaderColor.m; sourceTree = "<group>"; };
 		1541AE8714EC259400ED9D58 /* AHShaderColorFragment.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderColorFragment.fsh; path = GLSL/AHShaderColorFragment.fsh; sourceTree = "<group>"; };
 		1541AE8814EC259400ED9D58 /* AHShaderColorVertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderColorVertex.vsh; path = GLSL/AHShaderColorVertex.vsh; sourceTree = "<group>"; };
-		1541AE8914EC259400ED9D58 /* AHShaderTextureFragment.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderTextureFragment.fsh; path = GLSL/AHShaderTextureFragment.fsh; sourceTree = "<group>"; };
-		1541AE8A14EC259400ED9D58 /* AHShaderTextureVertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderTextureVertex.vsh; path = GLSL/AHShaderTextureVertex.vsh; sourceTree = "<group>"; };
+		1541AE8914EC259400ED9D58 /* AHShaderTextureFragment.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderTextureFragment.fsh; path = GLSL/AHShaderTextureFragment.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		1541AE8A14EC259400ED9D58 /* AHShaderTextureVertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderTextureVertex.vsh; path = GLSL/AHShaderTextureVertex.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		1547316914C62C7100DDEBA5 /* BCHeroRecorderActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroRecorderActor.h; path = Actors/Hero/BCHeroRecorderActor.h; sourceTree = "<group>"; };
 		1547316A14C62C7100DDEBA5 /* BCHeroRecorderActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCHeroRecorderActor.m; path = Actors/Hero/BCHeroRecorderActor.m; sourceTree = "<group>"; };
 		1547316C14C62C8E00DDEBA5 /* BCHeroPlaybackActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCHeroPlaybackActor.h; path = Actors/Hero/BCHeroPlaybackActor.h; sourceTree = "<group>"; };
@@ -242,6 +243,8 @@
 		154D871C14D09E4400147A99 /* AHShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHShaderManager.h; sourceTree = "<group>"; };
 		154D871D14D09E4400147A99 /* AHShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHShaderManager.m; sourceTree = "<group>"; };
 		154D919914D9FD4300E4FE9A /* misc-objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc-objects.png"; sourceTree = "<group>"; };
+		155317C114EC374F00E5C5B6 /* AHLightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHLightManager.h; path = Lights/AHLightManager.h; sourceTree = "<group>"; };
+		155317C214EC374F00E5C5B6 /* AHLightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHLightManager.m; path = Lights/AHLightManager.m; sourceTree = "<group>"; };
 		1558383A14EAD69000D53710 /* BCWeaponCannon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCWeaponCannon.h; path = Actors/Hero/Weapons/BCWeaponCannon.h; sourceTree = "<group>"; };
 		1558383B14EAD69000D53710 /* BCWeaponCannon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BCWeaponCannon.mm; path = Actors/Hero/Weapons/BCWeaponCannon.mm; sourceTree = "<group>"; };
 		1558383D14EAFB7500D53710 /* BCBuildingMultiLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCBuildingMultiLevel.h; path = Actors/Terrain/Buildings/BCBuildingMultiLevel.h; sourceTree = "<group>"; };
@@ -690,6 +693,15 @@
 			name = Time;
 			sourceTree = "<group>";
 		};
+		155317BF14EC371A00E5C5B6 /* Lights */ = {
+			isa = PBXGroup;
+			children = (
+				155317C114EC374F00E5C5B6 /* AHLightManager.h */,
+				155317C214EC374F00E5C5B6 /* AHLightManager.m */,
+			);
+			name = Lights;
+			sourceTree = "<group>";
+		};
 		1558383814EAD59100D53710 /* Weapons */ = {
 			isa = PBXGroup;
 			children = (
@@ -962,6 +974,7 @@
 				158C4A9514BB9B130089747C /* AHGraphicsManager.m */,
 				15C06CA214BCCBC60067D458 /* Camera */,
 				1515F8A114C9E2A2004FE3BB /* Layers */,
+				155317BF14EC371A00E5C5B6 /* Lights */,
 				1515F8A314C9E2AD004FE3BB /* Objects */,
 				15AC4D7314B7B3BB00283A06 /* Shaders */,
 				15132C2914C8E7E20017BBD0 /* Skeletons */,
@@ -1519,6 +1532,7 @@
 				1541AE8014EC1F4800ED9D58 /* AHShader.m in Sources */,
 				1541AE8314EC206E00ED9D58 /* AHShaderTexture.m in Sources */,
 				1541AE8614EC22D600ED9D58 /* AHShaderColor.m in Sources */,
+				155317C314EC374F00E5C5B6 /* AHLightManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

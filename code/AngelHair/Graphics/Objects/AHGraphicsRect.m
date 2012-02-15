@@ -20,6 +20,12 @@
 @end
 
 
+const GLubyte rectIndices[] = {
+    0, 1, 2,
+    1, 2, 3
+};
+
+
 @implementation AHGraphicsRect
 
 
@@ -33,6 +39,10 @@
         _depth = 3.0f;
         [self setVertexCount:4];
         [self setIndexCount:4];
+        
+        for (int i = 0; i < 4; i++) {
+            self->indices[i] = i;
+        }
     }
     return self;
 }
@@ -71,11 +81,6 @@
     self->vertices[1] = GLKVector3Make(l, b, _depth);
     self->vertices[2] = GLKVector3Make(r, t, _depth);
     self->vertices[3] = GLKVector3Make(r, b, _depth);
-    
-    self->indices[0] = 0;
-    self->indices[1] = 1;
-    self->indices[2] = 2;
-    self->indices[3] = 3;
 }
 
 

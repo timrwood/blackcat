@@ -61,6 +61,7 @@
     // assign pointers for
     [self setModelViewUniform:glGetUniformLocation(program, "modelview")];
     [self setProjectionUniform:glGetUniformLocation(program, "projection")];
+    [self setLightPositionUniform:glGetUniformLocation(program, "lightPosition")];
     
     glUniform1i(glGetUniformLocation(program, "textureBase"), AH_TEXTURE_SAMPLE_BASE);
     glUniform1i(glGetUniformLocation(program, "textureNormal"), AH_TEXTURE_SAMPLE_NORMAL);

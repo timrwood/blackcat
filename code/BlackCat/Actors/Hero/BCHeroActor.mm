@@ -222,7 +222,7 @@
     
     // update camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-    [[AHGraphicsManager camera] setWorldZoom:18.0f];
+    [[AHGraphicsManager camera] setWorldZoom:5.0f];
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];

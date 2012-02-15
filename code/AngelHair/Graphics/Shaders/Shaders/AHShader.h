@@ -16,11 +16,13 @@
     
     GLuint _modelViewUniform;
     GLuint _projectionUniform;
+    GLuint _lightPositionUniform;
     
     BOOL _isActive;
     
     GLKMatrix4 _projectionMatrix;
     GLKMatrix4 _modelViewMatrix;
+    GLKVector3 _lightPosition;
 }
 
 
@@ -38,6 +40,8 @@
 #pragma mark uniforms
 
 
+- (void)setLightPositionUniform:(GLuint)uniform;
+- (void)setLightPosition:(GLKVector3)position;
 - (void)setProjectionUniform:(GLuint)uniform;
 - (void)setModelViewUniform:(GLuint)uniform;
 - (void)setProjection:(GLKMatrix4)matrix;

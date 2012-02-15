@@ -43,7 +43,7 @@
         [_frontSkin setTopTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_frontSkin setBotTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_frontSkin setStartDepth:Z_BUILDING_FRONT endDepth:Z_PHYSICS_FRONT];
-        [self addComponent:_frontSkin];
+        //[self addComponent:_frontSkin];
         
         // back skin
         _backSkin = [[AHGraphicsCube alloc] init];
@@ -53,9 +53,9 @@
         [_backSkin setTopTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_backSkin setBotTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_backSkin setStartDepth:Z_PHYSICS_BACK endDepth:Z_BUILDING_BACK];
-        [self addComponent:_backSkin];
+        //[self addComponent:_backSkin];
         
-        CGRect trect = CGRectMake(0.25f, 0.0f, -0.25f, 1.0f);
+        CGRect trect = CGRectMake(0.0f, 0.0f, 0.25f, 1.0f);
         
         for (int i = 0; i < 4; i ++) {
             BCBreakableRect *rect = [[BCBreakableRect alloc] initWithCenter:position2 
@@ -68,7 +68,7 @@
             trect.origin.x += 0.25f;
             
             [[AHActorManager manager] add:rect];
-            //[rect breakAtPoint:position2 withRadius:1.0f];
+            [rect breakAtPoint:position2 withRadius:1.0f];
         }
         
         /*

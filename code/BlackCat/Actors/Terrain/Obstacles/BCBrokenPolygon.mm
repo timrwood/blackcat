@@ -7,9 +7,6 @@
 //
 
 
-//static int wasStatic = 0;
-
-
 #import "AHMathUtils.h"
 #import "AHMathQuads.h"
 #import "AHPhysicsPolygon.h"
@@ -35,14 +32,6 @@
         [_body addTag:PHY_TAG_BREAKABLE];
         [_body setCategory:PHY_CAT_DEBRIS];
         [_body setPosition:center];
-        /*
-        if (wasStatic > 2) {
-            [_body setStatic:YES];
-        } else {
-            [_body setStatic:NO];
-        }
-        wasStatic = (wasStatic + 1) % 6;
-         */
         [_body setStatic:NO];
         [self addComponent:_body];
         
@@ -69,15 +58,13 @@
         if (!isHorizontal) {
             [_skin setRightYTopOffset:quad.b.y - quad.a.y andRightYBottomOffset:quad.c.y - quad.d.y];
         } else {
-            [_skin setRightYTopOffset:quad.b.x - quad.c.x andRightYBottomOffset:quad.a.x - quad.d.x];
+            [_skin setRightYTopOffset:quad.a.x - quad.d.x andRightYBottomOffset:quad.b.x - quad.c.x];
             [_skin setOffsetHorizontal:YES];
         }
         
         [_skin setRect:rect];
         [_skin setPosition:center];
         [_skin setTex:texRect];
-        [_skin setTopTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_skin setBotTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skin setTextureKey:texKey];
         [_skin setStartDepth:Z_PHYSICS_FRONT endDepth:Z_PHYSICS_BACK];
         [self addComponent:_skin];

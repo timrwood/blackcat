@@ -209,7 +209,8 @@
     
     glVertexAttribPointer(AH_SHADER_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, self->textures);
     glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 3, GL_FLOAT, GL_FALSE, 0, self->vertices);
-	glDrawArrays(_drawType, 0, _count);
+	//glDrawArrays(_drawType, 0, _count);
+    glDrawElements(_drawType, _indexCount, GL_UNSIGNED_BYTE, self->indices);
     //glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

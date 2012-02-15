@@ -68,9 +68,21 @@
     [_body setSize:size andPosition:center];
     
     // add an obstacle
-    GLKVector2 obsPos = GLKVector2Make(center.x, self->_startCorner.y);
+    GLKVector2 obsPos = GLKVector2Make(center.x - 4.0f, self->_startCorner.y);
     BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
     [[AHActorManager manager] add:obstacle];
+
+    center.x = self->_startCorner.x + 2.0f;
+    center.y = self->_startCorner.y - 1.0f;
+    
+    AHGraphicsCube *cube = [[AHGraphicsCube alloc] init];
+    [cube setRectFromCenter:center andRadius:1.0f];
+    [cube setOffsetHorizontal:YES];
+    [cube setRightYTopOffset:-0.5f andRightYBottomOffset:0.5f];
+    [cube setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+    [cube setTextureKey:@"debug-grid.png"];
+    [cube setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
+    //[self addComponent:cube];
     
     [super setup];
 }
