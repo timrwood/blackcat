@@ -312,6 +312,10 @@
 #pragma mark tags
 
 
+- (int)tags {
+    return _tags;
+}
+
 - (void)addTag:(int)tag {
     _tags = _tags | tag;
 }

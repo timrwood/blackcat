@@ -117,6 +117,7 @@
 #pragma mark tags
 
 
+- (int)tags;
 - (void)addTag:(int)tag;
 - (void)removeTag:(int)tag;
 - (BOOL)hasTag:(int)tag;

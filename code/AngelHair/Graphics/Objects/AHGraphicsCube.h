@@ -18,6 +18,8 @@
     
     float _offsetYT;
     float _offsetYB;
+    
+    BOOL _isHorizontal;
 }
 
 
@@ -25,6 +27,7 @@
 #pragma mark rect
 
 
+- (void)setOffsetHorizontal:(BOOL)isHorizontal;
 - (void)setRightYTopOffset:(float)top andRightYBottomOffset:(float)bot;
 - (void)setRectFromCenter:(GLKVector2)center andRadius:(float)radius;
 - (void)setRectFromCenter:(GLKVector2)center andSize:(CGSize)size;

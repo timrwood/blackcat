@@ -10,10 +10,10 @@
 #define EXPLOSION_RADIUS 2.0f
 
 #define DASH_DISTANCE_TO_CANCEL 0.2f
-#define DASH_VELOCITY 0.1f
+#define DASH_VELOCITY 4.0f
 
-#define DASH_MAX_TIME 4.0f
-#define DASH_TIMEOUT 4.0f
+#define DASH_MAX_TIME 0.3f
+#define DASH_TIMEOUT 0.3f
 
 
 #import "AHTimeManager.h"
@@ -174,10 +174,12 @@ typedef enum {
         case STATE_CANNOT_DASH:
             break;
         case STATE_IS_DASHING_UP:
-            [self dashToPoint:GLKVector2Make(0.0f, -4.0f)];
+            [self dashToPoint:GLKVector2Make(0.0f, -4.5f)];
+            [self sendExplosionMessage:MSG_EXPLOSION_UP withRadius:EXPLOSION_RADIUS];
             break;
         case STATE_IS_DASHING_DOWN:
-            [self dashToPoint:GLKVector2Make(0.0f, 4.0f)];
+            [self dashToPoint:GLKVector2Make(0.0f, 2.0f)];
+            [self sendExplosionMessage:MSG_EXPLOSION_DOWN withRadius:EXPLOSION_RADIUS];
             break;
         case STATE_IS_DASHING_RIGHT:
             [self dashToPoint:GLKVector2Make(4.0f, 0.0f)];
@@ -192,7 +194,15 @@ typedef enum {
 
 - (BOOL)willCollideWithObstacle:(AHPhysicsBody *)obstacle {
     if ([obstacle hasTag:PHY_TAG_BREAKABLE] && [self isDashing]) {
-        [self sendExplosionMessage:MSG_EXPLOSION_RIGHT withRadius:1.2f];
+        if ([_dashState isState:STATE_IS_DASHING_RIGHT]) {
+            [self sendExplosionMessage:MSG_EXPLOSION_RIGHT withRadius:1.2f];
+        }
+        if ([_dashState isState:STATE_IS_DASHING_UP]) {
+            [self sendExplosionMessage:MSG_EXPLOSION_UP withRadius:1.2f];
+        }
+        if ([_dashState isState:STATE_IS_DASHING_DOWN]) {
+            [self sendExplosionMessage:MSG_EXPLOSION_DOWN withRadius:1.2f];
+        }
         return NO;
     }
     return YES;

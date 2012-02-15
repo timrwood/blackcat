@@ -43,7 +43,7 @@
         [_frontSkin setTopTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_frontSkin setBotTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_frontSkin setStartDepth:Z_BUILDING_FRONT endDepth:Z_PHYSICS_FRONT];
-        [self addComponent:_frontSkin];
+        //[self addComponent:_frontSkin];
         
         // back skin
         _backSkin = [[AHGraphicsCube alloc] init];
@@ -53,7 +53,7 @@
         [_backSkin setTopTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_backSkin setBotTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_backSkin setStartDepth:Z_PHYSICS_BACK endDepth:Z_BUILDING_BACK];
-        [self addComponent:_backSkin];
+        //[self addComponent:_backSkin];
         
         CGRect trect = CGRectMake(0.25f, 0.0f, -0.25f, 1.0f);
         
@@ -62,7 +62,7 @@
                                                                     andSize:size2 
                                                                  andTexRect:trect 
                                                                   andTexKey:@"debug-grid.png"];
-            [rect setBreakMessageType:MSG_EXPLOSION_RIGHT];
+            [rect enableBreakOnRight:YES];
             [rect setStartDepth:Z_PHYSICS_FRONT endDepth:Z_PHYSICS_BACK];
             position2.x += size2.width * 2.0f;
             trect.origin.x += 0.25f;
@@ -75,18 +75,32 @@
         GLKVector2 vec = position;
         vec.x -= OBSTACLE_HALF_HEIGHT * 2.0f;
         
-        CGSize size4 = CGSizeMake(OBSTACLE_HALF_HEIGHT, OBSTACLE_HALF_WIDTH / 4.0f);
+        CGSize size4 = CGSizeMake(OBSTACLE_HALF_HEIGHT, OBSTACLE_HALF_WIDTH);
         BCBreakableRect *rect = [[BCBreakableRect alloc] initWithCenter:vec 
                                                                 andSize:size4 
                                                              andTexRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) 
                                                               andTexKey:@"debug-grid.png"];
-        [rect setBreakMessageType:MSG_EXPLOSION_RIGHT];
         [rect setStartDepth:Z_PHYSICS_FRONT endDepth:Z_PHYSICS_BACK];
         
         [[AHActorManager manager] add:rect];
         
+        vec.y += 0.05f;
+        [rect breakAtPoint:vec withRadius:1.0f];
+        
+        vec.y -= 0.05f;
+        
+        vec.y += OBSTACLE_HALF_WIDTH * 10.5f;
+        rect = [[BCBreakableRect alloc] initWithCenter:vec 
+                                               andSize:size4 
+                                            andTexRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) 
+                                             andTexKey:@"debug-grid.png"];
+        [rect setStartDepth:Z_PHYSICS_FRONT endDepth:Z_PHYSICS_BACK];
+        
+        [[AHActorManager manager] add:rect];
+        vec.y += 0.05f;
         [rect breakAtPoint:vec withRadius:1.0f];
          */
+         
     }
     return self;
 }

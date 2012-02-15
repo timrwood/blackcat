@@ -22,7 +22,7 @@
     GLKVector2 _explosionPoint;
     GLKVector2 _center;
     
-    float _rotationAddition;
+    float _radius;
 }
 
 
@@ -39,7 +39,8 @@
 #pragma mark setters
 
 
-- (void)setExplosionPoint:(GLKVector2)point;
+- (void)setExplosionPoint:(GLKVector2)point andRadius:(float)radius;
+- (void)setTopTex:(CGRect)topTex andBotTex:(CGRect)botTex;
 
 
 @end

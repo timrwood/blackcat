@@ -84,7 +84,7 @@
     
     if ([[AHTimeManager manager] worldTime] - _timeCreated > MAX_TIME_TO_LIVE) {
         [self safeDestroy];
-        dlog(@"destroying cannon as it lived too long");
+        //dlog(@"destroying cannon as it lived too long");
     }
 }
 

@@ -20,6 +20,8 @@
     AHGraphicsCube *_skin;
     
     CGRect _texRect;
+    CGRect _texRectTop;
+    CGRect _texRectBot;
     CGSize _size;
     GLKVector2 _center;
     
@@ -27,7 +29,9 @@
     float _breakRadius;
     BOOL _hasBroken;
     
-    int _breakMessageType;
+    BOOL _breakOnUp;
+    BOOL _breakOnDown;
+    BOOL _breakOnRight;
     
     NSString *_texKey;
     
@@ -48,6 +52,14 @@
         andTexRect:(CGRect)texRect
          andTexKey:(NSString *)texKey;
 - (void)setStartDepth:(float)front endDepth:(float)back;
+- (void)setTopTex:(CGRect)topTex andBotTex:(CGRect)botTex;
+
+
+#pragma mark -
+#pragma mark tags
+
+
+- (void)addTag:(int)tag;
 
 
 #pragma mark -
@@ -90,7 +102,9 @@
 #pragma mark messages
 
 
-- (void)setBreakMessageType:(int)breakMessageType;
+- (void)enableBreakOnRight:(BOOL)willBreak;
+- (void)enableBreakOnUp:(BOOL)willBreak;
+- (void)enableBreakOnDown:(BOOL)willBreak;
 
 
 @end

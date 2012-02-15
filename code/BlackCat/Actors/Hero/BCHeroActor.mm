@@ -47,6 +47,7 @@
 #import "BCHeroActorRagdoll.h"
 #import "BCGlobalTypes.h"
 #import "BCGlobalManager.h"
+#import "BCClassSelectionScene.h"
 
 #import "BCHeroTypeBoxer.h"
 #import "BCHeroTypeDetective.h"
@@ -221,7 +222,7 @@
     
     // update camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-    [[AHGraphicsManager camera] setWorldZoom:15.0f];
+    [[AHGraphicsManager camera] setWorldZoom:8.0f];
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
@@ -269,7 +270,11 @@
 
 
 - (void)touchBeganAtPoint:(GLKVector2)point {
-    [self inputJump];
+    if (point.y < [[AHScreenManager manager] screenHeight] * 0.25f) {
+        [[AHSceneManager manager] goToScene:[[BCClassSelectionScene alloc] init]];
+    } else {
+        [self inputJump];
+    }
 }
 
 - (void)inputJump {

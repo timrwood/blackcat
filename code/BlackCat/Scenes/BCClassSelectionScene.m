@@ -25,6 +25,7 @@
 
 - (void)setup {
     [self addButtonsFromJSONFile:@"class-selection.scene"];
+    [super setup];
 }
 
 

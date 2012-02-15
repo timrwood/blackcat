@@ -112,7 +112,10 @@ static AHSceneManager *_manager = nil;
 }
 
 - (void)reset {
-    _needsToBeReset = YES;
+    // only reset if we are not transitioning to a new scene
+    if (!_nextScene) {
+        _needsToBeReset = YES;
+    }
 }
 
 

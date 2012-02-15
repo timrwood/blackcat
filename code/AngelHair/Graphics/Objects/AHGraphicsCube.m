@@ -30,6 +30,8 @@
     self = [super init];
     if (self) {
         [self setVertexCount:20];
+        _offsetYT = 0.0f;
+        _offsetYB = 0.0f;
     }
     return self;
 }
@@ -42,6 +44,10 @@
 #pragma mark -
 #pragma mark rect
 
+
+- (void)setOffsetHorizontal:(BOOL)isHorizontal {
+    _isHorizontal = isHorizontal;
+}
 
 - (void)setRightYTopOffset:(float)top andRightYBottomOffset:(float)bot {
     _offsetYT = top;
@@ -77,15 +83,26 @@
     float c = _startDepth;
     float f = _endDepth;
     
-    GLKVector3 ltf = GLKVector3Make(l,             t, f);
-    GLKVector3 lbf = GLKVector3Make(l,             b, f);
-    GLKVector3 ltc = GLKVector3Make(l,             t, c);
-    GLKVector3 lbc = GLKVector3Make(l,             b, c);
-    GLKVector3 rtc = GLKVector3Make(r, t + _offsetYT, c);
-    GLKVector3 rbc = GLKVector3Make(r, b + _offsetYB, c);
-    GLKVector3 rtf = GLKVector3Make(r, t + _offsetYT, f);
-    GLKVector3 rbf = GLKVector3Make(r, b + _offsetYB, f);
+    GLKVector3 ltf = GLKVector3Make(l, t, f);
+    GLKVector3 lbf = GLKVector3Make(l, b, f);
+    GLKVector3 ltc = GLKVector3Make(l, t, c);
+    GLKVector3 lbc = GLKVector3Make(l, b, c);
+    GLKVector3 rtc = GLKVector3Make(r, t, c);
+    GLKVector3 rbc = GLKVector3Make(r, b, c);
+    GLKVector3 rtf = GLKVector3Make(r, t, f);
+    GLKVector3 rbf = GLKVector3Make(r, b, f);
     
+    if (_isHorizontal) {
+        lbf.x = l + _offsetYB;
+        lbc.x = l + _offsetYB;
+        rbf.x = r + _offsetYT;
+        rbc.x = r + _offsetYT;
+    } else {
+        rtc.y = t + _offsetYT;
+        rbc.y = b + _offsetYB;
+        rtf.y = t + _offsetYT;
+        rbf.y = b + _offsetYB;
+    }
     
     self->vertices[0] = ltf;
     self->vertices[1] = lbf;
@@ -137,17 +154,32 @@
 
 - (void)setTex:(CGRect)rect {
     float convert = rect.size.height / _rect.size.height;
+    if (_isHorizontal) {
+        convert = rect.size.width / _rect.size.width;
+    }
     float rightTop = _offsetYT * convert;
     float rightBot = _offsetYB * convert;
     
-    self->textures[0] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
-    self->textures[1] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
-    self->textures[2] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
-    self->textures[3] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
-    self->textures[4] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rightTop);
-    self->textures[5] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height + rightBot);
-    self->textures[6] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rightTop);
-    self->textures[7] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height + rightBot);
+    self->textures[0] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
+    self->textures[1] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    self->textures[2] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
+    self->textures[3] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
+    self->textures[4] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
+    self->textures[5] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    self->textures[6] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
+    self->textures[7] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
+    
+    if (_isHorizontal) {
+        self->textures[1].x += rightTop;
+        self->textures[3].x += rightBot;
+        self->textures[5].x += rightTop;
+        self->textures[7].x += rightBot;
+    } else {
+        self->textures[4].y += rightTop;
+        self->textures[5].y += rightBot;
+        self->textures[6].y += rightTop;
+        self->textures[7].y += rightBot;
+    }
 }
 
 - (void)setTopTex:(CGRect)rect {
@@ -158,10 +190,24 @@
 }
 
 - (void)setBotTex:(CGRect)rect {
+    
+    
     self->textures[16] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
     self->textures[17] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
     self->textures[18] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
     self->textures[19] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    
+    if (_isHorizontal) {
+        float convert = rect.size.width / _rect.size.width;
+        
+        float rightTop = _offsetYT * convert;
+        float rightBot = _offsetYB * convert;
+        
+        self->textures[16].x += rightBot;
+        self->textures[17].x += rightBot;
+        self->textures[18].x += rightTop;
+        self->textures[19].x += rightTop;
+    }
 }
 
 

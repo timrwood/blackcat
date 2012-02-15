@@ -58,10 +58,11 @@
         [_skin setRectFromCenter:center andSize:size];
         [_skin setTex:texRect];
         [_skin setTextureKey:texKey];
-        [_skin setTopTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_skin setBotTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_PHYSICS_FRONT];
         [self addComponent:_skin];
+        
+        CGRect debugRect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+        [self setTopTex:debugRect andBotTex:debugRect];
         
         // save vars for later
         _texRect = texRect;
@@ -76,6 +77,22 @@
     _frontDepth = front;
     _backDepth = back;
     [_skin setStartDepth:_frontDepth endDepth:_backDepth];
+}
+
+- (void)setTopTex:(CGRect)topTex andBotTex:(CGRect)botTex {
+    [_skin setTopTex:topTex];
+    [_skin setBotTex:botTex];
+    _texRectBot = botTex;
+    _texRectTop = topTex;
+}
+
+
+#pragma mark -
+#pragma mark tags
+
+
+- (void)addTag:(int)tag {
+    [_body addTag:tag];
 }
 
 
@@ -100,6 +117,9 @@
     }
     
     GLKVector2 distFromCenterToPoint = GLKVector2Subtract(_breakPoint, _center);
+    distFromCenterToPoint.x = fabsf(distFromCenterToPoint.x);
+    distFromCenterToPoint.y = fabsf(distFromCenterToPoint.y);
+    
     GLKVector2 closestCornerToPoint;
     
     // get closest corner x
@@ -116,32 +136,28 @@
         closestCornerToPoint.y = _center.y + _size.height;
     }
     
-    // to far away in width
-    if (fabsf(distFromCenterToPoint.x) > _size.width + _breakRadius) {
-        //dlog(@"too far from center x %F < %F + %F", fabsf(distFromCenterToPoint.x), _size.width, _breakRadius);
-        return NO;
-    }
-    
-    // to far away in height
-    if (fabsf(distFromCenterToPoint.y) > _size.height + _breakRadius) {
-        //dlog(@"too far from center y");
-        return NO;
-    }
-    
-    // close enough in width and height
-    if (fabsf(distFromCenterToPoint.x) < _size.width + _breakRadius &&
-        fabsf(distFromCenterToPoint.y) < _size.height + _breakRadius) {
-        //dlog(@"within bounds");
+    // close enough in width
+    if (distFromCenterToPoint.x < _size.width + _breakRadius &&
+        distFromCenterToPoint.y < _size.height) {
+        dlog(@"close enough in width");
         return YES;
     }
     
-    if (GLKVector2Distance(_breakPoint, closestCornerToPoint) > _breakRadius) {
-        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
-        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
-        return NO;
+    // close enough in height
+    if (distFromCenterToPoint.y < _size.height + _breakRadius &&
+        distFromCenterToPoint.x < _size.width) {
+        dlog(@"close enough in height");
+        return YES;
     }
     
-    return YES;
+    // close enough to corners
+    if (GLKVector2Distance(_breakPoint, closestCornerToPoint) < _breakRadius) {
+        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
+        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void)breakAtPoint:(GLKVector2)point
@@ -256,6 +272,10 @@
                                                           andTexRect:texRect
                                                            andTexKey:_texKey];
     [rect setStartDepth:_frontDepth endDepth:_backDepth];
+    [rect addTag:[_body tags]];
+    [rect enableBreakOnUp:_breakOnUp];
+    [rect enableBreakOnRight:_breakOnRight];
+    [rect enableBreakOnDown:_breakOnDown];
     [[AHActorManager manager] add:rect];
 }
 
@@ -270,7 +290,7 @@
     }
     
     int count = 1;
-    if (_size.width > MIN_SIZE_TO_LEAVE_ALONE || _size.height > MIN_SIZE_TO_LEAVE_ALONE) {
+    if (fabsf(bottom - top) > MIN_SIZE_TO_LEAVE_ALONE) {
         count = 3;
     }
     
@@ -347,7 +367,7 @@
         BCBrokenPolygon *poly = [[BCBrokenPolygon alloc] initFromQuad:quad
                                                            andTexQuad:texQuad
                                                         andTextureKey:_texKey];
-        [poly setExplosionPoint:_breakPoint];
+        [poly setExplosionPoint:_breakPoint andRadius:_breakRadius];
         [[AHActorManager manager] add:poly];
     }
 }
@@ -370,11 +390,26 @@
     texRect.origin.x = FloatLerp(_texRect.origin.x, _texRect.origin.x + _texRect.size.width, topPercent);
     texRect.size.width = (bottomPercent - topPercent) * _texRect.size.width;
     
+    CGRect texRectTop = _texRectTop;
+    CGRect texRectBot = _texRectBot;
+    
+    texRectTop.origin.x = FloatLerp(_texRectTop.origin.x, _texRectTop.origin.x + _texRectTop.size.width, topPercent);
+    texRectTop.size.width = (bottomPercent - topPercent) * _texRectTop.size.width;
+    
+    texRectBot.origin.x = FloatLerp(_texRectBot.origin.x, _texRectBot.origin.x + _texRectBot.size.width, topPercent);
+    texRectBot.size.width = (bottomPercent - topPercent) * _texRectBot.size.width;
+    
     BCBreakableRect * rect = [[BCBreakableRect alloc] initWithCenter:center
                                                              andSize:size
                                                           andTexRect:texRect
                                                            andTexKey:_texKey];
+    [rect setTopTex:texRectTop andBotTex:texRectBot];
+
     [rect setStartDepth:_frontDepth endDepth:_backDepth];
+    [rect addTag:[_body tags]];
+    [rect enableBreakOnUp:_breakOnUp];
+    [rect enableBreakOnRight:_breakOnRight];
+    [rect enableBreakOnDown:_breakOnDown];
     [[AHActorManager manager] add:rect];
 }
 
@@ -389,7 +424,7 @@
     }
     
     int count = 1;
-    if (_size.width > MIN_SIZE_TO_LEAVE_ALONE || _size.height > MIN_SIZE_TO_LEAVE_ALONE) {
+    if (fabsf(bottom - top) > MIN_SIZE_TO_LEAVE_ALONE) {
         count = 3;
     }
     
@@ -462,10 +497,23 @@
         texQuad.c.x = texRights[i + 1];
         texQuad.d.x = texRights[i];
         
+        CGRect texRectTop = _texRectTop;
+        CGRect texRectBot = _texRectBot;
+        
+        float percentLeftTop = FloatPercentBetween(-_size.width, _size.width, lefts[i]);
+        float percentRightTop = FloatPercentBetween(-_size.width, _size.width, lefts[i + 1]);
+        
+        texRectTop.origin.x = FloatLerp(_texRectTop.origin.x, _texRectTop.origin.x + _texRectTop.size.width, percentLeftTop);
+        texRectTop.size.width = (percentRightTop - percentLeftTop) * _texRectTop.size.width;
+        
+        texRectBot.origin.x = FloatLerp(_texRectBot.origin.x, _texRectBot.origin.x + _texRectBot.size.width, percentLeftTop);
+        texRectBot.size.width = (percentRightTop - percentLeftTop) * _texRectBot.size.width;
+        
         BCBrokenPolygon *poly = [[BCBrokenPolygon alloc] initFromQuad:quad
                                                            andTexQuad:texQuad
                                                         andTextureKey:_texKey];
-        [poly setExplosionPoint:_breakPoint];
+        [poly setTopTex:texRectTop andBotTex:texRectBot];
+        [poly setExplosionPoint:_breakPoint andRadius:_breakRadius];
         [[AHActorManager manager] add:poly];
     }
 }
@@ -475,12 +523,38 @@
 #pragma mark messages
 
 
-- (void)setBreakMessageType:(int)breakMessageType {
-    _breakMessageType = breakMessageType;
+- (void)enableBreakOnRight:(BOOL)willBreak {
+    _breakOnRight = willBreak;
+}
+
+- (void)enableBreakOnUp:(BOOL)willBreak {
+    _breakOnUp = willBreak;
+}
+
+- (void)enableBreakOnDown:(BOOL)willBreak {
+    _breakOnDown = willBreak;
 }
 
 - (void)recieveMessage:(AHActorMessage *)message {
-    if ([message type] == MSG_EXPLOSION_ALL || [message type] == _breakMessageType) {
+    BOOL willBreak = NO;
+    
+    if ([message type] == MSG_EXPLOSION_ALL) {
+        willBreak = YES;
+    }
+    
+    if ([message type] == MSG_EXPLOSION_RIGHT && _breakOnRight) {
+        willBreak = YES;
+    }
+    
+    if ([message type] == MSG_EXPLOSION_UP && _breakOnUp) {
+        willBreak = YES;
+    }
+    
+    if ([message type] == MSG_EXPLOSION_DOWN && _breakOnDown) {
+        willBreak = YES;
+    }
+    
+    if (willBreak) {
         GLKVector2 point = [message firstPoint];
         float radius = [message thirdFloat];
         [self breakAtPoint:point withRadius:radius];
