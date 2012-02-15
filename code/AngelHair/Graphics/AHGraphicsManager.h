@@ -24,8 +24,6 @@
     
     EAGLContext *_eaglContext;
     
-    AHShaderManager *_shaderManager;
-    
     GLKMatrix4 _currentModelViewMatrix;
     GLKMatrix4 _currentProjectionMatrix;
     GLKMatrix4 *_popPushStack;
@@ -133,14 +131,6 @@
                         andColor:(GLKVector4)color
                         andCount:(int)count 
                      andDrawType:(GLenum)type;
-
-
-#pragma mark -
-#pragma mark color texture
-
-
-- (void)useTextureProgram:(BOOL)useTex;
-- (void)enableNormal:(BOOL)enabled;
 
 
 @end

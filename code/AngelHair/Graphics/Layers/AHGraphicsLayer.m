@@ -69,10 +69,10 @@
     for (AHGraphicsObject *object in _objects) {
         [[AHTextureManager manager] activateBaseTexture:[object texture]];
         if ([object normalTexture]) {
-            [[AHGraphicsManager manager] enableNormal:YES];
+            // enable normal
             [[AHTextureManager manager] activateNormalTexture:[object normalTexture]];
         } else {
-            [[AHGraphicsManager manager] enableNormal:NO];
+            // disable normal
         }
         [object draw];
     }

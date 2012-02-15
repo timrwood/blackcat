@@ -17,6 +17,7 @@
 #import "AHPhysicsManager.h"
 #import "AHFileManager.h"
 #import "AHSceneManager.h"
+#import "AHShaderManager.h"
 #import "AHInputManager.h"
 
 // #import "AHAnimationManager.h"
@@ -66,6 +67,7 @@ static AHSuperSystem *_manager = nil;
     [[AHPhysicsManager manager] setup];
     [[AHTextureManager manager] setup];
     [[AHGraphicsManager manager] setup];
+    [[AHShaderManager manager] setup];
     //[[AHAnimationManager manager] setup];
     [[AHActorManager manager] setup];
 }
@@ -82,6 +84,7 @@ static AHSuperSystem *_manager = nil;
 - (void)teardown {
     [[AHActorManager manager] teardown];
     //[[AHAnimationManager manager] teardown];
+    [[AHShaderManager manager] teardown];
     [[AHGraphicsManager manager] teardown];
     [[AHTextureManager manager] teardown];
     [[AHPhysicsManager manager] teardown];
@@ -138,7 +141,7 @@ static AHSuperSystem *_manager = nil;
     
     if (_isEnabledRenderDraw) {
         glEnable(GL_DEPTH_TEST);
-        [[AHGraphicsManager manager] useTextureProgram:YES];
+        [[AHShaderManager manager] useTextureProgram];
         glPushGroupMarkerEXT(0, "Graphics Manager Draw");
         [[AHGraphicsManager manager] draw];
         glPopGroupMarkerEXT();
@@ -146,7 +149,7 @@ static AHSuperSystem *_manager = nil;
     }
     
     if (_isEnabledDebugDraw) {
-        [[AHGraphicsManager manager] useTextureProgram:NO];
+        [[AHShaderManager manager] useColorProgram];
         glPushGroupMarkerEXT(0, "Debug Draw");
         [[AHPhysicsManager manager] drawDebug];
         glPopGroupMarkerEXT();

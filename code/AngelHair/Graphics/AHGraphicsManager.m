@@ -69,7 +69,6 @@ static AHGraphicsCamera *_camera = nil;
         
         [EAGLContext setCurrentContext:_eaglContext];
         
-        _shaderManager = [[AHShaderManager alloc] init];
         [self modelIdentity];
     }
     return self;
@@ -94,12 +93,12 @@ static AHGraphicsCamera *_camera = nil;
 
 
 - (void)setCameraMatrix:(GLKMatrix4)matrix {
-    [_shaderManager setProjectionMatrix:matrix];
+    [[AHShaderManager manager] setProjectionMatrix:matrix];
 }
 
 - (void)setModelMatrix:(GLKMatrix4)matrix {
     _currentModelViewMatrix = matrix;
-    [_shaderManager setModelViewMatrix:matrix];
+    [[AHShaderManager manager] setModelViewMatrix:matrix];
 }
 
 
@@ -322,26 +321,9 @@ static AHGraphicsCamera *_camera = nil;
                         andColor:(GLKVector4)color
                         andCount:(int)count 
                      andDrawType:(GLenum)type {
-    [_shaderManager setColor:color];
+    [[AHShaderManager manager] setColor:color];
     glVertexAttribPointer(AH_SHADER_ATTRIB_POS_COORD, 3, GL_FLOAT, GL_FALSE, 0, position);
 	glDrawArrays(type, 0, count);
-}
-
-
-#pragma mark -
-#pragma mark color texture
-
-
-- (void)useTextureProgram:(BOOL)useTex {
-    if (useTex) {
-        [_shaderManager useTextureProgram];
-    } else {
-        [_shaderManager useColorProgram];
-    }
-}
-
-- (void)enableNormal:(BOOL)enabled {
-    [_shaderManager enableNormal:enabled];
 }
 
 
