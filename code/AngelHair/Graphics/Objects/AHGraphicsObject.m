@@ -143,6 +143,9 @@
     if (textures) {
         free(textures);
     }
+    if (indices) {
+        free(indices);
+    }
     [self removeFromParentLayer];
 }
 

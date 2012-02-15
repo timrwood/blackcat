@@ -131,4 +131,16 @@
 }
 
 
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupBeforeDestruction {
+    _body = nil;
+    _skin = nil;
+    
+    [super cleanupBeforeDestruction];
+}
+
+
 @end

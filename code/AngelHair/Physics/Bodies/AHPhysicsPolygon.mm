@@ -119,4 +119,17 @@
 }
 
 
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupAfterRemoval {
+    if (_points) {
+        free(_points);
+    }
+    
+    [super cleanupAfterRemoval];
+}
+
+
 @end

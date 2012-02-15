@@ -7,11 +7,11 @@
 //
 
 
+#import "AHGraphicsCube.h"
 #import "BCBuildingType.h"
 
 
 @class AHPhysicsRect;
-@class AHGraphicsCube;
 
 
 @interface BCBuildingFlat : BCBuildingType {

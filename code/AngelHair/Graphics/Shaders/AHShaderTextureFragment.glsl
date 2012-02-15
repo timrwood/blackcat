@@ -7,8 +7,8 @@
 //
 
 
-varying lowp vec2 lightPosition;
-varying lowp vec2 texcoordFragment;
+varying highp vec2 lightPosition;
+varying highp vec2 texcoordFragment;
 
 uniform bool isNormalEnabled;
 
@@ -16,7 +16,7 @@ uniform sampler2D textureBase;
 uniform sampler2D textureNormal;
 
 void main(void) {
-    if (isNormalEnabled) {
+    /*if (isNormalEnabled) {
         
         // Extract the normal from the normal map  
         lowp vec3 normal = normalize(texture2D(textureNormal, texcoordFragment).rgb * 2.0 - 1.0);  
@@ -34,7 +34,7 @@ void main(void) {
         gl_FragColor = vec4(color, 1.0); 
          
         //gl_FragColor = texture2D(textureNormal, texcoordFragment);
-    } else {
+    } else {*/
         gl_FragColor = texture2D(textureBase, texcoordFragment);
-    }
+    //}
 }

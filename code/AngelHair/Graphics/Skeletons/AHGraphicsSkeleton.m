@@ -148,7 +148,7 @@
 }
 
 
-#pragma mark - 
+#pragma mark -
 #pragma mark skeleton
 
 
@@ -161,7 +161,7 @@
 }
 
 
-#pragma mark - 
+#pragma mark -
 #pragma mark draw
 
 
@@ -236,6 +236,23 @@
     [_armB update];
     [_legA update];
     [_legB update];
+}
+
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupAfterRemoval {
+    _armB = nil;
+    _armA = nil;
+    _legA = nil;
+    _legB = nil;
+    
+    _head = nil;
+    _torso = nil;
+    
+    [super cleanupAfterRemoval];
 }
 
 

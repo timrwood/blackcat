@@ -117,4 +117,18 @@
 }
 
 
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupBeforeDestruction {
+    _top = nil;
+    _mid = nil;
+    _bot = nil;
+    _bot2 = nil;
+    
+    [super cleanupBeforeDestruction];
+}
+
+
 @end

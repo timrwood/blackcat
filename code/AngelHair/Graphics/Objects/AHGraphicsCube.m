@@ -32,6 +32,7 @@
         [self setVertexCount:20];
         _offsetYT = 0.0f;
         _offsetYB = 0.0f;
+        _rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     }
     return self;
 }
@@ -160,6 +161,8 @@
     float rightTop = _offsetYT * convert;
     float rightBot = _offsetYB * convert;
     
+    dlog(@"top right %F bot right %F", rightTop, rightBot);
+    
     self->textures[0] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
     self->textures[1] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
     self->textures[2] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
@@ -190,8 +193,6 @@
 }
 
 - (void)setBotTex:(CGRect)rect {
-    
-    
     self->textures[16] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
     self->textures[17] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
     self->textures[18] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);

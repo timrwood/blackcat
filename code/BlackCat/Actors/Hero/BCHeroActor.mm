@@ -218,11 +218,11 @@
     // move the camera forward on the screen
     cameraPosition.y = [[BCGlobalManager manager] buildingHeight];
     cameraPosition.y -= [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].height * 0.5f;
-    cameraPosition.x += [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].width * 0.5f;
+    //cameraPosition.x += [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].width * 0.5f;
     
     // update camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-    [[AHGraphicsManager camera] setWorldZoom:8.0f];
+    [[AHGraphicsManager camera] setWorldZoom:18.0f];
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
@@ -296,6 +296,9 @@
     // cleanup type
     [_type cleanupAfterRemoval];
     _type = nil;
+    _body = nil;
+    _skeleton = nil;
+    _jumpingState = nil;
     
     [super cleanupBeforeDestruction];
 }

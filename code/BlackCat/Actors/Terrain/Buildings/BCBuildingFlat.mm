@@ -13,7 +13,6 @@
 
 #import "AHActorManager.h"
 #import "AHGraphicsManager.h"
-#import "AHGraphicsCube.h"
 #import "AHPhysicsRect.h"
 #import "AHMathUtils.h"
 
@@ -44,7 +43,7 @@
         _skin = [[AHGraphicsCube alloc] init];
         [_skin setTextureKey:@"debug-grid.png"];
         //[_skin setNormalTextureKey:@"debug-normal.jpg"];
-        [_skin setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skin setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
@@ -88,5 +87,16 @@
     return end;
 }
 
+
+#pragma mark -
+#pragma mark cleanup
+
+
+- (void)cleanupBeforeDestruction {
+    _body = nil;
+    _skin = nil;
+    
+    [super cleanupBeforeDestruction];
+}
 
 @end

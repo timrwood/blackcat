@@ -251,8 +251,8 @@
     center.x = self->_startCorner.x + STEP_0_WIDTH + size.width;
     center.y = self->_startCorner.y + (BUILDING_HEIGHT / 2.0f);
     [_skinStair setRightYTopOffset:size.height andRightYBottomOffset:0.0f];
-    [_skinStair setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
     [_skinStair setRectFromCenter:center andSize:size];
+    [_skinStair setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
 }
 
 

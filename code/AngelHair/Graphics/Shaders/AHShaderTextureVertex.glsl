@@ -10,8 +10,8 @@
 attribute vec4 poscoord;
 attribute vec2 texcoord;
 
-varying lowp vec2 texcoordFragment;
-varying lowp vec2 lightPosition;
+varying highp vec2 texcoordFragment;
+varying highp vec2 lightPosition;
 
 uniform mat4 projection;
 uniform mat4 modelview;
@@ -22,5 +22,5 @@ void main(void) {
     
     gl_Position = projection * modelview * poscoord;
     
-    lightPosition = vec2(-0.5, 0.0) - vec2(gl_Position);
+    //lightPosition = vec2(-0.5, 0.0) - vec2(gl_Position);
 }

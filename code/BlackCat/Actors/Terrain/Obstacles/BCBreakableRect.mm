@@ -139,21 +139,17 @@
     // close enough in width
     if (distFromCenterToPoint.x < _size.width + _breakRadius &&
         distFromCenterToPoint.y < _size.height) {
-        dlog(@"close enough in width");
         return YES;
     }
     
     // close enough in height
     if (distFromCenterToPoint.y < _size.height + _breakRadius &&
         distFromCenterToPoint.x < _size.width) {
-        dlog(@"close enough in height");
         return YES;
     }
     
     // close enough to corners
     if (GLKVector2Distance(_breakPoint, closestCornerToPoint) < _breakRadius) {
-        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
-        //dlog(@"too far from corner %@ %@", NSStringFromGLKVector2(_breakPoint), NSStringFromGLKVector2(closestCornerToPoint));
         return YES;
     }
     
