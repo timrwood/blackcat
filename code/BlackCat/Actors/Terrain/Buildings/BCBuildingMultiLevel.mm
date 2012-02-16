@@ -102,6 +102,7 @@
     [rect setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
     [[AHActorManager manager] add:rect];
     
+    /*
     // top
     rect = [[BCBreakableRect alloc] initWithCenter:positionTop 
                                            andSize:sizeTopBot 
@@ -124,6 +125,7 @@
     [rect enableBreakOnUp:YES];
     [rect setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
     [[AHActorManager manager] add:rect];
+     */
 }
 
 - (void)buildBottomAt:(float)height {

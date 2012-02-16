@@ -31,15 +31,27 @@ static AHLightManager *_manager = nil;
 
 
 #pragma mark -
+#pragma mark init
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setPosition:GLKVector3Make(-0.2f, 1.0f, 0.5f)];
+    }
+    return self;
+}
+
+
+#pragma mark -
 #pragma mark move light
 
 
 - (void)setPosition:(GLKVector3)position {
-    
+    _lightPosition = position;
 }
 
 - (void)updatePosition {
-    
+    [[AHShaderManager manager] setLightPosition:_lightPosition];
 }
 
 

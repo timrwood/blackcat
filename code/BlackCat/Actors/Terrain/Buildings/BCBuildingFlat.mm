@@ -48,6 +48,8 @@
         [_skin setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         [self addComponent:_skin];
+        
+        rotation = 0.0f;
     }
     return self;
 }
@@ -72,11 +74,13 @@
     BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
     [[AHActorManager manager] add:obstacle];
 
-    center.x = self->_startCorner.x + 2.0f;
+    center.x = self->_startCorner.x + 4.0f;
     center.y = self->_startCorner.y - 1.0f;
     
-    AHGraphicsCube *cube = [[AHGraphicsCube alloc] init];
-    [cube setRectFromCenter:center andRadius:1.0f];
+    cube = [[AHGraphicsCube alloc] init];
+    [cube setRectFromCenter:GLKVector2Zero() andRadius:0.5f];
+    
+    [cube setPosition:center];
     [cube setOffsetHorizontal:YES];
     [cube setRightYTopOffset:-0.5f andRightYBottomOffset:0.5f];
     [cube setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
@@ -97,6 +101,16 @@
     end.x = self->_startCorner.x + BUILDING_WIDTH;
     end.y = self->_startCorner.y;
     return end;
+}
+
+
+#pragma mark -
+#pragma mark update
+
+
+- (void)updateBeforeRender {
+    rotation += 0.01f;
+    [cube setRotation:rotation];
 }
 
 

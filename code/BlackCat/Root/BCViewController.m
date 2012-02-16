@@ -31,7 +31,7 @@
     [[AHSceneManager manager] goToScene:[[BCMainScene alloc] init]];
     [[AHGraphicsManager camera] setNearLimit:Z_NEAR_LIMIT];
     [[AHGraphicsManager camera] setFarLimit:Z_FAR_LIMIT];
-    [[AHGraphicsManager camera] setCenterDepth:Z_PHYSICS_DEPTH];
+    [[AHGraphicsManager camera] setCenterDepth:-Z_PHYSICS_DEPTH];
     
     _context = [[AHGraphicsManager manager] context];
     

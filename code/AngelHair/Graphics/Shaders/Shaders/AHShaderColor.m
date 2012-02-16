@@ -35,7 +35,6 @@
     
     // assign pointers for position and color
     glBindAttribLocation([self programId], AH_SHADER_ATTRIB_POS_COORD, "poscoord");
-    glBindAttribLocation([self programId], AH_SHADER_ATTRIB_TEX_COORD, "texcoord");
     
     // link program
     glLinkProgram(program);
@@ -56,15 +55,11 @@
     
     // enable pointers
     glEnableVertexAttribArray(AH_SHADER_ATTRIB_POS_COORD);
-    glEnableVertexAttribArray(AH_SHADER_ATTRIB_TEX_COORD);
 
     // assign pointers for
     [self setModelViewUniform:glGetUniformLocation(program, "modelview")];
     [self setProjectionUniform:glGetUniformLocation(program, "projection")];
     _colorUniform = glGetUniformLocation(program, "color");
-    
-    glUniform1i(glGetUniformLocation(program, "textureBase"), AH_TEXTURE_SAMPLE_BASE);
-    glUniform1i(glGetUniformLocation(program, "textureNormal"), AH_TEXTURE_SAMPLE_NORMAL);
     
     dlog(@"Compiled color shaders");
 }

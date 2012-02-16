@@ -75,7 +75,7 @@ static AHShaderManager *_manager = nil;
 - (void)useColorProgram {
     if (_currentShader != _colorShader) {
         [_colorShader activate];
-        [_colorShader deactivate];
+        [_textureShader deactivate];
         _currentShader = _colorShader;
     }
 }
@@ -102,6 +102,11 @@ static AHShaderManager *_manager = nil;
 - (void)setProjectionMatrix:(GLKMatrix4)matrix {
     [_colorShader setProjection:matrix];
     [_textureShader setProjection:matrix];
+}
+
+- (void)setNormalMatrix:(GLKMatrix4)matrix {
+    [_colorShader setNormal:matrix];
+    [_textureShader setNormal:matrix];
 }
 
 - (void)setLightPosition:(GLKVector3)lightPosition {

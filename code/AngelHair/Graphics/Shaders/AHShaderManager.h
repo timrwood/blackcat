@@ -12,6 +12,7 @@
 
 #define AH_SHADER_ATTRIB_POS_COORD 0
 #define AH_SHADER_ATTRIB_TEX_COORD 2
+#define AH_SHADER_ATTRIB_NOR_COORD 4
 
 
 #import "AHSubSystem.h"
@@ -55,6 +56,8 @@
 
 - (void)setModelViewMatrix:(GLKMatrix4)matrix;
 - (void)setProjectionMatrix:(GLKMatrix4)matrix;
+- (void)setNormalMatrix:(GLKMatrix4)matrix;
+- (void)setLightPosition:(GLKVector3)lightPosition;
 
 
 #pragma mark -

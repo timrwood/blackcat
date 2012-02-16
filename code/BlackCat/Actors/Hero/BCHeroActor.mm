@@ -220,9 +220,11 @@
     cameraPosition.y -= [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].height * 0.5f;
     //cameraPosition.x += [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].width * 0.5f;
     
+    [[AHGraphicsManager camera] setCameraOffset:GLKVector2Make(-0.5f, 0.0f)];
+    
     // update camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-    [[AHGraphicsManager camera] setWorldZoom:5.0f];
+    [[AHGraphicsManager camera] setWorldZoom:8.0f];
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];

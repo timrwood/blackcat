@@ -42,6 +42,7 @@ const GLubyte rectIndices[] = {
         
         for (int i = 0; i < 4; i++) {
             self->indices[i] = i;
+            self->normals[i] = GLKVector3Make(0.0f, 0.0f, 1.0f);
         }
     }
     return self;

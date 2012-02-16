@@ -69,8 +69,8 @@
         }
 	}
     
-    //dlog(@"total bodies : %i", [[AHPhysicsManager cppManager] world]->GetBodyCount());
-    //dlog(@"total actors : %i", [[AHActorManager manager] count]);
+    dlog(@"total bodies : %i", [[AHPhysicsManager cppManager] world]->GetBodyCount());
+    dlog(@"total actors : %i", [[AHActorManager manager] count]);
 }
 
 

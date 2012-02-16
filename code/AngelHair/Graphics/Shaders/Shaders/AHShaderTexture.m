@@ -34,8 +34,9 @@
     glAttachShader(program, fragmentShader);
     
     // assign pointers for position and color
-    glBindAttribLocation([self programId], AH_SHADER_ATTRIB_POS_COORD, "poscoord");
-    glBindAttribLocation([self programId], AH_SHADER_ATTRIB_TEX_COORD, "texcoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_POS_COORD, "poscoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_TEX_COORD, "texcoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_NOR_COORD, "norcoord");
     
     // link program
     glLinkProgram(program);
@@ -57,16 +58,40 @@
     // enable pointers
     glEnableVertexAttribArray(AH_SHADER_ATTRIB_POS_COORD);
     glEnableVertexAttribArray(AH_SHADER_ATTRIB_TEX_COORD);
+    glEnableVertexAttribArray(AH_SHADER_ATTRIB_NOR_COORD);
     
     // assign pointers for
     [self setModelViewUniform:glGetUniformLocation(program, "modelview")];
     [self setProjectionUniform:glGetUniformLocation(program, "projection")];
     [self setLightPositionUniform:glGetUniformLocation(program, "lightPosition")];
+    _normalUniform = glGetUniformLocation(program, "normalMatrix");
     
     glUniform1i(glGetUniformLocation(program, "textureBase"), AH_TEXTURE_SAMPLE_BASE);
     glUniform1i(glGetUniformLocation(program, "textureNormal"), AH_TEXTURE_SAMPLE_NORMAL);
     
     dlog(@"Compiled texture shaders");
+}
+
+
+#pragma mark -
+#pragma mark matrices
+
+
+- (void)setNormal:(GLKMatrix4)matrix {
+    _normalMatrix = matrix;
+    if ([self isActive]) {
+        glUniformMatrix4fv(_normalUniform, 1, 0, _normalMatrix.m);
+    }
+}
+
+
+#pragma mark -
+#pragma mark activate
+
+
+- (void)activate {
+    [super activate];
+    glUniformMatrix4fv(_normalUniform, 1, 0, _normalMatrix.m);
 }
 
 

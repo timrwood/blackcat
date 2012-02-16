@@ -10,6 +10,7 @@
 #define MAX_POP_PUSH_STACK 8
 
 
+#import "AHLightManager.h"
 #import "AHScreenManager.h"
 #import "AHShaderManager.h"
 #import "AHGraphicsObject.h"
@@ -60,8 +61,10 @@ static AHGraphicsCamera *_camera = nil;
         _hudLayer = [[AHGraphicsLayer alloc] init];
         _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         
-        _popPushStack = malloc(sizeof(GLKMatrix4) * MAX_POP_PUSH_STACK);
+        _modelViewPopPushStack = malloc(sizeof(GLKMatrix4) * MAX_POP_PUSH_STACK);
+        _normalPopPushStack = malloc(sizeof(GLKMatrix4) * MAX_POP_PUSH_STACK);
         _currentModelViewMatrix = GLKMatrix4Identity;
+        _currentNormalMatrix = GLKMatrix4Identity;
         
         if (!_eaglContext) {
             dlog(@"Failed to create EAGLContext");
@@ -101,17 +104,24 @@ static AHGraphicsCamera *_camera = nil;
     [[AHShaderManager manager] setModelViewMatrix:matrix];
 }
 
+- (void)setNormalMatrix:(GLKMatrix4)matrix {
+    _currentNormalMatrix = matrix;
+    [[AHShaderManager manager] setNormalMatrix:matrix];
+}
+
 
 #pragma mark -
 #pragma mark model movement
 
 
 - (void)modelIdentity {
-    [self setModelMatrix:GLKMatrix4Translate(GLKMatrix4Identity, 0.0f, 0.0f, 0.0f)];
+    [self setModelMatrix:GLKMatrix4Identity];
+    [self setNormalMatrix:GLKMatrix4Identity];
 }
 
 - (void)modelPush {
-    _popPushStack[_popPushIndex] = _currentModelViewMatrix;
+    _normalPopPushStack[_popPushIndex] = _currentModelViewMatrix;
+    _modelViewPopPushStack[_popPushIndex] = _currentModelViewMatrix;
     _popPushIndex ++;
     if (_popPushIndex >= MAX_POP_PUSH_STACK) {
         derror(@"Model View push is greater than the max");
@@ -123,7 +133,8 @@ static AHGraphicsCamera *_camera = nil;
     if (_popPushIndex < 0) {
         derror(@"Model View pop is less than zero");
     }
-    [self setModelMatrix:_popPushStack[_popPushIndex]];
+    [self setModelMatrix:_modelViewPopPushStack[_popPushIndex]];
+    [self setNormalMatrix:_normalPopPushStack[_popPushIndex]];
 }
 
 - (void)modelMove:(GLKVector2)move {
@@ -138,6 +149,7 @@ static AHGraphicsCamera *_camera = nil;
     matrix = GLKMatrix4Translate(matrix, move.x, move.y, 0.0f);
     matrix = GLKMatrix4RotateZ(matrix, rotate);
     [self setModelMatrix:matrix];
+    [self setNormalMatrix:GLKMatrix4RotateZ(_currentNormalMatrix, -rotate)];
 }
 
 - (void)modelMove:(GLKVector2)move 
@@ -148,6 +160,7 @@ static AHGraphicsCamera *_camera = nil;
     matrix = GLKMatrix4RotateZ(matrix, rotate);
     matrix = GLKMatrix4Translate(matrix, move2.x, move2.y, 0.0f);
     [self setModelMatrix:matrix];
+    [self setNormalMatrix:GLKMatrix4RotateZ(_currentNormalMatrix, -rotate)];
 }
 
 - (void)modelMove:(GLKVector2)move 
@@ -160,12 +173,14 @@ static AHGraphicsCamera *_camera = nil;
     matrix = GLKMatrix4Translate(matrix, move2.x, move2.y, 0.0f);
     matrix = GLKMatrix4RotateZ(matrix, rotate2);
     [self setModelMatrix:matrix];
+    [self setNormalMatrix:GLKMatrix4RotateZ(_currentNormalMatrix, -(rotate + rotate2))];
 }
 
 - (void)modelRotate:(float)rotate {
     GLKMatrix4 matrix = _currentModelViewMatrix;
     matrix = GLKMatrix4RotateZ(matrix, rotate);
     [self setModelMatrix:matrix];
+    [self setNormalMatrix:GLKMatrix4RotateZ(_currentNormalMatrix, -rotate)];
 }
 
 - (void)modelRotate:(float)rotate 
@@ -174,6 +189,7 @@ static AHGraphicsCamera *_camera = nil;
     matrix = GLKMatrix4RotateZ(matrix, rotate);
     matrix = GLKMatrix4Translate(matrix, move.x, move.y, 0.0f);
     [self setModelMatrix:matrix];
+    [self setNormalMatrix:GLKMatrix4RotateZ(_currentNormalMatrix, -rotate)];
 }
 
 - (void)modelRotate:(float)rotate 
@@ -184,6 +200,7 @@ static AHGraphicsCamera *_camera = nil;
     matrix = GLKMatrix4Translate(matrix, move.x, move.y, 0.0f);
     matrix = GLKMatrix4RotateZ(matrix, rotate2);
     [self setModelMatrix:matrix];
+    [self setNormalMatrix:GLKMatrix4RotateZ(_currentNormalMatrix, -(rotate + rotate2))];
 }
 
 - (void)modelRotate:(float)rotate 
@@ -196,6 +213,7 @@ static AHGraphicsCamera *_camera = nil;
     matrix = GLKMatrix4RotateZ(matrix, rotate2);
     matrix = GLKMatrix4Translate(matrix, move2.x, move2.y, 0.0f);
     [self setModelMatrix:matrix];
+    [self setNormalMatrix:GLKMatrix4RotateZ(_currentNormalMatrix, -(rotate + rotate2))];
 }
 
 
@@ -238,6 +256,8 @@ static AHGraphicsCamera *_camera = nil;
 
 - (void)draw {
     [_camera prepareToDrawWorld];
+    
+    [[AHLightManager manager] updatePosition];
     
     for (AHGraphicsLayer *layer in _layers) {
         [layer draw];

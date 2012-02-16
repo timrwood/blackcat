@@ -51,6 +51,7 @@ const GLubyte cubeIndices[] = {
         [self setVertexCount:20];
         [self setIndexCount:30];
         
+        // set indices
         for (int i = 0; i < 30; i++) {
             self->indices[i] = cubeIndices[i];
         }
@@ -130,6 +131,25 @@ const GLubyte cubeIndices[] = {
         rbc.y = b + _offsetYB;
         rtf.y = t + _offsetYT;
         rbf.y = b + _offsetYB;
+    }
+    
+    // update normals
+    for (int i = 0; i < 4; i++) {
+        // front
+        self->normals[i] = GLKVector3Make(0.0f, 0.0f, 1.0f);
+        
+        // all other sides
+        if (_isHorizontal) {
+            self->normals[i + 4] = GLKVector3Normalize(GLKVector3Make(t - b, -_offsetYT, 0.0f));
+            self->normals[i + 8] = GLKVector3Normalize(GLKVector3Make(b - t, _offsetYB, 0.0f));
+            self->normals[i + 12] = GLKVector3Make(0.0f, 1.0f, 0.0f);
+            self->normals[i + 16] = GLKVector3Make(0.0f, -1.0f, 0.0f);
+        } else {
+            self->normals[i + 4]  = GLKVector3Make(-1.0f, 0.0f, 0.0f);
+            self->normals[i + 8]  = GLKVector3Make(1.0f, 0.0f, 0.0f);
+            self->normals[i + 12] = GLKVector3Normalize(GLKVector3Make(_offsetYT, r - l, 0.0f));
+            self->normals[i + 16] = GLKVector3Normalize(GLKVector3Make(-_offsetYB, l - r, 0.0f));
+        }
     }
     
     // front

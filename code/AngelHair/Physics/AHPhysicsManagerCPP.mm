@@ -70,7 +70,7 @@
 
 
 - (void)update {
-    _world->Step([[AHTimeManager manager] worldSecondsPerFrame], 10, 10);
+    _world->Step([[AHTimeManager manager] worldSecondsPerFrame], 5, 5);
 }
 
 

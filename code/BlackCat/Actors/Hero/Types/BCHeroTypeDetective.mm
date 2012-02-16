@@ -76,7 +76,7 @@
 
 
 - (GLKVector2)modifyVelocity:(GLKVector2)velocity {
-    return GLKVector2Zero();
+    //return GLKVector2Zero();
     return velocity;
 }
 
@@ -92,6 +92,7 @@
     velocity = GLKVector2MultiplyScalar(velocity, CANNON_VELOCITY);
     
     BCWeaponCannon *cannon = [[BCWeaponCannon alloc] initAtPosition:[self heroPosition] andVelocity:velocity];
+    //BCWeaponCannon *cannon = [[BCWeaponCannon alloc] initAtPosition:worldPoint andVelocity:GLKVector2Zero()];
     [[AHActorManager manager] add:cannon];
 }
 

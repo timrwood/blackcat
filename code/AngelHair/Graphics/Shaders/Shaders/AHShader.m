@@ -107,6 +107,10 @@
     }
 }
 
+- (void)setNormal:(GLKMatrix4)matrix {
+    
+}
+
 - (void)setModelView:(GLKMatrix4)matrix {
     _modelViewMatrix = matrix;
     if (_isActive) {
@@ -125,7 +129,7 @@
 
 - (void)activate {
     _isActive = YES;
-    glLinkProgram(_programId);
+    glUseProgram(_programId);
     glUniformMatrix4fv(_modelViewUniform, 1, 0, _modelViewMatrix.m);
     glUniformMatrix4fv(_projectionUniform, 1, 0, _projectionMatrix.m);
     if (_lightPositionUniform > -1) {

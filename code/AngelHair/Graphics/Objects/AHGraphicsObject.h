@@ -35,6 +35,7 @@
 @protected;
     GLKVector3 *vertices;
     GLKVector2 *textures;
+    GLKVector3 *normals;
     GLubyte *indices;
     
     GLKVector2 _position;

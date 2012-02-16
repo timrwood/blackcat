@@ -13,7 +13,10 @@
 @interface AHGraphicsCamera : NSObject {
 @private;
     float _zoom;
+    
     GLKVector2 _position;
+    GLKVector2 _offset;
+    
     CGRect _screenRect;
     float _aspectRatio;
     GLKMatrix4 _orthoMatrix;
@@ -56,6 +59,7 @@
 - (void)cacheOrthoMatrix;
 - (GLKVector2)worldPosition;
 - (void)setWorldPosition:(GLKVector2)newPosition;
+- (void)setCameraOffset:(GLKVector2)offset;
 - (float)worldZoom;
 - (void)setWorldZoom:(float)newZoom;
 

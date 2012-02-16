@@ -18,6 +18,10 @@
 @private;
     AHPhysicsRect *_body;
     AHGraphicsCube *_skin;
+    
+    AHGraphicsCube *cube;
+    
+    float rotation;
 }
 
 

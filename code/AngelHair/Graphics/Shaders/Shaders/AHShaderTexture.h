@@ -11,7 +11,9 @@
 
 
 @interface AHShaderTexture : AHShader {
-    
+@private;
+    GLuint _normalUniform;
+    GLKMatrix4 _normalMatrix;
 }
 
 

@@ -46,6 +46,7 @@
 - (void)setModelViewUniform:(GLuint)uniform;
 - (void)setProjection:(GLKMatrix4)matrix;
 - (void)setModelView:(GLKMatrix4)matrix;
+- (void)setNormal:(GLKMatrix4)matrix;
 
 
 #pragma mark -

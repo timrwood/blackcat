@@ -9,7 +9,7 @@
 
 @interface AHLightManager : NSObject {
 @private;
-    GLKVector3 *_lightPosition;
+    GLKVector3 _lightPosition;
 }
 
 
@@ -18,6 +18,14 @@
 
 
 + (AHLightManager *)manager;
+
+
+#pragma mark -
+#pragma mark move light
+
+
+- (void)setPosition:(GLKVector3)position;
+- (void)updatePosition;
 
 
 @end
