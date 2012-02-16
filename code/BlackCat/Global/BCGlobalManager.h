@@ -7,11 +7,14 @@
 //
 
 
+#import "AHSuperSystem.h"
 #import "BCGlobalTypes.h"
-#import <Foundation/Foundation.h>
 
 
-@interface BCGlobalManager : NSObject
+@interface BCGlobalManager : NSObject <AHSuperSystemDelegate> {
+@private;
+    float _cameraYVelocity;
+}
 
 
 #pragma mark -
@@ -27,11 +30,13 @@
 
 @property (nonatomic) float heroSpeed;
 @property (nonatomic) GLKVector2 heroPosition;
-
 @property (nonatomic) float buildingHeightXPosition;
 @property (nonatomic) float buildingHeight;
-
 @property (nonatomic) BCHeroTypes heroType;
+
+@property (nonatomic) float idealCameraPositionX;
+@property (nonatomic) float idealCameraPositionY;
+@property (nonatomic) float cameraYActualPosition;
 
 
 @end

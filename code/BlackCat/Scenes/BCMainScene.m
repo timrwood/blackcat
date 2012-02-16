@@ -33,6 +33,7 @@
     
     [[BCGlobalManager manager] setHeroPosition:GLKVector2Make(0.0f, 0.0f)];
     [[BCGlobalManager manager] setHeroSpeed:0.0f];
+    [[BCGlobalManager manager] setCameraYActualPosition:0.0f];
     
     [[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];

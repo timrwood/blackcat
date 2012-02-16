@@ -12,7 +12,6 @@
 
 #import "AHMathUtils.h"
 #import "AHActorManager.h"
-#import "AHGraphicsCamera.h"
 #import "AHGraphicsManager.h"
 
 #import "BCTerrainBuilder.h"
@@ -81,7 +80,7 @@
     //}
     
     // same building
-    _buildingOffset = BUILDING_MULTI_LEVEL;
+    //_buildingOffset = BUILDING_MULTI_LEVEL;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -158,7 +157,7 @@
 }
 
 - (void)updateBuildingHeight {
-    float buildingX = [[BCGlobalManager manager] buildingHeightXPosition];
+    float buildingX = [[BCGlobalManager manager] heroPosition].x;
     float buildingHeight = 0.0f;
     
     GLKVector2 curEnd;
@@ -182,9 +181,9 @@
     
     if (buildingX < curEnd.x - GAP_ADDITION_LERPING) {
         buildingHeight = [_currentBuilding heightAtXPosition:buildingX];
-    } else if (buildingX < nextStart.x + GAP_ADDITION_LERPING) {
-        float percent = (buildingX - (curEnd.x - GAP_ADDITION_LERPING)) / ((nextStart.x + GAP_ADDITION_LERPING) - (curEnd.x - GAP_ADDITION_LERPING));
-        buildingHeight = FloatLerp(curEnd.y, nextStart.y, percent);
+    //} else if (buildingX < nextStart.x + GAP_ADDITION_LERPING) {
+    //    float percent = (buildingX - (curEnd.x - GAP_ADDITION_LERPING)) / ((nextStart.x + GAP_ADDITION_LERPING) - (curEnd.x - GAP_ADDITION_LERPING));
+    //    buildingHeight = FloatLerp(curEnd.y, nextStart.y, percent);
     } else {
         buildingHeight = [_nextBuilding heightAtXPosition:buildingX];
         [self buildBuilding];
@@ -195,6 +194,9 @@
         [self buildBuilding];
     }*/
     
+    float offset = -[[AHGraphicsManager camera] worldZoom] / 2.0f;
+    
+    [[BCGlobalManager manager] setIdealCameraPositionY:buildingHeight + offset];
     [[BCGlobalManager manager] setBuildingHeight:buildingHeight];
 }
 

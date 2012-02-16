@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 Broken Pixel Studios. All rights reserved.
 //
 
+
+#import "BCGlobalManager.h"
 #import "BCAppDelegate.h"
 #import "BCViewController.h"
 
@@ -31,6 +33,7 @@
     
     // init super system
     [[AHSuperSystem manager] setup];
+    [[AHSuperSystem manager] setDelegate:[BCGlobalManager manager]];
     //[[AHSuperSystem manager] setDebugDraw:YES];
     //[[AHSuperSystem manager] setRenderDraw:NO];
     

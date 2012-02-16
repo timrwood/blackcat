@@ -7,12 +7,26 @@
 //
 
 
+@protocol AHSuperSystemDelegate <NSObject>
+
+
+- (void)updateBeforePhysics;
+- (void)updateBeforeAnimation;
+- (void)updateBeforeRender;
+- (void)updateAfterEverything;
+
+
+@end
+
+
 @interface AHSuperSystem : NSObject {
 @private;
     BOOL _isEnabledDebugDraw;
     BOOL _isEnabledRenderDraw;
     
     BOOL _isPaused;
+    
+    NSObject <AHSuperSystemDelegate> *_delegate;
 }
 
 
@@ -36,6 +50,13 @@
 
 - (void)enterBackground;
 - (void)teardown;
+
+
+#pragma mark -
+#pragma mark delegate
+
+
+- (void)setDelegate:(NSObject <AHSuperSystemDelegate> *)delegate;
 
 
 #pragma mark -

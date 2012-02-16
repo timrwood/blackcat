@@ -210,7 +210,7 @@
 }
 
 - (void)updateCamera {
-    GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
+    /*GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
     
     // set the building height position based on the x position
     [[BCGlobalManager manager] setBuildingHeightXPosition:cameraPosition.x];
@@ -224,7 +224,9 @@
     
     // update camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-    [[AHGraphicsManager camera] setWorldZoom:8.0f];
+    [[AHGraphicsManager camera] setWorldZoom:8.0f];*/
+    
+    [[BCGlobalManager manager] setIdealCameraPositionX:[_body position].x];
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];

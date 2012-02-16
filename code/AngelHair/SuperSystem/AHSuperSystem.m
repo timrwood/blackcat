@@ -96,6 +96,15 @@ static AHSuperSystem *_manager = nil;
 
 
 #pragma mark -
+#pragma mark delegate
+
+
+- (void)setDelegate:(NSObject <AHSuperSystemDelegate> *)delegate {
+    _delegate = delegate;
+}
+
+
+#pragma mark -
 #pragma mark cleanCache
 
 
@@ -116,19 +125,31 @@ static AHSuperSystem *_manager = nil;
     [[AHTimeManager manager] update];
     // physics
     [[AHActorManager manager] updateBeforePhysics];
+    if (_delegate) {
+        [_delegate updateBeforePhysics];
+    }
     [[AHPhysicsManager manager] update];
     
     // animation
     [[AHActorManager manager] updateBeforeAnimation];
+    if (_delegate) {
+        [_delegate updateBeforeAnimation];
+    }
     //[[AHAnimationManager manager] update];
     
     // render
     [[AHActorManager manager] updateBeforeRender];
+    if (_delegate) {
+        [_delegate updateBeforeRender];
+    }
     [[AHGraphicsManager manager] update];
     
     // end update
     [[AHSceneManager manager] update];
     [[AHActorManager manager] updateAfterEverything];
+    if (_delegate) {
+        [_delegate updateAfterEverything];
+    }
 }
 
 

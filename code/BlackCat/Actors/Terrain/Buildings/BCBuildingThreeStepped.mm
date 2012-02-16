@@ -158,16 +158,10 @@
     float step2height = step1height + (_step1to2isUp ? -STEP_HEIGHT : STEP_HEIGHT);
     float step3height = step2height + (_step2to3isUp ? -STEP_HEIGHT : STEP_HEIGHT);
 
-    if (xPos > step2to3 + (SMOOTH_WIDTH * 0.5f)) {
+    if (xPos > step2to3 - (SMOOTH_WIDTH * 0.5f)) {
         return step3height;
-    } else if (xPos > step2to3 - (SMOOTH_WIDTH * 0.5f)) {
-        float percent = (xPos - (step2to3 - (SMOOTH_WIDTH * 0.5f))) / SMOOTH_WIDTH;
-        return FloatLerp(step2height, step3height, percent);
-    } else if (xPos > step1to2 + (SMOOTH_WIDTH * 0.5f)) {
-        return step2height;
     } else if (xPos > step1to2 - (SMOOTH_WIDTH * 0.5f)) {
-        float percent = (xPos - (step1to2 - (SMOOTH_WIDTH * 0.5f))) / SMOOTH_WIDTH;
-        return FloatLerp(step1height, step2height, percent);
+        return step2height;
     } else {
         return step1height;
     }
