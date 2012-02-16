@@ -18,19 +18,15 @@
 @private;
     AHPhysicsPolygon *_stairCeiling;
     AHPhysicsPolygon *_step1;
-    AHPhysicsRect *_stairCeilingEnd;
     AHPhysicsRect *_step2;
     
-    AHGraphicsCube *_skin1;
-    AHGraphicsCube *_skin2;
-    AHGraphicsCube *_skinCeiling1;
-    AHGraphicsCube *_skinCeiling2;
-    AHGraphicsCube *_skinCeiling3;
-    AHGraphicsCube *_skinBack;
-    AHGraphicsCube *_skinStair;
-    
-    BOOL _step1to2isUp;
-    BOOL _step2to3isUp;
+    AHGraphicsCube *_skinGroundTop;
+    AHGraphicsCube *_skinGroundBot;
+    AHGraphicsCube *_skinStairTop;
+    AHGraphicsCube *_skinStairAngled;
+    AHGraphicsCube *_skinStairBotCeil;
+    AHGraphicsCube *_skinStairBotBack;
+    AHGraphicsCube *_skinStairBotFront;
 }
 
 
@@ -43,8 +39,6 @@
 - (void)setupStairCeiling;
 - (void)setupStairCeilingMiddle;
 - (void)setupStairCeilingEnd;
-- (void)setupStepBack;
-- (void)setupStairSteps;
 
 
 @end

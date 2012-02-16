@@ -39,4 +39,12 @@
 @property (nonatomic) float cameraYActualPosition;
 
 
+#pragma mark -
+#pragma mark update
+
+
+- (void)updateCameraVelocityEaseOut;
+- (void)updateCameraVelocity;
+
+
 @end

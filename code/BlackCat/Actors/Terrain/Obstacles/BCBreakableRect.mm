@@ -364,6 +364,7 @@
                                                            andTexQuad:texQuad
                                                         andTextureKey:_texKey];
         [poly setExplosionPoint:_breakPoint andRadius:_breakRadius];
+        [poly setStartDepth:_frontDepth endDepth:_backDepth];
         [[AHActorManager manager] add:poly];
     }
 }
@@ -510,6 +511,7 @@
                                                         andTextureKey:_texKey];
         [poly setTopTex:texRectTop andBotTex:texRectBot];
         [poly setExplosionPoint:_breakPoint andRadius:_breakRadius];
+        [poly setStartDepth:_frontDepth endDepth:_backDepth];
         [[AHActorManager manager] add:poly];
     }
 }

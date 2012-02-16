@@ -54,19 +54,24 @@ typedef enum {
 } BCHeroTypes;
 
 
-#define Z_NEAR_LIMIT 0.5f
-#define Z_FAR_LIMIT 15.0f
+#define Z_NEAR_LIMIT 2.0f
+#define Z_FAR_LIMIT 30.0f
 
 
-#define Z_BUILDING_FRONT -3.0f
-#define Z_STAIR_FRONT    -3.5f
-#define Z_PHYSICS_FRONT  -3.9f
-#define Z_PHYSICS_DEPTH  -4.0f
-#define Z_PHYSICS_BACK   -4.1f
-#define Z_STAIR_BACK     -4.5f
-#define Z_BUILDING_BACK  -5.0f
+#define Z_WALL_WIDTH     -0.2f
 
+#define Z_BUILDING_FRONT -4.0f
+#define Z_STAIR_FRONT    -5.5f
+#define Z_PHYSICS_FRONT  -5.9f
+#define Z_PHYSICS_DEPTH  -6.0f
+#define Z_PHYSICS_BACK   -6.1f
+#define Z_STAIR_BACK     -6.5f
+#define Z_BUILDING_BACK  -8.0f
 
+#define Z_BACKGROUND_1   -10.0f
+#define Z_BACKGROUND_2   -15.0f
+#define Z_BACKGROUND_3   -20.0f
+#define Z_BACKGROUND_4   -30.0f
 
 
 

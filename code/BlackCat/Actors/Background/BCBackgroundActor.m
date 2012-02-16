@@ -39,15 +39,10 @@
         _bot = [[AHGraphicsRect alloc] init];
         _bot2 = [[AHGraphicsRect alloc] init];
         
-        [_top setLayerIndex:GFX_LAYER_BACKGROUND];
-        [_mid setLayerIndex:GFX_LAYER_BACKGROUND];
-        [_bot setLayerIndex:GFX_LAYER_BACKGROUND];
-        [_bot2 setLayerIndex:GFX_LAYER_BACKGROUND];
-        
-        [_top setDepth:-8.0f];
-        [_mid setDepth:-7.0f];
-        [_bot setDepth:-6.0f];
-        [_bot2 setDepth:-5.0f];
+        [_top setDepth:Z_BACKGROUND_4];
+        [_mid setDepth:Z_BACKGROUND_3];
+        [_bot setDepth:Z_BACKGROUND_2];
+        [_bot2 setDepth:Z_BACKGROUND_1];
         
         [_top setTextureKey:@"background.png"];
         [_mid setTextureKey:@"background.png"];

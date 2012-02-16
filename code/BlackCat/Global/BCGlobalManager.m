@@ -7,6 +7,9 @@
 //
 
 
+#define CAMERA_ACCELERATION 0.02f
+#define CAMERA_MAX_SPEED 0.15f
+
 #define CAMERA_ZOOM 8.0f
 
 
@@ -71,20 +74,7 @@ static BCGlobalManager *_manager = nil;
 }
 
 - (void)updateBeforeRender {
-    if (cameraYActualPosition < idealCameraPositionY) {
-        _cameraYVelocity = fminf(0.05f, idealCameraPositionY - cameraYActualPosition);
-    } else if (cameraYActualPosition > idealCameraPositionY) {
-        _cameraYVelocity = fmaxf(-0.05f, idealCameraPositionY - cameraYActualPosition);
-    } else {
-        _cameraYVelocity = 0.0f;
-    }
-    cameraYActualPosition += _cameraYVelocity;
-    
-    GLKVector2 cameraPosition = GLKVector2Make(idealCameraPositionX, cameraYActualPosition);
-    
-    // update camera
-    [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-    
+    [self updateCameraVelocityEaseOut];
     // defaults
     [[AHGraphicsManager camera] setCameraOffset:GLKVector2Make(-0.5f, 0.0f)];
     [[AHGraphicsManager camera] setWorldZoom:CAMERA_ZOOM];
@@ -95,6 +85,41 @@ static BCGlobalManager *_manager = nil;
 }
 
 - (void)updateAfterEverything {
+    
+}
+
+- (void)updateCameraVelocityEaseOut {
+    float distance = idealCameraPositionY - cameraYActualPosition;
+    float diff = distance / 5.0f;
+    
+    if (fabsf(distance) < 0.01f) {
+        cameraYActualPosition = idealCameraPositionY;
+    } else {
+        cameraYActualPosition += diff;
+    }
+    
+    // update camera
+    [[AHGraphicsManager camera] setWorldPosition:GLKVector2Make(idealCameraPositionX, cameraYActualPosition)];
+}
+
+- (void)updateCameraVelocity {
+    float distance = idealCameraPositionY - cameraYActualPosition;
+    
+    if (cameraYActualPosition < idealCameraPositionY) {
+        _cameraYVelocity += CAMERA_ACCELERATION;
+        _cameraYVelocity = fminf(CAMERA_MAX_SPEED, distance);
+    } else if (cameraYActualPosition > idealCameraPositionY) {
+        _cameraYVelocity -= CAMERA_ACCELERATION;
+        _cameraYVelocity = fmaxf(-CAMERA_MAX_SPEED, distance);
+    } else {
+        _cameraYVelocity = 0.0f;
+    }
+    cameraYActualPosition += _cameraYVelocity;
+    
+    GLKVector2 cameraPosition = GLKVector2Make(idealCameraPositionX, cameraYActualPosition);
+    
+    // update camera
+    [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
 }
 
 

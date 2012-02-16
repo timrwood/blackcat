@@ -13,6 +13,8 @@
 #define UPPER_HEIGHT 4.0f
 #define LOWER_HEIGHT 4.0f
 
+#define WALL_WIDTH 2.0f
+
 #define BUILDING_WIDTH 32.0f
 
 
@@ -21,6 +23,7 @@
 #import "AHPhysicsRect.h"
 
 #import "BCBreakableRect.h"
+#import "BCGlobalManager.h"
 #import "BCGlobalTypes.h"
 #import "BCBuildingMultiLevel.h"
 
@@ -54,6 +57,14 @@
     [self buildBackgroundAt:centerHeight - FLOOR_HEIGHT_INCLUDING_CEILING];
     [self buildBackgroundAt:centerHeight];
     [self buildBackgroundAt:centerHeight + FLOOR_HEIGHT_INCLUDING_CEILING];
+    
+    for (int i = 0; i < 4; i++) {
+        float layer = (float)((rand() % 3 - 1)) * FLOOR_HEIGHT_INCLUDING_CEILING;
+        float offset = (BUILDING_WIDTH / 5.0f) * (float) (i + 1);
+        GLKVector2 pos = GLKVector2Add(self->_startCorner, GLKVector2Make(offset, layer));
+        [self buildWallAtBottomCenter:pos];
+    }
+    
     [super setup];
 }
 
@@ -79,9 +90,9 @@
 
 - (void)buildFloorAt:(float)height {
     CGRect debugRect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    CGRect debugRect2 = CGRectMake(0.0f, 0.0f, 0.2f, 1.0f);
-    CGSize size = CGSizeMake(BUILDING_WIDTH / 2.0f, (CEILING_HEIGHT / 2.0f) - CEILING_EDGE_HEIGHT);
-    GLKVector2 position = GLKVector2Make([self buildingCenterPosition], height + CEILING_HEIGHT / 2.0f);
+    //CGRect debugRect2 = CGRectMake(0.0f, 0.0f, 0.2f, 1.0f);
+    CGSize size = CGSizeMake(BUILDING_WIDTH / 2.0f, CEILING_HEIGHT / 2.0f);
+    GLKVector2 position = GLKVector2Make([self buildingCenterPosition], height + size.height);
     
     CGSize sizeTopBot = size;
     sizeTopBot.height = CEILING_EDGE_HEIGHT / 2.0f;
@@ -99,33 +110,9 @@
                                                           andTexKey:@"debug-grid.png"];
     [rect enableBreakOnDown:YES];
     [rect enableBreakOnUp:YES];
-    [rect setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
-    [[AHActorManager manager] add:rect];
-    
-    /*
-    // top
-    rect = [[BCBreakableRect alloc] initWithCenter:positionTop 
-                                           andSize:sizeTopBot 
-                                        andTexRect:debugRect2 
-                                         andTexKey:@"debug-grid.png"];
-    [rect enableBreakOnRight:YES];
-    [rect enableBreakOnDown:YES];
-    [rect enableBreakOnUp:YES];
     [rect addTag:PHY_TAG_JUMPABLE];
     [rect setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
     [[AHActorManager manager] add:rect];
-    
-    // bottom
-    rect = [[BCBreakableRect alloc] initWithCenter:positionBot 
-                                           andSize:sizeTopBot 
-                                        andTexRect:debugRect2 
-                                         andTexKey:@"debug-grid.png"];
-    [rect enableBreakOnRight:YES];
-    [rect enableBreakOnDown:YES];
-    [rect enableBreakOnUp:YES];
-    [rect setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
-    [[AHActorManager manager] add:rect];
-     */
 }
 
 - (void)buildBottomAt:(float)height {
@@ -167,7 +154,23 @@
 }
 
 - (void)buildWallAtBottomCenter:(GLKVector2)center {
+    CGSize size = CGSizeMake(WALL_WIDTH / 2.0f, (FLOOR_HEIGHT_INCLUDING_CEILING - CEILING_HEIGHT) / 2.0f);
+    GLKVector2 position = GLKVector2Make(0.0f, -size.height);
     
+    AHPhysicsRect *_body = [[AHPhysicsRect alloc] initFromSize:size];
+    [_body setRestitution:0.0f];
+    [_body setStatic:YES];
+    [_body setCategory:PHY_CAT_BUILDING];
+    [_body setPosition:GLKVector2Add(position, center)];
+    [self addComponent:_body];
+    
+    AHGraphicsCube *_skin = [[AHGraphicsCube alloc] init];
+    [_skin setRectFromCenter:position andSize:size];
+    [_skin setPosition:center];
+    [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+    [_skin setTextureKey:@"debug-grid.png"];
+    [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
+    [self addComponent:_skin];
 }
 
 - (float)buildingCenterPosition {
@@ -192,6 +195,20 @@
     end.x = self->_startCorner.x + BUILDING_WIDTH;
     end.y = self->_startCorner.y;
     return end;
+}
+
+- (float)heightAtXPosition:(float)xPos {
+    float heightStart = self->_startCorner.y;
+    
+    GLKVector2 heroPosition = [[BCGlobalManager manager] heroPosition];
+    
+    if (heroPosition.y < heightStart - FLOOR_HEIGHT_INCLUDING_CEILING) {
+        return heightStart - FLOOR_HEIGHT_INCLUDING_CEILING;
+    } else if (heroPosition.y > heightStart) {
+        return heightStart + FLOOR_HEIGHT_INCLUDING_CEILING;
+    }    
+    
+    return heightStart;
 }
 
 

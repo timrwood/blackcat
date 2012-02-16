@@ -87,6 +87,10 @@
     [_skin setBotTex:botTex];
 }
 
+- (void)setStartDepth:(float)front endDepth:(float)back {
+    [_skin setStartDepth:front endDepth:back];
+}
+
 
 #pragma mark -
 #pragma mark setup
@@ -94,7 +98,7 @@
 
 - (void)setup {
     [super setup];
-    GLKVector2 explosionVelocity = GLKVector2Subtract(_center, _explosionPoint);
+    GLKVector2 explosionVelocity = GLKVector2Subtract(_explosionPoint, _center);
     
     // distance to explosion point
     float distanceFromExplosion = GLKVector2Length(explosionVelocity);

@@ -7,9 +7,6 @@
 //
 
 
-#define GAP_ADDITION_LERPING 2.0f
-
-
 #import "AHMathUtils.h"
 #import "AHActorManager.h"
 #import "AHGraphicsManager.h"
@@ -80,7 +77,7 @@
     //}
     
     // same building
-    //_buildingOffset = BUILDING_MULTI_LEVEL;
+    _buildingOffset = BUILDING_MULTI_LEVEL;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -166,7 +163,6 @@
     if (_nextBuilding) {
         nextStart = [_nextBuilding startCorner];
     } else {
-        //dlog(@"no next building, building one now");
         [self buildBuilding];
         return;
     }
@@ -174,25 +170,16 @@
     if (_currentBuilding) {
         curEnd = [_currentBuilding endCorner];
     } else {
-        //dlog(@"no current building, building one now");
         [self buildBuilding];
         return;
     }
     
-    if (buildingX < curEnd.x - GAP_ADDITION_LERPING) {
+    if (buildingX < curEnd.x) {
         buildingHeight = [_currentBuilding heightAtXPosition:buildingX];
-    //} else if (buildingX < nextStart.x + GAP_ADDITION_LERPING) {
-    //    float percent = (buildingX - (curEnd.x - GAP_ADDITION_LERPING)) / ((nextStart.x + GAP_ADDITION_LERPING) - (curEnd.x - GAP_ADDITION_LERPING));
-    //    buildingHeight = FloatLerp(curEnd.y, nextStart.y, percent);
     } else {
         buildingHeight = [_nextBuilding heightAtXPosition:buildingX];
         [self buildBuilding];
     }
-    
-    /*
-    if (heroX > nextStart.x) {
-        [self buildBuilding];
-    }*/
     
     float offset = -[[AHGraphicsManager camera] worldZoom] / 2.0f;
     

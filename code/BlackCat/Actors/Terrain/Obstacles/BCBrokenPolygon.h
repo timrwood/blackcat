@@ -41,6 +41,7 @@
 
 - (void)setExplosionPoint:(GLKVector2)point andRadius:(float)radius;
 - (void)setTopTex:(CGRect)topTex andBotTex:(CGRect)botTex;
+- (void)setStartDepth:(float)front endDepth:(float)back;
 
 
 @end

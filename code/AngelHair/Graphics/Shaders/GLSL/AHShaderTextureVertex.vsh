@@ -33,7 +33,7 @@ void main(void) {
     // calc normal for this vertex
     //norcoord_frag = vec3(normalMatrix * norcoord);
     
-    diffuse = max(dot(vec3(normalMatrix * norcoord), normalize(lightPosition)), 0.5);
+    diffuse = max(dot(vec3(normalMatrix * norcoord), normalize(lightPosition)), 0.2);
     
     // calc light pos
     //lightPosition_frag = normalize(lightPosition);
