@@ -10,7 +10,7 @@
 #define CAMERA_ACCELERATION 0.02f
 #define CAMERA_MAX_SPEED 0.15f
 
-#define CAMERA_ZOOM 8.0f
+#define CAMERA_ZOOM 4.0f
 
 
 #import "AHGraphicsManager.h"

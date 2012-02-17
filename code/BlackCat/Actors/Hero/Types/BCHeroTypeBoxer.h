@@ -21,6 +21,10 @@
     
     float cameraPositionX;
     float xOffset;
+    float averageVelocityX;
+    
+    BOOL _needsToDash;
+    int _needsToDashState;
 }
 
 
@@ -31,6 +35,15 @@
 - (BOOL)isDashing;
 - (void)sendExplosionMessage:(int)type withRadius:(float)radius;
 - (void)dashToPoint:(GLKVector2)point;
+
+
+#pragma mark -
+#pragma mark update
+
+
+- (void)updateDashXOffset;
+- (void)updateDashCheckTurnOn;
+- (void)updateDashCheckTurnOff;
 
 
 @end

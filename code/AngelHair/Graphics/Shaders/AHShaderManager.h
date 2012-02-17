@@ -18,12 +18,14 @@
 #import "AHSubSystem.h"
 #import "AHShaderColor.h"
 #import "AHShaderTexture.h"
+#import "AHShaderNormal.h"
 
 
 @interface AHShaderManager : NSObject <AHSubSystem> {
 @private;
-    AHShaderColor *_colorShader;
+    AHShaderColor   *_colorShader;
     AHShaderTexture *_textureShader;
+    AHShaderNormal  *_normalShader;
     AHShader *_currentShader;
 }
 
@@ -39,6 +41,7 @@
 #pragma mark program
 
 
+- (void)useNormalProgram;
 - (void)useTextureProgram;
 - (void)useColorProgram;
 

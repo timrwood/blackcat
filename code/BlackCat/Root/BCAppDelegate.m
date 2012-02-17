@@ -44,6 +44,11 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
+    if (NO) {
+        [self.viewController setPreferredFramesPerSecond:5];
+        [[AHTimeManager manager] setWorldToRealRatio:6];
+    }
+    
     return YES;
 }
 							

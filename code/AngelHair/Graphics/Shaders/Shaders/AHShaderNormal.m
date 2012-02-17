@@ -8,10 +8,10 @@
 
 
 #import "AHShaderManager.h"
-#import "AHShaderTexture.h"
+#import "AHShaderNormal.h"
 
 
-@implementation AHShaderTexture
+@implementation AHShaderNormal
 
 
 #pragma mark -
@@ -22,10 +22,10 @@
     GLuint program = [self programId];
     
     // load shaders
-    GLuint vertexShader = [self compileShader:@"AHShaderTextureVertex"
+    GLuint vertexShader = [self compileShader:@"AHShaderNormalVertex"
                                 withExtension:@"vsh"
                                      withType:GL_VERTEX_SHADER];
-    GLuint fragmentShader = [self compileShader:@"AHShaderTextureFragment"
+    GLuint fragmentShader = [self compileShader:@"AHShaderNormalFragment"
                                   withExtension:@"fsh"
                                        withType:GL_FRAGMENT_SHADER];
     
@@ -67,6 +67,7 @@
     _normalUniform = glGetUniformLocation(program, "normalMatrix");
     
     glUniform1i(glGetUniformLocation(program, "textureBase"), AH_TEXTURE_SAMPLE_BASE);
+    glUniform1i(glGetUniformLocation(program, "textureNormal"), AH_TEXTURE_SAMPLE_NORMAL);
     
     dlog(@"Compiled texture shaders");
 }

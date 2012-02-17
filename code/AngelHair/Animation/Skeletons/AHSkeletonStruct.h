@@ -80,6 +80,12 @@ static inline AHSkeleton AHSkeletonModRotationBetween(AHSkeleton skelIn, float l
     return skelOut;
 }
 
+static inline AHSkeleton AHSkeletonZero() {
+    return (AHSkeleton) {
+        0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f
+    };
+}
+
 typedef struct _AHSkeletonConfig {
 	float torsoWidth;
 	float torsoHeight;

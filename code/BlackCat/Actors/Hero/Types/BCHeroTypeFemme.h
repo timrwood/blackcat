@@ -20,7 +20,20 @@
     
     float cameraPositionX;
     float xOffset;
+    
+    float averageVelocityX;
+    
+    BOOL _needsToPhasewalk;
 }
+
+
+#pragma mark -
+#pragma mark update
+
+
+- (void)updatePhasewalkXOffset;
+- (void)updatePhasewalkCheckTurnOff;
+- (void)updatePhasewalkCheckTurnOn;
 
 
 @end

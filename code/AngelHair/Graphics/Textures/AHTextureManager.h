@@ -52,8 +52,8 @@
 #pragma mark activate
 
 
-- (void)activateBaseTexture:(AHTextureInfo *)texture;
-- (void)activateNormalTexture:(AHTextureInfo *)texture;
+- (void)activateBaseTexture:(GLuint)texture;
+- (void)activateNormalTexture:(GLuint)texture;
 
 
 @end

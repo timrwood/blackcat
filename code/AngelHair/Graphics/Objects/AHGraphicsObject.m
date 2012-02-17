@@ -7,6 +7,7 @@
 //
 
 
+#import "AHTextureManager.h"
 #import "AHShaderManager.h"
 #import "AHGraphicsManager.h"
 #import "AHGraphicsLayer.h"
@@ -162,15 +163,15 @@
 
 
 - (void)setTextureKey:(NSString *)key {
-    _texture = [[AHTextureManager manager] textureForKey:key];
+    _baseTexture = [[AHTextureManager manager] textureForKey:key];
 }
 
 - (void)setNormalTextureKey:(NSString *)key {
     _normalTexture = [[AHTextureManager manager] textureForKey:key];
 }
 
-- (AHTextureInfo *)texture {
-    return _texture;
+- (AHTextureInfo *)baseTexture {
+    return _baseTexture;
 }
 
 - (AHTextureInfo *)normalTexture {
@@ -183,6 +184,15 @@
 
 
 - (void)draw {
+    if (_baseTexture) {
+        [[AHTextureManager manager] activateBaseTexture:[_baseTexture name]];
+    }
+    if (_normalTexture) {
+        [[AHTextureManager manager] activateBaseTexture:[_normalTexture name]];
+        [[AHShaderManager manager] useNormalProgram];
+    } else {
+        [[AHShaderManager manager] useTextureProgram];
+    }
     glPushGroupMarkerEXT(0, "Drawing Graphics Object");
     if (_isOffset) {
         [[AHGraphicsManager manager] modelPush];
@@ -239,6 +249,10 @@
     } else {
         _isOffset = YES;
     }
+}
+
+- (GLKVector2)position {
+    return _position;
 }
 
 - (void)setRotation:(float)rotation {

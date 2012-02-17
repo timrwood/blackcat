@@ -95,11 +95,11 @@
 }
 
 - (void)setDepth:(float)depth {
-    [_armA setDepth:depth];
-    [_armB setDepth:depth];
-    [_legB setDepth:depth];
-    [_legA setDepth:depth];
-    [_head setDepth:depth];
+    [_armA setDepth:depth - 0.05f];
+    [_armB setDepth:depth + 0.1f];
+    [_legA setDepth:depth - 0.05f];
+    [_legB setDepth:depth + 0.1f];
+    [_head setDepth:depth + 0.05f];
     [_torso setDepth:depth];
 }
 
@@ -157,7 +157,11 @@
 }
 
 - (AHSkeleton)skeleton {
-    return _skeleton;
+    AHSkeleton skel = _skeleton;
+    GLKVector2 pos = [self position];
+    skel.x += pos.x;
+    skel.y += pos.y;
+    return skel;
 }
 
 

@@ -7,6 +7,9 @@
 //
 
 
+#define DEBUG_BUILDING_GAPS NO
+
+
 #import "AHMathUtils.h"
 #import "AHActorManager.h"
 #import "AHGraphicsManager.h"
@@ -77,7 +80,7 @@
     //}
     
     // same building
-    _buildingOffset = BUILDING_MULTI_LEVEL;
+    _buildingOffset = BUILDING_THREE_STEPPED_012;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -86,8 +89,13 @@
         lastEnd = [_nextBuilding endCorner];
     }
     
-    float spacing = 0.0f;
-    float nextHeight = [self seededRandomBetweenFloat:0.0f andFloat:0.0f];
+    float spacing = 2.0f;
+    float nextHeight = [self seededRandomBetweenFloat:-1.0f andFloat:1.0f];
+    
+    if (DEBUG_BUILDING_GAPS) {
+        spacing = 0.0f;
+        nextHeight = 0.0f;
+    }
     
     BCBuildingType *newBuilding;
     switch (type) {

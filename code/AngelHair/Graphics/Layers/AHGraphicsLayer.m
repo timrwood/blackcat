@@ -7,7 +7,6 @@
 //
 
 
-#import "AHTextureManager.h"
 #import "AHGraphicsManager.h"
 #import "AHGraphicsObject.h"
 #import "AHGraphicsLayer.h"
@@ -67,13 +66,6 @@
 
 - (void)draw {
     for (AHGraphicsObject *object in _objects) {
-        [[AHTextureManager manager] activateBaseTexture:[object texture]];
-        if ([object normalTexture]) {
-            // enable normal
-            [[AHTextureManager manager] activateNormalTexture:[object normalTexture]];
-        } else {
-            // disable normal
-        }
         [object draw];
     }
 }

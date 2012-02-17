@@ -17,7 +17,7 @@
 @interface AHGraphicsObject : AHActorComponent {
 @private;
     AHGraphicsLayer *_layer;
-    AHTextureInfo *_texture;
+    AHTextureInfo *_baseTexture;
     AHTextureInfo *_normalTexture;
     
     int _indexCount;
@@ -77,6 +77,7 @@
 
 
 - (void)setPosition:(GLKVector2)position;
+- (GLKVector2)position;
 - (void)setRotation:(float)rotation;
 
 
@@ -86,7 +87,7 @@
 
 - (void)setNormalTextureKey:(NSString *)key;
 - (void)setTextureKey:(NSString *)key;
-- (AHTextureInfo *)texture;
+- (AHTextureInfo *)baseTexture;
 - (AHTextureInfo *)normalTexture;
 
 

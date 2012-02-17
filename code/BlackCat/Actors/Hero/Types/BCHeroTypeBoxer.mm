@@ -93,6 +93,30 @@ typedef enum {
 
 
 - (void)updateBeforePhysics {
+    [self updateDashCheckTurnOff];
+}
+
+- (void)updateBeforeRender {
+    [self updateDashCheckTurnOn];
+    [self updateDashXOffset];
+}
+
+- (void)updateDashXOffset {
+    cameraPositionX += averageVelocityX + averageVelocityX;
+    xOffset = fmaxf(0.0f, [self heroPosition].x - cameraPositionX);
+}
+
+- (void)updateDashCheckTurnOn {
+    if (_needsToDash) {
+        _timeStartedDash = [[AHTimeManager manager] worldTime];
+        [_dashState changeState:_needsToDashState];
+        cameraPositionX = [self heroPosition].x;
+        xOffset = 0.0f;
+    }
+    _needsToDash = NO;
+}
+
+- (void)updateDashCheckTurnOff {
     if ([self isDashing]) {
         GLKVector2 difference = GLKVector2Subtract(_targetPosition, [self heroPosition]);
         float distance = GLKVector2Length(difference);
@@ -106,18 +130,11 @@ typedef enum {
         [_dashState changeState:STATE_CAN_DASH];
     }
     
-    
     if ([[AHTimeManager manager] worldTime] - _timeStartedDash > DASH_TIMEOUT) {
         [_dashState changeState:STATE_CAN_DASH];
     } else if ([[AHTimeManager manager] worldTime] - _timeStartedDash > DASH_MAX_TIME) {
         [_dashState changeState:STATE_CANNOT_DASH];
-    }
-    
-    if ([self isDashing]) {
-        xOffset = [self heroPosition].x - cameraPositionX;
-    } else {
-        xOffset = fmaxf(xOffset - 0.2f, 0.0f);
-    }
+    }                 
 }
 
 
@@ -130,6 +147,7 @@ typedef enum {
     if ([self isDashing]) {
         return [self velocityToPoint:_targetPosition withMax:DASH_VELOCITY];
     } else {
+        averageVelocityX = velocity.x * [[AHTimeManager manager] worldSecondsPerFrame];
         return velocity;
     }
 }
@@ -157,9 +175,6 @@ typedef enum {
 
 - (void)dashToPoint:(GLKVector2)point {
     _targetPosition = GLKVector2Add([self heroPosition], point);
-    _timeStartedDash = [[AHTimeManager manager] worldTime];
-    cameraPositionX = [self heroPosition].x;
-    xOffset = 0.0f;
 }
 
 
@@ -222,11 +237,14 @@ typedef enum {
         return;
     }
     if (point.x > 3.0f && point.x > fabsf(point.y)) {
-        [_dashState changeState:STATE_IS_DASHING_RIGHT];
+        _needsToDash = YES;
+        _needsToDashState = STATE_IS_DASHING_RIGHT;
     } else if (point.y > 3.0f) {
-        [_dashState changeState:STATE_IS_DASHING_DOWN];
+        _needsToDash = YES;
+        _needsToDashState = STATE_IS_DASHING_DOWN;
     } else if (point.y < -3.0f) {
-        [_dashState changeState:STATE_IS_DASHING_UP];
+        _needsToDash = YES;
+        _needsToDashState = STATE_IS_DASHING_UP;
     }
 }
 

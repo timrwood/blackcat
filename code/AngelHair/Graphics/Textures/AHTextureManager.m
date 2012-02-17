@@ -155,22 +155,26 @@ static AHTextureManager *_manager = nil;
 #pragma mark activate
 
 
-- (void)activateBaseTexture:(AHTextureInfo *)texture {
-    if ([texture name] != _currentBaseTexture) {
+- (void)activateBaseTexture:(GLuint)texture {
+    if (texture != _currentBaseTexture) {
         glPushGroupMarkerEXT(0, "Enabling Base Texture");
-        _currentBaseTexture = [texture name];
+        
+        _currentBaseTexture = texture;
         glActiveTexture(GL_TEXTURE0 + AH_TEXTURE_SAMPLE_BASE);
         glBindTexture(GL_TEXTURE_2D, _currentBaseTexture);
+        
         glPopGroupMarkerEXT();
     }
 }
 
-- (void)activateNormalTexture:(AHTextureInfo *)texture {
-    if ([texture name] != _currentNormalTexture) {
+- (void)activateNormalTexture:(GLuint)texture {
+    if (texture != _currentNormalTexture) {
         glPushGroupMarkerEXT(0, "Enabling Normal Texture");
-        _currentNormalTexture = [texture name];
+        
+        _currentNormalTexture = texture;
         glActiveTexture(GL_TEXTURE0 + AH_TEXTURE_SAMPLE_NORMAL);
         glBindTexture(GL_TEXTURE_2D, _currentNormalTexture);
+        
         glPopGroupMarkerEXT();
     }
 }

@@ -146,7 +146,7 @@
 
 
 - (void)cleanupBeforeDestruction {
-    [[AHSceneManager manager] reset];
+    //[[AHSceneManager manager] reset];
     //[[AHSceneManager manager] goToScene:[[BCClassSelectionScene alloc] init]];
     [super cleanupBeforeDestruction];
 }

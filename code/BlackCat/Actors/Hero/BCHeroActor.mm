@@ -111,8 +111,7 @@
         
         // graphics
         _skeleton = [[AHGraphicsSkeleton alloc] init];
-        AHSkeleton skeleton;
-        [_skeleton setSkeleton:skeleton];
+        [_skeleton setSkeleton:AHSkeletonZero()];
         [_skeleton setDepth:Z_PHYSICS_DEPTH];
         [_skeleton setLayerIndex:GFX_LAYER_BACKGROUND];
         [self addComponent:_skeleton];
@@ -152,11 +151,6 @@
 
 
 - (void)updateBeforeAnimation {
-    [self updateVelocity];
-    [self updateCamera];
-    [self updateJumpability];
-    [self updateSkeleton];
-    [self updateCrash];
     [_type updateBeforeAnimation];
 }
 
@@ -166,6 +160,11 @@
 
 - (void)updateBeforeRender {
     [_type updateBeforeRender];
+    [self updateVelocity];
+    [self updateCamera];
+    [self updateJumpability];
+    [self updateSkeleton];
+    [self updateCrash];
 }
 
 - (void)updateVelocity {
@@ -224,19 +223,18 @@
     
     // update camera
     [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-    [[AHGraphicsManager camera] setWorldZoom:8.0f];*/
+     [[AHGraphicsManager camera] setWorldZoom:8.0f];*/
     
-    [[BCGlobalManager manager] setIdealCameraPositionX:[_body position].x];
+    GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
+    
+    [[BCGlobalManager manager] setIdealCameraPositionX:cameraPosition.x];
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
 }
 
 - (void)updateSkeleton {
-    AHSkeleton skeleton;
-    skeleton.x = [_body position].x;
-    skeleton.y = [_body position].y;
-    [_skeleton setSkeleton:skeleton];
+    [_skeleton setPosition:[_body position]];
 }
 
 - (void)updateCrash {

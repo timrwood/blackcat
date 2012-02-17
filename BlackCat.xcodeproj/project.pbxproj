@@ -55,6 +55,9 @@
 		1558383F14EAFB7600D53710 /* BCBuildingMultiLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1558383E14EAFB7600D53710 /* BCBuildingMultiLevel.mm */; };
 		155D2ABA14E0EFDE0030E752 /* AHPhysicsPill.mm in Sources */ = {isa = PBXBuildFile; fileRef = 155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */; };
 		155D407614D9D64A00D4B826 /* body-detective.png in Resources */ = {isa = PBXBuildFile; fileRef = 155D407514D9D64A00D4B826 /* body-detective.png */; };
+		1564400614EDDAD500CFA385 /* AHShaderNormalVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 1564400114EDDAC200CFA385 /* AHShaderNormalVertex.vsh */; };
+		1564400714EDDAD600CFA385 /* AHShaderNormalFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 1564400214EDDAC200CFA385 /* AHShaderNormalFragment.fsh */; };
+		1564400A14EDDAFD00CFA385 /* AHShaderNormal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1564400914EDDAFD00CFA385 /* AHShaderNormal.m */; };
 		156A86FB14C7B30E00B85E04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156A86FA14C7B30E00B85E04 /* libz.dylib */; };
 		156EC7F714E4A23D00FB31E4 /* debug-normal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 156EC7F614E4A23D00FB31E4 /* debug-normal.jpg */; };
 		156EC7FF14E4B87A00FB31E4 /* grate-base.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 156EC7FD14E4B87A00FB31E4 /* grate-base.jpg */; };
@@ -252,6 +255,10 @@
 		155D2AB814E0EFDE0030E752 /* AHPhysicsPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPhysicsPill.h; sourceTree = "<group>"; };
 		155D2AB914E0EFDE0030E752 /* AHPhysicsPill.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AHPhysicsPill.mm; sourceTree = "<group>"; };
 		155D407514D9D64A00D4B826 /* body-detective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body-detective.png"; sourceTree = "<group>"; };
+		1564400114EDDAC200CFA385 /* AHShaderNormalVertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderNormalVertex.vsh; path = GLSL/AHShaderNormalVertex.vsh; sourceTree = "<group>"; };
+		1564400214EDDAC200CFA385 /* AHShaderNormalFragment.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = AHShaderNormalFragment.fsh; path = GLSL/AHShaderNormalFragment.fsh; sourceTree = "<group>"; };
+		1564400814EDDAFD00CFA385 /* AHShaderNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHShaderNormal.h; path = Shaders/AHShaderNormal.h; sourceTree = "<group>"; };
+		1564400914EDDAFD00CFA385 /* AHShaderNormal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHShaderNormal.m; path = Shaders/AHShaderNormal.m; sourceTree = "<group>"; };
 		156A86FA14C7B30E00B85E04 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		156EC7F614E4A23D00FB31E4 /* debug-normal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "debug-normal.jpg"; sourceTree = "<group>"; };
 		156EC7FD14E4B87A00FB31E4 /* grate-base.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "grate-base.jpg"; sourceTree = "<group>"; };
@@ -665,6 +672,8 @@
 			children = (
 				1541AE8714EC259400ED9D58 /* AHShaderColorFragment.fsh */,
 				1541AE8814EC259400ED9D58 /* AHShaderColorVertex.vsh */,
+				1564400214EDDAC200CFA385 /* AHShaderNormalFragment.fsh */,
+				1564400114EDDAC200CFA385 /* AHShaderNormalVertex.vsh */,
 				1541AE8914EC259400ED9D58 /* AHShaderTextureFragment.fsh */,
 				1541AE8A14EC259400ED9D58 /* AHShaderTextureVertex.vsh */,
 			);
@@ -678,6 +687,8 @@
 				1541AE7F14EC1F4800ED9D58 /* AHShader.m */,
 				1541AE8414EC22D600ED9D58 /* AHShaderColor.h */,
 				1541AE8514EC22D600ED9D58 /* AHShaderColor.m */,
+				1564400814EDDAFD00CFA385 /* AHShaderNormal.h */,
+				1564400914EDDAFD00CFA385 /* AHShaderNormal.m */,
 				1541AE8114EC206E00ED9D58 /* AHShaderTexture.h */,
 				1541AE8214EC206E00ED9D58 /* AHShaderTexture.m */,
 			);
@@ -1379,6 +1390,8 @@
 				1541AE9014EC289E00ED9D58 /* AHShaderColorVertex.vsh in Resources */,
 				1541AE9114EC28A000ED9D58 /* AHShaderTextureFragment.fsh in Resources */,
 				1541AE9214EC28A300ED9D58 /* AHShaderTextureVertex.vsh in Resources */,
+				1564400614EDDAD500CFA385 /* AHShaderNormalVertex.vsh in Resources */,
+				1564400714EDDAD600CFA385 /* AHShaderNormalFragment.fsh in Resources */,
 				15132C2514C8CB680017BBD0 /* background.png in Resources */,
 				1579F1EE14CF3BDA000C0833 /* debug-grid.png in Resources */,
 				15132C2414C8CB680017BBD0 /* demo.anim in Resources */,
@@ -1533,6 +1546,7 @@
 				1541AE8314EC206E00ED9D58 /* AHShaderTexture.m in Sources */,
 				1541AE8614EC22D600ED9D58 /* AHShaderColor.m in Sources */,
 				155317C314EC374F00E5C5B6 /* AHLightManager.m in Sources */,
+				1564400A14EDDAFD00CFA385 /* AHShaderNormal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
