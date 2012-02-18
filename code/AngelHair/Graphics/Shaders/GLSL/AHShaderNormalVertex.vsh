@@ -10,6 +10,8 @@
 attribute vec4 poscoord;
 attribute vec2 texcoord;
 attribute vec4 norcoord;
+attribute vec4 binorcoord;
+attribute vec4 tancoord;
 
 uniform mat4 projection;
 uniform mat4 normalMatrix;
@@ -18,6 +20,8 @@ uniform vec3 lightPosition;
 
 varying highp vec2 texcoord_frag;
 varying highp vec3 norcoord_frag;
+varying highp vec3 binorcoord_frag;
+varying highp vec3 tancoord_frag;
 varying highp vec3 lightPosition_frag;
 
 varying lowp float diffuse;
@@ -31,10 +35,16 @@ void main(void) {
     texcoord_frag = texcoord;
     
     // calc normal for this vertex
-    //norcoord_frag = vec3(normalMatrix * norcoord);
+    norcoord_frag = vec3(modelview * norcoord);
     
-    diffuse = max(dot(vec3(normalMatrix * norcoord), normalize(lightPosition)), 0.2);
+    // calculate binormal
+    binorcoord_frag = vec3(modelview * binorcoord);
+    
+    // calculate tangent
+    tancoord_frag = vec3(modelview * tancoord);
+    
+    //diffuse = max(dot(vec3(normalMatrix * norcoord), normalize(lightPosition)), 0.2);
     
     // calc light pos
-    //lightPosition_frag = normalize(lightPosition);
+    lightPosition_frag = normalize(lightPosition); //vec3(normalize(normalMatrix * vec4(lightPosition, 1.0)));
 }

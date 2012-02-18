@@ -174,7 +174,7 @@ typedef enum {
 
 
 - (GLKVector2)modifyVelocity:(GLKVector2)velocity {
-    //return GLKVector2Zero();
+    return GLKVector2Zero();
     if ([_phasewalkState isState:STATE_IS_PHASEWALKING]) {
         return [self velocityToPoint:_targetPosition withMax:PHASEWALK_VELOCITY];
     } else {

@@ -7,10 +7,14 @@
 //
 
 
+#define DEBUGGING_CAMERA YES
+
+
 #import "AHActorManager.h"
 #import "AHTimeManager.h"
 #import "AHGraphicsManager.h"
 
+#import "BCDebugCameraMover.h"
 #import "BCBackgroundActor.h"
 #import "BCHeroRecorderActor.h"
 #import "BCHeroPlaybackActor.h"
@@ -35,9 +39,13 @@
     [[BCGlobalManager manager] setHeroSpeed:0.0f];
     [[BCGlobalManager manager] setCameraYActualPosition:0.0f];
     
+    if (DEBUGGING_CAMERA) {
+        [[AHActorManager manager] add:[[BCDebugCameraMover alloc] init]];
+    }
+    
     [[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
-    [[AHActorManager manager] add:[[BCHeroActor alloc] init]];
+    //[[AHActorManager manager] add:[[BCHeroActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];
     _recorderActor = [[BCHeroRecorderActor alloc] init];
     [[AHActorManager manager] add:_recorderActor];

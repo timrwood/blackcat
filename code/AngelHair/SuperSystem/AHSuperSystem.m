@@ -161,12 +161,12 @@ static AHSuperSystem *_manager = nil;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     if (_isEnabledRenderDraw) {
-        glEnable(GL_DEPTH_TEST);
+        //glEnable(GL_DEPTH_TEST);
         [[AHShaderManager manager] useTextureProgram];
         glPushGroupMarkerEXT(0, "Graphics Manager Draw");
         [[AHGraphicsManager manager] draw];
         glPopGroupMarkerEXT();
-        glDisable(GL_DEPTH_TEST);
+        //glDisable(GL_DEPTH_TEST);
     }
     
     if (_isEnabledDebugDraw) {

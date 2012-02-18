@@ -23,8 +23,6 @@
     if (self) {
         _programId = glCreateProgram();
         _lightPositionUniform = -1;
-        
-        dlog(@"program %i", _programId);
         [self compile];
     }
     return self;
@@ -83,11 +81,12 @@
 
 - (void)setLightPositionUniform:(GLuint)uniform {
     _lightPositionUniform = uniform;
+    dlog(@"_lightPositionUniform %i", _lightPositionUniform);
 }
 
 - (void)setLightPosition:(GLKVector3)position {
     _lightPosition = position;
-    if (_isActive) {
+    if (_isActive && _lightPositionUniform > -1) {
         glUniform3fv(_lightPositionUniform, 1, _lightPosition.v);
     }
 }
@@ -133,7 +132,7 @@
     glUniformMatrix4fv(_modelViewUniform, 1, 0, _modelViewMatrix.m);
     glUniformMatrix4fv(_projectionUniform, 1, 0, _projectionMatrix.m);
     if (_lightPositionUniform > -1) {
-        glUniform3fv(_lightPositionUniform, 1, _lightPosition.v);
+        glUniform3f(_lightPositionUniform, _lightPosition.x, _lightPosition.y, _lightPosition.z);
     }
 }
 

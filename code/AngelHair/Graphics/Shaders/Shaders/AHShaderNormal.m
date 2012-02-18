@@ -34,9 +34,11 @@
     glAttachShader(program, fragmentShader);
     
     // assign pointers for position and color
-    glBindAttribLocation(program, AH_SHADER_ATTRIB_POS_COORD, "poscoord");
-    glBindAttribLocation(program, AH_SHADER_ATTRIB_TEX_COORD, "texcoord");
-    glBindAttribLocation(program, AH_SHADER_ATTRIB_NOR_COORD, "norcoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_POS_COORD,   "poscoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_TEX_COORD,   "texcoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_NOR_COORD,   "norcoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_BINOR_COORD, "binorcoord");
+    glBindAttribLocation(program, AH_SHADER_ATTRIB_TAN_COORD,   "tancoord");
     
     // link program
     glLinkProgram(program);
@@ -59,6 +61,8 @@
     glEnableVertexAttribArray(AH_SHADER_ATTRIB_POS_COORD);
     glEnableVertexAttribArray(AH_SHADER_ATTRIB_TEX_COORD);
     glEnableVertexAttribArray(AH_SHADER_ATTRIB_NOR_COORD);
+    glEnableVertexAttribArray(AH_SHADER_ATTRIB_BINOR_COORD);
+    glEnableVertexAttribArray(AH_SHADER_ATTRIB_TAN_COORD);
     
     // assign pointers for
     [self setModelViewUniform:glGetUniformLocation(program, "modelview")];
@@ -69,7 +73,7 @@
     glUniform1i(glGetUniformLocation(program, "textureBase"), AH_TEXTURE_SAMPLE_BASE);
     glUniform1i(glGetUniformLocation(program, "textureNormal"), AH_TEXTURE_SAMPLE_NORMAL);
     
-    dlog(@"Compiled texture shaders");
+    dlog(@"Compiled normal shaders into program %i", program);
 }
 
 

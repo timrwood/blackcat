@@ -36,6 +36,8 @@
     GLKVector3 *vertices;
     GLKVector2 *textures;
     GLKVector3 *normals;
+    GLKVector3 *binormals;
+    GLKVector3 *tangents;
     GLubyte *indices;
     
     GLKVector2 _position;
@@ -70,6 +72,7 @@
 - (void)setVertexCount:(int)newCount;
 - (void)setIndexCount:(int)newCount;
 - (int)vertexCount;
+- (void)calculateTangentAndBinormals;
 
 
 #pragma mark -

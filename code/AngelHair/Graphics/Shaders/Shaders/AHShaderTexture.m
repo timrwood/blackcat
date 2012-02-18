@@ -68,7 +68,7 @@
     
     glUniform1i(glGetUniformLocation(program, "textureBase"), AH_TEXTURE_SAMPLE_BASE);
     
-    dlog(@"Compiled texture shaders");
+    dlog(@"Compiled texture shaders into program %i", program);
 }
 
 

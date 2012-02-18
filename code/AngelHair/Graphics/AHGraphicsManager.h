@@ -25,15 +25,10 @@
     EAGLContext *_eaglContext;
     
     GLKMatrix4 _currentModelViewMatrix;
-    GLKMatrix4 _currentProjectionMatrix;
     GLKMatrix4 _currentNormalMatrix;
     GLKMatrix4 *_modelViewPopPushStack;
     GLKMatrix4 *_normalPopPushStack;
     int _popPushIndex;
-    
-    GLKVector4 _currentColor;
-    
-    GLuint _depthRenderBuffer;
 }
 
 

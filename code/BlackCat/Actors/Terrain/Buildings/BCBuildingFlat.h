@@ -20,6 +20,7 @@
     AHGraphicsCube *_skin;
     
     AHGraphicsCube *cube;
+    AHGraphicsCube *cube2;
     
     float rotation;
 }

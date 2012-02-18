@@ -38,12 +38,17 @@ const GLubyte rectIndices[] = {
     if (self) {
         _depth = 3.0f;
         [self setVertexCount:4];
-        [self setIndexCount:4];
+        [self setIndexCount:6];
         
+        for (int i = 0; i < 6; i++) {
+            self->indices[i] = rectIndices[i];
+        }
+        
+        [self setDrawType:GL_TRIANGLES];
+        /*
         for (int i = 0; i < 4; i++) {
             self->indices[i] = i;
-            self->normals[i] = GLKVector3Make(0.0f, 0.0f, 1.0f);
-        }
+        }*/
     }
     return self;
 }

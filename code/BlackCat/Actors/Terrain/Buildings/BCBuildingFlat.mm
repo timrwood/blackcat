@@ -42,12 +42,12 @@
         
         _skin = [[AHGraphicsCube alloc] init];
         [_skin setTextureKey:@"debug-grid.png"];
-        [_skin setNormalTextureKey:@"debug-normal.jpg"];
+        //[_skin setNormalTextureKey:@"debug-normal.jpg"];
         [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skin setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
-        [self addComponent:_skin];
+        //[self addComponent:_skin];
         
         rotation = 0.0f;
     }
@@ -81,12 +81,27 @@
     [cube setRectFromCenter:GLKVector2Zero() andRadius:0.5f];
     
     [cube setPosition:center];
-    [cube setOffsetHorizontal:YES];
+    //[cube setOffsetHorizontal:YES];
     [cube setRightYTopOffset:-0.5f andRightYBottomOffset:0.5f];
     [cube setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-    [cube setTextureKey:@"debug-grid.png"];
-    [cube setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
-    //[self addComponent:cube];
+    [cube setTextureKey:@"grate-base.jpg"];
+    [cube setNormalTextureKey:@"grate-normal.jpg"];
+    [cube setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_FRONT - 1.0f];
+    [self addComponent:cube];
+    
+    center.x += 2.0f;
+    
+    cube2 = [[AHGraphicsCube alloc] init];
+    [cube2 setRectFromCenter:GLKVector2Zero() andRadius:0.5f];
+    
+    [cube2 setPosition:center];
+    [cube2 setOffsetHorizontal:YES];
+    [cube2 setRightYTopOffset:-0.5f andRightYBottomOffset:0.5f];
+    [cube2 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+    [cube2 setTextureKey:@"grate-base.jpg"];
+    [cube2 setNormalTextureKey:@"grate-normal.jpg"];
+    [cube2 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_FRONT - 1.0f];
+    [self addComponent:cube2];
     
     [super setup];
 }
@@ -111,6 +126,7 @@
 - (void)updateBeforeRender {
     rotation += 0.01f;
     [cube setRotation:rotation];
+    [cube2 setRotation:rotation];
 }
 
 

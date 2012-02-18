@@ -31,9 +31,9 @@ void main(void) {
     texcoord_frag = texcoord;
     
     // calc normal for this vertex
-    //norcoord_frag = vec3(normalMatrix * norcoord);
+    norcoord_frag = vec3(modelview * norcoord);
     
-    diffuse = max(dot(vec3(normalMatrix * norcoord), normalize(lightPosition)), 0.2);
+    diffuse = max(dot(vec3(modelview * norcoord), normalize(lightPosition)), 0.2);
     
     // calc light pos
     //lightPosition_frag = normalize(lightPosition);

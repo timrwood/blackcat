@@ -13,8 +13,6 @@
 @interface AHGraphicsLayer : NSObject {
 @private;
     NSMutableArray *_objects;
-    
-    GLuint _currentTexture;
 }
 
 

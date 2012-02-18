@@ -16,7 +16,7 @@
     
     GLuint _modelViewUniform;
     GLuint _projectionUniform;
-    GLuint _lightPositionUniform;
+    GLint _lightPositionUniform;
     
     BOOL _isActive;
     

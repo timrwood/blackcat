@@ -61,7 +61,7 @@
     [self setProjectionUniform:glGetUniformLocation(program, "projection")];
     _colorUniform = glGetUniformLocation(program, "color");
     
-    dlog(@"Compiled color shaders");
+    dlog(@"Compiled color shaders into program %i", program);
 }
 
 

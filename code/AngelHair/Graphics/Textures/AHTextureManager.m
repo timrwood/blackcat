@@ -114,14 +114,16 @@ static AHTextureManager *_manager = nil;
         NSError *error;
         NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
                                                             forKey:GLKTextureLoaderGenerateMipmaps];
-        [texture setInfo:[GLKTextureLoader textureWithContentsOfFile:[[AHFileManager manager] pathToResourceFile:key] 
-                                                             options:options 
-                                                               error:&error]];
+        dlog(@"texture setinfo:%@", [[AHFileManager manager] pathToResourceFile:key]);
+        GLKTextureInfo *info = [GLKTextureLoader textureWithContentsOfFile:[[AHFileManager manager] pathToResourceFile:key] 
+                                                                   options:options 
+                                                                     error:&error];
         
-        if (![texture info]) {
+        if (!info) {
             dlog(@"Error loading texture : %@ - %@", key, [error localizedDescription]);
             dlog(@"Looking for texture in : %@", [[AHFileManager manager] pathToResourceFile:key]);
         }
+        [texture setInfo:info];
         
         // repeat textures
         glBindTexture(GL_TEXTURE_2D, [[texture info] name]);

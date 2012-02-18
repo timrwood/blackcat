@@ -22,18 +22,18 @@
 const GLubyte cubeIndices[] = {
     // front
     0, 1, 2,
-    1, 2, 3,
+    2, 1, 3,
     // left
-    4, 5, 6,
+    4, 6, 5,
     5, 6, 7,
     // right
     8, 9, 10,
-    9, 10, 11,
+    10, 9, 11,
     // top
     12, 13, 14,
-    13, 14, 15,
+    14, 13, 15,
     // bottom
-    16, 17, 18,
+    16, 18, 17,
     17, 18, 19
 };
 
@@ -133,6 +133,7 @@ const GLubyte cubeIndices[] = {
         rbf.y = b + _offsetYB;
     }
     
+    /*
     // update normals
     for (int i = 0; i < 4; i++) {
         // front
@@ -151,13 +152,20 @@ const GLubyte cubeIndices[] = {
             self->normals[i + 16] = GLKVector3Normalize(GLKVector3Make(-_offsetYB, l - r, 0.0f));
         }
     }
+     */
     
     // front
     self->vertices[0] = ltc;
     self->vertices[1] = lbc;
     self->vertices[2] = rtc;
     self->vertices[3] = rbc;
-    
+    /*
+    // debug
+    self->vertices[0] = rbc;
+    self->vertices[1] = rbc;
+    self->vertices[2] = rbc;
+    self->vertices[3] = rbc;
+    */
     // left
     self->vertices[4] = ltf;
     self->vertices[5] = lbf;
