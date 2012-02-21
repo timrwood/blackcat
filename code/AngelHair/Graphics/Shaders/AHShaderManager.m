@@ -116,6 +116,11 @@ static AHShaderManager *_manager = nil;
     [_colorShader setModelView:matrix];
     [_textureShader setModelView:matrix];
     [_normalShader setModelView:matrix];
+    _Bool isInvertable;
+    [self setNormalMatrix:GLKMatrix4InvertAndTranspose(matrix, &isInvertable)];
+    if (!isInvertable) {
+        dlog(@"Not inverted");
+    }
 }
 
 - (void)setProjectionMatrix:(GLKMatrix4)matrix {

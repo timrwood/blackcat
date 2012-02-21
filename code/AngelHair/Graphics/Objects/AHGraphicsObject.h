@@ -7,6 +7,7 @@
 //
 
 
+#import "AHGraphicsVertexStruct.h"
 #import "AHActorComponent.h"
 #import "AHTextureInfo.h"
 
@@ -27,22 +28,16 @@
     
     BOOL _isOffset;
     
-    BOOL _isBuffered;
-    BOOL _canBeBuffered;
-    
     GLuint _bufferId;
     GLuint _arrayId;
 @protected;
-    GLKVector3 *vertices;
-    GLKVector2 *textures;
-    GLKVector3 *normals;
-    GLKVector3 *binormals;
-    GLKVector3 *tangents;
+    AHVertex *vertices;
     GLubyte *indices;
     
     GLKVector2 _position;
     float _rotation;
     
+    GLenum _drawStaticDynamic;
     GLenum _drawType;
 }
 
@@ -51,8 +46,9 @@
 #pragma mark cache
 
 
-- (void)doNotBuffer;
-- (void)buffer;
+- (void)setDynamicBuffer:(BOOL)dynamicBuffer;
+- (void)bufferVertices;
+- (void)bufferIndices;
 
 
 #pragma mark -

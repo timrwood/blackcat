@@ -7,20 +7,17 @@
 //
 
 
-varying highp vec2 texcoord_frag;
-varying highp vec3 norcoord_frag;
-varying highp vec3 lightPosition_frag;
-varying lowp float diffuse;
-
-uniform bool isNormalEnabled;
-
 uniform sampler2D textureBase;
-uniform sampler2D textureNormal;
+
+varying highp vec2 texcoord_frag;
+varying mediump vec3 norcoord_frag;
+varying mediump vec3 lightPosition_frag;
+
 
 void main(void) {
-    //gl_FragColor = texture2D(textureBase, texcoord_frag) * vec4(diffuse, diffuse, diffuse, 1.0);
+	lowp vec3 base = texture2D(textureBase, texcoord_frag).rgb;
     
-    //gl_FragColor = vec4(norcoord_frag, 1.0);
+	lowp float diffuse = max(dot(normalize(lightPosition_frag), norcoord_frag), 0.2);
     
-    gl_FragColor = vec4(diffuse, diffuse, diffuse, 1.0);
+	gl_FragColor = vec4(base * diffuse, 1.0);
 }

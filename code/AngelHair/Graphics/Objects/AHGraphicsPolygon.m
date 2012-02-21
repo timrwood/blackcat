@@ -35,20 +35,20 @@
 
 - (void)setPositionVertices:(GLKVector2 *)verts {
     for (int i = 0; i < [self vertexCount]; i++) {
-        self->vertices[i] = GLKVector3MakeWithVector2(verts[i], _depth);
+        self->vertices[i].position = GLKVector3MakeWithVector2(verts[i], _depth);
     }
 }
 
 - (void)setTextureVertices:(GLKVector2 *)verts {
     for (int i = 0; i < [self vertexCount]; i++) {
-        self->textures[i] = verts[i];
+        self->vertices[i].texture = verts[i];
     }
 }
 
 - (void)setDepth:(float)depth {
     _depth = depth;
     for (int i = 0; i < [self vertexCount]; i++) {
-        self->vertices[i].z = _depth;
+        self->vertices[i].position.z = _depth;
     }
 }
 

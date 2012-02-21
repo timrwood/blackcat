@@ -43,6 +43,9 @@ const GLubyte rectIndices[] = {
         for (int i = 0; i < 6; i++) {
             self->indices[i] = rectIndices[i];
         }
+        for (int i = 0; i < 4; i++) {
+            self->vertices[i].normal = GLKVector3Make(0.0f, 0.0f, 1.0f);
+        }
         
         [self setDrawType:GL_TRIANGLES];
         /*
@@ -83,10 +86,10 @@ const GLubyte rectIndices[] = {
     float t = _rect.origin.y;
     float b = _rect.origin.y + _rect.size.height;
 
-    self->vertices[0] = GLKVector3Make(l, t, _depth);
-    self->vertices[1] = GLKVector3Make(l, b, _depth);
-    self->vertices[2] = GLKVector3Make(r, t, _depth);
-    self->vertices[3] = GLKVector3Make(r, b, _depth);
+    self->vertices[0].position = GLKVector3Make(l, t, _depth);
+    self->vertices[1].position = GLKVector3Make(l, b, _depth);
+    self->vertices[2].position = GLKVector3Make(r, t, _depth);
+    self->vertices[3].position = GLKVector3Make(r, b, _depth);
 }
 
 
@@ -108,10 +111,10 @@ const GLubyte rectIndices[] = {
 }
 
 - (void)setTex:(CGRect)rect {
-    self->textures[0] = GLKVector2Make(rect.origin.x,                   rect.origin.y);
-    self->textures[1] = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
-    self->textures[2] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
-    self->textures[3] = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+    self->vertices[0].texture = GLKVector2Make(rect.origin.x,                   rect.origin.y);
+    self->vertices[1].texture = GLKVector2Make(rect.origin.x,                   rect.origin.y + rect.size.height);
+    self->vertices[2].texture = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y);
+    self->vertices[3].texture = GLKVector2Make(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
 }
 
 

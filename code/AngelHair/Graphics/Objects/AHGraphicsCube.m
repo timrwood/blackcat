@@ -21,8 +21,8 @@
 
 const GLubyte cubeIndices[] = {
     // front
-    0, 1, 2,
-    2, 1, 3,
+    0, 2, 1,
+    1, 2, 3,
     // left
     4, 6, 5,
     5, 6, 7,
@@ -133,62 +133,41 @@ const GLubyte cubeIndices[] = {
         rbf.y = b + _offsetYB;
     }
     
-    /*
-    // update normals
-    for (int i = 0; i < 4; i++) {
-        // front
-        self->normals[i] = GLKVector3Make(0.0f, 0.0f, 1.0f);
-        
-        // all other sides
-        if (_isHorizontal) {
-            self->normals[i + 4] = GLKVector3Normalize(GLKVector3Make(t - b, -_offsetYT, 0.0f));
-            self->normals[i + 8] = GLKVector3Normalize(GLKVector3Make(b - t, _offsetYB, 0.0f));
-            self->normals[i + 12] = GLKVector3Make(0.0f, 1.0f, 0.0f);
-            self->normals[i + 16] = GLKVector3Make(0.0f, -1.0f, 0.0f);
-        } else {
-            self->normals[i + 4]  = GLKVector3Make(-1.0f, 0.0f, 0.0f);
-            self->normals[i + 8]  = GLKVector3Make(1.0f, 0.0f, 0.0f);
-            self->normals[i + 12] = GLKVector3Normalize(GLKVector3Make(_offsetYT, r - l, 0.0f));
-            self->normals[i + 16] = GLKVector3Normalize(GLKVector3Make(-_offsetYB, l - r, 0.0f));
-        }
-    }
-     */
-    
     // front
-    self->vertices[0] = ltc;
-    self->vertices[1] = lbc;
-    self->vertices[2] = rtc;
-    self->vertices[3] = rbc;
+    self->vertices[0].position = ltc;
+    self->vertices[1].position = lbc;
+    self->vertices[2].position = rtc;
+    self->vertices[3].position = rbc;
     /*
     // debug
-    self->vertices[0] = rbc;
-    self->vertices[1] = rbc;
-    self->vertices[2] = rbc;
-    self->vertices[3] = rbc;
+    self->vertices[0].position = rbc;
+    self->vertices[1].position = rbc;
+    self->vertices[2].position = rbc;
+    self->vertices[3].position = rbc;
     */
     // left
-    self->vertices[4] = ltf;
-    self->vertices[5] = lbf;
-    self->vertices[6] = ltc;
-    self->vertices[7] = lbc;
+    self->vertices[4].position = ltf;
+    self->vertices[5].position = lbf;
+    self->vertices[6].position = ltc;
+    self->vertices[7].position = lbc;
     
     // right
-    self->vertices[8]  = rtf;
-    self->vertices[9]  = rbf;
-    self->vertices[10] = rtc;
-    self->vertices[11] = rbc;
+    self->vertices[8].position  = rtf;
+    self->vertices[9].position  = rbf;
+    self->vertices[10].position = rtc;
+    self->vertices[11].position = rbc;
     
     // top
-    self->vertices[12] = ltc;
-    self->vertices[13] = ltf;
-    self->vertices[14] = rtc;
-    self->vertices[15] = rtf;
+    self->vertices[12].position = ltc;
+    self->vertices[13].position = ltf;
+    self->vertices[14].position = rtc;
+    self->vertices[15].position = rtf;
     
     // bottom
-    self->vertices[16] = lbc;
-    self->vertices[17] = lbf;
-    self->vertices[18] = rbc;
-    self->vertices[19] = rbf;
+    self->vertices[16].position = lbc;
+    self->vertices[17].position = lbf;
+    self->vertices[18].position = rbc;
+    self->vertices[19].position = rbf;
 }
 
 
@@ -227,17 +206,17 @@ const GLubyte cubeIndices[] = {
     float t = rect.origin.y;
     float b = rect.origin.y + rect.size.height;
     
-    self->textures[0] = GLKVector2Make(l, t);
-    self->textures[1] = GLKVector2Make(l, b);
-    self->textures[2] = GLKVector2Make(r, t);
-    self->textures[3] = GLKVector2Make(r, b);
+    self->vertices[0].texture = GLKVector2Make(l, t);
+    self->vertices[1].texture = GLKVector2Make(l, b);
+    self->vertices[2].texture = GLKVector2Make(r, t);
+    self->vertices[3].texture = GLKVector2Make(r, b);
     
     if (_isHorizontal) {
-        self->textures[1].x += rightTop;
-        self->textures[3].x += rightBot;
+        self->vertices[1].texture.x += rightTop;
+        self->vertices[3].texture.x += rightBot;
     } else {
-        self->textures[2].y += rightTop;
-        self->textures[3].y += rightBot;
+        self->vertices[2].texture.y += rightTop;
+        self->vertices[3].texture.y += rightBot;
     }
 }
 
@@ -247,10 +226,10 @@ const GLubyte cubeIndices[] = {
     float t = rect.origin.y;
     float b = rect.origin.y + rect.size.height;
     
-    self->textures[8] = GLKVector2Make(l, t);
-    self->textures[9] = GLKVector2Make(l, b);
-    self->textures[10] = GLKVector2Make(r, t);
-    self->textures[11] = GLKVector2Make(r, b);
+    self->vertices[8].texture = GLKVector2Make(l, t);
+    self->vertices[9].texture = GLKVector2Make(l, b);
+    self->vertices[10].texture = GLKVector2Make(r, t);
+    self->vertices[11].texture = GLKVector2Make(r, b);
 }
 
 - (void)setLeftTex:(CGRect)rect {
@@ -259,10 +238,10 @@ const GLubyte cubeIndices[] = {
     float t = rect.origin.y;
     float b = rect.origin.y + rect.size.height;
     
-    self->textures[4] = GLKVector2Make(l, t);
-    self->textures[5] = GLKVector2Make(l, b);
-    self->textures[6] = GLKVector2Make(r, t);
-    self->textures[7] = GLKVector2Make(r, b);
+    self->vertices[4].texture = GLKVector2Make(l, t);
+    self->vertices[5].texture = GLKVector2Make(l, b);
+    self->vertices[6].texture = GLKVector2Make(r, t);
+    self->vertices[7].texture = GLKVector2Make(r, b);
 }
 
 - (void)setTopTex:(CGRect)rect {
@@ -271,10 +250,10 @@ const GLubyte cubeIndices[] = {
     float t = rect.origin.y;
     float b = rect.origin.y + rect.size.height;
     
-    self->textures[12] = GLKVector2Make(l, t);
-    self->textures[13] = GLKVector2Make(l, b);
-    self->textures[14] = GLKVector2Make(r, t);
-    self->textures[15] = GLKVector2Make(r, b);
+    self->vertices[12].texture = GLKVector2Make(l, t);
+    self->vertices[13].texture = GLKVector2Make(l, b);
+    self->vertices[14].texture = GLKVector2Make(r, t);
+    self->vertices[15].texture = GLKVector2Make(r, b);
 }
 
 - (void)setBotTex:(CGRect)rect {
@@ -283,10 +262,10 @@ const GLubyte cubeIndices[] = {
     float t = rect.origin.y;
     float b = rect.origin.y + rect.size.height;
     
-    self->textures[16] = GLKVector2Make(l, t);
-    self->textures[17] = GLKVector2Make(l, b);
-    self->textures[18] = GLKVector2Make(r, t);
-    self->textures[19] = GLKVector2Make(r, b);
+    self->vertices[16].texture = GLKVector2Make(l, t);
+    self->vertices[17].texture = GLKVector2Make(l, b);
+    self->vertices[18].texture = GLKVector2Make(r, t);
+    self->vertices[19].texture = GLKVector2Make(r, b);
     
     if (_isHorizontal) {
         float convert = rect.size.width / _rect.size.width;
@@ -294,11 +273,21 @@ const GLubyte cubeIndices[] = {
         float rightTop = _offsetYT * convert;
         float rightBot = _offsetYB * convert;
         
-        self->textures[16].x += rightTop;
-        self->textures[17].x += rightTop;
-        self->textures[18].x += rightBot;
-        self->textures[19].x += rightBot;
+        self->vertices[16].texture.x += rightTop;
+        self->vertices[17].texture.x += rightTop;
+        self->vertices[18].texture.x += rightBot;
+        self->vertices[19].texture.x += rightBot;
     }
+}
+
+
+#pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    [self calculateTangentAndBinormals];
+    [super setup];
 }
 
 

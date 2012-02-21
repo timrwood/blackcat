@@ -9,32 +9,30 @@
 
 attribute vec4 poscoord;
 attribute vec2 texcoord;
+varying highp vec2 texcoord_frag;
+
 attribute vec4 norcoord;
+attribute vec4 binorcoord;
+attribute vec4 tancoord;
+varying vec3 norcoord_frag;
 
 uniform mat4 projection;
-uniform mat4 normalMatrix;
 uniform mat4 modelview;
+uniform mat4 normalMatrix;
+
 uniform vec3 lightPosition;
-
-varying highp vec2 texcoord_frag;
-varying highp vec3 norcoord_frag;
-varying highp vec3 lightPosition_frag;
-
-varying lowp float diffuse;
+varying vec3 lightPosition_frag;
 
 
 void main(void) {
-    // set position
-    gl_Position = projection * modelview * poscoord;
+    vec4 modelSpace = modelview * poscoord;
     
-    // set tex coord
+    // set position + texture position
+    gl_Position = projection * modelSpace;
     texcoord_frag = texcoord;
     
     // calc normal for this vertex
-    norcoord_frag = vec3(modelview * norcoord);
+    norcoord_frag = vec3(normalMatrix * norcoord);
     
-    diffuse = max(dot(vec3(modelview * norcoord), normalize(lightPosition)), 0.2);
-    
-    // calc light pos
-    //lightPosition_frag = normalize(lightPosition);
+    lightPosition_frag = lightPosition - vec3(modelSpace);
 }

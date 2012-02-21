@@ -7,9 +7,6 @@
 //
 
 
-#define DEBUGGING_CAMERA YES
-
-
 #import "AHActorManager.h"
 #import "AHTimeManager.h"
 #import "AHGraphicsManager.h"
@@ -41,11 +38,12 @@
     
     if (DEBUGGING_CAMERA) {
         [[AHActorManager manager] add:[[BCDebugCameraMover alloc] init]];
+    } else {
+        [[AHActorManager manager] add:[[BCHeroActor alloc] init]];
     }
     
     [[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
-    //[[AHActorManager manager] add:[[BCHeroActor alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];
     _recorderActor = [[BCHeroRecorderActor alloc] init];
     [[AHActorManager manager] add:_recorderActor];

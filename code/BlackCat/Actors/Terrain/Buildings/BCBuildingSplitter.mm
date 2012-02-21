@@ -105,6 +105,12 @@
         [_skinStairBotFront setTextureKey:@"debug-grid.png"];
         [_skinStairBotFront setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinStairBotFront setStartDepth:Z_STAIR_FRONT endDepth:Z_STAIR_FRONT + Z_WALL_WIDTH];
+        
+        [_skinStairTop setNormalTextureKey:@"grate-normal.jpg"];
+        [_skinStairAngled setNormalTextureKey:@"grate-normal.jpg"];
+        [_skinStairBotCeil setNormalTextureKey:@"grate-normal.jpg"];
+        [_skinStairBotBack setNormalTextureKey:@"grate-normal.jpg"];
+        [_skinStairBotFront setNormalTextureKey:@"grate-normal.jpg"];
     }
     return self;
 }

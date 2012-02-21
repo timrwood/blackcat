@@ -9,42 +9,45 @@
 
 attribute vec4 poscoord;
 attribute vec2 texcoord;
+varying highp vec2 texcoord_frag;
+
 attribute vec4 norcoord;
 attribute vec4 binorcoord;
 attribute vec4 tancoord;
 
 uniform mat4 projection;
-uniform mat4 normalMatrix;
 uniform mat4 modelview;
+uniform mat4 normalMatrix;
+
 uniform vec3 lightPosition;
 
-varying highp vec2 texcoord_frag;
-varying highp vec3 norcoord_frag;
-varying highp vec3 binorcoord_frag;
-varying highp vec3 tancoord_frag;
-varying highp vec3 lightPosition_frag;
-
-varying lowp float diffuse;
+varying vec3 lightVec; 
+varying vec3 eyeVec;
 
 
 void main(void) {
-    // set position
-    gl_Position = projection * modelview * poscoord;
+    vec4 modelSpace = modelview * poscoord;
     
-    // set tex coord
+    // set position + texture position
+    gl_Position = projection * modelSpace;
     texcoord_frag = texcoord;
     
     // calc normal for this vertex
-    norcoord_frag = vec3(modelview * norcoord);
+    vec3 n = vec3(normalMatrix * norcoord);
+    vec3 t = vec3(normalMatrix * tancoord);
+    vec3 b = cross(n, t);
     
-    // calculate binormal
-    binorcoord_frag = vec3(modelview * binorcoord);
+    vec3 vVertex = -vec3(gl_Position);
     
-    // calculate tangent
-    tancoord_frag = vec3(modelview * tancoord);
+    lightVec = lightPosition - vec3(modelSpace);
     
-    //diffuse = max(dot(vec3(normalMatrix * norcoord), normalize(lightPosition)), 0.2);
+    // calculate the light vector
+	//lightVec.x = dot(tmpVec, t);
+	//lightVec.y = dot(tmpVec, b);
+	//lightVec.z = dot(tmpVec, n);
     
-    // calc light pos
-    lightPosition_frag = normalize(lightPosition); //vec3(normalize(normalMatrix * vec4(lightPosition, 1.0)));
+    // calculate the eye vector
+	eyeVec.x = dot(vVertex, t);
+	eyeVec.y = dot(vVertex, b);
+	eyeVec.z = dot(vVertex, n);
 }

@@ -25,9 +25,11 @@
         [self setVertexCount:10];
         [self setIndexCount:10];
         
+        [self setDynamicBuffer:YES];
+        
         for (int i = 0; i < 10; i++) {
             self->indices[i] = i;
-            self->normals[i] = GLKVector3Make(0.0f, 0.0f, 1.0f);
+            self->vertices[i].normal = GLKVector3Make(0.0f, 0.0f, 1.0f);
         }
     }
     return self;
@@ -100,16 +102,16 @@
     float aboveBend = atBend - _rect.size.height * heightToWidth;
     float belowBend = atBend + _rect.size.height * heightToWidth;
     
-    self->textures[0] = GLKVector2Make(left,  top);
-    self->textures[1] = GLKVector2Make(right, top);
-    self->textures[2] = GLKVector2Make(left,  aboveBend);
-    self->textures[3] = GLKVector2Make(right, aboveBend);
-    self->textures[4] = GLKVector2Make(left,  atBend);
-    self->textures[5] = GLKVector2Make(right, atBend);
-    self->textures[6] = GLKVector2Make(left,  belowBend);
-    self->textures[7] = GLKVector2Make(right, belowBend);
-    self->textures[8] = GLKVector2Make(left,  bottom);
-    self->textures[9] = GLKVector2Make(right, bottom);
+    self->vertices[0].texture = GLKVector2Make(left,  top);
+    self->vertices[1].texture = GLKVector2Make(right, top);
+    self->vertices[2].texture = GLKVector2Make(left,  aboveBend);
+    self->vertices[3].texture = GLKVector2Make(right, aboveBend);
+    self->vertices[4].texture = GLKVector2Make(left,  atBend);
+    self->vertices[5].texture = GLKVector2Make(right, atBend);
+    self->vertices[6].texture = GLKVector2Make(left,  belowBend);
+    self->vertices[7].texture = GLKVector2Make(right, belowBend);
+    self->vertices[8].texture = GLKVector2Make(left,  bottom);
+    self->vertices[9].texture = GLKVector2Make(right, bottom);
     
     _canUseTextureCache = YES;
 }
@@ -132,8 +134,8 @@
     float aboveBend = atBend - halfWidth;
     
     // origin
-    self->vertices[0] = GLKVector3Make(-halfWidth, 0.0f, _depth);
-    self->vertices[1] = GLKVector3Make(halfWidth, 0.0f, _depth);
+    self->vertices[0].position = GLKVector3Make(-halfWidth, 0.0f, _depth);
+    self->vertices[1].position = GLKVector3Make(halfWidth, 0.0f, _depth);
 
     // center
     GLKVector2 halfAngle = GLKVector2Make(halfWidth * sinHalfRightAngle, halfWidth * cosHalfRightAngle);
@@ -146,14 +148,14 @@
         float h = fmaxf(-atBend, -halfWidth * cosHalfRightAngle / sinHalfRightAngle);
         GLKVector2 centerToClip = GLKVector2Make(-halfWidth, h);
         GLKVector2 clipPoint = GLKVector2Add(center, centerToClip);
-        self->vertices[4] = GLKVector3MakeWithVector2(clipPoint, _depth);
-        self->vertices[5] = GLKVector3MakeWithVector2(GLKVector2Add(center, halfAngle), _depth);
+        self->vertices[4].position = GLKVector3MakeWithVector2(clipPoint, _depth);
+        self->vertices[5].position = GLKVector3MakeWithVector2(GLKVector2Add(center, halfAngle), _depth);
     } else {
         float h = fmaxf(-atBend, halfWidth * cosHalfRightAngle / sinHalfRightAngle);
         GLKVector2 centerToClip = GLKVector2Make(halfWidth, h);
         GLKVector2 clipPoint = GLKVector2Add(center, centerToClip);
-        self->vertices[4] = GLKVector3MakeWithVector2(GLKVector2Subtract(center, halfAngle), _depth);
-        self->vertices[5] = GLKVector3MakeWithVector2(clipPoint, _depth);
+        self->vertices[4].position = GLKVector3MakeWithVector2(GLKVector2Subtract(center, halfAngle), _depth);
+        self->vertices[5].position = GLKVector3MakeWithVector2(clipPoint, _depth);
     }
     
     // left side
@@ -161,8 +163,8 @@
         self->vertices[2] = self->vertices[4];
         self->vertices[6] = self->vertices[4];
     } else {
-        self->vertices[6] = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Subtract(afterBendLength, endWidth)), _depth);
-        self->vertices[2] = GLKVector3MakeWithVector2(GLKVector2Make(-halfWidth, aboveBend), _depth);
+        self->vertices[6].position = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Subtract(afterBendLength, endWidth)), _depth);
+        self->vertices[2].position = GLKVector3MakeWithVector2(GLKVector2Make(-halfWidth, aboveBend), _depth);
     }
     
     // right side
@@ -170,12 +172,12 @@
         self->vertices[3] = self->vertices[5];
         self->vertices[7] = self->vertices[5];
     } else {
-        self->vertices[7] = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Add(afterBendLength, endWidth)), _depth);
-        self->vertices[3] = GLKVector3MakeWithVector2(GLKVector2Make(halfWidth, aboveBend), _depth);
+        self->vertices[7].position = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Add(afterBendLength, endWidth)), _depth);
+        self->vertices[3].position = GLKVector3MakeWithVector2(GLKVector2Make(halfWidth, aboveBend), _depth);
     }
     
-    self->vertices[8] = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Subtract(endLength, endWidth)), _depth);
-    self->vertices[9] = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Add(endLength, endWidth)), _depth);
+    self->vertices[8].position = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Subtract(endLength, endWidth)), _depth);
+    self->vertices[9].position = GLKVector3MakeWithVector2(GLKVector2Add(center, GLKVector2Add(endLength, endWidth)), _depth);
     
     _canUseVertexCache = YES;
 }
@@ -186,11 +188,20 @@
 
 
 - (void)update {
+    BOOL needsToUpdateBuffers = NO;
+    if (!_canUseVertexCache || !_canUseTextureCache) {
+        needsToUpdateBuffers = YES;
+    }
+    
     if (!_canUseVertexCache) {
         [self cacheVertexValues];
     }
     if (!_canUseTextureCache) {
         [self cacheTextureValues];
+    }
+    
+    if (needsToUpdateBuffers) {
+        [self bufferVertices];
     }
 }
 

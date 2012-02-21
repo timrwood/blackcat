@@ -8,6 +8,8 @@
 
 
 #import <GLKit/GLKit.h>
+
+#import "AHGraphicsVertexStruct.h"
 #import "AHSubSystem.h"
 #import "AHGraphicsCamera.h"
 
@@ -25,9 +27,7 @@
     EAGLContext *_eaglContext;
     
     GLKMatrix4 _currentModelViewMatrix;
-    GLKMatrix4 _currentNormalMatrix;
     GLKMatrix4 *_modelViewPopPushStack;
-    GLKMatrix4 *_normalPopPushStack;
     int _popPushIndex;
 }
 
@@ -53,7 +53,6 @@
 
 - (void)setCameraMatrix:(GLKMatrix4)matrix;
 - (void)setModelMatrix:(GLKMatrix4)matrix;
-- (void)setNormalMatrix:(GLKMatrix4)matrix;
 
 
 #pragma mark -

@@ -41,13 +41,13 @@
         [self addComponent:_body];
         
         _skin = [[AHGraphicsCube alloc] init];
-        [_skin setTextureKey:@"debug-grid.png"];
+        //[_skin setTextureKey:@"debug-grid.png"];
+        [_skin setTextureKey:@"grate-base.jpg"];
+        [_skin setNormalTextureKey:@"grate-normal.jpg"];
         //[_skin setNormalTextureKey:@"debug-normal.jpg"];
         [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        [_skin setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skin setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
-        //[self addComponent:_skin];
+        [self addComponent:_skin];
         
         rotation = 0.0f;
     }
@@ -70,9 +70,9 @@
     [_body setSize:size andPosition:center];
     
     // add an obstacle
-    //GLKVector2 obsPos = GLKVector2Make(center.x - 4.0f, self->_startCorner.y);
-    //BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
-    //[[AHActorManager manager] add:obstacle];
+    GLKVector2 obsPos = GLKVector2Make(center.x - 4.0f, self->_startCorner.y);
+    BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
+    [[AHActorManager manager] add:obstacle];
 
     center.x = self->_startCorner.x + 4.0f;
     center.y = self->_startCorner.y - 1.0f;
@@ -87,7 +87,7 @@
     [cube setTextureKey:@"grate-base.jpg"];
     [cube setNormalTextureKey:@"grate-normal.jpg"];
     [cube setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_FRONT - 1.0f];
-    [self addComponent:cube];
+    //[self addComponent:cube];
     
     center.x += 2.0f;
     
@@ -98,10 +98,10 @@
     [cube2 setOffsetHorizontal:YES];
     [cube2 setRightYTopOffset:-0.5f andRightYBottomOffset:0.5f];
     [cube2 setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-    [cube2 setTextureKey:@"grate-base.jpg"];
-    [cube2 setNormalTextureKey:@"grate-normal.jpg"];
+    [cube2 setTextureKey:@"debug-grid.png"];
+    //[cube2 setNormalTextureKey:@"debug-normal.jpg"];
     [cube2 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_FRONT - 1.0f];
-    [self addComponent:cube2];
+    //[self addComponent:cube2];
     
     [super setup];
 }
@@ -124,7 +124,7 @@
 
 
 - (void)updateBeforeRender {
-    rotation += 0.01f;
+    rotation += 0.03f;
     [cube setRotation:rotation];
     [cube2 setRotation:rotation];
 }

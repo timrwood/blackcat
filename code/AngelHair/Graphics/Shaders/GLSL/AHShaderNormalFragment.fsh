@@ -7,34 +7,41 @@
 //
 
 
-varying highp vec2 texcoord_frag;
-varying highp vec3 norcoord_frag;
-varying highp vec3 binorcoord_frag;
-varying highp vec3 tancoord_frag;
-
-varying highp vec3 lightPosition_frag;
-varying lowp float diffuse;
-
-uniform highp mat4 normalMatrix;
-
 uniform sampler2D textureBase;
 uniform sampler2D textureNormal;
 
+varying mediump vec3 lightVec;
+varying mediump vec3 eyeVec;
+varying highp vec2 texcoord_frag;
+
+uniform lowp float invRadius;
+
+
 void main(void) {
-    // get normal from texture
-    highp vec3 nor = normalize(texture2D(textureNormal, texcoord_frag).rgb) * 2.0 - 1.0; 
+	lowp vec3 lVec = normalize(lightVec);
     
-    highp vec3 normal = normalize(nor.x * tancoord_frag + nor.y * binorcoord_frag + nor.z * norcoord_frag);
+	lowp vec3 vVec = normalize(eyeVec);
+	
+	lowp vec3 base = texture2D(textureBase, texcoord_frag).rgb;
+	
+	lowp vec3 bump = normalize(texture2D(textureNormal, texcoord_frag).xyz * 2.0 - 1.0);
     
-    // average it with the vertex normals
-    highp float diffuse2 = max(dot(normal, normalize(vec3(0.0, 0.5, -0.5))), 0.0);
+	lowp float diffuse = max(dot(lVec, bump), 0.0);
     
-    // apply it to the color
-    highp vec3 color = diffuse2 * texture2D(textureBase, texcoord_frag).rgb;  
-    
-    // set the color with the alpha as 1
-    //gl_FragColor = vec4(nor, 1.0);
-    gl_FragColor = vec4(color, 1.0);
-    //gl_FragColor = vec4(norcoord_frag, 1.0);
-    //gl_FragColor = vec4(normal, 1.0);
+	lowp float specular = 0.2 * clamp(dot(reflect(-lVec, bump), vVec), 0.0, 1.0);
+	
+	gl_FragColor = vec4(base * (diffuse + specular), 1.0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

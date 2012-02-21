@@ -36,7 +36,7 @@ static AHLightManager *_manager = nil;
 - (id)init {
     self = [super init];
     if (self) {
-        [self setPosition:GLKVector3Make(0.2f, -1.0f, 0.5f)];
+        [self setPosition:GLKVector3Make(0.0f, 0.0f, 0.0f)];
     }
     return self;
 }

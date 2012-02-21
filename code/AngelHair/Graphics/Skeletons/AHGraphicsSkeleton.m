@@ -105,6 +105,21 @@
 
 
 #pragma mark -
+#pragma mark setup
+
+
+- (void)setup {
+    [super setup];
+    [_armA setup];
+    [_armB setup];
+    [_legA setup];
+    [_legB setup];
+    [_head setup];
+    [_torso setup];
+}
+
+
+#pragma mark -
 #pragma mark texture
 
 
