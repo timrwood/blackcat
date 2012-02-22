@@ -42,10 +42,11 @@
         
         _skin = [[AHGraphicsCube alloc] init];
         //[_skin setTextureKey:@"debug-grid.png"];
-        [_skin setTextureKey:@"grate-base.jpg"];
-        [_skin setNormalTextureKey:@"grate-normal.jpg"];
+        [_skin setTextureKey:@"buildings.jpg"];
+        //[_skin setNormalTextureKey:@"buildings-normal.jpg"];
         //[_skin setNormalTextureKey:@"debug-normal.jpg"];
-        [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
+        [_skin setTex:CGRectMake(0.0f, 0.0f, 1.0f, 0.25f)];
+        [_skin setTopTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
         [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         [self addComponent:_skin];
         

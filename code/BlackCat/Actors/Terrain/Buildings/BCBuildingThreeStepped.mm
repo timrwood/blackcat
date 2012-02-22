@@ -67,24 +67,23 @@
         [self addComponent:_skin2];
         [self addComponent:_skin3];
         
-        [_skin1 setTextureKey:@"debug-grid.png"];
-        [_skin2 setTextureKey:@"debug-grid.png"];
-        [_skin3 setTextureKey:@"debug-grid.png"];
+        [_skin1 setTextureKey:@"buildings.jpg"];
+        [_skin2 setTextureKey:@"buildings.jpg"];
+        [_skin3 setTextureKey:@"buildings.jpg"];
+        //[_skin1 setNormalTextureKey:@"buildings-normal.jpg"];
+        //[_skin2 setNormalTextureKey:@"buildings-normal.jpg"];
+        //[_skin3 setNormalTextureKey:@"buildings-normal.jpg"];
         
+        [_skin1 setTex:CGRectMake(0.0f, 0.25f, 1.0f, 0.25f)];
+        [_skin2 setTex:CGRectMake(0.0f, 0.25f, 1.0f, 0.25f)];
+        [_skin3 setTex:CGRectMake(0.0f, 0.25f, 1.0f, 0.25f)];
         
-        [_skin1 setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skin1 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skin1 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skin1 setTopTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
+        [_skin2 setTopTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
+        [_skin3 setTopTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
+        
         [_skin1 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
-        
-        [_skin2 setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skin2 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skin2 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin2 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
-        
-        [_skin3 setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skin3 setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skin3 setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
         [_skin3 setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
     }
     return self;

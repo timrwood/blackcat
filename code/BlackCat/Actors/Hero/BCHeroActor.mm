@@ -24,7 +24,7 @@
 
 #define DASH_SLOW_SPEED 1.0f
 
-#define INITIAL_RUN_SPEED 8.0f
+#define INITIAL_RUN_SPEED 2.0f
 
 #define STATE_CAN_JUMP 0
 #define STATE_IS_JUMPING 1

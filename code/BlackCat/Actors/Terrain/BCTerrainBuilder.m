@@ -75,12 +75,12 @@
         _buildingOffset--;
     }
     
-    //if (_buildingOffset == BUILDING_SPLITTER) {
+    //if (_buildingOffset > BUILDING_SPLITTER) {
     //    _buildingOffset--;
     //}
     
     // same building
-    //_buildingOffset = BUILDING_FLAT;
+    //_buildingOffset = BUILDING_THREE_STEPPED_101;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -189,7 +189,7 @@
         [self buildBuilding];
     }
     
-    float offset = -[[AHGraphicsManager camera] worldZoom] / 2.0f;
+    float offset = -[[AHGraphicsManager camera] worldZoom] * 0.25f;
     
     [[BCGlobalManager manager] setIdealCameraPositionY:buildingHeight + offset];
     [[BCGlobalManager manager] setBuildingHeight:buildingHeight];

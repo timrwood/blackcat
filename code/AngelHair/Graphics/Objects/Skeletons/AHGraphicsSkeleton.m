@@ -110,12 +110,22 @@
 
 - (void)setup {
     [super setup];
-    [_armA setup];
-    [_armB setup];
-    [_legA setup];
-    [_legB setup];
-    [_head setup];
-    [_torso setup];
+    
+    // buffering vertices
+    [_armA bufferVertices];
+    [_armB bufferVertices];
+    [_legA bufferVertices];
+    [_legB bufferVertices];
+    [_head bufferVertices];
+    [_torso bufferVertices];
+    
+    // buffering indices
+    [_armA bufferIndices];
+    [_armB bufferIndices];
+    [_legA bufferIndices];
+    [_legB bufferIndices];
+    [_head bufferIndices];
+    [_torso bufferIndices];
 }
 
 
@@ -185,6 +195,8 @@
 
 
 - (void)draw {
+    [self activateTextures];
+    
     glPushGroupMarkerEXT(0, "Skeleton Draw");
     AHGraphicsManager *m = [AHGraphicsManager manager];
     // set skeleton origin

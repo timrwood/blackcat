@@ -88,6 +88,7 @@
 - (void)setTextureKey:(NSString *)key;
 - (AHTextureInfo *)baseTexture;
 - (AHTextureInfo *)normalTexture;
+- (void)activateTextures;
 
 
 #pragma mark -

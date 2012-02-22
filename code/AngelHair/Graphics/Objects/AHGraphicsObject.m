@@ -281,13 +281,7 @@
     return _normalTexture;
 }
 
-
-#pragma mark -
-#pragma mark draw
-
-
-- (void)draw {
-    // enabling textures
+- (void)activateTextures {
     if (_baseTexture) {
         [[AHTextureManager manager] activateBaseTexture:[_baseTexture name]];
     }
@@ -297,6 +291,15 @@
     } else {
         [[AHShaderManager manager] useTextureProgram];
     }
+}
+
+
+#pragma mark -
+#pragma mark draw
+
+
+- (void)draw {
+    [self activateTextures];
     
     // drawing graphics object
     glPushGroupMarkerEXT(0, "Drawing Graphics Object");

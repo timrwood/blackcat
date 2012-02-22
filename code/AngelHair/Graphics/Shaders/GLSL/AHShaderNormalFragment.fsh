@@ -26,11 +26,11 @@ void main(void) {
 	
 	lowp vec3 bump = normalize(texture2D(textureNormal, texcoord_frag).xyz * 2.0 - 1.0);
     
-	lowp float diffuse = max(dot(lVec, bump), 0.0);
+	lowp float diffuse = max(dot(lVec, bump), 0.4);
     
-	lowp float specular = 0.2 * clamp(dot(reflect(-lVec, bump), vVec), 0.0, 1.0);
+	lowp float specular = 0.8 * clamp(dot(reflect(-lVec, bump), vVec), 0.0, 1.0);
 	
-	gl_FragColor = vec4(base * (diffuse + specular), 1.0);
+	gl_FragColor = vec4((base * diffuse) + specular, 1.0);
 }
 
 

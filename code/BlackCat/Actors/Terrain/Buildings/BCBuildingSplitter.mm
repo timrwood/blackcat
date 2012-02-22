@@ -64,44 +64,50 @@
         [self addComponent:_step2];
         [self addComponent:_stairCeiling];
         
+        // ground
         _skinGroundTop = [[AHGraphicsCube alloc] init];
         [self addComponent:_skinGroundTop];
-        [_skinGroundTop setTextureKey:@"debug-grid.png"];
-        [_skinGroundTop setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinGroundTop setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         
         _skinGroundBot = [[AHGraphicsCube alloc] init];
         [self addComponent:_skinGroundBot];
-        [_skinGroundBot setTextureKey:@"debug-grid.png"];
-        [_skinGroundBot setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinGroundBot setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         
+        [_skinGroundTop setTextureKey:@"buildings.jpg"];
+        [_skinGroundTop setTex:CGRectMake(0.0f, 0.0f, 1.0f, 0.25f)];
+        [_skinGroundTop setTopTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
+        
+        [_skinGroundBot setTextureKey:@"buildings.jpg"];
+        [_skinGroundBot setTex:CGRectMake(0.0f, 0.0f, 1.0f, 0.25f)];
+        [_skinGroundBot setTopTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
+        
+        // stairs
         _skinStairTop = [[AHGraphicsCube alloc] init];
-        [self addComponent:_skinStairTop];
+        //[self addComponent:_skinStairTop];
         [_skinStairTop setTextureKey:@"debug-grid.png"];
         [_skinStairTop setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinStairTop setStartDepth:Z_STAIR_FRONT endDepth:Z_STAIR_BACK];
         
         _skinStairAngled = [[AHGraphicsCube alloc] init];
-        [self addComponent:_skinStairAngled];
+        //[self addComponent:_skinStairAngled];
         [_skinStairAngled setTextureKey:@"debug-grid.png"];
         [_skinStairAngled setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinStairAngled setStartDepth:Z_STAIR_FRONT endDepth:Z_STAIR_BACK];
         
         _skinStairBotCeil = [[AHGraphicsCube alloc] init];
-        [self addComponent:_skinStairBotCeil];
+        //[self addComponent:_skinStairBotCeil];
         [_skinStairBotCeil setTextureKey:@"debug-grid.png"];
         [_skinStairBotCeil setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinStairBotCeil setStartDepth:Z_STAIR_FRONT + Z_WALL_WIDTH endDepth:Z_STAIR_BACK - Z_WALL_WIDTH];
         
         _skinStairBotBack = [[AHGraphicsCube alloc] init];
-        [self addComponent:_skinStairBotBack];
+        //[self addComponent:_skinStairBotBack];
         [_skinStairBotBack setTextureKey:@"debug-grid.png"];
         [_skinStairBotBack setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinStairBotBack setStartDepth:Z_STAIR_BACK - Z_WALL_WIDTH endDepth:Z_STAIR_BACK];
         
         _skinStairBotFront = [[AHGraphicsCube alloc] init];
-        [self addComponent:_skinStairBotFront];
+        //[self addComponent:_skinStairBotFront];
         [_skinStairBotFront setTextureKey:@"debug-grid.png"];
         [_skinStairBotFront setTex:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         [_skinStairBotFront setStartDepth:Z_STAIR_FRONT endDepth:Z_STAIR_FRONT + Z_WALL_WIDTH];
@@ -233,13 +239,14 @@
 }
 
 - (float)heightAtXPosition:(float)xPos {
-    float stairEnd = self->_startCorner.x + STEP_0_WIDTH + STAIR_WIDTH;
+    float stairStart = self->_startCorner.x + STEP_0_WIDTH;
     float heightStart = self->_startCorner.y;
     float heightEnd = self->_startCorner.y + STAIR_HEIGHT;
     
     GLKVector2 heroPosition = [[BCGlobalManager manager] heroPosition];
     
-    if (xPos > stairEnd) {
+    if (xPos > stairStart) {
+        return heightEnd;
         if (heroPosition.y > self->_startCorner.y) {
             return heightEnd;
         } else {

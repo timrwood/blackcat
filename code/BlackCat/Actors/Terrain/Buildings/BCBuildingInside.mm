@@ -52,18 +52,16 @@
         [self addComponent:_bodyBot];
         
         _skinTop = [[AHGraphicsCube alloc] init];
-        [_skinTop setTextureKey:@"debug-grid.png"];
-        [_skinTop setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skinTop setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skinTop setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinTop setTextureKey:@"buildings.jpg"];
+        [_skinTop setTex:CGRectMake(0.0f, 0.0f, 1.0f, 0.25f)];
+        [_skinTop setBotTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
         [_skinTop setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         [self addComponent:_skinTop];
         
         _skinBot = [[AHGraphicsCube alloc] init];
-        [_skinBot setTextureKey:@"debug-grid.png"];
-        [_skinBot setTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skinBot setTopTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
-        [_skinBot setBotTex:CGRectMake(0.0f, 0.0f, 2.0f, 1.0f)];
+        [_skinBot setTextureKey:@"buildings.jpg"];
+        [_skinBot setTex:CGRectMake(0.0f, 0.0f, 1.0f, 0.25f)];
+        [_skinBot setTopTex:CGRectMake(0.0f, 0.5f, 1.0f, 0.125f)];
         [_skinBot setStartDepth:Z_BUILDING_FRONT endDepth:Z_BUILDING_BACK];
         [self addComponent:_skinBot];
     }

@@ -60,7 +60,7 @@ typedef enum {
 
 #define Z_WALL_WIDTH     -0.2f
 
-#define Z_LIGHT          -2.0f
+#define Z_LIGHT          0.0f
 
 #define Z_BUILDING_FRONT -4.0f
 #define Z_STAIR_FRONT    -5.5f

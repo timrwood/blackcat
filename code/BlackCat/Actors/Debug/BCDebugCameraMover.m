@@ -46,7 +46,7 @@
     GLKVector2 camera = [[AHGraphicsManager camera] worldPosition];
     GLKVector2 diff = GLKVector2Subtract(_moved, point);
     camera = GLKVector2Add(camera, GLKVector2DivideScalar(diff, 100.0f));
-    GLKVector3 light = GLKVector3Make(camera.x, camera.y, Z_LIGHT);
+    GLKVector3 light = GLKVector3Make(camera.x - 3.0f, camera.y - 3.0f, Z_LIGHT);
     
     [[AHLightManager manager] setPosition:light];
     [[AHGraphicsManager camera] setWorldPosition:camera];

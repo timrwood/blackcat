@@ -78,7 +78,7 @@ static BCGlobalManager *_manager = nil;
 - (void)updateBeforeRender {
     [self updateCameraVelocityEaseOut];
     // defaults
-    [[AHGraphicsManager camera] setCameraOffset:GLKVector2Make(-0.5f, 0.0f)];
+    [[AHGraphicsManager camera] setCameraOffset:GLKVector2Make(-0.5f, 0.25f)];
     [[AHGraphicsManager camera] setWorldZoom:CAMERA_ZOOM];
 }
 
@@ -92,7 +92,7 @@ static BCGlobalManager *_manager = nil;
 
 - (void)updateCameraVelocityEaseOut {
     float distance = idealCameraPositionY - cameraYActualPosition;
-    float diff = distance / 5.0f;
+    float diff = distance / 10.0f;
     
     if (fabsf(distance) < 0.01f) {
         cameraYActualPosition = idealCameraPositionY;
@@ -102,7 +102,7 @@ static BCGlobalManager *_manager = nil;
     
     // update camera
     GLKVector2 center = GLKVector2Make(idealCameraPositionX, cameraYActualPosition);
-    GLKVector3 light = GLKVector3Make(center.x, center.y, Z_LIGHT);
+    GLKVector3 light = GLKVector3Make(center.x - 1.0f, center.y - 2.0f, Z_LIGHT);
     if (!DEBUGGING_CAMERA) {
         [[AHGraphicsManager camera] setWorldPosition:center];
         [[AHLightManager manager] setPosition:light];
