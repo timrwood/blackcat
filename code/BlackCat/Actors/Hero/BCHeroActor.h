@@ -14,6 +14,7 @@
 #import "AHLogicState.h"
 #import "AHGraphicsSkeleton.h"
 #import "AHParticleEmitter.h"
+#import "BCHeroJumpController.h"
 
 
 @class AHPhysicsPill;
@@ -25,16 +26,8 @@
     AHPhysicsPill *_body;
     BCHeroType *_type;
     AHGraphicsSkeleton *_skeleton;
-    AHLogicState *_jumpingState;
     AHParticleEmitter *_emitter;
-    
-    int _safetyRange;
-    
-    float _upwardSlowing;
-    float _downwardSlowing;
-    
-    float _runSpeed;
-    float _speedIncrease;
+    BCHeroJumpController *_jumpController;
     
     BOOL _resetWhenDestroyed;
     BOOL _madeRagdoll;
@@ -60,18 +53,10 @@
 
 
 - (void)updateVelocity;
-- (void)updateJumpability;
 - (void)updateCamera;
 - (void)updateSkeleton;
 - (void)updateCrash;
 - (void)updateEmitter;
-
-
-#pragma mark -
-#pragma mark input
-
-
-- (void)inputJump;
 
 
 #pragma mark -

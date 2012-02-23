@@ -114,7 +114,6 @@ static AHTextureManager *_manager = nil;
         NSError *error;
         NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
                                                             forKey:GLKTextureLoaderGenerateMipmaps];
-        dlog(@"texture setinfo:%@", [[AHFileManager manager] pathToResourceFile:key]);
         GLKTextureInfo *info = [GLKTextureLoader textureWithContentsOfFile:[[AHFileManager manager] pathToResourceFile:key] 
                                                                    options:options 
                                                                      error:&error];

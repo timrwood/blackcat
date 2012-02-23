@@ -7,30 +7,6 @@
 //
 
 
-#define CAMERA_JUMP_DISTANCE 4.0f
-
-#define HERO_WIDTH 0.3f
-#define HERO_HEIGHT 1.0f
-#define HERO_HEIGHT_RAYCAST_RADIUS_RATIO 1.1f
-#define HERO_WIDTH_RAYCAST_RADIUS_RATIO 1.5f
-
-#define MAX_SAFETY_RANGE_FRAMES 3
-
-#define JUMP_INITIAL_VELOCITY 70.0f
-
-#define JUMP_UPWARD_SLOWING 1.35f
-#define JUMP_DOWNWARD_SLOWING 1.4f
-#define JUMP_MAX_DOWNWARD_SLOWING 10.0f
-
-#define DASH_SLOW_SPEED 1.0f
-
-#define INITIAL_RUN_SPEED 20.0f
-
-#define STATE_CAN_JUMP 0
-#define STATE_IS_JUMPING 1
-#define STATE_CANNOT_JUMP 2
-
-
 #import "AHTimeManager.h"
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
@@ -93,11 +69,6 @@
         [_body setBullet:YES];
         [self addComponent:_body];
         
-        // jumping state
-        _jumpingState = [[AHLogicState alloc] init];
-        [_jumpingState setDelegate:self];
-        [self addComponent:_jumpingState];
-        
         // input
         CGRect rectLeft = [[AHScreenManager manager] screenRect];
         rectLeft.size.width = [[AHScreenManager manager] screenWidth] * 0.25;
@@ -123,17 +94,14 @@
         [_skeleton setFromSkeletonConfig:[_type graphicsConfig]];
         [_type setHero:self];
         
+        // jump controller
+        _jumpController = [[BCHeroJumpController alloc] initWithHero:self];
+        
+        // create ragdoll
         _resetWhenDestroyed = YES;
         
-        // vertical speeds
-        _upwardSlowing = powf(JUMP_UPWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
-        _downwardSlowing = powf(JUMP_DOWNWARD_SLOWING, 60.0f / [[AHTimeManager manager] realFramesPerSecond]);
-        
-        // horizontal speeds
-        _runSpeed = INITIAL_RUN_SPEED;
-        _speedIncrease = 0.01f * [[AHTimeManager manager] realFramesPerSecond] / 60.0f;
-        
-        [self createEmitter];
+        // debug emitter
+        //[self createEmitter];
         
         //[[AHTimeManager manager] setWorldToRealRatio:5.0f];
     }
@@ -180,64 +148,22 @@
 
 - (void)updateBeforePhysics {
     [_type updateBeforePhysics];
+    [_jumpController updateBeforePhysics];
     [self updateVelocity];
 }
 
 - (void)updateBeforeAnimation {
     [_type updateBeforeAnimation];
+    [_jumpController updateBeforeAnimation];
 }
 
 - (void)updateBeforeRender {
     [_type updateBeforeRender];
-    [self updateJumpability];
-    [self updateCrash];
+    [_jumpController updateBeforeRender];
+    //[self updateCrash];
     [self updateCamera];
     [self updateSkeleton];
     [self updateEmitter];
-}
-
-- (void)updateVelocity {
-    AHParticleEmitterConfig config = [_emitter config];
-    config.linearVelocity.x = [_body linearVelocity].x - 3.0f;
-    [_emitter setConfig:config];
-    
-    GLKVector2 velocity = [_body linearVelocity];
-    
-    // increase velocity
-    if (_runSpeed < 15.0f) {
-        //_runSpeed += _speedIncrease;
-    } else if (_runSpeed < 50.0f) {
-        //_runSpeed += _speedIncrease / 2.0f;
-    }
-    velocity.x = _runSpeed;
-    
-    // make jumping snappier
-    if (velocity.y > 0.0f && velocity.y < JUMP_MAX_DOWNWARD_SLOWING) {
-        velocity.y *= _downwardSlowing;
-    } else if (velocity.y < 0.0f) {
-        velocity.y /= _upwardSlowing;
-    }
-    
-    // set vars
-    [_body setLinearVelocity:[_type modifyVelocity:velocity]];
-}
-
-- (void)updateJumpability {
-    GLKVector2 foot = [_body position];
-    foot.y += HERO_HEIGHT * HERO_HEIGHT_RAYCAST_RADIUS_RATIO;
-    
-    int cat = [[AHPhysicsManager cppManager] getFirstActorCategoryWithTag:PHY_TAG_JUMPABLE from:[_body position] to:foot];
-    
-    if (cat != PHY_CAT_NONE) {
-        [_jumpingState changeState:STATE_CAN_JUMP];
-        _safetyRange = MAX_SAFETY_RANGE_FRAMES;
-    } else {
-        if (_safetyRange > 0) {
-            _safetyRange--;
-        } else {
-            [_jumpingState changeState:STATE_CANNOT_JUMP];
-        }
-    }
 }
 
 - (void)updateCamera {
@@ -245,6 +171,13 @@
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
+}
+
+- (void)updateVelocity {
+    GLKVector2 velocity = [_body linearVelocity];
+    velocity = [_jumpController modifyVelocity:velocity];
+    velocity = [_type modifyVelocity:velocity];
+    [_body setLinearVelocity:velocity];
 }
 
 - (void)updateSkeleton {
@@ -273,23 +206,6 @@
 
 
 #pragma mark -
-#pragma mark state
-
-
-- (void)stateChangedTo:(int)newState {
-    if (newState == STATE_IS_JUMPING ){
-        float velx = [_body linearVelocity].x;
-        [_body setLinearVelocity:GLKVector2Make(velx, -JUMP_INITIAL_VELOCITY)];
-        // we need to send a message so that the recorder can estimate paths better 
-        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_JUMP]];
-    }
-    if (newState == STATE_CAN_JUMP) {
-        [self sendMessage:[[AHActorMessage alloc] initWithType:(int)MSG_HERO_LAND]];
-    }
-}
-
-
-#pragma mark -
 #pragma mark touch
 
 
@@ -297,13 +213,7 @@
     if (point.y < [[AHScreenManager manager] screenHeight] * 0.25f) {
         [[AHSceneManager manager] goToScene:[[BCClassSelectionScene alloc] init]];
     } else {
-        [self inputJump];
-    }
-}
-
-- (void)inputJump {
-    if ([_jumpingState isState:STATE_CAN_JUMP]) {
-        [_jumpingState changeState:STATE_IS_JUMPING];
+        [_jumpController jump];
     }
 }
 
@@ -322,7 +232,7 @@
     _type = nil;
     _body = nil;
     _skeleton = nil;
-    _jumpingState = nil;
+    _jumpController = nil;
     
     [super cleanupBeforeDestruction];
 }
@@ -343,8 +253,12 @@
     
     _resetWhenDestroyed = NO;
     
+    GLKVector2 velocity = [_body linearVelocity];
+    velocity = [_jumpController modifyVelocity:velocity];
+    velocity = [_type modifyVelocity:velocity];
+    
     BCHeroActorRagdoll *ragdoll = [[BCHeroActorRagdoll alloc] initFromSkeleton:[_skeleton skeleton]];
-    [ragdoll setLinearVelocity:GLKVector2Make(_runSpeed, [_body linearVelocity].y)];
+    [ragdoll setLinearVelocity:velocity];
     [[AHActorManager manager] add:ragdoll];
 }
 

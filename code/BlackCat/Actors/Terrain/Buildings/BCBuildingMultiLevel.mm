@@ -111,6 +111,8 @@
     [rect enableBreakOnDown:YES];
     [rect enableBreakOnUp:YES];
     [rect addTag:PHY_TAG_JUMPABLE];
+    [rect setCategory:PHY_CAT_BUILDING];
+    [rect setRestitution:0.0f];
     [rect setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
     [[AHActorManager manager] add:rect];
 }

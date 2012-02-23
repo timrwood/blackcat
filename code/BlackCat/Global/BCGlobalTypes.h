@@ -54,9 +54,9 @@ typedef enum {
 } BCHeroTypes;
 
 
+// z index
 #define Z_NEAR_LIMIT 2.0f
 #define Z_FAR_LIMIT 30.0f
-
 
 #define Z_WALL_WIDTH     -0.2f
 
@@ -75,9 +75,21 @@ typedef enum {
 #define Z_BACKGROUND_3   -20.0f
 #define Z_BACKGROUND_4   -30.0f
 
+// hero
+#define HERO_WIDTH 0.3f
+#define HERO_HEIGHT 1.0f
+#define HERO_HEIGHT_RAYCAST_RADIUS_RATIO 1.1f
+#define HERO_WIDTH_RAYCAST_RADIUS_RATIO 1.5f
+
+
 
 
 #define DEBUGGING_CAMERA NO
+
+
+
+
+
 
 
 

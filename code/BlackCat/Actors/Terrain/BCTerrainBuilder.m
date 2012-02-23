@@ -7,7 +7,7 @@
 //
 
 
-#define DEBUG_BUILDING_GAPS NO
+#define DEBUG_BUILDING_GAPS YES
 
 
 #import "AHMathUtils.h"
@@ -88,7 +88,7 @@
     //}
     
     // same building
-    //_buildingOffset = BUILDING_MULTI_LEVEL;
+    _buildingOffset = BUILDING_SPLITTER;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {

@@ -9,15 +9,15 @@
 
 #define BUILDING_HEIGHT 6.0f
 
-#define STEP_0_WIDTH 12.0f
-#define STEP_1_WIDTH 10.0f
+#define STEP_0_WIDTH 20.0f
+#define STEP_1_WIDTH 20.0f
 
-#define STAIR_CEILING_OFFSET 3.0f
-#define STAIR_CEILING_HEIGHT 2.5f
+#define STAIR_CEILING_OFFSET 5.0f
+#define STAIR_CEILING_HEIGHT 3.0f
 #define STAIR_CEILING_DEPTH 0.2f
 
 #define STAIR_WIDTH 4.0f
-#define STAIR_HEIGHT 2.0f
+#define STAIR_HEIGHT 3.0f
 
 
 

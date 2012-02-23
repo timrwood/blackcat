@@ -37,6 +37,8 @@
     
     float _backDepth;
     float _frontDepth;
+    
+    float _restitution;
 }
 
 
@@ -60,6 +62,8 @@
 
 
 - (void)addTag:(int)tag;
+- (void)setCategory:(int)category;
+- (void)setRestitution:(float)restitution;
 
 
 #pragma mark -

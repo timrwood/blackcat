@@ -95,6 +95,15 @@
     [_body addTag:tag];
 }
 
+- (void)setCategory:(int)category {
+    [_body setCategory:category];
+}
+
+- (void)setRestitution:(float)restitution {
+    _restitution = restitution;
+    [_body setRestitution:restitution];
+}
+
 
 #pragma mark -
 #pragma mark cleanup
@@ -272,6 +281,8 @@
     [rect enableBreakOnUp:_breakOnUp];
     [rect enableBreakOnRight:_breakOnRight];
     [rect enableBreakOnDown:_breakOnDown];
+    [rect setCategory:[_body category]];
+    [rect setRestitution:_restitution];
     [[AHActorManager manager] add:rect];
 }
 
@@ -407,6 +418,8 @@
     [rect enableBreakOnUp:_breakOnUp];
     [rect enableBreakOnRight:_breakOnRight];
     [rect enableBreakOnDown:_breakOnDown];
+    [rect setCategory:[_body category]];
+    [rect setRestitution:_restitution];
     [[AHActorManager manager] add:rect];
 }
 

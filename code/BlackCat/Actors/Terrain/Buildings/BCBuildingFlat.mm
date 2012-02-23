@@ -75,9 +75,9 @@
     [_body setSize:size andPosition:center];
     
     // add an obstacle
-    GLKVector2 obsPos = GLKVector2Make(center.x - 4.0f, self->_startCorner.y);
-    BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
-    [[AHActorManager manager] add:obstacle];
+    //GLKVector2 obsPos = GLKVector2Make(center.x - 4.0f, self->_startCorner.y);
+    //BCCrashableObstacle *obstacle = [[BCCrashableObstacle alloc] initAtBottomCenterPoint:obsPos];
+    //[[AHActorManager manager] add:obstacle];
 
     center.x = self->_startCorner.x + 4.0f;
     center.y = self->_startCorner.y - 1.0f;
