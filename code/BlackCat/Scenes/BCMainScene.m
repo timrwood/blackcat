@@ -43,7 +43,8 @@
     }
     
     [[AHActorManager manager] add:[[BCBackgroundActor alloc] init]];
-    [[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
+    //[[AHActorManager manager] add:[[BCTerrainBuilder alloc] initWithKey:12345]];
+    [[AHActorManager manager] add:[[BCTerrainBuilder alloc] init]];
     [[AHActorManager manager] add:[[BCTerrainCleaner alloc] init]];
     _recorderActor = [[BCHeroRecorderActor alloc] init];
     [[AHActorManager manager] add:_recorderActor];

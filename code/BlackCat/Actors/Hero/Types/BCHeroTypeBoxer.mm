@@ -70,12 +70,12 @@ typedef enum {
 
 - (AHSkeletonConfig)graphicsConfig {
     AHSkeletonConfig config;
-    config.armWidth = 0.25f;
+    config.armWidth = 0.20f;
     config.armLength = 0.9f;
-    config.legWidth = 0.25f;
-    config.legLength = 1.0f;
-    config.torsoWidth = 0.3f;
-    config.torsoHeight = 0.6f;
+    config.legWidth = 0.20f;
+    config.legLength = 1.1f;
+    config.torsoWidth = 0.28f;
+    config.torsoHeight = 0.94f;
     config.headTop = 0.22f;
     config.headBottom = 0.08f;
     config.headLeft = 0.1f;

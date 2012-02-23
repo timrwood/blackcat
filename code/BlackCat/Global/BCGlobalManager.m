@@ -10,7 +10,7 @@
 #define CAMERA_ACCELERATION 0.02f
 #define CAMERA_MAX_SPEED 0.15f
 
-#define CAMERA_ZOOM 5.0f
+#define CAMERA_ZOOM 7.0f
 
 
 #import "AHLightManager.h"
@@ -78,7 +78,7 @@ static BCGlobalManager *_manager = nil;
 - (void)updateBeforeRender {
     [self updateCameraVelocityEaseOut];
     // defaults
-    [[AHGraphicsManager camera] setCameraOffset:GLKVector2Make(-0.5f, 0.25f)];
+    [[AHGraphicsManager camera] setCameraOffset:GLKVector2Make(-0.5f, 0.0f)];
     [[AHGraphicsManager camera] setWorldZoom:CAMERA_ZOOM];
 }
 

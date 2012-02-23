@@ -153,6 +153,10 @@
 		15AC4E3314B7B3BC00283A06 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DEF14B7B3BB00283A06 /* b2Rope.cpp */; };
 		15AC4E3414B7B3BC00283A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AC4DF314B7B3BB00283A06 /* main.m */; };
 		15B5E16314EEF7C300CD30F8 /* BCDebugCameraMover.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B5E16214EEF7C300CD30F8 /* BCDebugCameraMover.m */; };
+		15BFC1BE14F5AF75000A89C4 /* AHParticleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BFC1BD14F5AF75000A89C4 /* AHParticleManager.m */; };
+		15BFC1CB14F5B165000A89C4 /* AHParticleRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BFC1C814F5B165000A89C4 /* AHParticleRenderer.m */; };
+		15BFC1CE14F5B17F000A89C4 /* AHParticleEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BFC1CD14F5B17F000A89C4 /* AHParticleEmitter.m */; };
+		15BFC1D114F5B339000A89C4 /* AHParticlePointRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BFC1D014F5B339000A89C4 /* AHParticlePointRenderer.m */; };
 		15C06CA614BCCBFD0067D458 /* AHGraphicsCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */; };
 		15C5EBC314C0F17200FB5BAF /* AHActorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5EBC214C0F17200FB5BAF /* AHActorMessage.m */; };
 		15C98D9C14D9B5E700B34918 /* BCHeroType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15C98D9B14D9B5E700B34918 /* BCHeroType.mm */; };
@@ -448,6 +452,14 @@
 		15AC4E3914B7B4F700283A06 /* AHSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHSubSystem.h; path = SubSystem/AHSubSystem.h; sourceTree = "<group>"; };
 		15B5E16114EEF7C300CD30F8 /* BCDebugCameraMover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCDebugCameraMover.h; path = Actors/Debug/BCDebugCameraMover.h; sourceTree = "<group>"; };
 		15B5E16214EEF7C300CD30F8 /* BCDebugCameraMover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCDebugCameraMover.m; path = Actors/Debug/BCDebugCameraMover.m; sourceTree = "<group>"; };
+		15BFC1BC14F5AF75000A89C4 /* AHParticleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHParticleManager.h; path = Particles/AHParticleManager.h; sourceTree = "<group>"; };
+		15BFC1BD14F5AF75000A89C4 /* AHParticleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHParticleManager.m; path = Particles/AHParticleManager.m; sourceTree = "<group>"; };
+		15BFC1C714F5B165000A89C4 /* AHParticleRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHParticleRenderer.h; sourceTree = "<group>"; };
+		15BFC1C814F5B165000A89C4 /* AHParticleRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHParticleRenderer.m; sourceTree = "<group>"; };
+		15BFC1CC14F5B17F000A89C4 /* AHParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHParticleEmitter.h; sourceTree = "<group>"; };
+		15BFC1CD14F5B17F000A89C4 /* AHParticleEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHParticleEmitter.m; sourceTree = "<group>"; };
+		15BFC1CF14F5B339000A89C4 /* AHParticlePointRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHParticlePointRenderer.h; sourceTree = "<group>"; };
+		15BFC1D014F5B339000A89C4 /* AHParticlePointRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHParticlePointRenderer.m; sourceTree = "<group>"; };
 		15C06CA414BCCBFD0067D458 /* AHGraphicsCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHGraphicsCamera.h; path = Camera/AHGraphicsCamera.h; sourceTree = "<group>"; };
 		15C06CA514BCCBFD0067D458 /* AHGraphicsCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AHGraphicsCamera.m; path = Camera/AHGraphicsCamera.m; sourceTree = "<group>"; };
 		15C5EBC114C0F17200FB5BAF /* AHActorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHActorMessage.h; sourceTree = "<group>"; };
@@ -943,6 +955,7 @@
 				15AC4D7614B7B3BB00283A06 /* Input */,
 				15AC4D7714B7B3BB00283A06 /* Logic */,
 				15CEA5CD14BFB7530052D6BC /* Math */,
+				15BFC1B714F56A7C000A89C4 /* Particles */,
 				15AC4D7814B7B3BB00283A06 /* Physics */,
 				158346F614B7BF8000C1DA04 /* Scenes */,
 				152F4AFB14E1A3FF00B5E3BD /* Screen */,
@@ -1289,6 +1302,39 @@
 			name = Debug;
 			sourceTree = "<group>";
 		};
+		15BFC1B714F56A7C000A89C4 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				15BFC1C114F5B165000A89C4 /* Emitters */,
+				15BFC1C614F5B165000A89C4 /* Renderers */,
+				15BFC1BC14F5AF75000A89C4 /* AHParticleManager.h */,
+				15BFC1BD14F5AF75000A89C4 /* AHParticleManager.m */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
+		15BFC1C114F5B165000A89C4 /* Emitters */ = {
+			isa = PBXGroup;
+			children = (
+				15BFC1CC14F5B17F000A89C4 /* AHParticleEmitter.h */,
+				15BFC1CD14F5B17F000A89C4 /* AHParticleEmitter.m */,
+			);
+			name = Emitters;
+			path = Particles/Emitters;
+			sourceTree = "<group>";
+		};
+		15BFC1C614F5B165000A89C4 /* Renderers */ = {
+			isa = PBXGroup;
+			children = (
+				15BFC1C714F5B165000A89C4 /* AHParticleRenderer.h */,
+				15BFC1C814F5B165000A89C4 /* AHParticleRenderer.m */,
+				15BFC1CF14F5B339000A89C4 /* AHParticlePointRenderer.h */,
+				15BFC1D014F5B339000A89C4 /* AHParticlePointRenderer.m */,
+			);
+			name = Renderers;
+			path = Particles/Renderers;
+			sourceTree = "<group>";
+		};
 		15C06CA214BCCBC60067D458 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -1572,6 +1618,10 @@
 				15B5E16314EEF7C300CD30F8 /* BCDebugCameraMover.m in Sources */,
 				15FC353014F45F4C00126F92 /* AHGraphicsLimb.m in Sources */,
 				15FC353114F45F4C00126F92 /* AHGraphicsSkeleton.m in Sources */,
+				15BFC1BE14F5AF75000A89C4 /* AHParticleManager.m in Sources */,
+				15BFC1CB14F5B165000A89C4 /* AHParticleRenderer.m in Sources */,
+				15BFC1CE14F5B17F000A89C4 /* AHParticleEmitter.m in Sources */,
+				15BFC1D114F5B339000A89C4 /* AHParticlePointRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

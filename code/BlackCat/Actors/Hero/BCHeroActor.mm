@@ -9,14 +9,14 @@
 
 #define CAMERA_JUMP_DISTANCE 4.0f
 
-#define HERO_WIDTH 0.2f
-#define HERO_HEIGHT 0.8f
+#define HERO_WIDTH 0.3f
+#define HERO_HEIGHT 1.0f
 #define HERO_HEIGHT_RAYCAST_RADIUS_RATIO 1.1f
 #define HERO_WIDTH_RAYCAST_RADIUS_RATIO 1.5f
 
 #define MAX_SAFETY_RANGE_FRAMES 3
 
-#define JUMP_INITIAL_VELOCITY 30.0f
+#define JUMP_INITIAL_VELOCITY 70.0f
 
 #define JUMP_UPWARD_SLOWING 1.35f
 #define JUMP_DOWNWARD_SLOWING 1.4f
@@ -24,7 +24,7 @@
 
 #define DASH_SLOW_SPEED 1.0f
 
-#define INITIAL_RUN_SPEED 2.0f
+#define INITIAL_RUN_SPEED 20.0f
 
 #define STATE_CAN_JUMP 0
 #define STATE_IS_JUMPING 1
@@ -35,6 +35,8 @@
 #import "AHGraphicsManager.h"
 #import "AHInputManager.h"
 #import "AHSceneManager.h"
+
+#import "AHParticlePointRenderer.h"
 
 #import "AHMathUtils.h"
 
@@ -131,9 +133,35 @@
         _runSpeed = INITIAL_RUN_SPEED;
         _speedIncrease = 0.01f * [[AHTimeManager manager] realFramesPerSecond] / 60.0f;
         
+        [self createEmitter];
+        
         //[[AHTimeManager manager] setWorldToRealRatio:5.0f];
     }
     return self;
+}
+
+
+#pragma mark -
+#pragma mark emitter
+
+
+- (void)createEmitter {
+    _emitter = [[AHParticleEmitter alloc] init];
+    AHParticleEmitterConfig config;
+    config.position = GLKVector3Make(0.0f, 0.0f, Z_BUILDING_FRONT);
+    config.positionVariance = GLKVector3Make(0.0f, -1.0f, 0.0f);
+    config.linearVelocity = GLKVector3Make(0.0f, -5.0f, 0.0f);
+    config.linearVelocityVariance = GLKVector3Make(1.0f, 2.0f, 10.0f);
+    config.lifetime = 0.4f;
+    config.lifetimeVariance = 0.1f;
+    config.gravity = GLKVector3Make(0.0f, 5.0f, 0.0f);
+    config.particlesPerSecond = 200.0f;
+    config.hasLifetime = NO;
+    [_emitter setConfig:config];
+    [self addComponent:_emitter];
+    
+    AHParticlePointRenderer *r = [[AHParticlePointRenderer alloc] init];
+    [_emitter setRenderer:r];
 }
 
 
@@ -150,24 +178,29 @@
 #pragma mark update
 
 
+- (void)updateBeforePhysics {
+    [_type updateBeforePhysics];
+    [self updateVelocity];
+}
+
 - (void)updateBeforeAnimation {
     [_type updateBeforeAnimation];
 }
 
-- (void)updateBeforePhysics {
-    [_type updateBeforePhysics];
-}
-
 - (void)updateBeforeRender {
     [_type updateBeforeRender];
-    [self updateVelocity];
-    [self updateCamera];
     [self updateJumpability];
-    [self updateSkeleton];
     [self updateCrash];
+    [self updateCamera];
+    [self updateSkeleton];
+    [self updateEmitter];
 }
 
 - (void)updateVelocity {
+    AHParticleEmitterConfig config = [_emitter config];
+    config.linearVelocity.x = [_body linearVelocity].x - 3.0f;
+    [_emitter setConfig:config];
+    
     GLKVector2 velocity = [_body linearVelocity];
     
     // increase velocity
@@ -187,7 +220,6 @@
     
     // set vars
     [_body setLinearVelocity:[_type modifyVelocity:velocity]];
-    //[_body setLinearVelocity:[_type modifyVelocity:GLKVector2Make(0.0f, 0.0f)]];
 }
 
 - (void)updateJumpability {
@@ -209,25 +241,7 @@
 }
 
 - (void)updateCamera {
-    /*GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
-    
-    // set the building height position based on the x position
-    [[BCGlobalManager manager] setBuildingHeightXPosition:cameraPosition.x];
-    
-    // move the camera forward on the screen
-    cameraPosition.y = [[BCGlobalManager manager] buildingHeight];
-    cameraPosition.y -= [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].height * 0.5f;
-    //cameraPosition.x += [[AHGraphicsManager camera] worldSizeAt:Z_NEAR_LIMIT].width * 0.5f;
-    
-    [[AHGraphicsManager camera] setCameraOffset:GLKVector2Make(-0.5f, 0.0f)];
-    
-    // update camera
-    [[AHGraphicsManager camera] setWorldPosition:cameraPosition];
-     [[AHGraphicsManager camera] setWorldZoom:8.0f];*/
-    
-    GLKVector2 cameraPosition = [_type modifyCameraPosition:[_body position]];
-    
-    [[BCGlobalManager manager] setIdealCameraPositionX:cameraPosition.x];
+    [[BCGlobalManager manager] setIdealCameraPositionX:[_type modifyCameraPosition:[_body position]].x];
     
     // update hero position
     [[BCGlobalManager manager] setHeroPosition:[_body position]];
@@ -249,6 +263,14 @@
         [self makeRagdoll];
     }
 }
+
+- (void)updateEmitter {
+    AHParticleEmitterConfig config = [_emitter config];
+    GLKVector3 pos = GLKVector3Make([_body position].x, [_body position].y, Z_PHYSICS_DEPTH);
+    config.position = pos;
+    [_emitter setConfig:config];
+}
+
 
 #pragma mark -
 #pragma mark state

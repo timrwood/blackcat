@@ -9,9 +9,9 @@
 
 #define BUILDING_HEIGHT 4.0f
 #define STEP_HEIGHT 1.0f
-#define STEP_0_WIDTH 8.0f
-#define STEP_1_WIDTH 8.0f
-#define STEP_2_WIDTH 8.0f
+#define STEP_0_WIDTH 16.0f
+#define STEP_1_WIDTH 16.0f
+#define STEP_2_WIDTH 16.0f
 
 #define SMOOTH_WIDTH 4.0f
 

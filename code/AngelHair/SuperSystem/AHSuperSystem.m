@@ -14,6 +14,7 @@
 #import "AHTextureManager.h"
 #import "AHGraphicsManager.h"
 #import "AHActorManager.h"
+#import "AHParticleManager.h"
 #import "AHPhysicsManager.h"
 #import "AHFileManager.h"
 #import "AHSceneManager.h"
@@ -68,6 +69,7 @@ static AHSuperSystem *_manager = nil;
     [[AHTextureManager manager] setup];
     [[AHGraphicsManager manager] setup];
     [[AHShaderManager manager] setup];
+    [[AHParticleManager manager] setup];
     //[[AHAnimationManager manager] setup];
     [[AHActorManager manager] setup];
 }
@@ -84,6 +86,7 @@ static AHSuperSystem *_manager = nil;
 - (void)teardown {
     [[AHActorManager manager] teardown];
     //[[AHAnimationManager manager] teardown];
+    [[AHParticleManager manager] teardown];
     [[AHShaderManager manager] teardown];
     [[AHGraphicsManager manager] teardown];
     [[AHTextureManager manager] teardown];
@@ -132,6 +135,7 @@ static AHSuperSystem *_manager = nil;
     
     // animation
     [[AHActorManager manager] updateBeforeAnimation];
+    [[AHParticleManager manager] update];
     if (_delegate) {
         [_delegate updateBeforeAnimation];
     }
@@ -162,8 +166,15 @@ static AHSuperSystem *_manager = nil;
     
     if (_isEnabledRenderDraw) {
         [[AHShaderManager manager] useTextureProgram];
+        
+        // draw graphics manager
         glPushGroupMarkerEXT(0, "Graphics Manager Draw");
         [[AHGraphicsManager manager] draw];
+        glPopGroupMarkerEXT();
+        
+        // draw particle manager
+        glPushGroupMarkerEXT(0, "Particle Manager Draw");
+        [[AHParticleManager manager] draw];
         glPopGroupMarkerEXT();
     }
     

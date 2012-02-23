@@ -15,4 +15,6 @@ uniform mat4 modelview;
 
 void main(void) {
     gl_Position = projection * modelview * poscoord;
+    
+    gl_PointSize = 1.0;
 }

@@ -25,6 +25,7 @@
 - (void)buildBottomAt:(float)height;
 - (void)buildTopAt:(float)height;
 - (void)buildWallAtBottomCenter:(GLKVector2)center;
+- (void)buildWallAtBottomCenterBreakable:(GLKVector2)center;
 - (float)buildingCenterPosition;
 - (void)configSolidBuilding:(AHPhysicsBody *)body;
 

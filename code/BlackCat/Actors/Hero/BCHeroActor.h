@@ -13,6 +13,7 @@
 #import "AHContactDelegate.h"
 #import "AHLogicState.h"
 #import "AHGraphicsSkeleton.h"
+#import "AHParticleEmitter.h"
 
 
 @class AHPhysicsPill;
@@ -25,6 +26,7 @@
     BCHeroType *_type;
     AHGraphicsSkeleton *_skeleton;
     AHLogicState *_jumpingState;
+    AHParticleEmitter *_emitter;
     
     int _safetyRange;
     
@@ -37,6 +39,13 @@
     BOOL _resetWhenDestroyed;
     BOOL _madeRagdoll;
 }
+
+
+#pragma mark -
+#pragma mark emitter
+
+
+- (void)createEmitter;
 
 
 #pragma mark -
@@ -55,6 +64,7 @@
 - (void)updateCamera;
 - (void)updateSkeleton;
 - (void)updateCrash;
+- (void)updateEmitter;
 
 
 #pragma mark -

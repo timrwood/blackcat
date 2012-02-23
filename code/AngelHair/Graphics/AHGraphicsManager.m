@@ -10,6 +10,7 @@
 #define MAX_POP_PUSH_STACK 8
 
 
+#import "AHParticleManager.h"
 #import "AHLightManager.h"
 #import "AHScreenManager.h"
 #import "AHShaderManager.h"
@@ -209,6 +210,9 @@ static AHGraphicsCamera *_camera = nil;
     
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CW);
 }
 
 
@@ -243,6 +247,8 @@ static AHGraphicsCamera *_camera = nil;
     [[AHLightManager manager] updatePosition];
     
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    
     for (AHGraphicsLayer *layer in _layers) {
         [layer draw];
     }

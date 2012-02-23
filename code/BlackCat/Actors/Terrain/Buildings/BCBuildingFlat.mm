@@ -15,6 +15,8 @@
 #import "AHGraphicsManager.h"
 #import "AHPhysicsRect.h"
 #import "AHMathUtils.h"
+#import "AHParticleEmitter.h"
+#import "AHParticlePointRenderer.h"
 
 #import "BCGlobalTypes.h"
 #import "BCCrashableObstacle.h"
@@ -51,6 +53,8 @@
         [self addComponent:_skin];
         
         rotation = 0.0f;
+        
+        //[self createEmitter];
     }
     return self;
 }
@@ -105,6 +109,25 @@
     //[self addComponent:cube2];
     
     [super setup];
+}
+
+- (void)createEmitter {
+    AHParticleEmitter *e = [[AHParticleEmitter alloc] init];
+    AHParticleEmitterConfig config;
+    config.position = GLKVector3Make(0.0f, 0.0f, Z_BUILDING_FRONT);
+    config.positionVariance = GLKVector3Make(0.0f, 0.0f, 0.0f);
+    config.linearVelocity = GLKVector3Make(0.0f, 0.0f, 0.0f);
+    config.linearVelocityVariance = GLKVector3Make(3.0f, 1.0f, 3.0f);
+    config.lifetime = 0.2f;
+    config.lifetimeVariance = 0.1f;
+    config.gravity = GLKVector3Make(0.0f, 10.0f, 0.0f);
+    config.particlesPerSecond = 100.0f;
+    config.hasLifetime = NO;
+    [e setConfig:config];
+    [self addComponent:e];
+    
+    AHParticlePointRenderer *r = [[AHParticlePointRenderer alloc] init];
+    [e setRenderer:r];
 }
 
 

@@ -75,12 +75,20 @@
         _buildingOffset--;
     }
     
+    /*
+    float r = [self seededRandomBetweenFloat:0.0f andFloat:1.0f];
+    if (r > 0.5f) {
+        _buildingOffset = BUILDING_MULTI_LEVEL;
+    } else {
+        _buildingOffset = BUILDING_INSIDE;
+    }
+    */
     //if (_buildingOffset > BUILDING_SPLITTER) {
     //    _buildingOffset--;
     //}
     
     // same building
-    //_buildingOffset = BUILDING_THREE_STEPPED_101;
+    //_buildingOffset = BUILDING_MULTI_LEVEL;
 }
 
 - (void)buildBuildingWithType:(BCBuildingTypes)type {
@@ -89,7 +97,7 @@
         lastEnd = [_nextBuilding endCorner];
     }
     
-    float spacing = 2.0f;
+    float spacing = 4.0f;
     float nextHeight = [self seededRandomBetweenFloat:-1.0f andFloat:1.0f];
     
     if (DEBUG_BUILDING_GAPS) {

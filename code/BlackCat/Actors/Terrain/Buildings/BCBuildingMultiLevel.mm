@@ -7,15 +7,15 @@
 //
 
 
-#define FLOOR_HEIGHT_INCLUDING_CEILING 4.0f
-#define CEILING_HEIGHT 0.5f
+#define FLOOR_HEIGHT_INCLUDING_CEILING 3.0f
+#define CEILING_HEIGHT 0.33f
 #define CEILING_EDGE_HEIGHT 0.05f
 #define UPPER_HEIGHT 4.0f
 #define LOWER_HEIGHT 4.0f
 
-#define WALL_WIDTH 2.0f
+#define WALL_WIDTH 8.0f
 
-#define BUILDING_WIDTH 32.0f
+#define BUILDING_WIDTH 56.0f
 
 
 #import "AHActorManager.h"
@@ -154,6 +154,11 @@
 }
 
 - (void)buildWallAtBottomCenter:(GLKVector2)center {
+    if (NO) {
+        [self buildWallAtBottomCenterBreakable:center];
+        return;
+    }
+    
     CGSize size = CGSizeMake(WALL_WIDTH / 2.0f, (FLOOR_HEIGHT_INCLUDING_CEILING - CEILING_HEIGHT) / 2.0f);
     GLKVector2 position = GLKVector2Make(0.0f, -size.height);
     
@@ -171,6 +176,21 @@
     [_skin setTextureKey:@"debug-grid.png"];
     [_skin setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
     [self addComponent:_skin];
+}
+
+- (void)buildWallAtBottomCenterBreakable:(GLKVector2)center {
+    CGSize size = CGSizeMake(WALL_WIDTH / 16.0f, (FLOOR_HEIGHT_INCLUDING_CEILING - CEILING_HEIGHT) / 2.0f);
+    GLKVector2 position = GLKVector2Make(-size.width * 8.0f, -size.height);
+    
+    for (int i = 0; i < 8; i++) {
+        BCBreakableRect *rect = [[BCBreakableRect alloc] initWithCenter:GLKVector2Add(position, center) 
+                                                                andSize:size                                                             andTexRect:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) 
+                                                              andTexKey:@"debug-grid.png"];
+        [rect enableBreakOnRight:YES];
+        [rect setStartDepth:Z_BUILDING_FRONT endDepth:Z_STAIR_BACK];
+        position.x += size.width * 2.0f;
+        [[AHActorManager manager] add:rect];
+    }
 }
 
 - (float)buildingCenterPosition {
@@ -199,6 +219,7 @@
 
 - (float)heightAtXPosition:(float)xPos {
     float heightStart = self->_startCorner.y;
+    return heightStart;
     
     GLKVector2 heroPosition = [[BCGlobalManager manager] heroPosition];
     

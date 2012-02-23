@@ -26,4 +26,11 @@
 }
 
 
+#pragma mark -
+#pragma mark emitter
+
+
+- (void)createEmitter;
+
+
 @end

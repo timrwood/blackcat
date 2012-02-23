@@ -8,7 +8,7 @@
 
 
 #define PHASEWALK_DISTANCE_TO_CANCEL 1.0f
-#define PHASEWALK_VELOCITY 1.0f
+#define PHASEWALK_VELOCITY 4.0f
 
 #define PHASEWALK_MAX_TIME 0.5f
 #define PHASEWALK_TIMEOUT 1.0f
@@ -71,9 +71,9 @@ typedef enum {
     config.armWidth = 0.20f;
     config.armLength = 0.9f;
     config.legWidth = 0.20f;
-    config.legLength = 1.0f;
+    config.legLength = 1.24f;
     config.torsoWidth = 0.28f;
-    config.torsoHeight = 0.6f;
+    config.torsoHeight = 0.94f;
     config.headTop = 0.22f;
     config.headBottom = 0.08f;
     config.headLeft = 0.1f;
@@ -102,6 +102,8 @@ typedef enum {
 - (void)updatePhasewalkXOffset {
     cameraPositionX += averageVelocityX;
     xOffset = fmaxf(0.0f, [self heroPosition].x - cameraPositionX);
+    // debug
+    //xOffset = 0.0f;
 }
 
 - (void)updatePhasewalkCheckTurnOff {
@@ -109,6 +111,7 @@ typedef enum {
         GLKVector2 difference = GLKVector2Subtract(_targetPosition, [self heroPosition]);
         float distance = GLKVector2Length(difference);
         if (distance < PHASEWALK_DISTANCE_TO_CANCEL) {
+            //[_phasewalkState changeState:STATE_CAN_PHASEWALK];
             [_phasewalkState changeState:STATE_CANNOT_PHASEWALK];
         }
     } else if (xOffset > 0.0f) {
@@ -212,6 +215,7 @@ typedef enum {
 
 
 - (GLKVector2)modifyCameraPosition:(GLKVector2)heroPosition {
+    //return heroPosition;
     return GLKVector2Subtract(heroPosition, GLKVector2Make(xOffset, 0.0f));
 }
 
