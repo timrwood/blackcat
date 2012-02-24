@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Skelasaur.xcscheme</key>
+		<key>Skeletons.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15DBF01314F6DCD8001DEF09</key>
+		<key>15F421E614F7389E00D4FD4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		15F421EC14F7389E00D4FD4E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F421EB14F7389E00D4FD4E /* Cocoa.framework */; };
+		15F4221E14F738CE00D4FD4E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221114F738CE00D4FD4E /* Credits.rtf */; };
+		15F4221F14F738CE00D4FD4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221314F738CE00D4FD4E /* InfoPlist.strings */; };
+		15F4222014F738CE00D4FD4E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221514F738CE00D4FD4E /* MainMenu.xib */; };
+		15F4222114F738CE00D4FD4E /* SKDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221714F738CE00D4FD4E /* SKDocument.xib */; };
+		15F4222214F738CE00D4FD4E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4221914F738CE00D4FD4E /* main.m */; };
+		15F4222314F738CE00D4FD4E /* SKDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4221B14F738CE00D4FD4E /* SKDocument.m */; };
+		15F4222414F738CE00D4FD4E /* Skeletons-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221C14F738CE00D4FD4E /* Skeletons-Info.plist */; };
+		15F4224714F738E200D4FD4E /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223214F738E200D4FD4E /* CDataScanner.m */; };
+		15F4224814F738E200D4FD4E /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223514F738E200D4FD4E /* CFilteringJSONSerializer.m */; };
+		15F4224914F738E200D4FD4E /* CJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223714F738E200D4FD4E /* CJSONSerialization.m */; };
+		15F4224A14F738E200D4FD4E /* CJSONSerializedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223914F738E200D4FD4E /* CJSONSerializedData.m */; };
+		15F4224B14F738E200D4FD4E /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223C14F738E200D4FD4E /* CDataScanner_Extensions.m */; };
+		15F4224C14F738E200D4FD4E /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223E14F738E200D4FD4E /* NSDictionary_JSONExtensions.m */; };
+		15F4224D14F738E200D4FD4E /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4224114F738E200D4FD4E /* CJSONDeserializer.m */; };
+		15F4224E14F738E200D4FD4E /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4224314F738E200D4FD4E /* CJSONScanner.m */; };
+		15F4224F14F738E200D4FD4E /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4224514F738E200D4FD4E /* CJSONSerializer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		15F421E714F7389E00D4FD4E /* Skeletons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skeletons.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15F421EB14F7389E00D4FD4E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		15F421EE14F7389E00D4FD4E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		15F421EF14F7389E00D4FD4E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		15F421F014F7389E00D4FD4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		15F4221214F738CE00D4FD4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		15F4221414F738CE00D4FD4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		15F4221614F738CE00D4FD4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		15F4221814F738CE00D4FD4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SKDocument.xib; sourceTree = "<group>"; };
+		15F4221914F738CE00D4FD4E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		15F4221A14F738CE00D4FD4E /* SKDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDocument.h; sourceTree = "<group>"; };
+		15F4221B14F738CE00D4FD4E /* SKDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDocument.m; sourceTree = "<group>"; };
+		15F4221C14F738CE00D4FD4E /* Skeletons-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Skeletons-Info.plist"; sourceTree = "<group>"; };
+		15F4221D14F738CE00D4FD4E /* Skeletons-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Skeletons-Prefix.pch"; sourceTree = "<group>"; };
+		15F4222714F738E200D4FD4E /* GLKMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMath.h; sourceTree = "<group>"; };
+		15F4222814F738E200D4FD4E /* GLKMathTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMathTypes.h; sourceTree = "<group>"; };
+		15F4222914F738E200D4FD4E /* GLKMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMathUtils.h; sourceTree = "<group>"; };
+		15F4222A14F738E200D4FD4E /* GLKMatrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix3.h; sourceTree = "<group>"; };
+		15F4222B14F738E200D4FD4E /* GLKMatrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix4.h; sourceTree = "<group>"; };
+		15F4222C14F738E200D4FD4E /* GLKQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKQuaternion.h; sourceTree = "<group>"; };
+		15F4222D14F738E200D4FD4E /* GLKVector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKVector2.h; sourceTree = "<group>"; };
+		15F4222E14F738E200D4FD4E /* GLKVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKVector3.h; sourceTree = "<group>"; };
+		15F4222F14F738E200D4FD4E /* GLKVector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKVector4.h; sourceTree = "<group>"; };
+		15F4223114F738E200D4FD4E /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
+		15F4223214F738E200D4FD4E /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
+		15F4223414F738E200D4FD4E /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
+		15F4223514F738E200D4FD4E /* CFilteringJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFilteringJSONSerializer.m; sourceTree = "<group>"; };
+		15F4223614F738E200D4FD4E /* CJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerialization.h; sourceTree = "<group>"; };
+		15F4223714F738E200D4FD4E /* CJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerialization.m; sourceTree = "<group>"; };
+		15F4223814F738E200D4FD4E /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
+		15F4223914F738E200D4FD4E /* CJSONSerializedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializedData.m; sourceTree = "<group>"; };
+		15F4223B14F738E200D4FD4E /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
+		15F4223C14F738E200D4FD4E /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
+		15F4223D14F738E200D4FD4E /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		15F4223E14F738E200D4FD4E /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
+		15F4224014F738E200D4FD4E /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
+		15F4224114F738E200D4FD4E /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
+		15F4224214F738E200D4FD4E /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
+		15F4224314F738E200D4FD4E /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
+		15F4224414F738E200D4FD4E /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		15F4224514F738E200D4FD4E /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
+		15F4224614F738E200D4FD4E /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		15F421E414F7389E00D4FD4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15F421EC14F7389E00D4FD4E /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15A3EB1014F74BDC0027100D /* Media */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
+		15F421DC14F7389D00D4FD4E = {
+			isa = PBXGroup;
+			children = (
+				15F4222514F738D000D4FD4E /* Code */,
+				15F421EA14F7389E00D4FD4E /* Frameworks */,
+				15F421E814F7389E00D4FD4E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		15F421E814F7389E00D4FD4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15F421E714F7389E00D4FD4E /* Skeletons.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15F421EA14F7389E00D4FD4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15F421EB14F7389E00D4FD4E /* Cocoa.framework */,
+				15F421ED14F7389E00D4FD4E /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		15F421ED14F7389E00D4FD4E /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15F421EE14F7389E00D4FD4E /* AppKit.framework */,
+				15F421EF14F7389E00D4FD4E /* CoreData.framework */,
+				15F421F014F7389E00D4FD4E /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		15F4221014F738CE00D4FD4E /* Skeletons */ = {
+			isa = PBXGroup;
+			children = (
+				15A3EB1014F74BDC0027100D /* Media */,
+				15F4221114F738CE00D4FD4E /* Credits.rtf */,
+				15F4221314F738CE00D4FD4E /* InfoPlist.strings */,
+				15F4221514F738CE00D4FD4E /* MainMenu.xib */,
+				15F4221714F738CE00D4FD4E /* SKDocument.xib */,
+				15F4221914F738CE00D4FD4E /* main.m */,
+				15F4221A14F738CE00D4FD4E /* SKDocument.h */,
+				15F4221B14F738CE00D4FD4E /* SKDocument.m */,
+				15F4221C14F738CE00D4FD4E /* Skeletons-Info.plist */,
+				15F4221D14F738CE00D4FD4E /* Skeletons-Prefix.pch */,
+			);
+			name = Skeletons;
+			path = code/Skeletons;
+			sourceTree = "<group>";
+		};
+		15F4222514F738D000D4FD4E /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				15F4222614F738E200D4FD4E /* GLKit */,
+				15F4223014F738E200D4FD4E /* TouchJSON */,
+				15F4221014F738CE00D4FD4E /* Skeletons */,
+			);
+			name = Code;
+			sourceTree = "<group>";
+		};
+		15F4222614F738E200D4FD4E /* GLKit */ = {
+			isa = PBXGroup;
+			children = (
+				15F4222714F738E200D4FD4E /* GLKMath.h */,
+				15F4222814F738E200D4FD4E /* GLKMathTypes.h */,
+				15F4222914F738E200D4FD4E /* GLKMathUtils.h */,
+				15F4222A14F738E200D4FD4E /* GLKMatrix3.h */,
+				15F4222B14F738E200D4FD4E /* GLKMatrix4.h */,
+				15F4222C14F738E200D4FD4E /* GLKQuaternion.h */,
+				15F4222D14F738E200D4FD4E /* GLKVector2.h */,
+				15F4222E14F738E200D4FD4E /* GLKVector3.h */,
+				15F4222F14F738E200D4FD4E /* GLKVector4.h */,
+			);
+			name = GLKit;
+			path = code/GLKit;
+			sourceTree = "<group>";
+		};
+		15F4223014F738E200D4FD4E /* TouchJSON */ = {
+			isa = PBXGroup;
+			children = (
+				15F4223114F738E200D4FD4E /* CDataScanner.h */,
+				15F4223214F738E200D4FD4E /* CDataScanner.m */,
+				15F4223314F738E200D4FD4E /* Experimental */,
+				15F4223A14F738E200D4FD4E /* Extensions */,
+				15F4223F14F738E200D4FD4E /* JSON */,
+			);
+			name = TouchJSON;
+			path = code/TouchJSON;
+			sourceTree = "<group>";
+		};
+		15F4223314F738E200D4FD4E /* Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				15F4223414F738E200D4FD4E /* CFilteringJSONSerializer.h */,
+				15F4223514F738E200D4FD4E /* CFilteringJSONSerializer.m */,
+				15F4223614F738E200D4FD4E /* CJSONSerialization.h */,
+				15F4223714F738E200D4FD4E /* CJSONSerialization.m */,
+				15F4223814F738E200D4FD4E /* CJSONSerializedData.h */,
+				15F4223914F738E200D4FD4E /* CJSONSerializedData.m */,
+			);
+			path = Experimental;
+			sourceTree = "<group>";
+		};
+		15F4223A14F738E200D4FD4E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				15F4223B14F738E200D4FD4E /* CDataScanner_Extensions.h */,
+				15F4223C14F738E200D4FD4E /* CDataScanner_Extensions.m */,
+				15F4223D14F738E200D4FD4E /* NSDictionary_JSONExtensions.h */,
+				15F4223E14F738E200D4FD4E /* NSDictionary_JSONExtensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		15F4223F14F738E200D4FD4E /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				15F4224014F738E200D4FD4E /* CJSONDeserializer.h */,
+				15F4224114F738E200D4FD4E /* CJSONDeserializer.m */,
+				15F4224214F738E200D4FD4E /* CJSONScanner.h */,
+				15F4224314F738E200D4FD4E /* CJSONScanner.m */,
+				15F4224414F738E200D4FD4E /* CJSONSerializer.h */,
+				15F4224514F738E200D4FD4E /* CJSONSerializer.m */,
+				15F4224614F738E200D4FD4E /* JSONRepresentation.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		15F421E614F7389E00D4FD4E /* Skeletons */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15F4220814F7389E00D4FD4E /* Build configuration list for PBXNativeTarget "Skeletons" */;
+			buildPhases = (
+				15F421E314F7389E00D4FD4E /* Sources */,
+				15F421E414F7389E00D4FD4E /* Frameworks */,
+				15F421E514F7389E00D4FD4E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Skeletons;
+			productName = Skeletons;
+			productReference = 15F421E714F7389E00D4FD4E /* Skeletons.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15F421DE14F7389D00D4FD4E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SK;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Infinite Beta";
+			};
+			buildConfigurationList = 15F421E114F7389D00D4FD4E /* Build configuration list for PBXProject "Skeletons" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 15F421DC14F7389D00D4FD4E;
+			productRefGroup = 15F421E814F7389E00D4FD4E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				15F421E614F7389E00D4FD4E /* Skeletons */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15F421E514F7389E00D4FD4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15F4221E14F738CE00D4FD4E /* Credits.rtf in Resources */,
+				15F4221F14F738CE00D4FD4E /* InfoPlist.strings in Resources */,
+				15F4222014F738CE00D4FD4E /* MainMenu.xib in Resources */,
+				15F4222114F738CE00D4FD4E /* SKDocument.xib in Resources */,
+				15F4222414F738CE00D4FD4E /* Skeletons-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15F421E314F7389E00D4FD4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15F4222214F738CE00D4FD4E /* main.m in Sources */,
+				15F4222314F738CE00D4FD4E /* SKDocument.m in Sources */,
+				15F4224714F738E200D4FD4E /* CDataScanner.m in Sources */,
+				15F4224814F738E200D4FD4E /* CFilteringJSONSerializer.m in Sources */,
+				15F4224914F738E200D4FD4E /* CJSONSerialization.m in Sources */,
+				15F4224A14F738E200D4FD4E /* CJSONSerializedData.m in Sources */,
+				15F4224B14F738E200D4FD4E /* CDataScanner_Extensions.m in Sources */,
+				15F4224C14F738E200D4FD4E /* NSDictionary_JSONExtensions.m in Sources */,
+				15F4224D14F738E200D4FD4E /* CJSONDeserializer.m in Sources */,
+				15F4224E14F738E200D4FD4E /* CJSONScanner.m in Sources */,
+				15F4224F14F738E200D4FD4E /* CJSONSerializer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		15F4221114F738CE00D4FD4E /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15F4221214F738CE00D4FD4E /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		15F4221314F738CE00D4FD4E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15F4221414F738CE00D4FD4E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		15F4221514F738CE00D4FD4E /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15F4221614F738CE00D4FD4E /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		15F4221714F738CE00D4FD4E /* SKDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15F4221814F738CE00D4FD4E /* en */,
+			);
+			name = SKDocument.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		15F4220614F7389E00D4FD4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		15F4220714F7389E00D4FD4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		15F4220914F7389E00D4FD4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "code/Skeletons/Skeletons-Prefix.pch";
+				INFOPLIST_FILE = "code/Skeletons/Skeletons-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		15F4220A14F7389E00D4FD4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "code/Skeletons/Skeletons-Prefix.pch";
+				INFOPLIST_FILE = "code/Skeletons/Skeletons-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15F421E114F7389D00D4FD4E /* Build configuration list for PBXProject "Skeletons" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15F4220614F7389E00D4FD4E /* Debug */,
+				15F4220714F7389E00D4FD4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15F4220814F7389E00D4FD4E /* Build configuration list for PBXNativeTarget "Skeletons" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15F4220914F7389E00D4FD4E /* Debug */,
+				15F4220A14F7389E00D4FD4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15F421DE14F7389D00D4FD4E /* Project object */;
+}
