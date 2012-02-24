@@ -6,11 +6,18 @@
 //  Copyright (c) 2012 Infinite Beta. All rights reserved.
 //
 
+
 #import <Cocoa/Cocoa.h>
+
+
+@class SKTimeline;
+
 
 @interface SKDocument : NSDocument <NSApplicationDelegate> {
 @private;
-    BOOL _isPaused;
+    BOOL _isPlaying;
+    
+    SKTimeline *_timeline;
 }
 
 
@@ -23,6 +30,7 @@
 @property (weak) IBOutlet NSSegmentedControl *speedControl;
 @property (weak) IBOutlet NSButton *addKeyframeButton;
 @property (weak) IBOutlet NSButton *removeKeyframeButton;
+@property (weak) IBOutlet NSView *keyframeView;
 
 
 #pragma mark -

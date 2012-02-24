@@ -6,9 +6,25 @@
 //  Copyright (c) 2012 Infinite Beta. All rights reserved.
 //
 
+
+#import "SKTimeline.h"
 #import "SKDocument.h"
 
+
 @implementation SKDocument
+
+
+#pragma mark -
+#pragma mark init
+
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        _timeline = [[SKTimeline alloc] init];
+    }
+    return self;
+}
 
 
 #pragma mark -
@@ -20,15 +36,8 @@
 @synthesize speedControl;
 @synthesize addKeyframeButton;
 @synthesize removeKeyframeButton;
+@synthesize keyframeView;
 
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        // Add your subclass-specific initialization here.
-    }
-    return self;
-}
 
 - (NSString *)windowNibName {
     // Override returning the nib file name of the document
@@ -38,6 +47,8 @@
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
     [super windowControllerDidLoadNib:aController];
+    [keyframeView addSubview:_timeline];
+    [_timeline updateRect];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
 
@@ -68,11 +79,13 @@
 
 
 - (IBAction)pauseResumeAnimaion:(id)sender {
-    _isPaused = !_isPaused;
-    if (_isPaused) {
-        debugLabel.stringValue = @"paused";
-    } else {
+    _isPlaying = !_isPlaying;
+    if (_isPlaying) {
+        [_timeline play];
         debugLabel.stringValue = @"playing";
+    } else {
+        [_timeline pause];
+        debugLabel.stringValue = @"paused";
     }
 }
 
@@ -83,6 +96,7 @@
 }
 
 - (IBAction)addKeyframe:(id)sender {
+    [_timeline addKeyframe];
     debugLabel.stringValue = @"add keyframe";
 }
 

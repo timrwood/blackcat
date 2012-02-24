@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15060B0D14F808B40015C815 /* SKStartEndControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 15060B0C14F808B40015C815 /* SKStartEndControl.m */; };
+		15060B1214F82C740015C815 /* SKPoseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15060B1114F82C740015C815 /* SKPoseView.m */; };
+		15060B1514F82CE80015C815 /* SKPoseJoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 15060B1414F82CE80015C815 /* SKPoseJoint.m */; };
+		1525B76A14F7F70A00EBF552 /* SKKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 1525B76914F7F70A00EBF552 /* SKKeyframe.m */; };
+		1525B76D14F7F71F00EBF552 /* SKTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 1525B76C14F7F71F00EBF552 /* SKTimeline.m */; };
 		15F421EC14F7389E00D4FD4E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F421EB14F7389E00D4FD4E /* Cocoa.framework */; };
 		15F4221E14F738CE00D4FD4E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221114F738CE00D4FD4E /* Credits.rtf */; };
 		15F4221F14F738CE00D4FD4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221314F738CE00D4FD4E /* InfoPlist.strings */; };
@@ -27,6 +32,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15060B0B14F808B40015C815 /* SKStartEndControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKStartEndControl.h; path = Timeline/SKStartEndControl.h; sourceTree = "<group>"; };
+		15060B0C14F808B40015C815 /* SKStartEndControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKStartEndControl.m; path = Timeline/SKStartEndControl.m; sourceTree = "<group>"; };
+		15060B1014F82C740015C815 /* SKPoseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKPoseView.h; path = Pose/SKPoseView.h; sourceTree = "<group>"; };
+		15060B1114F82C740015C815 /* SKPoseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKPoseView.m; path = Pose/SKPoseView.m; sourceTree = "<group>"; };
+		15060B1314F82CE80015C815 /* SKPoseJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKPoseJoint.h; path = Pose/SKPoseJoint.h; sourceTree = "<group>"; };
+		15060B1414F82CE80015C815 /* SKPoseJoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKPoseJoint.m; path = Pose/SKPoseJoint.m; sourceTree = "<group>"; };
+		1525B76814F7F70A00EBF552 /* SKKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKKeyframe.h; path = Keyframe/SKKeyframe.h; sourceTree = "<group>"; };
+		1525B76914F7F70A00EBF552 /* SKKeyframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKKeyframe.m; path = Keyframe/SKKeyframe.m; sourceTree = "<group>"; };
+		1525B76B14F7F71F00EBF552 /* SKTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKTimeline.h; path = Timeline/SKTimeline.h; sourceTree = "<group>"; };
+		1525B76C14F7F71F00EBF552 /* SKTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKTimeline.m; path = Timeline/SKTimeline.m; sourceTree = "<group>"; };
 		15F421E714F7389E00D4FD4E /* Skeletons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skeletons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15F421EB14F7389E00D4FD4E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		15F421EE14F7389E00D4FD4E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -83,9 +98,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15060B0F14F82C2C0015C815 /* Pose */ = {
+			isa = PBXGroup;
+			children = (
+				15060B1014F82C740015C815 /* SKPoseView.h */,
+				15060B1114F82C740015C815 /* SKPoseView.m */,
+				15060B1314F82CE80015C815 /* SKPoseJoint.h */,
+				15060B1414F82CE80015C815 /* SKPoseJoint.m */,
+			);
+			name = Pose;
+			sourceTree = "<group>";
+		};
+		1525B76614F7F6C600EBF552 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				1525B76B14F7F71F00EBF552 /* SKTimeline.h */,
+				1525B76C14F7F71F00EBF552 /* SKTimeline.m */,
+				15060B0B14F808B40015C815 /* SKStartEndControl.h */,
+				15060B0C14F808B40015C815 /* SKStartEndControl.m */,
+			);
+			name = Timeline;
+			sourceTree = "<group>";
+		};
+		1525B76714F7F6DA00EBF552 /* Keyframe */ = {
+			isa = PBXGroup;
+			children = (
+				1525B76814F7F70A00EBF552 /* SKKeyframe.h */,
+				1525B76914F7F70A00EBF552 /* SKKeyframe.m */,
+			);
+			name = Keyframe;
+			sourceTree = "<group>";
+		};
 		15A3EB1014F74BDC0027100D /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				15F4221114F738CE00D4FD4E /* Credits.rtf */,
+				15F4221314F738CE00D4FD4E /* InfoPlist.strings */,
+				15F4221914F738CE00D4FD4E /* main.m */,
+				15F4221C14F738CE00D4FD4E /* Skeletons-Info.plist */,
+				15F4221D14F738CE00D4FD4E /* Skeletons-Prefix.pch */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -129,16 +180,14 @@
 		15F4221014F738CE00D4FD4E /* Skeletons */ = {
 			isa = PBXGroup;
 			children = (
+				15060B0F14F82C2C0015C815 /* Pose */,
+				1525B76714F7F6DA00EBF552 /* Keyframe */,
+				1525B76614F7F6C600EBF552 /* Timeline */,
 				15A3EB1014F74BDC0027100D /* Media */,
-				15F4221114F738CE00D4FD4E /* Credits.rtf */,
-				15F4221314F738CE00D4FD4E /* InfoPlist.strings */,
 				15F4221514F738CE00D4FD4E /* MainMenu.xib */,
 				15F4221714F738CE00D4FD4E /* SKDocument.xib */,
-				15F4221914F738CE00D4FD4E /* main.m */,
 				15F4221A14F738CE00D4FD4E /* SKDocument.h */,
 				15F4221B14F738CE00D4FD4E /* SKDocument.m */,
-				15F4221C14F738CE00D4FD4E /* Skeletons-Info.plist */,
-				15F4221D14F738CE00D4FD4E /* Skeletons-Prefix.pch */,
 			);
 			name = Skeletons;
 			path = code/Skeletons;
@@ -300,6 +349,11 @@
 				15F4224D14F738E200D4FD4E /* CJSONDeserializer.m in Sources */,
 				15F4224E14F738E200D4FD4E /* CJSONScanner.m in Sources */,
 				15F4224F14F738E200D4FD4E /* CJSONSerializer.m in Sources */,
+				1525B76A14F7F70A00EBF552 /* SKKeyframe.m in Sources */,
+				1525B76D14F7F71F00EBF552 /* SKTimeline.m in Sources */,
+				15060B0D14F808B40015C815 /* SKStartEndControl.m in Sources */,
+				15060B1214F82C740015C815 /* SKPoseView.m in Sources */,
+				15060B1514F82CE80015C815 /* SKPoseJoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
