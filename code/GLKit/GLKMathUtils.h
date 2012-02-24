@@ -11,7 +11,7 @@
 #include <math.h>
 #include <stdbool.h>
 
-#include <GLKit/GLKMathTypes.h>
+#include "GLKMathTypes.h"
 
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>

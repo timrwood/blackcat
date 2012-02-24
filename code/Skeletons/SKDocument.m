@@ -8,6 +8,7 @@
 
 
 #import "SKTimeline.h"
+#import "SKPoseView.h"
 #import "SKDocument.h"
 
 
@@ -22,6 +23,7 @@
     self = [super init];
     if (self) {
         _timeline = [[SKTimeline alloc] init];
+        _pose = [[SKPoseView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 580.0f, 290.0f)];
     }
     return self;
 }
@@ -37,6 +39,7 @@
 @synthesize addKeyframeButton;
 @synthesize removeKeyframeButton;
 @synthesize keyframeView;
+@synthesize poserView;
 
 
 - (NSString *)windowNibName {
@@ -49,6 +52,7 @@
     [super windowControllerDidLoadNib:aController];
     [keyframeView addSubview:_timeline];
     [_timeline updateRect];
+    [poserView addSubview:_pose];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
 

@@ -11,10 +11,10 @@
 #include <stddef.h>
 #include <math.h>
 
-#include <GLKit/GLKMathTypes.h>
+#include "GLKMathTypes.h"
 
-#include <GLKit/GLKVector3.h>
-#include <GLKit/GLKVector4.h>
+#include "GLKVector3.h"
+#include "GLKVector4.h"
 
 #ifdef __cplusplus
 extern "C" {

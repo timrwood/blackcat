@@ -11,6 +11,7 @@
 
 
 @class SKTimeline;
+@class SKPoseView;
 
 
 @interface SKDocument : NSDocument <NSApplicationDelegate> {
@@ -18,6 +19,7 @@
     BOOL _isPlaying;
     
     SKTimeline *_timeline;
+    SKPoseView *_pose;
 }
 
 
@@ -31,6 +33,7 @@
 @property (weak) IBOutlet NSButton *addKeyframeButton;
 @property (weak) IBOutlet NSButton *removeKeyframeButton;
 @property (weak) IBOutlet NSView *keyframeView;
+@property (weak) IBOutlet NSView *poserView;
 
 
 #pragma mark -

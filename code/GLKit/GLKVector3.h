@@ -11,7 +11,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-#include <GLKit/GLKMathTypes.h>
+#include "GLKMathTypes.h"
 
 #ifdef __cplusplus
 extern "C" {

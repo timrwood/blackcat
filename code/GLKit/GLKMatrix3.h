@@ -16,9 +16,9 @@
 #include <arm_neon.h>
 #endif
 
-#include <GLKit/GLKMathTypes.h>
-#include <GLKit/GLKVector3.h>
-#include <GLKit/GLKQuaternion.h>
+#include "GLKMathTypes.h"
+#include "GLKVector3.h"
+#include "GLKQuaternion.h"
 
 #ifdef __cplusplus
 extern "C" {

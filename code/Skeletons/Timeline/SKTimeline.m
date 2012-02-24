@@ -117,7 +117,6 @@
         _currentFrame = [_startControl frameId];
     }
     [_currentControl setFrameId:_currentFrame];
-    NSLog(@"_currentFrame %i", _currentFrame);
 }
 
 

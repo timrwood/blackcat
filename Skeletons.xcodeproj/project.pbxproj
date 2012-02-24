@@ -19,7 +19,6 @@
 		15F4222114F738CE00D4FD4E /* SKDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221714F738CE00D4FD4E /* SKDocument.xib */; };
 		15F4222214F738CE00D4FD4E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4221914F738CE00D4FD4E /* main.m */; };
 		15F4222314F738CE00D4FD4E /* SKDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4221B14F738CE00D4FD4E /* SKDocument.m */; };
-		15F4222414F738CE00D4FD4E /* Skeletons-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15F4221C14F738CE00D4FD4E /* Skeletons-Info.plist */; };
 		15F4224714F738E200D4FD4E /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223214F738E200D4FD4E /* CDataScanner.m */; };
 		15F4224814F738E200D4FD4E /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223514F738E200D4FD4E /* CFilteringJSONSerializer.m */; };
 		15F4224914F738E200D4FD4E /* CJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F4223714F738E200D4FD4E /* CJSONSerialization.m */; };
@@ -327,7 +326,6 @@
 				15F4221F14F738CE00D4FD4E /* InfoPlist.strings in Resources */,
 				15F4222014F738CE00D4FD4E /* MainMenu.xib in Resources */,
 				15F4222114F738CE00D4FD4E /* SKDocument.xib in Resources */,
-				15F4222414F738CE00D4FD4E /* Skeletons-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

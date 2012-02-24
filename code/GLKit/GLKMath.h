@@ -5,15 +5,13 @@
 //  Copyright (c) 2011, Apple Inc. All rights reserved.
 //
 
-#include <GLKit/GLKMathTypes.h>
+#include"GLKMathTypes.h"
 
-#include <GLKit/GLKMatrix3.h>
-#include <GLKit/GLKMatrix4.h>
-#include <GLKit/GLKVector2.h>
-#include <GLKit/GLKVector3.h>
-#include <GLKit/GLKVector4.h>
-#include <GLKit/GLKQuaternion.h>
+#include "GLKMatrix3.h"
+#include "GLKMatrix4.h"
+#include "GLKVector2.h"
+#include "GLKVector3.h"
+#include "GLKVector4.h"
+#include "GLKQuaternion.h"
 
-#include <GLKit/GLKMatrixStack.h>
-
-#include <GLKit/GLKMathUtils.h>
+#include "GLKMathUtils.h"

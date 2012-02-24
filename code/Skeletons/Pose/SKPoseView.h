@@ -10,7 +10,41 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface SKPoseView : NSView
+@class SKPoseJoint;
+
+
+@interface SKPoseView : NSView {
+    NSMutableArray *joints;
+    
+    SKPoseJoint *waist;
+    SKPoseJoint *neck;
+    
+    SKPoseJoint *elbow1;
+    SKPoseJoint *elbow2;
+    
+    SKPoseJoint *shoulder1;
+    SKPoseJoint *shoulder2;
+    
+    SKPoseJoint *knee1;
+    SKPoseJoint *knee2;
+    
+    SKPoseJoint *hip1;
+    SKPoseJoint *hip2;
+}
+
+
+#pragma mark -
+#pragma mark init
+
+
+- (void)initJoints;
+
+
+#pragma mark -
+#pragma mark joints
+
+
+- (void)addJoint:(SKPoseJoint *)joint;
 
 
 @end
