@@ -73,16 +73,68 @@
     [knee2 setParent:hip2];
     
     [waist setPosition:GLKVector2Make(290.0f, 145.0f)];
-    [neck setPosition:GLKVector2Make(0.0f, 100.0f)];
+    [neck setPosition:GLKVector2Make(0.0f, 80.0f)];
+    [waist setLength:GLKVector2Make(0.0f, 80.0f)];
+    [neck setLength:GLKVector2Make(0.0f, 40.0f)]; 
+    
+    [hip1 setPosition:GLKVector2Make(0.0f, 0.0f)];
+    [hip2 setPosition:GLKVector2Make(0.0f, 0.0f)];
+    [hip1 setLength:GLKVector2Make(0.0f, -50.0f)];
+    [hip2 setLength:GLKVector2Make(0.0f, -50.0f)];
     
     [knee1 setPosition:GLKVector2Make(0.0f, -50.0f)];
     [knee2 setPosition:GLKVector2Make(0.0f, -50.0f)];
+    [knee1 setLength:GLKVector2Make(0.0f, -50.0f)];
+    [knee2 setLength:GLKVector2Make(0.0f, -50.0f)];
     
     [elbow1 setPosition:GLKVector2Make(0.0f, -50.0f)];
     [elbow2 setPosition:GLKVector2Make(0.0f, -50.0f)];
+    [elbow1 setLength:GLKVector2Make(0.0f, -50.0f)];
+    [elbow2 setLength:GLKVector2Make(0.0f, -50.0f)];
     
-    [shoulder1 setPosition:GLKVector2Make(0.0f, 100.0f)];
-    [shoulder2 setPosition:GLKVector2Make(0.0f, 100.0f)];
+    [shoulder1 setPosition:GLKVector2Make(0.0f, 80.0f)];
+    [shoulder2 setPosition:GLKVector2Make(0.0f, 80.0f)];
+    [shoulder1 setLength:GLKVector2Make(0.0f, -50.0f)];
+    [shoulder2 setLength:GLKVector2Make(0.0f, -50.0f)];
+}
+
+
+#pragma mark -
+#pragma mark dragging
+
+
+- (BOOL)acceptsFirstMouse:(NSEvent *)event {
+	return YES;
+}
+
+- (void)mouseDown:(NSEvent *)event {
+    CGPoint l = [event locationInWindow];
+    CGRect r = [self convertRect:[self bounds] toView:nil];
+    l.x -= r.origin.x;
+    l.y -= r.origin.y;
+    GLKVector2 g = GLKVector2Make(l.x, l.y);
+    
+    [self jointClosestToPoint:g];
+    
+    NSLog(@"location %F %F", g.x, g.y);
+}
+
+- (void)mouseDragged:(NSEvent *)event {
+    CGPoint l = [event locationInWindow];
+    CGRect r = [self convertRect:[self bounds] toView:nil];
+    l.x -= r.origin.x;
+    l.y -= r.origin.y;
+    GLKVector2 g = GLKVector2Make(l.x, l.y);
+    
+    [current rotateTowardsPoint:g];
+    
+    [self setNeedsDisplay:YES];
+    
+    NSLog(@"drag location %F %F", g.x, g.y);
+}
+
+- (void)mouseUp:(NSEvent *)event {
+    
 }
 
 
@@ -118,6 +170,18 @@
     }
 }
 
+- (void)jointClosestToPoint:(GLKVector2)point {
+    float dist = 100000.0f;
+    float newDist;
+    for (SKPoseJoint *joint in joints) {
+        newDist = GLKVector2Length(GLKVector2Subtract(point, [joint endPoint]));
+        if (newDist < dist) {
+            current = joint;
+            dist = newDist;
+        }
+    }
+}
+
 
 #pragma mark -
 #pragma mark debug
@@ -128,16 +192,15 @@
     [waist setRotation:_r];
     [neck setRotation:_r];
     [elbow1 setRotation:_r];
-    [elbow2 setRotation:_r];
-    [shoulder1 setRotation:_r];
+    [elbow2 setRotation:-_r];
+    [shoulder1 setRotation:-_r];
     [shoulder2 setRotation:_r];
     [knee1 setRotation:_r];
-    [knee2 setRotation:_r];
-    [hip1 setRotation:_r];
+    [knee2 setRotation:-_r];
+    [hip1 setRotation:-_r];
     [hip2 setRotation:_r];
     
     [self setNeedsDisplay:YES];
-    [self setNeedsLayout:YES];
 }
 
 

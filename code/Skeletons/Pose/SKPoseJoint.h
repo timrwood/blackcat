@@ -12,8 +12,8 @@
 
 @interface SKPoseJoint : NSObject {
 @private;
-    GLKVector2 originPoint;
-    GLKVector2 endPoint;
+    GLKVector2 _originPoint;
+    GLKVector2 _endPoint;
     
     float _rotation;
 }
@@ -25,6 +25,7 @@
 
 
 @property (assign, nonatomic) GLKVector2 position;
+@property (assign) GLKVector2 length;
 @property (weak) SKPoseJoint *parent;
 
 
@@ -36,6 +37,8 @@
                   radians:(float)radians;
 - (void)setRotation:(float)rotation;
 - (float)rotation;
+- (GLKVector2)endPoint;
+- (void)rotateTowardsPoint:(GLKVector2)point;
 
 
 #pragma mark -

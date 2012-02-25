@@ -17,8 +17,7 @@
 {
     self = [super init];
     if (self) {
-        originPoint = GLKVector2Make(4.0f, 20.0f);
-        endPoint = GLKVector2Make(50.0f, 50.0f);
+        
     }
     return self;
 }
@@ -29,6 +28,7 @@
 
 
 @synthesize position = _position;
+@synthesize length;
 @synthesize parent;
 
 - (GLKVector2)position {
@@ -68,8 +68,19 @@
 
 
 - (void)updatePosition {
-    originPoint = [self position];
-    endPoint = GLKVector2Add(originPoint, [self rotatePoint:GLKVector2Make(0.0f, 50.0f) radians:[self rotation]]);
+    _originPoint = [self position];
+    _endPoint = GLKVector2Add(_originPoint, [self rotatePoint:length radians:[self rotation]]);
+}
+
+- (GLKVector2)endPoint {
+    return _endPoint;
+}
+
+- (void)rotateTowardsPoint:(GLKVector2)point {
+    GLKVector2 diff = GLKVector2Subtract(point, [self position]);
+    float angle = atan2f(diff.y, diff.x);
+    float angle2 = atan2f(length.y, length.x);
+    [self setRotation:angle - angle2 - [parent rotation]];
 }
 
 
@@ -80,10 +91,16 @@
 - (void)drawInContext:(CGContextRef)c {
     [self updatePosition];
     CGContextBeginPath(c);
-    CGContextMoveToPoint(c, originPoint.x, originPoint.y);
-    CGContextAddLineToPoint(c, endPoint.x, endPoint.y);
+    CGContextMoveToPoint(c, _originPoint.x, _originPoint.y);
+    CGContextAddLineToPoint(c, _endPoint.x, _endPoint.y);
     CGContextStrokePath(c);
 }
 
 
 @end
+
+
+
+
+
+

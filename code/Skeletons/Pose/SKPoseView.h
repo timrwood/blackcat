@@ -31,6 +31,8 @@
     SKPoseJoint *hip1;
     SKPoseJoint *hip2;
     
+    SKPoseJoint *current;
+    
     float _r;
 }
 
@@ -40,6 +42,7 @@
 
 
 - (void)initJoints;
+- (void)jointClosestToPoint:(GLKVector2)point;
 
 
 #pragma mark -
