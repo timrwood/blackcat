@@ -12,7 +12,10 @@
 
 @interface SKPoseJoint : NSObject {
 @private;
+    GLKVector2 originPoint;
+    GLKVector2 endPoint;
     
+    float _rotation;
 }
 
 
@@ -20,8 +23,33 @@
 #pragma mark properties
 
 
-@property (assign) GLKVector2 offsetFromParent;
+
+@property (assign, nonatomic) GLKVector2 position;
 @property (weak) SKPoseJoint *parent;
+
+
+#pragma mark -
+#pragma mark rotation
+
+
+- (GLKVector2)rotatePoint:(GLKVector2)point
+                  radians:(float)radians;
+- (void)setRotation:(float)rotation;
+- (float)rotation;
+
+
+#pragma mark -
+#pragma mark position
+
+
+- (void)updatePosition;
+
+
+#pragma mark -
+#pragma mark draw
+
+
+- (void)drawInContext:(CGContextRef)c;
 
 
 @end

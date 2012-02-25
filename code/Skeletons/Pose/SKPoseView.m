@@ -22,6 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         joints = [[NSMutableArray alloc] init];
+        [self initJoints];
     }
     return self;
 }
@@ -70,6 +71,18 @@
     
     [knee1 setParent:hip1];
     [knee2 setParent:hip2];
+    
+    [waist setPosition:GLKVector2Make(290.0f, 145.0f)];
+    [neck setPosition:GLKVector2Make(0.0f, 100.0f)];
+    
+    [knee1 setPosition:GLKVector2Make(0.0f, -50.0f)];
+    [knee2 setPosition:GLKVector2Make(0.0f, -50.0f)];
+    
+    [elbow1 setPosition:GLKVector2Make(0.0f, -50.0f)];
+    [elbow2 setPosition:GLKVector2Make(0.0f, -50.0f)];
+    
+    [shoulder1 setPosition:GLKVector2Make(0.0f, 100.0f)];
+    [shoulder2 setPosition:GLKVector2Make(0.0f, 100.0f)];
 }
 
 
@@ -78,7 +91,20 @@
 
 
 - (void)drawRect:(NSRect)dirtyRect {
+    CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
     
+    CGFloat color[4];
+    color[0] = 0.0f;
+    color[1] = 1.0f;
+    color[2] = 1.0f;
+    color[3] = 0.5f;
+    
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineWidth(context, 10.0f);
+    CGContextSetStrokeColor(context, color);
+    for (SKPoseJoint *joint in joints) {
+        [joint drawInContext:context];
+    }
 }
 
 
@@ -90,6 +116,28 @@
     if (![joints containsObject:joint]) {
         [joints addObject:joint];
     }
+}
+
+
+#pragma mark -
+#pragma mark debug
+
+
+- (void)debugRotation {
+    _r += 0.01;
+    [waist setRotation:_r];
+    [neck setRotation:_r];
+    [elbow1 setRotation:_r];
+    [elbow2 setRotation:_r];
+    [shoulder1 setRotation:_r];
+    [shoulder2 setRotation:_r];
+    [knee1 setRotation:_r];
+    [knee2 setRotation:_r];
+    [hip1 setRotation:_r];
+    [hip2 setRotation:_r];
+    
+    [self setNeedsDisplay:YES];
+    [self setNeedsLayout:YES];
 }
 
 

@@ -14,6 +14,7 @@
 #import "SKKeyframe.h"
 #import "SKStartEndControl.h"
 #import "SKTimeline.h"
+#import "SKPoseView.h"
 
 
 @implementation SKTimeline
@@ -61,6 +62,13 @@
     [self addSubview:_endControl];
     [self addSubview:_currentControl];
 }
+
+
+#pragma mark -
+#pragma mark properties
+
+
+@synthesize pose;
 
 
 #pragma mark -
@@ -117,6 +125,10 @@
         _currentFrame = [_startControl frameId];
     }
     [_currentControl setFrameId:_currentFrame];
+    
+    if (pose) {
+        [pose debugRotation];
+    }
 }
 
 

@@ -11,6 +11,7 @@
 
 
 @class SKStartEndControl;
+@class SKPoseView;
 
 
 @interface SKTimeline : NSView {
@@ -25,6 +26,13 @@
     SKStartEndControl *_endControl;
     SKStartEndControl *_currentControl;
 }
+
+
+#pragma mark -
+#pragma mark properties
+
+
+@property (weak) SKPoseView *pose;
 
 
 #pragma mark -

@@ -22,8 +22,9 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _timeline = [[SKTimeline alloc] init];
         _pose = [[SKPoseView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 580.0f, 290.0f)];
+        _timeline = [[SKTimeline alloc] init];
+        [_timeline setPose:_pose];
     }
     return self;
 }

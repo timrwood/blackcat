@@ -30,6 +30,8 @@
     
     SKPoseJoint *hip1;
     SKPoseJoint *hip2;
+    
+    float _r;
 }
 
 
@@ -45,6 +47,13 @@
 
 
 - (void)addJoint:(SKPoseJoint *)joint;
+
+
+#pragma mark -
+#pragma mark debug
+
+
+- (void)debugRotation;
 
 
 @end
