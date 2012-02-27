@@ -7,6 +7,7 @@
 //
 
 
+#import "SKTimeline.h"
 #import "SKPoseJoint.h"
 #import "SKPoseView.h"
 
@@ -23,6 +24,7 @@
     if (self) {
         joints = [[NSMutableArray alloc] init];
         [self initJoints];
+        [self setAutoresizingMask:(NSViewHeightSizable | NSViewWidthSizable)];
     }
     return self;
 }
@@ -100,6 +102,13 @@
 
 
 #pragma mark -
+#pragma mark properties
+
+
+@synthesize timeline;
+
+
+#pragma mark -
 #pragma mark dragging
 
 
@@ -115,8 +124,6 @@
     GLKVector2 g = GLKVector2Make(l.x, l.y);
     
     [self jointClosestToPoint:g];
-    
-    NSLog(@"location %F %F", g.x, g.y);
 }
 
 - (void)mouseDragged:(NSEvent *)event {
@@ -129,12 +136,16 @@
     [current rotateTowardsPoint:g];
     
     [self setNeedsDisplay:YES];
-    
-    NSLog(@"drag location %F %F", g.x, g.y);
 }
 
 - (void)mouseUp:(NSEvent *)event {
-    
+    if (timeline) {
+        [timeline skeletonChanged];
+    }
+}
+
+- (void)viewDidMoveToSuperview {
+    [self setFrame:[[self superview] frame]];
 }
 
 
@@ -144,6 +155,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
+    
+    CGSize s = [self frame].size;
+    GLKVector2 vec = GLKVector2Make(s.width / 2.0f, s.height / 2.0f);
+    
+    [waist setPosition:vec];
     
     CGFloat color[4];
     color[0] = 0.0f;
@@ -199,6 +215,43 @@
     [knee2 setRotation:-_r];
     [hip1 setRotation:-_r];
     [hip2 setRotation:_r];
+    
+    [self setNeedsDisplay:YES];
+}
+
+
+#pragma mark -
+#pragma mark skeleton
+
+
+- (AHSkeleton)skeleton {
+    AHSkeleton skel;
+    skel.waist = [waist selfRotation];
+    skel.neck = [neck selfRotation];
+    skel.elbowA = [elbow1 selfRotation];
+    skel.elbowB = [elbow2 selfRotation];
+    skel.shoulderA = [shoulder1 selfRotation];
+    skel.shoulderB = [shoulder2 selfRotation];
+    skel.kneeA = [knee1 selfRotation];
+    skel.kneeB = [knee2 selfRotation];
+    skel.hipA = [hip1 selfRotation];
+    skel.hipB = [hip2 selfRotation];
+    return skel;
+}
+
+- (void)setSkeleton:(AHSkeleton)skel {
+    [waist setRotation:skel.waist];
+    [neck setRotation:skel.waist];
+    [elbow1 setRotation:skel.elbowA];
+    [elbow2 setRotation:skel.elbowB];
+    [shoulder1 setRotation:skel.shoulderA];
+    [shoulder2 setRotation:skel.shoulderB];
+    [knee1 setRotation:skel.kneeA];
+    [knee2 setRotation:skel.kneeB];
+    [hip1 setRotation:skel.hipA];
+    [hip2 setRotation:skel.hipB];
+    
+    NSLog(@"skel %F %F", [knee1 selfRotation], [knee2 selfRotation]);
     
     [self setNeedsDisplay:YES];
 }

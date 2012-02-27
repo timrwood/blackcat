@@ -7,10 +7,12 @@
 //
 
 
+#import "AHSkeletonStruct.h"
 #import <Cocoa/Cocoa.h>
 
 
 @class SKPoseJoint;
+@class SKTimeline;
 
 
 @interface SKPoseView : NSView {
@@ -46,6 +48,13 @@
 
 
 #pragma mark -
+#pragma mark properties
+
+
+@property (weak) SKTimeline *timeline;
+
+
+#pragma mark -
 #pragma mark joints
 
 
@@ -57,6 +66,14 @@
 
 
 - (void)debugRotation;
+
+
+#pragma mark -
+#pragma mark skeleton
+
+
+- (AHSkeleton)skeleton;
+- (void)setSkeleton:(AHSkeleton)skeleton;
 
 
 @end

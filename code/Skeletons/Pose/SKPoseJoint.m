@@ -7,6 +7,7 @@
 //
 
 
+#import "AHMathUtils.h"
 #import "SKPoseJoint.h"
 
 
@@ -52,7 +53,15 @@
 }
 
 - (void)setRotation:(float)rotation {
-    _rotation = rotation;
+    if (rotation > 0.0f) {
+        _rotation = fmodf(rotation + M_TAU_2, M_TAU) - M_TAU_2;
+    } else {
+        _rotation = fmodf(rotation - M_TAU_2, M_TAU) + M_TAU_2;
+    }
+}
+
+- (float)selfRotation {
+    return _rotation;
 }
 
 - (float)rotation {

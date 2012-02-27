@@ -68,7 +68,12 @@
 #pragma mark properties
 
 
-@synthesize pose;
+@synthesize pose = _pose;
+
+- (void)setPose:(SKPoseView *)pose {
+    [pose setTimeline:self];
+    _pose = pose;
+}
 
 
 #pragma mark -
@@ -125,10 +130,7 @@
         _currentFrame = [_startControl frameId];
     }
     [_currentControl setFrameId:_currentFrame];
-    
-    if (pose) {
-        [pose debugRotation];
-    }
+    [self updateCurrentFrame];
 }
 
 
@@ -136,13 +138,23 @@
 #pragma mark add remove
 
 
-- (void)addKeyframe {
+- (BOOL)addKeyframe {
+    for (SKKeyframe *keyframe in keyframes) {
+        if ([keyframe frameId] == [_currentControl frameId]) {
+            NSLog(@"already a keyframe here");
+            return NO;
+        }
+    }
+    
     SKKeyframe *keyframe = [[SKKeyframe alloc] init];
     [keyframe setMin:0];
     [keyframe setMax:KEYFRAME_MAX];
     [keyframe setFrameId:[_currentControl frameId]];
     [self addSubview:keyframe positioned:NSWindowBelow relativeTo:nil];
     [keyframes addObject:keyframe];
+    [keyframe setSkeleton:[[self pose] skeleton]];
+    [self updateKeyframes];
+    return YES;
 }
 
 
@@ -159,6 +171,31 @@
     [self updateRect];
 }
 
+- (void)updateCurrentFrame {
+    SKKeyframe *lastFrame;
+    for (SKKeyframe *keyframe in keyframes) {
+        if ([keyframe frameId] == [_currentControl frameId]) {
+            [_pose setSkeleton:[keyframe skeleton]];
+            NSLog(@"set exact");
+            return;
+        } else if ([keyframe frameId] > [_currentControl frameId]) {
+            if (lastFrame) {
+                float percent = FloatPercentBetween([keyframe frameId], [lastFrame frameId], [_currentControl frameId]);
+                [_pose setSkeleton:AHSkeletonLerp([lastFrame skeleton], [keyframe skeleton], percent)];
+                NSLog(@"set lerp");
+                return;
+            } else {
+                [_pose setSkeleton:[keyframe skeleton]];
+                NSLog(@"set begin");
+                return;
+            }
+        }
+        lastFrame = keyframe;
+    }
+    NSLog(@"set last");
+    [_pose setSkeleton:[lastFrame skeleton]];
+}
+
 - (void)updateRect {
     rect.size.width = [_endControl frameId] * 10.0f + 100.0f;
     self.frame = rect;
@@ -167,6 +204,28 @@
     CGRect superRect = self.superview.frame;
     superRect.size.width = rect.size.width;
     self.superview.frame = superRect;
+}
+
+- (void)updateKeyframes {
+    NSLog(@"sort keyframes");
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"frameId" ascending:YES];
+    [keyframes sortUsingDescriptors:[NSArray arrayWithObject:sort]];
+}
+
+
+#pragma mark -
+#pragma mark skeleton change
+
+
+- (void)skeletonChanged {
+    if ([self addKeyframe]) {
+        return;
+    }
+    for (SKKeyframe *keyframe in keyframes) {
+        if ([keyframe frameId] == [_currentControl frameId]) {
+            [keyframe setSkeleton:[[self pose] skeleton]];
+        }
+    }
 }
 
 

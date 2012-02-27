@@ -32,6 +32,7 @@
 @synthesize timeline;
 @synthesize min;
 @synthesize max;
+@synthesize skeleton;
 
 
 #pragma mark -
@@ -57,6 +58,7 @@
 - (void)mouseUp:(NSEvent *)event {
     lastDragX = 0.0f;
     targetX = 0.0f;
+    [timeline updateKeyframes];
 }
 
 

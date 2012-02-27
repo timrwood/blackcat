@@ -37,6 +37,7 @@
                   radians:(float)radians;
 - (void)setRotation:(float)rotation;
 - (float)rotation;
+- (float)selfRotation;
 - (GLKVector2)endPoint;
 - (void)rotateTowardsPoint:(GLKVector2)point;
 

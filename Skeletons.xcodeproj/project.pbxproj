@@ -37,6 +37,9 @@
 		15060B1114F82C740015C815 /* SKPoseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKPoseView.m; path = Pose/SKPoseView.m; sourceTree = "<group>"; };
 		15060B1314F82CE80015C815 /* SKPoseJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKPoseJoint.h; path = Pose/SKPoseJoint.h; sourceTree = "<group>"; };
 		15060B1414F82CE80015C815 /* SKPoseJoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKPoseJoint.m; path = Pose/SKPoseJoint.m; sourceTree = "<group>"; };
+		150B90F714FC044A00C2C367 /* AHSkeletonStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHSkeletonStruct.h; sourceTree = "<group>"; };
+		150B910414FC044A00C2C367 /* AHMathQuads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHMathQuads.h; sourceTree = "<group>"; };
+		150B910514FC044A00C2C367 /* AHMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHMathUtils.h; sourceTree = "<group>"; };
 		1525B76814F7F70A00EBF552 /* SKKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKKeyframe.h; path = Keyframe/SKKeyframe.h; sourceTree = "<group>"; };
 		1525B76914F7F70A00EBF552 /* SKKeyframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKKeyframe.m; path = Keyframe/SKKeyframe.m; sourceTree = "<group>"; };
 		1525B76B14F7F71F00EBF552 /* SKTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKTimeline.h; path = Timeline/SKTimeline.h; sourceTree = "<group>"; };
@@ -106,6 +109,42 @@
 				15060B1414F82CE80015C815 /* SKPoseJoint.m */,
 			);
 			name = Pose;
+			sourceTree = "<group>";
+		};
+		150B90F214FC03F300C2C367 /* AngelHair */ = {
+			isa = PBXGroup;
+			children = (
+				150B90F314FC044A00C2C367 /* Animation */,
+				150B910314FC044A00C2C367 /* Math */,
+			);
+			name = AngelHair;
+			sourceTree = "<group>";
+		};
+		150B90F314FC044A00C2C367 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				150B90F414FC044A00C2C367 /* Skeletons */,
+			);
+			name = Animation;
+			path = code/AngelHair/Animation;
+			sourceTree = "<group>";
+		};
+		150B90F414FC044A00C2C367 /* Skeletons */ = {
+			isa = PBXGroup;
+			children = (
+				150B90F714FC044A00C2C367 /* AHSkeletonStruct.h */,
+			);
+			path = Skeletons;
+			sourceTree = "<group>";
+		};
+		150B910314FC044A00C2C367 /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				150B910414FC044A00C2C367 /* AHMathQuads.h */,
+				150B910514FC044A00C2C367 /* AHMathUtils.h */,
+			);
+			name = Math;
+			path = code/AngelHair/Math;
 			sourceTree = "<group>";
 		};
 		1525B76614F7F6C600EBF552 /* Timeline */ = {
@@ -195,6 +234,7 @@
 		15F4222514F738D000D4FD4E /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				150B90F214FC03F300C2C367 /* AngelHair */,
 				15F4222614F738E200D4FD4E /* GLKit */,
 				15F4223014F738E200D4FD4E /* TouchJSON */,
 				15F4221014F738CE00D4FD4E /* Skeletons */,

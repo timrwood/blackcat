@@ -7,6 +7,7 @@
 //
 
 
+#import "AHSkeletonStruct.h"
 #import <Foundation/Foundation.h>
 
 
@@ -20,6 +21,8 @@
     CGRect rect;
     
     int _frameId;
+    
+    AHSkeleton skeleton;
 }
 
 
@@ -30,6 +33,7 @@
 @property (weak) SKTimeline *timeline;
 @property (assign) int min;
 @property (assign) int max;
+@property (assign) AHSkeleton skeleton;
 
 
 #pragma mark -
@@ -38,5 +42,6 @@
 
 - (void)setFrameId:(int)frame;
 - (int)frameId;
+
 
 @end

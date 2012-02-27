@@ -8,6 +8,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import "AHSkeletonStruct.h"
 
 
 @class SKStartEndControl;
@@ -32,7 +33,7 @@
 #pragma mark properties
 
 
-@property (weak) SKPoseView *pose;
+@property (weak, nonatomic) SKPoseView *pose;
 
 
 #pragma mark -
@@ -61,15 +62,23 @@
 #pragma mark add remove
 
 
-- (void)addKeyframe;
+- (BOOL)addKeyframe;
 
 
 #pragma mark -
 #pragma mark update start end
 
 
+- (void)updateCurrentFrame;
 - (void)updateStartEnd;
 - (void)updateRect;
+- (void)updateKeyframes;
 
+
+#pragma mark -
+#pragma mark skeleton change
+
+
+- (void)skeletonChanged;
 
 @end

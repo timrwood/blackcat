@@ -60,6 +60,9 @@
 - (void)mouseUp:(NSEvent *)event {
     lastDragX = 0.0f;
     targetX = 0.0f;
+    if (_isCurrent) {
+        [timeline updateCurrentFrame];
+    }
 }
 
 
@@ -121,6 +124,9 @@
         _frameId = newFrame;
         if (timeline) {
             [timeline updateStartEnd];
+            if (_isCurrent) {
+                [timeline updateCurrentFrame];
+            }
         }
         rect.origin.x = _frameId * 10.0f;
         [self setFrame:rect];

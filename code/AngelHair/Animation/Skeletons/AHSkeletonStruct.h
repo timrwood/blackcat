@@ -60,7 +60,7 @@ static inline AHSkeleton AHSkeletonMultiply(AHSkeleton skeleton, float percent) 
     };
 }
 
-static inline AHSkeleton AHSkeletonAtPercentToSkeleton(AHSkeleton skeletonA, AHSkeleton skeletonB, float percent) {
+static inline AHSkeleton AHSkeletonLerp(AHSkeleton skeletonA, AHSkeleton skeletonB, float percent) {
     return AHSkeletonAdd(AHSkeletonMultiply(skeletonA, percent),
                          AHSkeletonMultiply(skeletonB, 1.0f - percent));
 }
