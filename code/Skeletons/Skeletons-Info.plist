@@ -13,8 +13,12 @@
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string></string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/json</string>
+			</array>
 			<key>CFBundleTypeName</key>
-			<string>DocumentType</string>
+			<string>Skeleton Animation</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>????</string>

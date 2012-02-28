@@ -225,7 +225,7 @@
 
 
 - (AHSkeleton)skeleton {
-    AHSkeleton skel;
+    AHSkeleton skel = AHSkeletonZero();
     skel.waist = [waist selfRotation];
     skel.neck = [neck selfRotation];
     skel.elbowA = [elbow1 selfRotation];
@@ -241,7 +241,7 @@
 
 - (void)setSkeleton:(AHSkeleton)skel {
     [waist setRotation:skel.waist];
-    [neck setRotation:skel.waist];
+    [neck setRotation:skel.neck];
     [elbow1 setRotation:skel.elbowA];
     [elbow2 setRotation:skel.elbowB];
     [shoulder1 setRotation:skel.shoulderA];
@@ -250,8 +250,6 @@
     [knee2 setRotation:skel.kneeB];
     [hip1 setRotation:skel.hipA];
     [hip2 setRotation:skel.hipB];
-    
-    NSLog(@"skel %F %F", [knee1 selfRotation], [knee2 selfRotation]);
     
     [self setNeedsDisplay:YES];
 }

@@ -13,6 +13,7 @@
 
 @class SKStartEndControl;
 @class SKPoseView;
+@class SKDocument;
 
 
 @interface SKTimeline : NSView {
@@ -34,6 +35,7 @@
 
 
 @property (weak, nonatomic) SKPoseView *pose;
+@property (weak) SKDocument *document;
 
 
 #pragma mark -
@@ -73,6 +75,7 @@
 - (void)updateStartEnd;
 - (void)updateRect;
 - (void)updateKeyframes;
+- (void)removeKeyframe;
 
 
 #pragma mark -
@@ -80,5 +83,25 @@
 
 
 - (void)skeletonChanged;
+
+
+#pragma mark -
+#pragma mark data
+
+
+- (NSMutableDictionary *)dictionaryForSkeleton:(AHSkeleton)skeleton;
+- (AHSkeleton)skeletonForDictionary:(NSDictionary *)dict;
+- (NSData *)keyframeData;
+- (void)setKeyframeData:(NSData *)data;
+
+
+#pragma mark -
+#pragma mark copy paste
+
+
+- (void)copy;
+- (void)paste;
+- (void)cut;
+
 
 @end

@@ -25,6 +25,7 @@
         _pose = [[SKPoseView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 580.0f, 290.0f)];
         _timeline = [[SKTimeline alloc] init];
         [_timeline setPose:_pose];
+        [_timeline setDocument:self];
     }
     return self;
 }
@@ -34,7 +35,6 @@
 #pragma mark properties
 
 
-@synthesize debugLabel;
 @synthesize playButton;
 @synthesize speedControl;
 @synthesize addKeyframeButton;
@@ -62,19 +62,11 @@
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
-    // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-    // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return nil;
+    return [_timeline keyframeData];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
-    // Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-    // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-    // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
+    [_timeline setKeyframeData:data];
     return YES;
 }
 
@@ -87,26 +79,38 @@
     _isPlaying = !_isPlaying;
     if (_isPlaying) {
         [_timeline play];
-        debugLabel.stringValue = @"playing";
     } else {
         [_timeline pause];
-        debugLabel.stringValue = @"paused";
     }
 }
 
 - (IBAction)changePlaybackRate:(id)sender {
-    if (sender == self.speedControl) {
-        debugLabel.stringValue = [NSString stringWithFormat:@"selected playback rate %i", self.speedControl.selectedSegment];
-    }
+    
 }
 
 - (IBAction)addKeyframe:(id)sender {
     [_timeline addKeyframe];
-    debugLabel.stringValue = @"add keyframe";
 }
 
 - (IBAction)removeKeyframe:(id)sender {
-    debugLabel.stringValue = @"remove keyframe";
+    [_timeline removeKeyframe];
+}
+
+
+#pragma mark -
+#pragma mark copy paste
+
+
+- (IBAction)copy:(id)sender {
+    [_timeline copy];
+}
+
+- (IBAction)paste:(id)sender {
+    [_timeline paste];
+}
+
+- (IBAction)cut:(id)sender {
+    [_timeline cut];
 }
 
 

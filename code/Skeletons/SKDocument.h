@@ -27,7 +27,6 @@
 #pragma mark properties
 
 
-@property (weak) IBOutlet NSTextField *debugLabel;
 @property (weak) IBOutlet NSButton *playButton;
 @property (weak) IBOutlet NSSegmentedControl *speedControl;
 @property (weak) IBOutlet NSButton *addKeyframeButton;
@@ -40,10 +39,20 @@
 #pragma mark actions
 
 
+
 - (IBAction)pauseResumeAnimaion:(id)sender;
 - (IBAction)changePlaybackRate:(id)sender;
 - (IBAction)addKeyframe:(id)sender;
 - (IBAction)removeKeyframe:(id)sender;
+
+
+#pragma mark -
+#pragma mark copy paste
+
+
+- (IBAction)copy:(id)sender;
+- (IBAction)paste:(id)sender;
+- (IBAction)cut:(id)sender;
 
 
 @end
